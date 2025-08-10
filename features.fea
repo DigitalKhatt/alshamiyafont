@@ -5,26 +5,27 @@
 
 
 lookup setdecomp {
-    feature ccmp;
+  feature ccmp;
 
-    sub alef.maddahabove.isol				by alef.isol maddahabove;
+  sub alef.maddahabove.isol				by alef.isol maddahabove;
   sub alef.hamzaabove.isol				by alef.isol hamzaabove;
-    sub waw.hamzaabove.isol					by waw.isol hamzaabove;
-    sub alef.hamzabelow.isol				by alef.isol hamzabelow;
-    sub alefmaksura.hamzaabove.isol 		by alefmaksura.isol hamzaabove;
-    sub behshape.onedotdown.isol			by behshape.isol onedotdown;
-    sub heh.twodotsup.isol					by heh.isol twodotsup;
-    sub behshape.twodotsup.isol				by behshape.isol twodotsup;
-    sub behshape.three_dots.isol			by behshape.isol three_dots;
-    sub hah.onedotdown.isol					by hah.isol onedotdown;
-    sub hah.onedotup.isol					by hah.isol onedotup;
-    sub dal.onedotup.isol					by dal.isol onedotup;
-    sub reh.onedotup.isol					by reh.isol onedotup;
-    sub seen.three_dots.isol				by seen.isol three_dots;
-    sub sad.onedotup.isol					by sad.isol onedotup;
-    sub tah.onedotup.isol					by tah.isol onedotup;
-    sub ain.onedotup.isol					by ain.isol onedotup;
-    sub alef.wasla.isol						by alef.isol wasla;
+  sub waw.hamzaabove.isol					by waw.isol hamzaabove;
+  sub alef.hamzabelow.isol				by alef.isol hamzabelow;
+  sub alefmaksura.hamzaabove.isol 		by alefmaksura.isol hamzaabove;
+  sub behshape.onedotdown.isol			by behshape.isol onedotdown;
+  sub heh.twodotsup.isol					by heh.isol twodotsup;
+  sub behshape.twodotsup.isol				by behshape.isol twodotsup;
+  sub behshape.three_dots.isol			by behshape.isol three_dots;
+  sub hah.onedotdown.isol					by hah.isol onedotdown;
+  sub hah.onedotup.isol					by hah.isol onedotup;
+  sub dal.onedotup.isol					by dal.isol onedotup;
+  sub reh.onedotup.isol					by reh.isol onedotup;
+  sub seen.three_dots.isol				by seen.isol three_dots;
+  sub sad.onedotup.isol					by sad.isol onedotup;
+  sub tah.onedotup.isol					by tah.isol onedotup;
+  sub ain.onedotup.isol					by ain.isol onedotup;
+  sub alef.wasla.isol						by alef.isol wasla;
+  sub noon.onedotup.isol        by noon.isol onedotup;
 
 } setdecomp;
 

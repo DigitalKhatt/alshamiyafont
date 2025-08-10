@@ -135,6 +135,7 @@ void OldMadina::generateGlyphs() {
   addFake("tah.onedotup.isol", 0x0638, m_layout->glyphNamePerCode.lastKey() + 1);
   addFake("ain.onedotup.isol", 0x063A, m_layout->glyphNamePerCode.lastKey() + 1);
   addFake("alef.wasla.isol", 0x0671, m_layout->glyphNamePerCode.lastKey() + 1);
+  addFake("noon.onedotup.isol", 0x0646, m_layout->glyphNamePerCode.lastKey() + 1);
 
   m_layout->glyphs = glyphs;
 
@@ -381,7 +382,7 @@ OldMadina::OldMadina(OtLayout* layout, Font* font, bool extended) :Automedina{ l
 
   layout->expandableGlyphs["behshape.isol"] = { 3,-2,0,0 };
 
-  layout->expandableGlyphs["behshape.init.beforenoon"] = { 20,-0.7,0,0 };
+  layout->expandableGlyphs["behshape.init.beforenoon"] = { 20,-0.5,0,0 };
 
 
 
@@ -426,8 +427,8 @@ OldMadina::OldMadina(OtLayout* layout, Font* font, bool extended) :Automedina{ l
   layout->expandableGlyphs["behshape.medi"] = { 20,-0.5,20,-0.5 };
   layout->expandableGlyphs["behshape.medi.afterbeh"] = { 20,-0.5,0,0 };
   layout->expandableGlyphs["behshape.medi.beforeseen"] = { 20,0,20,0 };
-  layout->expandableGlyphs["behshape.medi.beforereh"] = { 20,-0.5,20,-0.7 };
-  layout->expandableGlyphs["behshape.medi.beforenoon"] = { 20,-0.5,20,-0.7 };
+  layout->expandableGlyphs["behshape.medi.beforereh"] = { 20,-0.3,20,-0.3 };
+  layout->expandableGlyphs["behshape.medi.beforenoon"] = { 20,-0.5,20,-0.5 };
   layout->expandableGlyphs["behshape.medi.beforeyeh"] = { 0,0,20,-1 };
 
 
@@ -493,7 +494,7 @@ OldMadina::OldMadina(OtLayout* layout, Font* font, bool extended) :Automedina{ l
   //kashida_ii
 
 
-  layout->expandableGlyphs["behshape.medi.expa"] = { 20,-1,0,0 };
+  layout->expandableGlyphs["behshape.medi.expa"] = { 20,-1,20,-0.8 };
 
 
 
@@ -1031,19 +1032,8 @@ Lookup* OldMadina::defaultdotmarks() {
   MarkBaseSubtable* newsubtable = new MarkBaseSubtable(lookup);
   lookup->subtables.append(newsubtable);
 
-  /*classes["topdotmarks"] = {
-                "onedotup",
-                "twodotsup",
-                "three_dots"
-        };
-
-        classes["downdotmarks"] = {
-                "onedotdown",
-                "twodotsdown"
-        };*/
-
   newsubtable->name = "onedotup";
-  newsubtable->base = { "^behshape|^hah|^fehshape|^dal|^reh|^sad|^tah|^ain" };
+  newsubtable->base = { "^behshape|^hah|^fehshape|^dal|^reh|^sad|^tah|^ain|^noon" };
   newsubtable->classes["onedotup"].mark = { "onedotup" };
   newsubtable->classes["onedotup"].basefunction = Defaulbaseanchorfortopdots(*this, *newsubtable);
   newsubtable->classes["onedotup"].markfunction = Defaultopmarkanchor(*this, *newsubtable);

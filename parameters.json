@@ -1103,6 +1103,26 @@
                         -197,
                         29
                     ],
+                    "noon.fina": [
+                        -20,
+                        -60
+                    ],
+                    "noon.fina.afterbeh": [
+                        80,
+                        -20
+                    ],
+                    "noon.fina.expa": [
+                        -520,
+                        -40
+                    ],
+                    "noon.fina.expa.afterbeh": [
+                        -40,
+                        100
+                    ],
+                    "noon.isol": [
+                        80,
+                        -40
+                    ],
                     "reh.fina": [
                         86,
                         36
@@ -1276,8 +1296,8 @@
                         95
                     ],
                     "behshape.medi.beforereh": [
-                        23,
-                        169
+                        70,
+                        145
                     ],
                     "behshape.medi.beforeseen": [
                         122,
