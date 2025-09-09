@@ -26,7 +26,8 @@ lookup setdecomp {
   sub ain.onedotup.isol					by ain.isol onedotup;
   sub alef.wasla.isol						by alef.isol wasla;
   sub noon.onedotup.isol        by noon.isol onedotup;
-
+  sub feh.onedotup.isol           by feh.isol onedotup;
+  sub qaf.twodotsup.isol        by qaf.isol twodotsup;
 } setdecomp;
 
 lookup init {
@@ -38,12 +39,12 @@ lookup init {
     sub sad.isol by sad.init;
     sub tah.isol by tah.init;
     sub ain.isol by ain.init;
-    sub feh.isol by fehshape.init onedotup;
-    sub qaf.isol by fehshape.init twodotsup;
+    sub feh.isol by fehshape.init;
+    sub qaf.isol by fehshape.init;
     sub kaf.isol by kaf.init;
     sub lam.isol by lam.init;
     sub meem.isol by meem.init;
-    sub noon.isol by behshape.init onedotup;
+    sub noon.isol by behshape.init;
     sub heh.isol by heh.init;
     sub yehshape.isol by behshape.init twodotsdown;
     sub alefmaksura.isol by behshape.init;
@@ -58,12 +59,12 @@ lookup medi {
     sub sad.isol by sad.medi;
     sub tah.isol by tah.medi;
     sub ain.isol by ain.medi;
-    sub feh.isol by fehshape.medi onedotup;
-    sub qaf.isol by fehshape.medi twodotsup;
+    sub feh.isol by fehshape.medi;
+    sub qaf.isol by fehshape.medi;
     sub kaf.isol by kaf.medi;
     sub lam.isol by lam.medi;
     sub meem.isol by meem.medi;
-    sub noon.isol by behshape.medi onedotup;
+    sub noon.isol by behshape.medi;
     sub heh.isol by heh.medi;
     sub yehshape.isol by behshape.medi twodotsdown;
     sub alefmaksura.isol by behshape.medi;
@@ -92,45 +93,7 @@ lookup fina {
     sub waw.isol by waw.fina;
     sub yehshape.isol by yehshape.fina;
     sub alefmaksura.isol by yehshape.fina;
-  sub tatweel by tatweel.fina;
-
 } fina;
-
-lookup kashida.standard.fina {
-
-  feature calt;
-
-
-  lookup kashida.standard.fina.l1 {			
-    sub  behshape.medi onedotup  tatweel.fina by noon.fina.expa;
-    sub  behshape.isol tatweel by behshape.isol.expa;
-    sub  behshape.fina tatweel by behshape.fina.expa;
-    sub  kaf.fina tatweel by kaf.fina.expa;
-    sub  kaf.fina.afterlam tatweel by kaf.fina.afterlam.expa;
-    sub  noon.isol tatweel by noon.isol.expa;
-    sub  noon.fina tatweel by noon.fina.expa;
-    sub  noon.fina.afterbeh tatweel by noon.fina.expa.afterbeh;
-    sub  alefmaksura.isol tatweel by alefmaksura.isol.expa;
-    sub  yehshape.isol tatweel by yehshape.isol.expa;	
-    sub  yehshape.fina.ii tatweel by yehshape.fina.ii.expa;
-    sub  yehshape.fina tatweel by yehshape.fina.expa;
-    sub  sad.isol tatweel by sad.isol.expa;	
-    sub  sad.fina tatweel by sad.fina.expa;
-    sub  seen.isol tatweel by seen.isol.expa;
-    sub  seen.fina tatweel by seen.fina.expa;
-    sub  feh.isol tatweel by feh.isol.expa;
-    sub  feh.fina tatweel by feh.fina.expa;
-    sub  qaf.isol tatweel by qaf.isol.expa;
-    sub  qaf.fina tatweel by qaf.fina.expa;
-    sub  kaf.init tatweel by kaf.init.ii;
-    sub  kaf.medi tatweel by kaf.medi.ii;
-  } kashida.standard.fina.l1;   
-
-  
-
-  sub behshape.medi'lookup kashida.standard.fina.l1 [onedotup onedotdown]' tatweel.fina';
-
-} kashida.standard.fina;
 
 lookup smalllalefreplacement {
     feature rlig;
@@ -400,7 +363,7 @@ lookup requiredligature {
   } requiredligature.l13;
 
   lookup substyehshapefinaafterbeh {
-    sub yehshape.fina by yehshape.fina.ii;
+    sub yehshape.fina by yehshape.fina.beforebeh;
     sub behshape.medi by behshape.medi.beforeyeh;
     sub seen.init by seen.init.beforeyeh;
     sub seen.medi by seen.medi.beforeyeh;
@@ -554,15 +517,15 @@ lookup leftexpand {
       sub @haslefttatweel add 3.5 0;
     } forwawfea.add3;
 
-    sub @haslefttatweel'lookup forwawfea.l1 [waw.fina qaf.fina qaf.fina.expa];
+    sub @haslefttatweel'lookup forwawfea.l1 [waw.fina qaf.fina qaf.fina.expa tah.fina];
 
     sub @haslefttatweel'lookup forwawfea.add1 [heh.medi];
 
     #sub @haslefttatweel'lookup forwawfea.add1 [sad.medi sad.medi.beforereh sad.medi.beforeyeh sad.fina];
 
-    sub @haslefttatweel'lookup forwawfea.add3 [tah.fina];
+    
 
-    sub @haslefttatweel'lookup forwawfea.l4 [/^tah.medi/];
+    sub @haslefttatweel'lookup forwawfea.add1.5 [/^tah.medi/];
 
   } forwawheh;
 
@@ -714,7 +677,7 @@ lookup convertsmallaleftochar {
 
 lookup isolkern {
 
-  feature curs;
+  feature kern;
 
   lookupflag IgnoreMarks;
 
@@ -744,8 +707,8 @@ lookup isolkern {
 
   pos [alef.fina.laf]' [hah.init]'<0 0 -100 0>;
 
-  pos [alef.fina.lamalef]'<-100 0 0 0> [hah.init hah.init.ii];
-  pos [alef.fina.lamalef]'<-50 0 0 0>;
+  pos [alef.fina.lamalef]'<-100 0 -100 0> [hah.init hah.init.ii];
+  pos [alef.fina.lamalef]'<-50 0 -50 0>;
 
   pos [alef.isol alef.fina]' [lam.init.lam_hah lam.init.allah]';
 
@@ -759,7 +722,7 @@ lookup isolkern {
 
   pos /^reh|^waw/'<-200 0 -200 0> [space];
   
-  pos /^reh|^waw/';
+  pos /^reh|^waw/'<-100 0 -100 0>;
 
   pos /^endofaya/'lookup isolkern.o1 rubelhizb;
 
@@ -978,9 +941,9 @@ lookup othercalt {
   lookup othercalt.l1 {
     sub behshape.init by behshape.init.beforereh;
     sub hamzaabove by hamzaabove.small;
-    sub kaf.medi.beforelam by kaf.medi.beforelam.ii;
-    sub kaf.init by kaf.init.iii;
-    sub kaf.init.beforelam by kaf.init.beforelam.ii;
+    #sub kaf.medi.beforelam by kaf.medi.beforelam.ii;
+    #sub kaf.init by kaf.init.iii;
+    #sub kaf.init.beforelam by kaf.init.beforelam.ii;
   } othercalt.l1;
 
   lookup othercalt.l2 {
@@ -1002,23 +965,23 @@ lookup othercalt {
 
   sub behshape.init'lookup othercalt.l1 twodotsdown /^reh.fina/;
 
-  sub [alef.isol alef.fina alef.fina.lamalef]'lookup othercalt.l2 hamzaabove'lookup othercalt.l1 [fatha damma sukun]' /^kaf.init/'lookup othercalt.l1;
+  #sub [alef.isol alef.fina alef.fina.lamalef]'lookup othercalt.l2 hamzaabove'lookup othercalt.l1 [fatha damma sukun]' /^kaf.init/'lookup othercalt.l1;
 
   sub behshape.init'lookup othercalt.l3 onedotdown kasra alef.fina hamzabelow;
 
-  sub lam.init shadda kasra kaf.medi.beforelam'lookup othercalt.l1;
+  #sub lam.init shadda kasra kaf.medi.beforelam'lookup othercalt.l1;
 
-  sub alef.fina hamzaabove sukun kaf.init'lookup othercalt.l1;
+  #sub alef.fina hamzaabove sukun kaf.init'lookup othercalt.l1;
 
-  sub alef.isol wasla kaf.init'lookup othercalt.l1;
+  #sub alef.isol wasla kaf.init'lookup othercalt.l1;
 
   sub [/^behshape.medi/ /^behshape.init/  /yehshape|alefmaksura/ /waw/] hamzaabove'lookup othercalt.l4 [kasra kasratan kasratanidgham];
 
   sub alef.isol'lookup othercalt.l2 kaf.init;
 
-  sub [alef.fina alef.fina.lamalef]'lookup othercalt.l5 kaf.init.beforelam'lookup othercalt.l1;
+  #sub [alef.fina alef.fina.lamalef]'lookup othercalt.l5 kaf.init.beforelam'lookup othercalt.l1;
 
-  sub [alef.fina.laf]' [kaf.init.beforelam]'lookup othercalt.l1; 
+  #sub [alef.fina.laf]' [kaf.init.beforelam]'lookup othercalt.l1; 
 
   ######## dal/thal kaf #############
 
@@ -1026,11 +989,11 @@ lookup othercalt {
     sub kaf.init by kaf.init.iii;    
   } othercalt.kaf.l1;
 
-  sub [dal.isol /^dal.fina/ /^reh.fina/]' [onedotup]' [hamzaabove fatha damma shadda sukun]' ([damma fatha kasra]?)' [kaf.init]'lookup othercalt.kaf.l1;
+  #sub [dal.isol /^dal.fina/ /^reh.fina/]' [onedotup]' [hamzaabove fatha damma shadda sukun]' ([damma fatha kasra]?)' [kaf.init]'lookup othercalt.kaf.l1;
 
-  sub [dal.isol /^dal.fina/ /^reh.fina/ waw.isol]' [hamzaabove fatha damma shadda sukun]' ([damma fatha])' kaf.init'lookup othercalt.kaf.l1;
+  #sub [dal.isol /^dal.fina/ /^reh.fina/ waw.isol]' [hamzaabove fatha damma shadda sukun]' ([damma fatha])' kaf.init'lookup othercalt.kaf.l1;
 
-  sub /^alef.fina/ (wasla?)  [kaf.init]'lookup othercalt.kaf.l1;
+  #sub /^alef.fina/ (wasla?)  [kaf.init]'lookup othercalt.kaf.l1;
   
 
 
@@ -1126,7 +1089,7 @@ lookup adjustmarks {
 
 lookup adjustmkmk {
 
-  feature mkmk;
+  feature mkmk;  
   
   lookup adjustmkmk.space.1 {
     pos kasratan <100 -180 0 0>;
@@ -1140,6 +1103,32 @@ lookup adjustmkmk {
     pos /^hamza.isol/ <70 0 70 0>;
     pos /^reh.fina/ <80 0 80 0>;
   } adjustmkmk.space.1;
+
+  lookup caltmkmk.waqfmarks.1 {					
+    pos mark  @topmarks <anchor function defaultmarkabovemark> 
+      markClass @waqfmarks <anchor function defaultopmarkanchor> @waqfmarks;
+  } caltmkmk.waqfmarks.1;
+
+  lookup caltmkmk.waqfmarks.2 {					
+    pos mark  @topmarks <anchor function defaultmarkabovemark> 
+      markClass @waqfmarks <anchor function defaultopmarkanchor> @waqfmarks;
+  } caltmkmk.waqfmarks.2;
+
+  lookup caltmkmk.waqfmarks.3 {					
+    pos base  [/^lam.medi/] <anchor 0 0>
+      markClass @waqfmarks <anchor 0 0> @waqfmarks;
+  } caltmkmk.waqfmarks.3; 
+
+
+  pos [heh.fina heh.fina.afterlam heh.isol]' twodotsup' (@marks?)' @topmarks' @waqfmarks'lookup caltmkmk.waqfmarks.1;
+  pos [/^lam[.]isol/ /^lam[.]fina/ /qaf.isol/ /qaf.fina/ /kaf.fina/]'  (@marks?)' (@marks?)' @topmarks'  @waqfmarks'lookup caltmkmk.waqfmarks.2;	
+  pos /^lam.medi/' @marks' /^meem.fina.ii/' @marks' @waqfmarks'<0 0 0 0>;
+  pos /^lam.medi.laf.afterkaf/' /^shadda/' /^fatha/' /^alef.fina.laf/' (/^maddahabove/?)' /^waqf.sad/'<0 0 0 0>;
+  pos /^feh.isol/' /^shadda/' /^fatha/' /^waqf.sad/'<0 0 0 0>;
+  pos /^lam.isol/' /^shadda/' /^kasra/' /^waqf.sad/'<0 0 0 0>;
+  pos /^fehshape.medi.beforeyeh/' /^onedotup/' /^shadda/' /^fathatanidgham/' /^yehshape.fina.ii/' /^waqf.sad/'<0 0 0 0>;
+  pos /^fehshape.medi/' /^onedotup/' /^shadda/' /^fathatanidgham/' /^alef.fina/' /^waqf.sad/'<0 0 0 0>;
+  pos /^lam.medi.beforeyeh/' /^shadda/' /^fathatanidgham/' /^yehshape.fina.ii/' /^waqf.sad/'<0 0 0 0>;
 
   pos heh.isol' twodotsup' kasratan'lookup adjustmkmk.space.1 waqf.sad' space' alef.isol' hamzabelow'; # page 419 line 12 بِعَوْرَةٍۖ إِن  
   pos heh.fina.afterlam' twodotsup' dammatan' waqf.jeem'lookup adjustmkmk.space.1 space' alef.isol' hamzaabove' damma'; # page 212 line 2 ذِلَّةٌۚ أُو۟لَٰٓئِكَ
@@ -1392,32 +1381,6 @@ lookup caltmkmk {
 
   pos dal.isol fatha'lookup caltmkmk.l2 kaf.init.beforelam;
 
-  lookup caltmkmk.waqfmarks.1 {					
-    pos mark  @topmarks <anchor function defaultmarkabovemark> 
-      markClass @waqfmarks <anchor function defaultopmarkanchor> @waqfmarks;
-  } caltmkmk.waqfmarks.1;
-
-  lookup caltmkmk.waqfmarks.2 {					
-    pos mark  @topmarks <anchor function defaultmarkabovemark> 
-      markClass @waqfmarks <anchor function defaultopmarkanchor> @waqfmarks;
-  } caltmkmk.waqfmarks.2;
-
-  lookup caltmkmk.waqfmarks.3 {					
-    pos base  [/^lam.medi/] <anchor 0 0>
-      markClass @waqfmarks <anchor 0 0> @waqfmarks;
-  } caltmkmk.waqfmarks.3; 
-
-
-  pos [heh.fina heh.fina.afterlam heh.isol]' twodotsup' (@marks?)' @topmarks' @waqfmarks'lookup caltmkmk.waqfmarks.1;
-  pos [/^lam[.]isol/ /^lam[.]fina/ /qaf.isol/ /qaf.fina/ /kaf.fina/]'  (@marks?)' (@marks?)' @topmarks'  @waqfmarks'lookup caltmkmk.waqfmarks.2;	
-  pos /^lam.medi/' @marks' /^meem.fina.ii/' @marks' @waqfmarks'<0 0 0 0>;
-  pos /^lam.medi.laf.afterkaf/' /^shadda/' /^fatha/' /^alef.fina.laf/' (/^maddahabove/?)' /^waqf.sad/'<0 0 0 0>;
-  pos /^feh.isol/' /^shadda/' /^fatha/' /^waqf.sad/'<0 0 0 0>;
-  pos /^lam.isol/' /^shadda/' /^kasra/' /^waqf.sad/'<0 0 0 0>;
-  pos /^fehshape.medi.beforeyeh/' /^onedotup/' /^shadda/' /^fathatanidgham/' /^yehshape.fina.ii/' /^waqf.sad/'<0 0 0 0>;
-  pos /^fehshape.medi/' /^onedotup/' /^shadda/' /^fathatanidgham/' /^alef.fina/' /^waqf.sad/'<0 0 0 0>;
-  pos /^lam.medi.beforeyeh/' /^shadda/' /^fathatanidgham/' /^yehshape.fina.ii/' /^waqf.sad/'<0 0 0 0>;
-
 } caltmkmk;
 
 lookup lowmarkafterwawandreh {
@@ -1607,10 +1570,9 @@ feature calt {
     behshape.init hah.init seen.init sad.init tah.init ain.init fehshape.init kaf.init kaf.init.ii lam.init meem.init
     heh.init heh.medi behshape.medi behshape.medi.afterbeh behshape.medi.beforeseen hah.medi hah.medi.afterbeh hah.medi.lam_hah 
     hah.medi.aftermeem hah.medi.afterfeh hah.medi.aftersad seen.medi seen.medi.afterbeh sad.medi tah.medi ain.medi fehshape.medi kaf.medi lam.medi lam.medi.afterkaf
-    meem.medi meem.medi.afterhah kaf.init.ii kaf.init.iii kaf.init.iv
+    meem.medi meem.medi.afterhah kaf.init.ii kaf.init.iii
   ];
-  #lookup kashida.standard.fina;
-  #lookup tatweels;
+  
   lookup multiplebehshape;
   lookup behbehinit;
   #lookup kafsubst;	
@@ -1625,14 +1587,14 @@ feature calt {
 } calt;
 
 feature curs {
-  lookup isolkern;
+  #lookup isolkern;
   lookup cursivejoin;
-  lookup rehwawcursivecpp;
-  
+  #lookup rehwawcursivecpp;  
 } curs;
 
 feature kern {  
-  lookup variouskern;	
+  lookup isolkern;
+  #lookup variouskern;	
 } kern;
 
 feature mark {
@@ -1640,7 +1602,7 @@ feature mark {
   lookup defaultdotmarks;
   lookup defaultwaqfmarktobase;
   lookup joinedsmallletters;
-  lookup adjustmarks;
+  #lookup adjustmarks;
 } mark;
 
 feature mkmk {
@@ -1648,8 +1610,8 @@ feature mkmk {
   lookup defaultmkmk;
   lookup caltmkmk;
   lookup lowmarkafterwawandreh;  
-  lookup adjustmkmk;
-  lookup adjustinterlineoverlap;
+  #lookup adjustmkmk;
+  #lookup adjustinterlineoverlap;
 } mkmk;
 
 feature basm {

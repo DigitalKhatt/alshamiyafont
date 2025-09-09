@@ -10,3 +10,6 @@ penwidth := 98;
 joinvector := ljoinvector := rjoinvector := (16,lineheight);
 nuqta := 1.4penwidth;
 defAxis("scaleX","SCLX",50,100,200,"params100");
+newinternal digitscale; digitscale := 0.8;
+ayadigitheight:= 105;
+ayadigitkern:=40;
