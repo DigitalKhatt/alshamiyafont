@@ -1,4 +1,16 @@
 {
+    "adjustoverlap.l110": {
+        "subtable1": {
+            "parameters": {
+                "damma": [
+                    72,
+                    -24,
+                    0,
+                    0
+                ]
+            }
+        }
+    },
     "basmala.curs.l1": {
         "subtable1": {
             "entryParameters": {
@@ -81,6 +93,10 @@
                 "hamzabelow": [
                     -50,
                     -416
+                ],
+                "qaf.isol": [
+                    -260,
+                    20
                 ]
             }
         },
@@ -200,7 +216,7 @@
                         16
                     ],
                     "ain.init.finjani": [
-                        -110,
+                        -50,
                         -15
                     ],
                     "ain.isol": [
@@ -267,6 +283,10 @@
                         -25,
                         3
                     ],
+                    "feh.isol": [
+                        100,
+                        0
+                    ],
                     "fehshape.init": [
                         -4,
                         4
@@ -284,7 +304,7 @@
                         -15
                     ],
                     "fehshape.medi": [
-                        1,
+                        -39,
                         -23
                     ],
                     "fehshape.medi.beforeyeh": [
@@ -292,8 +312,8 @@
                         -3
                     ],
                     "hah.init": [
-                        -136,
-                        68
+                        -56,
+                        28
                     ],
                     "hah.init.ii": [
                         -98,
@@ -376,20 +396,20 @@
                         -57
                     ],
                     "sad.medi.beforereh": [
-                        204,
-                        0
+                        108,
+                        -24
                     ],
                     "sad.medi.beforeyeh": [
                         117,
                         0
                     ],
                     "tah.fina": [
-                        375,
+                        195,
                         -428
                     ],
                     "tah.init": [
-                        96,
-                        -482
+                        76,
+                        -382
                     ],
                     "tah.init.beforeyeh": [
                         200,
@@ -438,8 +458,8 @@
                         -173
                     ],
                     "behshape.medi.afterbeh": [
-                        -57,
-                        0
+                        23,
+                        -20
                     ],
                     "behshape.medi.beforereh": [
                         -18,
@@ -1184,8 +1204,8 @@
                         250
                     ],
                     "tah.fina": [
-                        300,
-                        0
+                        84,
+                        24
                     ],
                     "tah.init.beforeyeh": [
                         135,
@@ -1758,8 +1778,8 @@
             "fathadamma": {
                 "baseparameters": {
                     "tah.fina": [
-                        426,
-                        -453
+                        306,
+                        -393
                     ],
                     "tah.init": [
                         110,
@@ -2048,8 +2068,8 @@
                         -141
                     ],
                     "kaf.init.beforelam": [
-                        29,
-                        -174
+                        -71,
+                        -214
                     ],
                     "kaf.init.beforelam.ii": [
                         -80,
@@ -2128,8 +2148,8 @@
                         -65
                     ],
                     "lam.init.lam_hah": [
-                        -170,
-                        -61
+                        -70,
+                        -41
                     ],
                     "lam.init.lamalef": [
                         89,
@@ -2196,7 +2216,7 @@
                         -121
                     ],
                     "meem.init": [
-                        -17,
+                        43,
                         -36
                     ],
                     "meem.init.beforehah": [
@@ -2244,8 +2264,8 @@
                         15
                     ],
                     "reh.fina": [
-                        136,
-                        -170
+                        36,
+                        -30
                     ],
                     "reh.fina.afterbehshape": [
                         109,
@@ -2284,8 +2304,8 @@
                         -33
                     ],
                     "sad.medi": [
-                        220,
-                        -16
+                        120,
+                        -36
                     ],
                     "sad.medi.beforereh": [
                         154,
@@ -2434,8 +2454,8 @@
                         -443
                     ],
                     "fatha": [
-                        -101,
-                        -295
+                        -121,
+                        -315
                     ]
                 }
             }
@@ -3816,6 +3836,16 @@
                     0,
                     0
                 ]
+            }
+        }
+    },
+    "rehwawcursivecpp": {
+        "rehfina": {
+            "entryParameters": {
+            }
+        },
+        "wawfina": {
+            "entryParameters": {
             }
         }
     },

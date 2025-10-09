@@ -572,7 +572,7 @@ lookup basmala {
     } basmala.l2;
 
     lookup basmala.l3 {
-        sub noon.fina by noon.fina.basmala add 10 -0.5;
+        sub noon.fina by noon.fina.basmala add 10 0;
     } basmala.l3 ;
 
     lookup basmala.l4 {
@@ -632,7 +632,7 @@ lookup basmalafatiha {
     
   sub meem.fina.ii by meem.fina.basmala add 0 0;         
   sub meem.medi.afterhah  add -0.7 0; 
-  sub noon.fina by noon.fina.basmala add 9 -0.5;
+  sub noon.fina by noon.fina.basmala add 9 0;
   sub lam.init  add -0.5 0; 
   sub reh.fina  add 0 -0.5;  
   sub behshape.medi add 1 0;
@@ -677,7 +677,7 @@ lookup convertsmallaleftochar {
 
 lookup isolkern {
 
-  feature kern;
+  feature curs;
 
   lookupflag IgnoreMarks;
 
@@ -710,7 +710,7 @@ lookup isolkern {
   pos [alef.fina.lamalef]'<-100 0 -100 0> [hah.init hah.init.ii];
   pos [alef.fina.lamalef]'<-50 0 -50 0>;
 
-  pos [alef.isol alef.fina]' [lam.init.lam_hah lam.init.allah]';
+  pos [alef.isol /^alef.fina/]' [lam.init.lam_hah lam.init.allah]';
 
   pos [alef.isol /^alef.fina/]'lookup isolkern.o2 [/^lam.init/ /^alef.isol/];
 
@@ -722,7 +722,8 @@ lookup isolkern {
 
   pos /^reh|^waw/'<-200 0 -200 0> [space];
   
-  pos /^reh|^waw/'<-100 0 -100 0>;
+  #pos /^reh|^waw/'<-100 0 -100 0>;
+  pos /^reh|^waw/';
 
   pos /^endofaya/'lookup isolkern.o1 rubelhizb;
 
@@ -1529,6 +1530,8 @@ lookup lowmarkafterwawandreh {
 
 } lowmarkafterwawandreh;
 
+include(output/adjustoverlap.fea);
+
 feature ccmp {	
   lookup setdecomp;	
   lookup miscellaneoussubst;
@@ -1587,15 +1590,14 @@ feature calt {
 } calt;
 
 feature curs {
-  #lookup isolkern;
+  lookup isolkern;
   lookup cursivejoin;
-  #lookup rehwawcursivecpp;  
+  lookup rehwawcursivecpp;  
 } curs;
 
-feature kern {  
-  lookup isolkern;
-  #lookup variouskern;	
-} kern;
+#feature kern {    
+#  lookup variouskern;	
+#} kern;
 
 feature mark {
   lookup defaultmarkpositioncpp;
@@ -1612,6 +1614,7 @@ feature mkmk {
   lookup lowmarkafterwawandreh;  
   #lookup adjustmkmk;
   #lookup adjustinterlineoverlap;
+  lookup adjustoverlap;
 } mkmk;
 
 feature basm {

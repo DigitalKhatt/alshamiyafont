@@ -415,7 +415,7 @@ OldMadina::OldMadina(OtLayout* layout, Font* font, bool extended) :Automedina{ l
   layout->expandableGlyphs["sad.init"] = { 20,-0.5,0,0 };
   layout->expandableGlyphs["tah.init"] = { 20,0,0,0 };
   layout->expandableGlyphs["ain.init"] = { 20,-0.7,0,0 };
-  layout->expandableGlyphs["fehshape.init"] = { 20,-1,0,0 };
+  layout->expandableGlyphs["fehshape.init"] = { 20,-0.5,0,0 };
   layout->expandableGlyphs["kaf.init"] = { 20,-0.5,0,0 };
   layout->expandableGlyphs["kaf.init.ii"] = { 20,-1.5,6,-1 };
   layout->expandableGlyphs["kaf.init.iii"] = { 20,-0.5,0,0 };    
@@ -431,7 +431,7 @@ OldMadina::OldMadina(OtLayout* layout, Font* font, bool extended) :Automedina{ l
   layout->expandableGlyphs["behshape.medi.afterbeh"] = { 20,-0.5,0,0 };
   layout->expandableGlyphs["behshape.medi.beforeseen"] = { 20,0,20,0 };
   layout->expandableGlyphs["behshape.medi.beforereh"] = { 20,-0.3,20,-0.3 };
-  layout->expandableGlyphs["behshape.medi.beforenoon"] = { 20,-0.5,20,-0.5 };
+  layout->expandableGlyphs["behshape.medi.beforenoon"] = { 20,-0.4,20,-0.4 };
   layout->expandableGlyphs["behshape.medi.beforeyeh"] = { 0,0,20,-1 };
 
 
@@ -486,7 +486,7 @@ OldMadina::OldMadina(OtLayout* layout, Font* font, bool extended) :Automedina{ l
   layout->expandableGlyphs["lam.fina"] = { 0.0,0.0,20,-0.5 };
   layout->expandableGlyphs["kaf.fina"] = { 0.0,0.0,20,-0.3 };
   layout->expandableGlyphs["noon.fina"] = { 0.0,0.0,20,-0.1 };
-  layout->expandableGlyphs["noon.fina.basmala"] = { 20,0.0,0,-0.5 };
+  layout->expandableGlyphs["noon.fina.basmala"] = { 20,0.0,0,0 };
   layout->expandableGlyphs["reh.fina"] = { 0.0,0.0,20,0 };
   layout->expandableGlyphs["ain.fina"] = { 0.0,0.0,20,-0.3 };
 
@@ -610,7 +610,7 @@ Lookup* OldMadina::rehwawcursivecpp() {
   lookup->type = Lookup::cursive;
   lookup->flags = Lookup::Flags::IgnoreMarks; // | Lookup::Flags::RightToLeft;
 
-  int kern = 150;
+  int kern = 100;
 
   class CustomCursiveSubtable : public CursiveSubtable {
   public:
@@ -684,6 +684,27 @@ Lookup* OldMadina::rehwawcursivecpp() {
     rehfinaafterbehshape->anchors[glyphcode].entry = QPoint(glyph.width, 0);
     rehfinaafterseen->anchors[glyphcode].entry = QPoint(glyph.width, 0);
 
+  }
+
+  // See bug https://github.com/DigitalKhatt/madinafont/issues/21
+  if(toMacOS){
+    for (auto it = entryAnchorsRTL.constBegin(); it != entryAnchorsRTL.constEnd(); ++it) {
+      QString cursiveName = it.key();
+      auto entries = it.value();
+      auto exits = exitAnchorsRTL[cursiveName];
+
+      CursiveSubtable* newsubtable = new CursiveSubtable(lookup);
+      lookup->subtables.append(newsubtable);
+      newsubtable->name = cursiveName;
+
+      for (auto anchor = entries.constBegin(); anchor != entries.constEnd(); ++anchor) {
+        newsubtable->anchors[anchor.key()].entry = anchor.value();
+      }
+
+      for (auto anchor = exits.constBegin(); anchor != exits.constEnd(); ++anchor) {
+        newsubtable->anchors[anchor.key()].exit = anchor.value();
+      }
+    }
   }
 
   return lookup;
@@ -2699,7 +2720,7 @@ Lookup* OldMadina::glyphalternates() {
   alternate->feature = alternate->name;
   alternate->type = Lookup::alternate;
 
-  m_layout->addLookup(alternate);
+  //m_layout->addLookup(alternate);
 
   alternateSubtable = new AlternateSubtableWithTatweel(alternate);
   alternate->subtables.append(alternateSubtable);
@@ -2740,6 +2761,6 @@ Lookup* OldMadina::glyphalternates() {
 
   }
 
-  return nullptr;
+  return alternate;
 
 }

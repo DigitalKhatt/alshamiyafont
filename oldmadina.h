@@ -36,5 +36,6 @@ private:
   Lookup* shrinkstretchlt();
   void addchars();
   void generateGlyphs();
+  bool toMacOS = false;
 };
 
