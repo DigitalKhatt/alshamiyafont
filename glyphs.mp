@@ -646,7 +646,7 @@ leftbearing:=0;
 tr_ := identity shifted (0,-ypart llcorner currentpicture);
 savepicture:=1;
 enddefchar;
-defchar(fatha,1614,-1,-1,-1);
+defchar(fathashape,-1,-1,-1,-1);
 %%backgroundimage:images/fatha.jpg,-565.643,-207.389,1,0,0,1
 %%beginparams
 z1 = (-3.1983,454.645);
@@ -682,20 +682,24 @@ leftbearing := 0;
 tr_ := identity shifted (0,-ypart llcorner currentpicture);
 savepicture:=1;
 enddefchar;
+defchar(fatha,1614,-1,-1,-1);
+%%beginbody
+fathashape_(lefttatweel,0);
+savepicture:=1;
+enddefchar;
 defchar(kasra,1616,-1,-1,-1);
 %%beginbody
 
-fatha_(lefttatweel,0);
-leftbearing := 0;
-rightbearing := 0;
+fathashape_(lefttatweel,0);
+
 enddefchar;
-beginchar(fathatan,1611,-1,-1,-1);
+defchar(fathatan,1611,-1,-1,-1);
 %%beginbody
 
 
 picture _temppic;
 _temppic := image(
-fatha_(0,0);
+fathashape_(lefttatweel,righttatweel);
 );
 
 draw _temppic;
@@ -703,17 +707,16 @@ draw _temppic;
 draw _temppic shifted (0,120);
 
 
-leftbearing := 0;
-rightbearing := 0;
+
 savepicture:=1;
-endchar;
+enddefchar;
 defchar(kasratanidgham,2290,-1,-1,-1);
 %%beginbody
 
 lefttatweel := lefttatweel - 0.5;
 picture _temppic;
 _temppic := image(
-fatha_(lefttatweel,righttatweel);
+fathashape_(lefttatweel,righttatweel);
 );
 
 draw _temppic;
@@ -726,15 +729,14 @@ draw _temppic shifted (1/3(x.ul - x.ur), -9/10(y.ur-y.lr));
 tr_ := identity shifted (0,-ypart llcorner currentpicture);
 
 enddefchar;
-beginchar(kasratan,1613,-1,-1,-1);
+defchar(kasratan,1613,-1,-1,-1);
 %%beginbody
 
-leftbearing := rightbearing := 0;
-drawcomp(fathatan,identity);
+fathatan_(lefttatweel,righttatweel);
 
 
 
-endchar;
+enddefchar;
 defchar(fathatanidgham,2288,-1,-1,-1);
 %%backgroundimage:images/fathatanidgham.jpg,-522,-377,1,0,0,1
 %%beginbody
@@ -742,7 +744,7 @@ defchar(fathatanidgham,2288,-1,-1,-1);
 lefttatweel := lefttatweel - 0.35;
 picture _temppic;
 _temppic := image(
-fatha_(lefttatweel,righttatweel);
+fathashape_(lefttatweel,righttatweel);
 );
 
 draw _temppic;
@@ -3047,25 +3049,25 @@ leftanchor := z2;
 
 enddefchar;
 defchar(lam.init.beforeyeh,-1,-1,-1,-1);
-%%backgroundimage:images/lam_yeh.jpg,-359.839,-1183.84,1,0,0,1
+%%backgroundimage:images/lam_yeh.jpg,-354.839,-1297.84,1,0,0,1
 %%beginparams
-z1 = (10,-23);
+z1 = (15,91);
 
 %%beginpaths
 
 fill
-(84.8889,-37.8056) .. tension 1 and 4.35593 ..
+(89.8889,76.1944) .. tension 1 and 4.35593 ..
  {up}z1 .. tension 0.931123 and 1.29763 ..
-(49.7725,37.8393) .. tension 1.74542 and 1.28017 ..
- {up}(150.446,97.977) .. tension 4.13979 and 12.9449 ..
-(100.423,484.676) .. tension 3.29886 and 1 ..
- {up}(80.3024,544.858) .. tension 1.75176 and 1.27974 ..
- {right}(141.635,656.213) .. tension 0.812326 and 1 ..
- {down}(159.462,638.333) .. tension 1 and 1 ..
- {down}(158.767,604.028) .. tension 0.75 and 0.75 ..
- {down}(202,550) .. tension 1 and 1.50717 ..
- {down}(170.338,473.479) .. tension 2.63614 and 1.12218 ..
- {down}(214,135) .. tension 1.68905 and 1.53 ..
+(54.7725,151.839) .. tension 1.74542 and 1.28017 ..
+ {up}(155.446,211.977) .. tension 4.13979 and 12.9449 ..
+(105.423,598.676) .. tension 3.29886 and 1 ..
+ {up}(85.3024,658.858) .. tension 1.75176 and 1.27974 ..
+ {right}(146.635,770.213) .. tension 0.812326 and 1 ..
+ {down}(164.462,752.333) .. tension 1 and 1 ..
+ {down}(163.767,718.028) .. tension 0.75 and 0.75 ..
+ {down}(207,664) .. tension 1 and 1.50717 ..
+ {down}(175.338,587.479) .. tension 2.63614 and 1.12218 ..
+ {down}(219,249) .. tension 1.68905 and 1.53 ..
  {left} cycle
 ;
 
@@ -6376,6 +6378,8 @@ rightbearing := -(xpart (urcorner currentpicture) - x1);
 enddefchar;
 defchar(kaf.init.short,-1,-1,-1,-1);
 %%backgroundimage:images/kaf.init.short.jpg,-1749,-1277,1,0,0,1
+%%beginparams
+z1 = (298,170);
 
 %%beginverbatim
 
@@ -6393,7 +6397,7 @@ fill
  {down}((664.4,912.6) + z.kafpos) .. tension 1 and 2.54535 ..
 ((635.4,844.8) + z.kafpos) .. tension 9.18768 and 3.67959 ..
  {down}(26.2,558.6) .. tension 6.25338 and 0.946181 ..
- {down}(298.2,170.6) .. tension 0.857029 and 1 ..
+ {down}z1 .. tension 0.857029 and 1 ..
 bldmv ( (215,19.4), (0,0), (2,-8) ) leftjoin
 bldmv ( (194,117.4), (0,0), (11,-5) ) .. tension 1 and 1 ..
  {up}(242.4,153.4) .. tension 1.67402 and 5.60646 ..
@@ -6407,7 +6411,7 @@ bldmv ( (194,117.4), (0,0), (11,-5) ) .. tension 1 and 1 ..
 %%endpaths
 %%beginbody
 
-rightbearing := -300; 
+rightbearing := -(xpart (urcorner currentpicture) - x1); 
 
 enddefchar;
 defchar(kaf.init.ii,-1,-1,-1,-1);
@@ -6459,7 +6463,7 @@ z.kafpos = (-200,100);
 z.kafpos2 = (-20,-0);
 kaf.init_(lefttatweel,righttatweel);
 
-rightbearing := 50; 
+%rightbearing := 50; 
 
 enddefchar;
 defchar(kaf.init.beforelam,-1,-1,-1,-1);
@@ -6493,7 +6497,7 @@ bldmv ( (89.03,117.074), (0,0), (11,-5) ) .. tension 1 and 1 ..
 
 %%endpaths
 %%beginbody
-rightbearing := -100; 
+
 rightbearing := -(xpart (urcorner currentpicture) - x1); 
 
 
@@ -6502,6 +6506,7 @@ enddefchar;
 defchar(kaf.init.beforelam.ii,-1,-1,-1,-1);
 %%backgroundimage:images/kaf_lam.jpg,-611,-1125,1,0,0,1
 %%beginparams
+z1 = (162,151);
 z4 = (-102,362);
 
 %%beginverbatim
@@ -6518,9 +6523,9 @@ fill
  {down}((255,725) + z.kafpos) .. tension 1 and 2.54535 ..
 ((232,649) + z.kafpos) .. tension 9.18768 and 6.92449 ..
  {down}z4 .. tension 8.85555 and 0.75 ..
- {down}(154,151) .. tension 0.857029 and 1 ..
+ {down}z1 .. tension 0.857029 and 1 ..
 bldmv ( (85,21), (0,0), (2,-8) ) leftjoin
-bldmv ( (79,103), (0,0), (11,-5) ) .. tension 1 and 1 ..
+bldmv ( (82,108), (0,0), (11,-5) ) .. tension 1 and 1 ..
  {up}(102,140) .. tension 1.67402 and 6.04181 ..
 (-152,273) .. tension 2.28057 and 0.75 ..
  {up}(-173,347) .. tension 2.43753 and 111.847 ..
@@ -6529,13 +6534,14 @@ bldmv ( (79,103), (0,0), (11,-5) ) .. tension 1 and 1 ..
 
 %%endpaths
 %%beginbody
-rightbearing := -100; 
+rightbearing := -(xpart (urcorner currentpicture) - x1); 
 
 enddefchar;
 defchar(kaf.init.beforeyeh,-1,-1,-1,-1);
 %%backgroundimage:images/Kaf_yeh.jpg,-266.884,-1153.86,1,0,0,1
 %%beginparams
 z1 = (90,102);
+z4 = (369,282);
 
 %%beginpaths
 
@@ -6554,7 +6560,7 @@ fill
 (386,846) .. tension 0.913449 and 3.47361 ..
  {down}(90,642) .. tension 9.18768 and 1 ..
 (179,567) .. tension 6.25338 and 0.840434 ..
- {down}(369,282) .. tension 0.75 and 1 ..
+ {down}z4 .. tension 0.75 and 1 ..
 (218.915,111.589) .. tension 1 and 4.90153 ..
  {left} cycle
 ;
@@ -6565,7 +6571,7 @@ leftbearing := 0;
 
 setCursiveAnchor(ltrcursive,z1,ExitAnchor);
 
-rightbearing := -250;
+rightbearing := -(xpart (urcorner currentpicture) - x4); 
 
 enddefchar;
 defchar(kaf.medi,-1,-1,-1,-1);

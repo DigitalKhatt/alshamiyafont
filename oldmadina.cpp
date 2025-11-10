@@ -493,6 +493,10 @@ OldMadina::OldMadina(OtLayout* layout, Font* font, bool extended) :Automedina{ l
   layout->expandableGlyphs["fatha"] = { 20,-1.0,0,0 };
   layout->expandableGlyphs["kasra"] = { 20,-1.0,0,0 };
   layout->expandableGlyphs["space"] = { 20,-2,0.0,0.0 };
+  layout->expandableGlyphs["kasratan"] = { 20,-0.7,0.0,0.0 };
+
+  
+
 
   //kashida_ii
 
@@ -818,9 +822,13 @@ Lookup* OldMadina::defaultmarkposition() {
   newsubtable->name = "tah";
   newsubtable->base = { "^tah" };
 
-  newsubtable->classes["fathadamma"].mark = { "fatha", "damma","shadda", "sukun" };
+  newsubtable->classes["fathadamma"].mark = { "fatha", "damma","shadda" };
   newsubtable->classes["fathadamma"].basefunction = Defaulbaseanchorfortop(*this, *newsubtable);
   newsubtable->classes["fathadamma"].markfunction = Defaultopmarkanchor(*this, *newsubtable);
+
+  newsubtable->classes["sukun"].mark = {  "sukun" };
+  newsubtable->classes["sukun"].basefunction = Defaulbaseanchorfortop(*this, *newsubtable);
+  newsubtable->classes["sukun"].markfunction = Defaultopmarkanchor(*this, *newsubtable);
 
   newsubtable->classes["fathatandammatan"].mark = { "fathatan", "dammatan" };
   newsubtable->classes["fathatandammatan"].basefunction = Defaulbaseanchorfortop(*this, *newsubtable);

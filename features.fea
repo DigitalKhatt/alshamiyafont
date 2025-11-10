@@ -708,6 +708,7 @@ lookup isolkern {
   pos [alef.fina.laf]' [hah.init]'<0 0 -100 0>;
 
   pos [alef.fina.lamalef]'<-100 0 -100 0> [hah.init hah.init.ii];
+  pos [alef.fina.lamalef]'<70 0 70 0> /^lam.init/;
   pos [alef.fina.lamalef]'<-50 0 -50 0>;
 
   pos [alef.isol /^alef.fina/]' [lam.init.lam_hah lam.init.allah]';
@@ -863,6 +864,13 @@ lookup variouskern {
 
 } variouskern;
 
+lookup kernadjust {
+  feature kern;	
+
+  pos /^waw[.]isol/'<220 0 220 0> (@marks{0,3})' /^alef.isol/' /^hamzabelow/';
+
+} kernadjust;
+
 lookup kafsubst {
 
   feature calt;
@@ -960,41 +968,25 @@ lookup othercalt {
     sub hamzaabove by hamzabelow;
   } othercalt.l4;
 
-  lookup othercalt.l5 {
-    sub alef.fina add -0.5 0;	
-  } othercalt.l5;	
 
   sub behshape.init'lookup othercalt.l1 twodotsdown /^reh.fina/;
 
-  #sub [alef.isol alef.fina alef.fina.lamalef]'lookup othercalt.l2 hamzaabove'lookup othercalt.l1 [fatha damma sukun]' /^kaf.init/'lookup othercalt.l1;
-
   sub behshape.init'lookup othercalt.l3 onedotdown kasra alef.fina hamzabelow;
-
-  #sub lam.init shadda kasra kaf.medi.beforelam'lookup othercalt.l1;
-
-  #sub alef.fina hamzaabove sukun kaf.init'lookup othercalt.l1;
-
-  #sub alef.isol wasla kaf.init'lookup othercalt.l1;
 
   sub [/^behshape.medi/ /^behshape.init/  /yehshape|alefmaksura/ /waw/] hamzaabove'lookup othercalt.l4 [kasra kasratan kasratanidgham];
 
   sub alef.isol'lookup othercalt.l2 kaf.init;
 
-  #sub [alef.fina alef.fina.lamalef]'lookup othercalt.l5 kaf.init.beforelam'lookup othercalt.l1;
+  lookup othercalt.l5 {
+    sub kasratan add -0.4 0;	
+  } othercalt.l5;
 
-  #sub [alef.fina.laf]' [kaf.init.beforelam]'lookup othercalt.l1; 
+  sub [meem.isol]' [kasratan]'lookup othercalt.l5; 
 
-  ######## dal/thal kaf #############
+  sub [hah.fina hah.isol]' ([onedotdown]?)' (shadda?)' [kasratan]'lookup othercalt.l5; 
 
-  lookup othercalt.kaf.l1 {		
-    sub kaf.init by kaf.init.iii;    
-  } othercalt.kaf.l1;
-
-  #sub [dal.isol /^dal.fina/ /^reh.fina/]' [onedotup]' [hamzaabove fatha damma shadda sukun]' ([damma fatha kasra]?)' [kaf.init]'lookup othercalt.kaf.l1;
-
-  #sub [dal.isol /^dal.fina/ /^reh.fina/ waw.isol]' [hamzaabove fatha damma shadda sukun]' ([damma fatha])' kaf.init'lookup othercalt.kaf.l1;
-
-  #sub /^alef.fina/ (wasla?)  [kaf.init]'lookup othercalt.kaf.l1;
+  sub [ain.fina ain.isol]' (onedotup?)' (shadda?)' [kasratan]'lookup othercalt.l5;
+  
   
 
 
@@ -1148,75 +1140,7 @@ lookup adjustmkmk {
   pos [/^alef.isol/ /^alef.fina/]'lookup adjustmkmk.space.1  hamzaabove' [/fatha/ damma]' space' alef.isol' wasla';
   pos [/^heh.isol/ /^hamza.isol/]'lookup adjustmkmk.space.1 (twodotsup?)' (dammatanidgham|(damma meemiqlab))' (@waqfmarks?)' space' [/^lam.init/ /^endofaya/]';
   pos /^reh.fina/' (onedotup?)' fathatan' /^alef.isol/'lookup adjustmkmk.space.1 (@waqfmarks?)' space' /^alef.isol/' /^hamzabelow/';
-  #pos /^alef.fina/'lookup adjustmkmk.space.1 maddahabove' space' /^alef.isol/' /^hamzaabove/;    
-
-  # space alef hamzabelow
-
-  lookup adjustmkmk.hamzabelow {
-
-    feature mkmk;
-
-    lookupflag UseMarkFilteringSet [hamzabelow];
-
-    lookup adjustmkmk.hamzabelow.1 {
-      pos /^alef.isol/ <0 0 50 0>;
-    } adjustmkmk.hamzabelow.1;
-
-    pos [/^lam.fina/ /^noon.fina/ /^waw.isol/ /^meem/ /^yehshape/ /^seen.fina/ /^sad/ /^ain/ /^seen/ /^reh/] space /^alef.isol/'lookup adjustmkmk.hamzabelow.1 hamzabelow';
-
-
-  } adjustmkmk.hamzabelow;
-  
-
-  lookup adjustmkmk.l2 {					
-    pos base /^tah/
-    <anchor function defaulbaseanchorfortop> markClass [fatha shadda sukun] <anchor function defaultopmarkanchor> @fathashadda
-    <anchor function defaulbaseanchorfortop> markClass [damma] <anchor function defaultopmarkanchor> @damma
-    <anchor function defaulbaseanchorfortop> markClass [fathatan dammatan] <anchor function defaultopmarkanchor> @fathatandammatan
-    <anchor function defaulbaseanchorfortop> markClass [fathatanidgham  dammatanidgham] <anchor function defaultopmarkanchor> @idgham;	
-  } adjustmkmk.l2;
-
-   lookup adjustmkmk.l3 {					
-    pos base /^tah/
-    <anchor function defaulbaseanchorfortop> markClass [fatha] <anchor function defaultopmarkanchor> @fathashadda
-    <anchor function defaulbaseanchorfortop> markClass [damma] <anchor function defaultopmarkanchor> @damma;
-  } adjustmkmk.l3;
-
-  pos /^tah/' onedotup' [fatha damma]'lookup adjustmkmk.l3 [meemiqlab];
-  
-  
-  pos /^tah/' onedotup' [fatha damma shadda sukun fathatan dammatan fathatanidgham  dammatanidgham ]'lookup adjustmkmk.l2;
-
-  
-
-  # hah mkmk
-
-  lookup adjustmkmk.hah.1 {					
-    pos base /^hah.fina/
-    <anchor function defaultbaseanchorforlow> markClass [onedotdown] <anchor function defaullowmarkanchor> @onedotdown
-    <anchor function defaultbaseanchorforlow> markClass [kasratan] <anchor function defaullowmarkanchor> @kasratan
-    <anchor function defaultbaseanchorforlow> markClass [kasra] <anchor function defaullowmarkanchor> @kasra
-    <anchor function defaultbaseanchorforlow> markClass [kasratanidgham] <anchor function defaullowmarkanchor> @kasratanidgham;	
-  } adjustmkmk.hah.1;
-
-  lookup adjustmkmk.hah.2 {					
-    pos base /^hah.fina/
-    <anchor function defaultbaseanchorforlow> markClass [kasra] <anchor function defaullowmarkanchor> @kasra
-    <anchor function defaultbaseanchorforlow> markClass [smalllowmeem] <anchor function smalllowmeem> @smalllowmeem;
-  } adjustmkmk.hah.2;
-
-  pos /^hah.fina/'  onedotdown'lookup adjustmkmk.hah.1 (shadda?)' [kasra kasratan kasratanidgham]'lookup adjustmkmk.hah.1;
-  pos /^hah.fina/'  kasra'lookup adjustmkmk.hah.2 [smalllowmeem]'lookup adjustmkmk.hah.2;
-
-  # reh followed by heh.isol and smalllowmeem
-
-  lookup adjustmkmk.heh.1 {					
-    pos base /^heh.isol/
-    <anchor function defaultbaseanchorforlow> markClass [kasra] <anchor function defaullowmarkanchor> @kasra
-    <anchor function defaultbaseanchorforlow> markClass [smalllowmeem] <anchor function smalllowmeem> @smalllowmeem;
-  } adjustmkmk.heh.1;
-
-  pos /^reh.fina/' (shadda?)' fatha' heh.isol' (twodotsup?)' kasra'lookup adjustmkmk.heh.1 smalllowmeem'lookup adjustmkmk.heh.1;
+  #pos /^alef.fina/'lookup adjustmkmk.space.1 maddahabove' space' /^alef.isol/' /^hamzaabove/;      
 
   # 	kaf.medi.beforelam
 
@@ -1345,6 +1269,21 @@ lookup adjustinterlineoverlap {
 
 } adjustinterlineoverlap;
 
+lookup caltmkmk.hamzabelow {
+
+  feature mkmk;
+
+  lookupflag UseMarkFilteringSet [hamzabelow];
+
+  lookup adjustmkmk.hamzabelow.1 {
+    pos /^alef.isol/ <0 0 50 0>;
+  } adjustmkmk.hamzabelow.1;
+
+  pos [/^lam.fina/ /^noon.fina/ /^waw.isol/ /^meem/ /^yehshape/ /^seen.fina/ /^sad/ /^ain/ /^seen/ /^reh/] space /^alef.isol/'lookup adjustmkmk.hamzabelow.1 hamzabelow';
+
+
+} caltmkmk.hamzabelow;
+
 lookup caltmkmk {
 
   feature mkmk;
@@ -1369,9 +1308,9 @@ lookup caltmkmk {
 
   lookup caltmkmk.l1 {					
     pos base  [hah.isol] <anchor function defaultbaseanchorforlow> markClass onedotdown <anchor function defaullowmarkanchor> @onedotdown
-    <anchor function defaultbaseanchorforlow> markClass kasra <anchor function defaullowmarkanchor> @kasra
-    <anchor function defaultbaseanchorforlow> markClass kasratan <anchor function defaullowmarkanchor> @kasratan
-    <anchor function defaultbaseanchorforlow> markClass kasratanidgham <anchor function defaullowmarkanchor> @kasratanidgham;
+      <anchor function defaultbaseanchorforlow> markClass kasra <anchor function defaullowmarkanchor> @kasra
+      <anchor function defaultbaseanchorforlow> markClass kasratan <anchor function defaullowmarkanchor> @kasratan
+      <anchor function defaultbaseanchorforlow> markClass kasratanidgham <anchor function defaullowmarkanchor> @kasratanidgham;
   } caltmkmk.l1;  
 
   pos hah.isol'lookup caltmkmk.l1 onedotdown'lookup caltmkmk.l1 [kasra kasratan kasratanidgham] 'lookup caltmkmk.l1;
@@ -1380,7 +1319,54 @@ lookup caltmkmk {
     pos base  [dal.isol] <anchor 0 0> markClass fatha <anchor 0 0> @fatha ;
   } caltmkmk.l2;
 
-  pos dal.isol fatha'lookup caltmkmk.l2 kaf.init.beforelam;
+  pos dal.isol fatha'lookup caltmkmk.l2 kaf.init.beforelam; 
+
+   lookup caltmkmk.l3 {					
+    pos base /^tah/
+    <anchor function defaulbaseanchorfortop> markClass [fatha] <anchor function defaultopmarkanchor> @fathashadda
+    <anchor function defaulbaseanchorfortop> markClass [damma] <anchor function defaultopmarkanchor> @damma;
+  } caltmkmk.l3;
+
+  pos /^tah/' onedotup' [fatha damma]'lookup caltmkmk.l3 [meemiqlab];
+
+   lookup caltmkmk.l4 {					
+    pos base /^tah/
+    <anchor function defaulbaseanchorfortop> markClass [fatha shadda sukun] <anchor function defaultopmarkanchor> @fathashadda
+    <anchor function defaulbaseanchorfortop> markClass [damma] <anchor function defaultopmarkanchor> @damma
+    <anchor function defaulbaseanchorfortop> markClass [fathatan dammatan] <anchor function defaultopmarkanchor> @fathatandammatan
+    <anchor function defaulbaseanchorfortop> markClass [fathatanidgham  dammatanidgham] <anchor function defaultopmarkanchor> @idgham;	
+  } caltmkmk.l4;  
+  
+  pos /^tah/' onedotup' [fatha damma shadda sukun fathatan dammatan fathatanidgham  dammatanidgham ]'lookup caltmkmk.l4;
+
+  # hah mkmk
+
+  lookup caltmkmk.hah.1 {					
+    pos base /^hah.fina/
+    <anchor function defaultbaseanchorforlow> markClass [onedotdown] <anchor function defaullowmarkanchor> @onedotdown
+    <anchor function defaultbaseanchorforlow> markClass [kasratan] <anchor function defaullowmarkanchor> @kasratan
+    <anchor function defaultbaseanchorforlow> markClass [kasra] <anchor function defaullowmarkanchor> @kasra
+    <anchor function defaultbaseanchorforlow> markClass [kasratanidgham] <anchor function defaullowmarkanchor> @kasratanidgham;	
+  } caltmkmk.hah.1;
+
+  lookup caltmkmk.hah.2 {					
+    pos base /^hah.fina/
+    <anchor function defaultbaseanchorforlow> markClass [kasra] <anchor function defaullowmarkanchor> @kasra
+    <anchor function defaultbaseanchorforlow> markClass [smalllowmeem] <anchor function smalllowmeem> @smalllowmeem;
+  } caltmkmk.hah.2;
+
+  pos /^hah.fina/'  onedotdown'lookup caltmkmk.hah.1 (shadda?)' [kasra kasratan kasratanidgham]'lookup caltmkmk.hah.1;
+  pos /^hah.fina/'  kasra'lookup caltmkmk.hah.2 [smalllowmeem]'lookup caltmkmk.hah.2;
+
+  # reh followed by heh.isol and smalllowmeem
+
+  lookup caltmkmk.heh.1 {					
+    pos base /^heh.isol/
+    <anchor function defaultbaseanchorforlow> markClass [kasra] <anchor function defaullowmarkanchor> @kasra
+    <anchor function defaultbaseanchorforlow> markClass [smalllowmeem] <anchor function smalllowmeem> @smalllowmeem;
+  } caltmkmk.heh.1;
+
+  pos /^reh.fina/' (shadda?)' fatha' heh.isol' (twodotsup?)' kasra'lookup caltmkmk.heh.1 smalllowmeem'lookup caltmkmk.heh.1;
 
 } caltmkmk;
 
@@ -1562,7 +1548,7 @@ feature rlig {
   lookup requiredligature;	
   lookup otherliga;		
   lookup behshapeseen;  
-  #lookup alefadjustmentgsub;
+  lookup alefadjustmentgsub;
   lookup smalllalefreplacement;			
   lookup ayanumbers;	
 } rlig;
@@ -1595,9 +1581,10 @@ feature curs {
   lookup rehwawcursivecpp;  
 } curs;
 
-#feature kern {    
-#  lookup variouskern;	
-#} kern;
+feature kern {    
+  #lookup variouskern;	
+  lookup kernadjust;	
+} kern;
 
 feature mark {
   lookup defaultmarkpositioncpp;
@@ -1614,7 +1601,7 @@ feature mkmk {
   lookup lowmarkafterwawandreh;  
   #lookup adjustmkmk;
   #lookup adjustinterlineoverlap;
-  lookup adjustoverlap;
+  #lookup adjustoverlap;
 } mkmk;
 
 feature basm {
