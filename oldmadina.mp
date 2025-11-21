@@ -11,4 +11,7 @@ joinvector := ljoinvector := rjoinvector := (16,lineheight);
 nuqta := 1.4penwidth;
 newinternal digitscale;
 digitscale := 0.80;
-defAxis("scaleX","SCLX",50,100,200,"params100");
+boolean isForCoreText; isForCoreText = false;
+if not isForCoreText :
+  defAxis("scaleX","SCLX",50,100,200,"params100");
+fi

@@ -1,26 +1,25 @@
 #include "oldmadina.h"
-#include "qstring.h"
-#include "Subtable.h"
-#include "Lookup.h"
-#include "font.hpp"
-#include "GlyphVis.h"
+
 #include <algorithm>
-#include "qregularexpression.h"
+
+#include "GlyphVis.h"
+#include "Lookup.h"
+#include "Subtable.h"
 #include "defaultmarkpositions.h"
+#include "font.hpp"
 #include "metafont.h"
 #include "qdebug.h"
-
+#include "qregularexpression.h"
+#include "qstring.h"
 
 using namespace std;
 
 void OldMadina::generateSubstEquivGlyphs() {
-
   return;
 
   GlyphParameters parameters;
 
   for (auto& glyph : m_layout->expandableGlyphs) {
-
     auto glyphCode = m_layout->glyphCodePerName[glyph.first];
     auto valueLimits = glyph.second;
 
@@ -50,18 +49,15 @@ void OldMadina::generateSubstEquivGlyphs() {
 }
 
 void OldMadina::generateGlyphs() {
-
   mp_edge_object* edges = font->getEdges();
 
   glyphs.clear();
 
   while (edges) {
-
     auto name = QString(edges->charname);
 
     if (name != "alternatechar") {
       GlyphVis& glyph = *glyphs.insert(name, GlyphVis(m_layout, edges));
-
 
       m_layout->glyphNamePerCode[glyph.charcode] = glyph.name;
       m_layout->glyphCodePerName[glyph.name] = glyph.charcode;
@@ -70,43 +66,39 @@ void OldMadina::generateGlyphs() {
       if (!classes["marks"].contains(glyph.name)) {
         classes["bases"].insert(glyph.name);
         m_layout->glyphGlobalClasses[glyph.charcode] = OtLayout::BaseGlyph;
-      }
-      else {
+      } else {
         m_layout->glyphGlobalClasses[glyph.charcode] = OtLayout::MarkGlyph;
       }
 
       for (int i = 0; i < edges->numAnchors; i++) {
         AnchorPoint anchor = edges->anchors[i];
         if (anchor.anchorName) {
-          switch (anchor.type)
-          {
-          case 1:
-            markAnchors[anchor.anchorName][glyph.charcode] = QPoint(anchor.x, anchor.y);
-            break;
-          case 2:
-            entryAnchors[anchor.anchorName][glyph.charcode] = QPoint(anchor.x, anchor.y);
-            break;
-          case 3:
-            exitAnchors[anchor.anchorName][glyph.charcode] = QPoint(anchor.x, anchor.y);
-          case 4:
-            entryAnchorsRTL[anchor.anchorName][glyph.charcode] = QPoint(anchor.x, anchor.y);
-            break;
-          case 5:
-            exitAnchorsRTL[anchor.anchorName][glyph.charcode] = QPoint(anchor.x, anchor.y);
-          default:
-            break;
+          switch (anchor.type) {
+            case 1:
+              markAnchors[anchor.anchorName][glyph.charcode] = QPoint(anchor.x, anchor.y);
+              break;
+            case 2:
+              entryAnchors[anchor.anchorName][glyph.charcode] = QPoint(anchor.x, anchor.y);
+              break;
+            case 3:
+              exitAnchors[anchor.anchorName][glyph.charcode] = QPoint(anchor.x, anchor.y);
+            case 4:
+              entryAnchorsRTL[anchor.anchorName][glyph.charcode] = QPoint(anchor.x, anchor.y);
+              break;
+            case 5:
+              exitAnchorsRTL[anchor.anchorName][glyph.charcode] = QPoint(anchor.x, anchor.y);
+            default:
+              break;
           }
         }
       }
     }
 
-
-
     edges = edges->next;
   }
 
   auto addFake = [this](QString glyphName, quint16 unicode, quint16 codechar) {
-    auto code = unicode; //codechar; //layout.glyphNamePerCode.lastKey();
+    auto code = unicode;  // codechar; //layout.glyphNamePerCode.lastKey();
     GlyphVis& glyph = *glyphs.insert(glyphName, GlyphVis());
     glyph.name = glyphName;
     glyph.charcode = code;
@@ -114,8 +106,6 @@ void OldMadina::generateGlyphs() {
     m_layout->glyphNamePerCode[glyph.charcode] = glyph.name;
     m_layout->glyphCodePerName[glyph.name] = glyph.charcode;
     m_layout->unicodeToGlyphCode.insert(unicode, glyph.charcode);
-
-
   };
   addFake("alef.maddahabove.isol", 0x0622, m_layout->glyphNamePerCode.lastKey() + 1);
   addFake("alef.hamzaabove.isol", 0x0623, m_layout->glyphNamePerCode.lastKey() + 1);
@@ -137,32 +127,25 @@ void OldMadina::generateGlyphs() {
   addFake("alef.wasla.isol", 0x0671, m_layout->glyphNamePerCode.lastKey() + 1);
 
   m_layout->glyphs = glyphs;
-
-
 }
 
-
 void OldMadina::addchars() {
-
   QString ayaName = "endofaya";
 
   for (int ayaNumber = 1; ayaNumber <= 286; ayaNumber++) {
-    QString setcolored = ""; // QString("coloredglyph:=\"%1.colored%2\"").arg(ayaName).arg(ayaNumber);
-    QString data = QString("beginchar(%1%2,-1,-1,2,-1);\n%%beginbody\ngenAyaNumber(%1, %2,3000);%3;endchar;").arg(ayaName).arg(ayaNumber).arg(setcolored);    
+    QString setcolored = "";  // QString("coloredglyph:=\"%1.colored%2\"").arg(ayaName).arg(ayaNumber);
+    QString data = QString("beginchar(%1%2,-1,-1,2,-1);\n%%beginbody\ngenAyaNumber(%1, %2,3000);%3;endchar;").arg(ayaName).arg(ayaNumber).arg(setcolored);
     m_layout->font->executeMetaPost(data);
     addedGlyphs.insert(QString("%1%2").arg(ayaName).arg(ayaNumber), data);
     /*
     data = QString("beginchar(%1.colored%2,-1,-1,5,-1);\n%%beginbody\ngenAyaNumber(%1.colored, %2,3000);endchar;").arg(ayaName).arg(ayaNumber);
     m_layout->font->executeMetaPost(data);*/
   }
-
-
-
 }
 
-OldMadina::OldMadina(OtLayout* layout, Font* font, bool extended) :Automedina{ layout,font, extended } {
-
-  //m_metafont = layout->m_font;
+OldMadina::OldMadina(OtLayout* layout, Font* font, bool extended) : Automedina{layout, font, extended} {
+  isForCoreText = font->getBoolVariable("isForCoreText");
+  // m_metafont = layout->m_font;
   classes["marks"] = {
       "onedotup",
       "onedotdown",
@@ -208,58 +191,55 @@ OldMadina::OldMadina(OtLayout* layout, Font* font, bool extended) :Automedina{ l
       "waqf.smallhighthreedots",
       "roundedfilledhigh",
       "roundedfilledlow",
-      "space.ii"
-  };
+      "space.ii"};
 
   classes["topmarks"] = {
-    //"onedotup",
-    //"twodotsup",
-    //"three_dots",
-    "fathatanidgham",
-    "dammatanidgham",
-    "fatha",
-    "damma",
-    "shadda",
-    "headkhah",
-    "sukun",
-    "dammatan",
-    "maddahabove",
-    "fathatan",
-    "smallalef",
-    "smallalef.replacement",
-    "smallalef.joined",
-    "meemiqlab",
-    "smallhighyeh",
-    "smallhighwaw",
-    "wasla",
-    "hamzaabove",
-    "hamzaabove.joined",
-    //"hamzaabove.lamalef",
-    "smallhighroundedzero",
-    "rectangularzero",
-    "smallhighseen",
-    "smallhighnoon",
-    "roundedfilledhigh",
-    "hamzaabove.joined",
+      //"onedotup",
+      //"twodotsup",
+      //"three_dots",
+      "fathatanidgham",
+      "dammatanidgham",
+      "fatha",
+      "damma",
+      "shadda",
+      "headkhah",
+      "sukun",
+      "dammatan",
+      "maddahabove",
+      "fathatan",
+      "smallalef",
+      "smallalef.replacement",
+      "smallalef.joined",
+      "meemiqlab",
+      "smallhighyeh",
+      "smallhighwaw",
+      "wasla",
+      "hamzaabove",
+      "hamzaabove.joined",
+      //"hamzaabove.lamalef",
+      "smallhighroundedzero",
+      "rectangularzero",
+      "smallhighseen",
+      "smallhighnoon",
+      "roundedfilledhigh",
+      "hamzaabove.joined",
   };
 
   classes["lowmarks"] = {
-    //"onedotdown",
-    //"twodotsdown",
-    "kasratanidgham",
-    "kasra",
-    "kasratan",
-    "hamzabelow",
-    "smalllowseen",
-    "roundedfilledlow",
-    "smalllowmeem"
-  };
+      //"onedotdown",
+      //"twodotsdown",
+      "kasratanidgham",
+      "kasra",
+      "kasratan",
+      "hamzabelow",
+      "smalllowseen",
+      "roundedfilledlow",
+      "smalllowmeem"};
 
   classes["kasras"] = {
       "kasratanidgham",
       "kasra",
-      "kasratan"
-  };
+      "kasratan"};
 
   classes["waqfmarks"] = {
       "waqf.meem",
@@ -267,27 +247,23 @@ OldMadina::OldMadina(OtLayout* layout, Font* font, bool extended) :Automedina{ l
       "waqf.qaf",
       "waqf.jeem",
       "waqf.sad",
-      "waqf.smallhighthreedots"
-  };
+      "waqf.smallhighthreedots"};
 
   classes["dotmarks"] = {
       "onedotup",
       "onedotdown",
       "twodotsup",
       "twodotsdown",
-      "three_dots"
-  };
+      "three_dots"};
 
   classes["topdotmarks"] = {
       "onedotup",
       "twodotsup",
-      "three_dots"
-  };
+      "three_dots"};
 
   classes["downdotmarks"] = {
       "onedotdown",
-      "twodotsdown"
-  };
+      "twodotsdown"};
 
   classes["digits"] = {
       "zeroindic",
@@ -299,330 +275,335 @@ OldMadina::OldMadina(OtLayout* layout, Font* font, bool extended) :Automedina{ l
       "sixindic",
       "sevenindic",
       "eightindic",
-      "nineindic"
-  };
+      "nineindic"};
 
   initchar = {
-    "behshape" ,
-    //"teh" ,
-    //"tehmarbuta" ,
-    //"theh" ,
-    //"jeem" ,
-    "hah" ,
-    //"khah" ,
-    //"dal" ,
-    //"thal" ,
-    //"reh" ,
-    //"zain" ,
-    "seen" ,
-    //"sheen" ,
-    "sad" ,
-    //"dad" ,
-    "tah" ,
-    //"zah" ,
-    "ain" ,
-    //"ghain" ,
-    "fehshape" ,
-    //"qaf" ,
-    "kaf" ,
-    "lam" ,
-    "meem" ,
-    //"noon" ,
-    "heh" ,
-    //"waw" ,
-    //"yeh" ,
-    //"yehwithoutdots" ,
-    //"alefmaksura"
+      "behshape",
+      //"teh" ,
+      //"tehmarbuta" ,
+      //"theh" ,
+      //"jeem" ,
+      "hah",
+      //"khah" ,
+      //"dal" ,
+      //"thal" ,
+      //"reh" ,
+      //"zain" ,
+      "seen",
+      //"sheen" ,
+      "sad",
+      //"dad" ,
+      "tah",
+      //"zah" ,
+      "ain",
+      //"ghain" ,
+      "fehshape",
+      //"qaf" ,
+      "kaf",
+      "lam",
+      "meem",
+      //"noon" ,
+      "heh",
+      //"waw" ,
+      //"yeh" ,
+      //"yehwithoutdots" ,
+      //"alefmaksura"
   };
 
   medichar = {
-    //"alef" ,
-    "behshape" ,
-    //"teh" ,
-    //"tehmarbuta" ,
-    //"theh" ,
-    //"jeem" ,
-    "hah" ,
-    //"khah" ,
-    //"dal" ,
-    //"thal" ,
-    //"reh" ,
-    //"zain" ,
-    "seen" ,
-    //"sheen" ,
-    "sad" ,
-    //"dad" ,
-    "tah" ,
-    //"zah" ,
-    "ain" ,
-    //"ghain" ,
-    "fehshape" ,
-    //"qaf" ,
-    "kaf" ,
-    "lam" ,
-    "meem" ,
-    //"noon" ,
-    "heh" ,
-    //"waw" ,
-    //"yeh" ,
-    //"yehwithoutdots" ,
-    //"alefmaksura"
+      //"alef" ,
+      "behshape",
+      //"teh" ,
+      //"tehmarbuta" ,
+      //"theh" ,
+      //"jeem" ,
+      "hah",
+      //"khah" ,
+      //"dal" ,
+      //"thal" ,
+      //"reh" ,
+      //"zain" ,
+      "seen",
+      //"sheen" ,
+      "sad",
+      //"dad" ,
+      "tah",
+      //"zah" ,
+      "ain",
+      //"ghain" ,
+      "fehshape",
+      //"qaf" ,
+      "kaf",
+      "lam",
+      "meem",
+      //"noon" ,
+      "heh",
+      //"waw" ,
+      //"yeh" ,
+      //"yehwithoutdots" ,
+      //"alefmaksura"
   };
 
   addchars();
 
   generateGlyphs();
 
-  //setAnchorCalcFunctions();
+  // setAnchorCalcFunctions();
 
+  layout->expandableGlyphs["alef.isol"] = {5, -4, 0, 0};
+  layout->expandableGlyphs["alef.fina"] = {5, -4, 20, -0.4};
 
-  layout->expandableGlyphs["alef.isol"] = { 5,-4,0,0 };
-  layout->expandableGlyphs["alef.fina"] = { 5,-4,20,-0.4 };
+  layout->expandableGlyphs["behshape.isol"] = {20, -2.5, 0, 0};
 
-  layout->expandableGlyphs["behshape.isol"] = { 20,-2.5,0,0 };
+  layout->expandableGlyphs["behshape.init.beforenoon"] = {20, -0.7, 0, 0};
 
-  layout->expandableGlyphs["behshape.init.beforenoon"] = { 20,-0.7,0,0 };
+  layout->expandableGlyphs["behshape.isol.expa"] = {20, 0, 0, 0};
+  layout->expandableGlyphs["behshape.fina.expa"] = {20, 0, 0, 0};
+  layout->expandableGlyphs["kaf.fina.expa"] = {20, -1, 20, -1};
+  layout->expandableGlyphs["kaf.fina.afterlam.expa"] = {20, 0, 0, 0};
+  layout->expandableGlyphs["noon.isol.expa"] = {20, 0, 0, 0};
+  layout->expandableGlyphs["noon.fina.expa"] = {20, 0, 0, 0};
+  layout->expandableGlyphs["noon.fina.expa.afterbeh"] = {20, 0, 0, 0};
+  layout->expandableGlyphs["alefmaksura.isol.expa"] = {20, 0, 0, 0};
+  layout->expandableGlyphs["yehshape.isol.expa"] = {20, 0, 0, 0};
+  layout->expandableGlyphs["yehshape.fina.ii.expa"] = {20, 0, 0, 0};
+  layout->expandableGlyphs["yehshape.fina.expa"] = {20, 0, 0, 0};
+  layout->expandableGlyphs["sad.isol.expa"] = {20, 0, 0, 0};
+  layout->expandableGlyphs["sad.fina.expa"] = {20, 0, 0, 0};
+  layout->expandableGlyphs["seen.isol.expa"] = {20, 0, 0, 0};
+  layout->expandableGlyphs["seen.fina.expa"] = {20, 0, 0, 0};
+  layout->expandableGlyphs["feh.isol.expa"] = {20, 0, 0, 0};
+  layout->expandableGlyphs["feh.fina.expa"] = {20, 0, 0, 0};
+  layout->expandableGlyphs["qaf.isol.expa"] = {20, 0, 0, 0};
+  layout->expandableGlyphs["qaf.fina.expa"] = {20, 0, 0, 0};
 
+  layout->expandableGlyphs["behshape.init"] = {20, -1, 0, 0};
+  layout->expandableGlyphs["hah.init"] = {20, -0.5, 0, 0};
+  layout->expandableGlyphs["seen.init"] = {20, -0.7, 0, 0};
+  layout->expandableGlyphs["sad.init"] = {20, -0.5, 0, 0};
+  layout->expandableGlyphs["tah.init"] = {20, -0.5, 0, 0};
+  layout->expandableGlyphs["ain.init"] = {20, -0.7, 0, 0};
+  layout->expandableGlyphs["fehshape.init"] = {20, -1, 0, 0};
+  layout->expandableGlyphs["kaf.init"] = {20, -1.5, 0, 0};
+  layout->expandableGlyphs["kaf.init.ii"] = {20, -1.5, 6, -1};
+  layout->expandableGlyphs["kaf.init.iii"] = {20, -1.5, 0, 0};
+  layout->expandableGlyphs["kaf.init.iv"] = {20, -1.5, 0, 0};
+  layout->expandableGlyphs["kaf.init.ii.i"] = {20, -2, 0, 0};
 
+  layout->expandableGlyphs["lam.init"] = {20, -1, 0, 0};
+  layout->expandableGlyphs["meem.init"] = {20, -0.7, 0, 0};
+  layout->expandableGlyphs["heh.init"] = {20, -0.5, 0, 0};
 
-  layout->expandableGlyphs["behshape.isol.expa"] = { 20,0,0,0 };
-  layout->expandableGlyphs["behshape.fina.expa"] = { 20,0,0,0 };
-  layout->expandableGlyphs["kaf.fina.expa"] = { 20,-1,20,-1 };
-  layout->expandableGlyphs["kaf.fina.afterlam.expa"] = { 20,0,0,0 };
-  layout->expandableGlyphs["noon.isol.expa"] = { 20,0,0,0 };
-  layout->expandableGlyphs["noon.fina.expa"] = { 20,0,0,0 };
-  layout->expandableGlyphs["noon.fina.expa.afterbeh"] = { 20,0,0,0 };
-  layout->expandableGlyphs["alefmaksura.isol.expa"] = { 20,0,0,0 };
-  layout->expandableGlyphs["yehshape.isol.expa"] = { 20,0,0,0 };
-  layout->expandableGlyphs["yehshape.fina.ii.expa"] = { 20,0,0,0 };
-  layout->expandableGlyphs["yehshape.fina.expa"] = { 20,0,0,0 };
-  layout->expandableGlyphs["sad.isol.expa"] = { 20,0,0,0 };
-  layout->expandableGlyphs["sad.fina.expa"] = { 20,0,0,0 };
-  layout->expandableGlyphs["seen.isol.expa"] = { 20,0,0,0 };
-  layout->expandableGlyphs["seen.fina.expa"] = { 20,0,0,0 };
-  layout->expandableGlyphs["feh.isol.expa"] = { 20,0,0,0 };
-  layout->expandableGlyphs["feh.fina.expa"] = { 20,0,0,0 };
-  layout->expandableGlyphs["qaf.isol.expa"] = { 20,0,0,0 };
-  layout->expandableGlyphs["qaf.fina.expa"] = { 20,0,0,0 };
+  layout->expandableGlyphs["heh.medi"] = {20, -0.3, 0, 0};
+  layout->expandableGlyphs["behshape.medi"] = {20, -0.5, 20, -0.5};
+  layout->expandableGlyphs["behshape.medi.afterbeh"] = {20, -0.5, 0, 0};
+  layout->expandableGlyphs["behshape.medi.beforeseen"] = {20, -1, 20, -1};
+  layout->expandableGlyphs["behshape.medi.beforereh"] = {20, -0.5, 20, -0.7};
+  layout->expandableGlyphs["behshape.medi.beforenoon"] = {20, -0.5, 20, -0.7};
+  layout->expandableGlyphs["behshape.medi.beforeyeh"] = {0, 0, 20, -1};
 
-  layout->expandableGlyphs["behshape.init"] = { 20,-1,0,0 };
-  layout->expandableGlyphs["hah.init"] = { 20,-0.5,0,0 };
-  layout->expandableGlyphs["seen.init"] = { 20,-0.7,0,0 };
-  layout->expandableGlyphs["sad.init"] = { 20,-0.5,0,0 };
-  layout->expandableGlyphs["tah.init"] = { 20,-0.5,0,0 };
-  layout->expandableGlyphs["ain.init"] = { 20,-0.7,0,0 };
-  layout->expandableGlyphs["fehshape.init"] = { 20,-1,0,0 };
-  layout->expandableGlyphs["kaf.init"] = { 20,-1.5,0,0 };
-  layout->expandableGlyphs["kaf.init.ii"] = { 20,-1.5,6,-1 };
-  layout->expandableGlyphs["kaf.init.iii"] = { 20,-1.5,0,0 };
-  layout->expandableGlyphs["kaf.init.iv"] = { 20,-1.5,0,0 };
-  layout->expandableGlyphs["kaf.init.ii.i"] = { 20,-2,0,0 };
-  
-  layout->expandableGlyphs["lam.init"] = { 20,-1,0,0 };
-  layout->expandableGlyphs["meem.init"] = { 20,-0.7,0,0 };
-  layout->expandableGlyphs["heh.init"] = { 20,-0.5,0,0 };
+  layout->expandableGlyphs["hah.medi"] = {20, -1.3, 20, -1};
+  layout->expandableGlyphs["hah.medi.afterbeh"] = {20, -1, 0, 0};
+  layout->expandableGlyphs["hah.medi.lam_hah"] = {20, -1, 0, 0};
+  layout->expandableGlyphs["hah.medi.aftermeem"] = {20, -1, 0, 0};
+  layout->expandableGlyphs["hah.medi.afterfeh"] = {20, -1, 0, 0};
+  layout->expandableGlyphs["hah.medi.ii"] = {0, 0, 20, -0.5};
+  layout->expandableGlyphs["seen.medi"] = {20, -0.5, 20, -0.5};
+  layout->expandableGlyphs["seen.medi.afterbeh"] = {20, -0.5, 20, -0.5};
+  layout->expandableGlyphs["seen.medi.beforereh"] = {0, 0, 20, -0.5};
+  layout->expandableGlyphs["seen.medi.beforeyeh"] = {0, 0, 20, -0.5};
+  layout->expandableGlyphs["sad.medi"] = {20, -0.5, 20, -0.5};
+  layout->expandableGlyphs["tah.medi"] = {20, -0.5, 20, -0.5};
+  layout->expandableGlyphs["ain.medi"] = {20, -0.5, 20, -0.5};
+  layout->expandableGlyphs["ain.medi.beforeyeh"] = {0, 0, 20, -0.5};
+  layout->expandableGlyphs["fehshape.medi"] = {20, -0.5, 20, -0.5};
+  layout->expandableGlyphs["fehshape.medi.beforeyeh"] = {0, 0, 20, -0.5};
 
-  layout->expandableGlyphs["heh.medi"] = { 20,-0.3,0,0 };
-  layout->expandableGlyphs["behshape.medi"] = { 20,-0.5,20,-0.5 };
-  layout->expandableGlyphs["behshape.medi.afterbeh"] = { 20,-0.5,0,0 };
-  layout->expandableGlyphs["behshape.medi.beforeseen"] = { 20,-1,20,-1 };
-  layout->expandableGlyphs["behshape.medi.beforereh"] = { 20,-0.5,20,-0.7 };
-  layout->expandableGlyphs["behshape.medi.beforenoon"] = { 20,-0.5,20,-0.7 };
-  layout->expandableGlyphs["behshape.medi.beforeyeh"] = { 0,0,20,-1 };
+  layout->expandableGlyphs["kaf.medi"] = {20, -1.5, 20, -1.5};
+  layout->expandableGlyphs["kaf.medi.beforemeem"] = {0, 0, 20, 0};
+  layout->expandableGlyphs["kaf.medi.beforeyeh"] = {0, 0, 20, -1};
+  layout->expandableGlyphs["kaf.medi.beforelam"] = {0, 0, 20, -1};
+  layout->expandableGlyphs["kaf.medi.ii"] = {20, -0.5, 20, -0.5};
+  layout->expandableGlyphs["kaf.medi.ii.i"] = {20, -0.5, 20, -0.5};
+  layout->expandableGlyphs["lam.medi"] = {20, -1, 20, -0.5};
+  layout->expandableGlyphs["lam.medi.beforeyeh"] = {0, 0, 20, -0.5};
+  layout->expandableGlyphs["lam.medi.beforeheh"] = {0, 0, 20, -0.5};
+  layout->expandableGlyphs["lam.medi.afterkaf"] = {20, -1, 0, 0};
+  layout->expandableGlyphs["meem.medi"] = {20, -0.5, 20, -0.5};
+  layout->expandableGlyphs["meem.medi.afterhah"] = {20, -0.7, 0, 0};
+  layout->expandableGlyphs["meem.medi.beforeyeh"] = {0, 0, 20, -0.5};
 
+  layout->expandableGlyphs["lam.medi.laf"] = {0.0, 0.0, 20, -0.5};
+  layout->expandableGlyphs["dal.fina"] = {0.0, 0.0, 20, -0.5};
+  layout->expandableGlyphs["heh.fina"] = {0.0, 0.0, 20, -0.5};
+  layout->expandableGlyphs["hah.fina"] = {0.0, 0.0, 20, -0.5};
+  layout->expandableGlyphs["seen.fina"] = {0, 0, 20, -0.5};
+  layout->expandableGlyphs["feh.fina"] = {0.0, 0.0, 20, -0.5};
+  layout->expandableGlyphs["meem.fina"] = {0.0, 0.0, 20, -0.7};
+  layout->expandableGlyphs["meem.fina.ii"] = {0.0, 0.0, 20, -0.7};
+  layout->expandableGlyphs["behshape.fina"] = {0.0, 0.0, 20, -0.5};
+  layout->expandableGlyphs["qaf.fina"] = {0.0, 0.0, 20, -0.5};
+  layout->expandableGlyphs["lam.fina"] = {0.0, 0.0, 20, -0.5};
+  layout->expandableGlyphs["kaf.fina"] = {0.0, 0.0, 20, -1};
+  layout->expandableGlyphs["noon.fina"] = {0.0, 0.0, 20, -0.5};
+  layout->expandableGlyphs["noon.fina.basmala"] = {20, 0.0, 0, -0.5};
+  layout->expandableGlyphs["reh.fina"] = {0.0, 0.0, 20, -0.5};
+  layout->expandableGlyphs["ain.fina"] = {0.0, 0.0, 20, -0.5};
 
+  layout->expandableGlyphs["fatha"] = {20, -1.0, 0, 0};
+  layout->expandableGlyphs["kasra"] = {20, -1.0, 0, 0};
+  layout->expandableGlyphs["space"] = {20, -2, 0.0, 0.0};
 
-  layout->expandableGlyphs["hah.medi"] = { 20,-1.3,20,-1 };
-  layout->expandableGlyphs["hah.medi.afterbeh"] = { 20,-1,0,0 };
-  layout->expandableGlyphs["hah.medi.lam_hah"] = { 20,-1,0,0 };
-  layout->expandableGlyphs["hah.medi.aftermeem"] = { 20,-1,0,0 };
-  layout->expandableGlyphs["hah.medi.afterfeh"] = { 20,-1,0,0 };
-  layout->expandableGlyphs["hah.medi.ii"] = { 0,0,20,-0.5 };
-  layout->expandableGlyphs["seen.medi"] = { 20,-0.5,20,-0.5 };
-  layout->expandableGlyphs["seen.medi.afterbeh"] = { 20,-0.5,20,-0.5 };
-  layout->expandableGlyphs["seen.medi.beforereh"] = { 0,0,20,-0.5 };
-  layout->expandableGlyphs["seen.medi.beforeyeh"] = { 0,0,20,-0.5 };
-  layout->expandableGlyphs["sad.medi"] = { 20,-0.5,20,-0.5 };
-  layout->expandableGlyphs["tah.medi"] = { 20,-0.5,20,-0.5 };
-  layout->expandableGlyphs["ain.medi"] = { 20,-0.5,20,-0.5 };
-  layout->expandableGlyphs["ain.medi.beforeyeh"] = { 0,0,20,-0.5 };
-  layout->expandableGlyphs["fehshape.medi"] = { 20,-0.5,20,-0.5 };
-  layout->expandableGlyphs["fehshape.medi.beforeyeh"] = { 0,0,20,-0.5 };
+  // kashida_ii
 
-  layout->expandableGlyphs["kaf.medi"] = { 20,-1.5,20,-1.5 };
-  layout->expandableGlyphs["kaf.medi.beforemeem"] = { 0,0,20,0 };
-  layout->expandableGlyphs["kaf.medi.beforeyeh"] = { 0,0,20,-1 };
-  layout->expandableGlyphs["kaf.medi.beforelam"] = { 0,0,20,-1 };
-  layout->expandableGlyphs["kaf.medi.ii"] = { 20,-0.5,20,-0.5 };
-  layout->expandableGlyphs["kaf.medi.ii.i"] = { 20,-0.5,20,-0.5 };
-  layout->expandableGlyphs["lam.medi"] = { 20,-1,20,-0.5 };
-  layout->expandableGlyphs["lam.medi.beforeyeh"] = { 0,0,20,-0.5 };
-  layout->expandableGlyphs["lam.medi.beforeheh"] = { 0,0,20,-0.5 };
-  layout->expandableGlyphs["lam.medi.afterkaf"] = { 20,-1,0,0 };
-  layout->expandableGlyphs["meem.medi"] = { 20,-0.5,20,-0.5 };
-  layout->expandableGlyphs["meem.medi.afterhah"] = { 20,-0.7,0,0 };
-  layout->expandableGlyphs["meem.medi.beforeyeh"] = { 0,0,20,-0.5 };
+  layout->expandableGlyphs["behshape.medi.expa"] = {20, -1, 0, 0};
 
-
-
-
-
-
-  layout->expandableGlyphs["lam.medi.laf"] = { 0.0,0.0,20,-0.5 };
-  layout->expandableGlyphs["dal.fina"] = { 0.0,0.0,20,-0.5 };
-  layout->expandableGlyphs["heh.fina"] = { 0.0,0.0,20,-0.5 };
-  layout->expandableGlyphs["hah.fina"] = { 0.0,0.0,20,-0.5 };
-  layout->expandableGlyphs["seen.fina"] = { 0,0,20,-0.5 };
-  layout->expandableGlyphs["feh.fina"] = { 0.0,0.0,20,-0.5 };
-  layout->expandableGlyphs["meem.fina"] = { 0.0,0.0,20,-0.7 };
-  layout->expandableGlyphs["meem.fina.ii"] = { 0.0,0.0,20,-0.7 };
-  layout->expandableGlyphs["behshape.fina"] = { 0.0,0.0,20,-0.5 };
-  layout->expandableGlyphs["qaf.fina"] = { 0.0,0.0,20,-0.5 };
-  layout->expandableGlyphs["lam.fina"] = { 0.0,0.0,20,-0.5 };
-  layout->expandableGlyphs["kaf.fina"] = { 0.0,0.0,20,-1 };
-  layout->expandableGlyphs["noon.fina"] = { 0.0,0.0,20,-0.5 };
-  layout->expandableGlyphs["noon.fina.basmala"] = { 20,0.0,0,-0.5 };
-  layout->expandableGlyphs["reh.fina"] = { 0.0,0.0,20,-0.5 };
-  layout->expandableGlyphs["ain.fina"] = { 0.0,0.0,20,-0.5 };
-
-  layout->expandableGlyphs["fatha"] = { 20,-1.0,0,0 };
-  layout->expandableGlyphs["kasra"] = { 20,-1.0,0,0 };
-  layout->expandableGlyphs["space"] = { 20,-2,0.0,0.0 };
-
-  //kashida_ii
-
-
-  layout->expandableGlyphs["behshape.medi.expa"] = { 20,-1,0,0 };
-
-
-
-
-  //Basmala
-  layout->expandableGlyphs["behshape.medi.basmala"] = { 20,-1,0,0 };
-  layout->expandableGlyphs["seen.medi.basmala"] = { 20,-1,0,0 };
-  layout->expandableGlyphs["meem.fina.basmala"] = { 0,0,20,-1 };
-
-
-
-
-
-
-
+  // Basmala
+  layout->expandableGlyphs["behshape.medi.basmala"] = {20, -1, 0, 0};
+  layout->expandableGlyphs["seen.medi.basmala"] = {20, -1, 0, 0};
+  layout->expandableGlyphs["meem.fina.basmala"] = {0, 0, 20, -1};
 }
 
 CalcAnchor OldMadina::getanchorCalcFunctions(QString functionName,
-                                             Subtable *subtable) {
-    CalcAnchor ret;
+                                             Subtable* subtable) {
+  CalcAnchor ret;
   if (functionName == "defaultmarkabovemark") {
-    return Defaultmarkabovemark(*this, *(MarkBaseSubtable *)(subtable));
+    return Defaultmarkabovemark(*this, *(MarkBaseSubtable*)(subtable));
   } else if (functionName == "defaultopmarkanchor") {
-    return Defaultopmarkanchor(*this, *(MarkBaseSubtable *)(subtable));
+    return Defaultopmarkanchor(*this, *(MarkBaseSubtable*)(subtable));
   } else if (functionName == "defaultmarkbelowmark") {
-    return Defaultmarkbelowmark(*this, *(MarkBaseSubtable *)(subtable));
+    return Defaultmarkbelowmark(*this, *(MarkBaseSubtable*)(subtable));
   } else if (functionName == "defaullowmarkanchor") {
-    return Defaullowmarkanchor(*this, *(MarkBaseSubtable *)(subtable));
+    return Defaullowmarkanchor(*this, *(MarkBaseSubtable*)(subtable));
   } else if (functionName == "defaultbaseanchorforlow") {
-    return Defaulbaseanchorforlow(*this, *(MarkBaseSubtable *)(subtable));
+    return Defaulbaseanchorforlow(*this, *(MarkBaseSubtable*)(subtable));
   } else if (functionName == "defaulbaseanchorfortop") {
-    return Defaulbaseanchorfortop(*this, *(MarkBaseSubtable *)(subtable));
+    return Defaulbaseanchorfortop(*this, *(MarkBaseSubtable*)(subtable));
   } else if (functionName == "joinedsmalllettersbaseanchor") {
-    return Joinedsmalllettersbaseanchor(*this, *(MarkBaseSubtable *)(subtable));
+    return Joinedsmalllettersbaseanchor(*this, *(MarkBaseSubtable*)(subtable));
   } else {
-      return ret;
+    return ret;
   }
 }
 
 Lookup* OldMadina::getLookup(QString lookupName) {
-
   if (lookupName == "defaultmarkpositioncpp") {
     return defaultmarkposition();
-  }
-  else if (lookupName == "defaultwaqfmarktobase") {
+  } else if (lookupName == "defaultwaqfmarktobase") {
     return defaultwaqfmarktobase();
-  }
-  else if (lookupName == "forsmalllalef") {
+  } else if (lookupName == "forsmalllalef") {
     return forsmalllalef();
-  }
-  else if (lookupName == "forhamza") {
+  } else if (lookupName == "forhamza") {
     return forhamza();
-  }
-  else if (lookupName == "forheh") {
+  } else if (lookupName == "forheh") {
     return forheh();
-  }
-  else if (lookupName == "forwaw") {
+  } else if (lookupName == "forwaw") {
     return forwaw();
-  }
-  else if (lookupName == "rehwawcursivecpp") {
+  } else if (lookupName == "rehwawcursivecpp") {
     return rehwawcursivecpp();
-  }
-  else if (lookupName == "cursivejoin") {
+  } else if (lookupName == "cursivejoin") {
     return cursivejoin();
-  }
-  else if (lookupName == "defaultdotmarks") {
+  } else if (lookupName == "defaultdotmarks") {
     return defaultdotmarks();
-  }
-  else if (lookupName == "pointmarks") {
+  } else if (lookupName == "pointmarks") {
     return pointmarks();
-  }
-  else if (lookupName == "defaultwaqfmarkabovemarkprecise") {
+  } else if (lookupName == "defaultwaqfmarkabovemarkprecise") {
     return defaultwaqfmarkabovemarkprecise();
-  }
-  else if (lookupName == "defaultmarkdotmarks") {
+  } else if (lookupName == "defaultmarkdotmarks") {
     return defaultmarkdotmarks();
-  }
-  else if (lookupName == "defaultmkmk") {
+  } else if (lookupName == "defaultmkmk") {
     return defaultmkmk();
-  }
-  else if (lookupName == "ayanumbers") {
+  } else if (lookupName == "ayanumbers") {
     return ayanumbers();
-  }
-  else if (lookupName == "ayanumberskern") {
+  } else if (lookupName == "ayanumberskern") {
     return ayanumberskern();
-  }
-  else if (lookupName == "shrinkstretchlt") {
+  } else if (lookupName == "shrinkstretchlt") {
     return shrinkstretchlt();
-  }
-  else if (lookupName == "tajweedcolorcpp") {
+  } else if (lookupName == "tajweedcolorcpp") {
     return tajweedcolorcpp();
-  }
-  else if (lookupName == "forsmallhighwaw") {
+  } else if (lookupName == "forsmallhighwaw") {
     return forsmallhighwaw();
-  }
-  else if (lookupName == "populatecvxx") {
+  } else if (lookupName == "populatecvxx") {
     return populatecvxx();
-  }
-  else if (lookupName == "glyphalternates") {
+  } else if (lookupName == "glyphalternates") {
     return glyphalternates();
+  } else if (lookupName == "allcursivejoinnortl") {
+    return allCursiveJoin(false);
+  } else if (lookupName == "allcursivejoinrtl") {
+    return allCursiveJoin(true);
   }
 
   return nullptr;
+}
+Lookup* OldMadina::allCursiveJoin(bool rtl) {
+  auto lookup = new Lookup(m_layout);
+  lookup->name = "allcursivejoin" + (rtl ? QString("rtl") : "nortl");
+  lookup->feature = "";
+  lookup->type = Lookup::cursive;
+
+  if (rtl) {
+    lookup->flags = Lookup::Flags::IgnoreMarks | Lookup::Flags::RightToLeft;
+  } else {
+    lookup->flags = Lookup::Flags::IgnoreMarks;
+  }
+  for (auto it = entryAnchorsRTL.constBegin(); it != entryAnchorsRTL.constEnd(); ++it) {
+    QString cursiveName = it.key();
+    auto entries = it.value();
+    auto exits = exitAnchorsRTL[cursiveName];
+
+    CursiveSubtable* newsubtable = new CursiveSubtable(lookup);
+    lookup->subtables.append(newsubtable);
+    newsubtable->name = cursiveName;
+
+    for (auto anchor = entries.constBegin(); anchor != entries.constEnd(); ++anchor) {
+      newsubtable->anchors[anchor.key()].entry = anchor.value();
+    }
+
+    for (auto anchor = exits.constBegin(); anchor != exits.constEnd(); ++anchor) {
+      newsubtable->anchors[anchor.key()].exit = anchor.value();
+    }
+  }
+  for (auto it = entryAnchors.constBegin(); it != entryAnchors.constEnd(); ++it) {
+    QString cursiveName = it.key();
+    auto entries = it.value();
+    auto exits = exitAnchors[cursiveName];
+
+    CursiveSubtable* newsubtable = new CursiveSubtable(lookup);
+    lookup->subtables.append(newsubtable);
+    newsubtable->name = cursiveName;
+
+    for (auto anchor = entries.constBegin(); anchor != entries.constEnd(); ++anchor) {
+      newsubtable->anchors[anchor.key()].entry = anchor.value();
+    }
+
+    for (auto anchor = exits.constBegin(); anchor != exits.constEnd(); ++anchor) {
+      newsubtable->anchors[anchor.key()].exit = anchor.value();
+    }
+  }
+  return lookup;
 }
 
 Lookup* OldMadina::rehwawcursivecpp() {
   Lookup* lookup = new Lookup(m_layout);
   lookup->name = "rehwawcursivecpp";
-  lookup->feature = "curs";
+  lookup->feature = isForCoreText ? "" : "curs";
   lookup->type = Lookup::cursive;
-  lookup->flags = Lookup::Flags::IgnoreMarks; // | Lookup::Flags::RightToLeft;
+  lookup->flags = Lookup::Flags::IgnoreMarks;  // | Lookup::Flags::RightToLeft;
 
   int kern = 150;
 
   class CustomCursiveSubtable : public CursiveSubtable {
-  public:
+   public:
     CustomCursiveSubtable(Lookup* lookup) : CursiveSubtable(lookup) {}
 
     virtual QPoint calculateEntry(GlyphVis* originalglyph, GlyphVis* extendedglyph, QPoint defaultEntry) {
-
       QPoint entry = entryParameters[originalglyph->charcode];
 
       entry += QPoint(extendedglyph->width, 0);
 
       return entry;
-
     }
-
   };
-
 
   CursiveSubtable* rehfinaafterbehshape = new CursiveSubtable(lookup);
   lookup->subtables.append(rehfinaafterbehshape);
@@ -648,27 +629,25 @@ Lookup* OldMadina::rehwawcursivecpp() {
   lookup->subtables.append(rehfina);
   rehfina->name = "rehfina";
 
-  auto glyphcodes = m_layout->classtoUnicode("^reh.fina$|^reh.fina[.]added");
+  auto rehfFinaGlyphs = m_layout->classtoUnicode("^reh.fina$|^reh.fina[.]added");
 
-  for (auto glyphcode : glyphcodes) {
+  for (auto glyphcode : rehfFinaGlyphs) {
     rehfina->anchors[glyphcode].exit = QPoint(kern, 0);
   }
-
 
   CursiveSubtable* wawfina = new CustomCursiveSubtable(lookup);
   lookup->subtables.append(wawfina);
   wawfina->name = "wawfina";
 
-  glyphcodes = m_layout->classtoUnicode("^waw.fina$|^waw.fina[.]added");
+  auto wawFinaGlyphs = m_layout->classtoUnicode("^waw.fina$|^waw.fina[.]added");
 
-  for (auto glyphcode : glyphcodes) {
+  for (auto glyphcode : wawFinaGlyphs) {
     wawfina->anchors[glyphcode].exit = QPoint(kern, 0);
   }
 
-  glyphcodes = m_layout->classtoUnicode("[.]isol|[.]init"); //"((?<!reh|waw)[.]isol)|init"
+  auto glyphcodes = m_layout->classtoUnicode("[.]isol|[.]init");  //"((?<!reh|waw)[.]isol)|init"
 
   for (auto glyphcode : glyphcodes) {
-
     QString glyphName = m_layout->glyphNamePerCode[glyphcode];
     auto& glyph = glyphs[glyphName];
 
@@ -678,14 +657,11 @@ Lookup* OldMadina::rehwawcursivecpp() {
     wawfina->anchors[glyphcode].entry = QPoint(glyph.width, 0);
     rehfinaafterbehshape->anchors[glyphcode].entry = QPoint(glyph.width, 0);
     rehfinaafterseen->anchors[glyphcode].entry = QPoint(glyph.width, 0);
-
   }
 
   return lookup;
-
 }
 Lookup* OldMadina::cursivejoin() {
-
   auto lookup = new Lookup(m_layout);
   lookup->name = "cursivejoinrtl";
   lookup->feature = "curs";
@@ -710,7 +686,6 @@ Lookup* OldMadina::cursivejoin() {
     }
   }
 
-
   m_layout->addLookup(lookup);
 
   lookup = new Lookup(m_layout);
@@ -718,7 +693,6 @@ Lookup* OldMadina::cursivejoin() {
   lookup->feature = "curs";
   lookup->type = Lookup::cursive;
   lookup->flags = Lookup::Flags::IgnoreMarks;
-
 
   for (auto it = entryAnchors.constBegin(); it != entryAnchors.constEnd(); ++it) {
     QString cursiveName = it.key();
@@ -738,12 +712,7 @@ Lookup* OldMadina::cursivejoin() {
     }
   }
 
-
-
-
-
   return lookup;
-
 }
 Lookup* OldMadina::defaultmarkposition() {
   Lookup* lookup = new Lookup(m_layout);
@@ -773,205 +742,196 @@ Lookup* OldMadina::defaultmarkposition() {
   lowmarks.remove("hamzabelow");
   lowmarks.remove("smalllowseen");
 
-
-  //meem.fina.afterkaf
+  // meem.fina.afterkaf
 
   MarkBaseSubtable* newsubtable = new MarkBaseSubtable(lookup);
   lookup->subtables.append(newsubtable);
 
   newsubtable->name = "meemfinaafterkaf";
-  newsubtable->base = { "meem.fina.afterkaf" };
-  newsubtable->classes["sukun"].mark = { "sukun" };
+  newsubtable->base = {"meem.fina.afterkaf"};
+  newsubtable->classes["sukun"].mark = {"sukun"};
   newsubtable->classes["sukun"].basefunction = Defaulbaseanchorfortop(*this, *newsubtable);
   newsubtable->classes["sukun"].markfunction = Defaultopmarkanchor(*this, *newsubtable);
 
-  //tah
+  // tah
   newsubtable = new MarkBaseSubtable(lookup);
   lookup->subtables.append(newsubtable);
 
   newsubtable->name = "tah";
-  newsubtable->base = { "^tah" };
+  newsubtable->base = {"^tah"};
 
-  newsubtable->classes["fathadamma"].mark = { "fatha", "damma","shadda", "sukun" };
+  newsubtable->classes["fathadamma"].mark = {"fatha", "damma", "shadda", "sukun"};
   newsubtable->classes["fathadamma"].basefunction = Defaulbaseanchorfortop(*this, *newsubtable);
   newsubtable->classes["fathadamma"].markfunction = Defaultopmarkanchor(*this, *newsubtable);
 
-  newsubtable->classes["fathatandammatan"].mark = { "fathatan", "dammatan" };
+  newsubtable->classes["fathatandammatan"].mark = {"fathatan", "dammatan"};
   newsubtable->classes["fathatandammatan"].basefunction = Defaulbaseanchorfortop(*this, *newsubtable);
   newsubtable->classes["fathatandammatan"].markfunction = Defaultopmarkanchor(*this, *newsubtable);
 
-  newsubtable->classes["idgham"].mark = { "fathatanidgham", "dammatanidgham" };
+  newsubtable->classes["idgham"].mark = {"fathatanidgham", "dammatanidgham"};
   newsubtable->classes["idgham"].basefunction = Defaulbaseanchorfortop(*this, *newsubtable);
   newsubtable->classes["idgham"].markfunction = Defaultopmarkanchor(*this, *newsubtable);
 
-
-  //default
+  // default
   newsubtable = new MarkBaseSubtable(lookup);
   lookup->subtables.append(newsubtable);
 
   newsubtable->name = "topmarks";
-  newsubtable->base = { "bases" };
+  newsubtable->base = {"bases"};
   newsubtable->classes["topmarks"].mark = topmarks;
   newsubtable->classes["topmarks"].basefunction = Defaulbaseanchorfortop(*this, *newsubtable);
   newsubtable->classes["topmarks"].markfunction = Defaultopmarkanchor(*this, *newsubtable);
 
-
   newsubtable = new MarkBaseSubtable(lookup);
   lookup->subtables.append(newsubtable);
   newsubtable->name = "lowmarks";
-  newsubtable->base = { "bases" };
+  newsubtable->base = {"bases"};
   newsubtable->classes["lowmarks"].mark = lowmarks;
   newsubtable->classes["lowmarks"].basefunction = Defaulbaseanchorforlow(*this, *newsubtable);
   newsubtable->classes["lowmarks"].markfunction = Defaullowmarkanchor(*this, *newsubtable);
 
-
-
   newsubtable = new MarkBaseSubtable(lookup);
   newsubtable->name = "smallletters";
-  newsubtable->base = { "bases" };
+  newsubtable->base = {"bases"};
   lookup->subtables.append(newsubtable);
-  newsubtable->classes["smallletters"].mark = { "smallalef.joined","smallhighwaw" };
+  newsubtable->classes["smallletters"].mark = {"smallalef.joined", "smallhighwaw"};
   newsubtable->classes["smallletters"].basefunction = Defaulbaseanchorforsmallalef(*this, *newsubtable);
   newsubtable->classes["smallletters"].markfunction = Defaultopmarkanchor(*this, *newsubtable);
 
   newsubtable = new MarkBaseSubtable(lookup);
   newsubtable->name = "joinedmarks";
-  newsubtable->base = { "bases" };
+  newsubtable->base = {"bases"};
   lookup->subtables.append(newsubtable);
-  newsubtable->classes["hamzaabove"].mark = { "hamzaabove.joined" };
+  newsubtable->classes["hamzaabove"].mark = {"hamzaabove.joined"};
   newsubtable->classes["hamzaabove"].basefunction = Defaulbaseanchorforsmallalef(*this, *newsubtable);
   newsubtable->classes["hamzaabove"].markfunction = Defaultopmarkanchor(*this, *newsubtable);
 
-  //default
+  // default
   newsubtable = new MarkBaseSubtable(lookup);
   lookup->subtables.append(newsubtable);
   newsubtable->name = "smallhighyeh";
-  newsubtable->base = { "bases" }; // TODO minimize
+  newsubtable->base = {"bases"};  // TODO minimize
 
-  newsubtable->classes["smallhighyeh"].mark = { "smallhighyeh" };
+  newsubtable->classes["smallhighyeh"].mark = {"smallhighyeh"};
   newsubtable->classes["smallhighyeh"].basefunction = Defaulbaseanchorforsmallalef(*this, *newsubtable);
   newsubtable->classes["smallhighyeh"].markfunction = Defaultopmarkanchor(*this, *newsubtable);
 
-  //shadda
+  // shadda
 
   newsubtable = new MarkBaseSubtable(lookup);
   lookup->subtables.append(newsubtable);
 
   newsubtable->name = "shadda";
-  newsubtable->base = { "bases" };
-  newsubtable->classes["shadda"].mark = { "shadda" };
+  newsubtable->base = {"bases"};
+  newsubtable->classes["shadda"].mark = {"shadda"};
   newsubtable->classes["shadda"].basefunction = Defaulbaseanchorfortop(*this, *newsubtable);
   newsubtable->classes["shadda"].markfunction = Defaultopmarkanchor(*this, *newsubtable);
 
-  //maddahabove
+  // maddahabove
 
   newsubtable = new MarkBaseSubtable(lookup);
   lookup->subtables.append(newsubtable);
 
   newsubtable->name = "maddahabove";
-  newsubtable->base = { "bases" };
-  newsubtable->classes["maddahabove"].mark = { "maddahabove" };
+  newsubtable->base = {"bases"};
+  newsubtable->classes["maddahabove"].mark = {"maddahabove"};
   newsubtable->classes["maddahabove"].basefunction = Defaulbaseanchorfortop(*this, *newsubtable);
   newsubtable->classes["maddahabove"].markfunction = Defaultopmarkanchor(*this, *newsubtable);
 
-  //hamzaabove
+  // hamzaabove
 
   newsubtable = new MarkBaseSubtable(lookup);
   lookup->subtables.append(newsubtable);
 
   newsubtable->name = "hamzaabove";
-  newsubtable->base = { "alef|waw|yehshape|behshape" };
-  newsubtable->classes["hamzaabove"].mark = { "hamzaabove","hamzaabove.small" };
+  newsubtable->base = {"alef|waw|yehshape|behshape"};
+  newsubtable->classes["hamzaabove"].mark = {"hamzaabove", "hamzaabove.small"};
   newsubtable->classes["hamzaabove"].basefunction = Defaulbaseanchorfortop(*this, *newsubtable);
   newsubtable->classes["hamzaabove"].markfunction = Defaultopmarkanchor(*this, *newsubtable);
 
-  //smallalef.replacement
+  // smallalef.replacement
 
   newsubtable = new MarkBaseSubtable(lookup);
   lookup->subtables.append(newsubtable);
 
   newsubtable->name = "smallalefreplacement";
-  newsubtable->base = { "alef|waw|yehshape|behshape" };
-  newsubtable->classes["smallalefreplacement"].mark = { "smallalef.replacement" };
+  newsubtable->base = {"alef|waw|yehshape|behshape"};
+  newsubtable->classes["smallalefreplacement"].mark = {"smallalef.replacement"};
   newsubtable->classes["smallalefreplacement"].basefunction = Defaulbaseanchorfortop(*this, *newsubtable);
   newsubtable->classes["smallalefreplacement"].markfunction = Defaultopmarkanchor(*this, *newsubtable);
 
-  //roundedfilledhigh
+  // roundedfilledhigh
 
   newsubtable = new MarkBaseSubtable(lookup);
   lookup->subtables.append(newsubtable);
 
   newsubtable->name = "roundedfilledhigh";
-  newsubtable->base = { "alef[.]isol.*|meem[.]init.*" };
-  newsubtable->classes["roundedfilledhigh"].mark = { "roundedfilledhigh" };
+  newsubtable->base = {"alef[.]isol.*|meem[.]init.*"};
+  newsubtable->classes["roundedfilledhigh"].mark = {"roundedfilledhigh"};
   newsubtable->classes["roundedfilledhigh"].basefunction = Defaulbaseanchorforsmallalef(*this, *newsubtable);
   newsubtable->classes["roundedfilledhigh"].markfunction = Defaultopmarkanchor(*this, *newsubtable);
 
-  //smallhighnoon
+  // smallhighnoon
   newsubtable = new MarkBaseSubtable(lookup);
   lookup->subtables.append(newsubtable);
 
   newsubtable->name = "smallhighnoon";
-  newsubtable->base = { "behshape[.]init.*" };
-  newsubtable->classes["smallhighnoon"].mark = { "smallhighnoon" };
+  newsubtable->base = {"behshape[.]init.*"};
+  newsubtable->classes["smallhighnoon"].mark = {"smallhighnoon"};
   newsubtable->classes["smallhighnoon"].basefunction = Defaulbaseanchorforsmallalef(*this, *newsubtable);
   newsubtable->classes["smallhighnoon"].markfunction = Defaultopmarkanchor(*this, *newsubtable);
 
-  //smallhighseen
+  // smallhighseen
   newsubtable = new MarkBaseSubtable(lookup);
   lookup->subtables.append(newsubtable);
 
   newsubtable->name = "smallhighseen";
-  newsubtable->base = { "sad[.]medi|^alef.fina|^heh.fina|^lam.fina|^noon.fina" };
-  newsubtable->classes["smallhighseen"].mark = { "smallhighseen" };
+  newsubtable->base = {"sad[.]medi|^alef.fina|^heh.fina|^lam.fina|^noon.fina"};
+  newsubtable->classes["smallhighseen"].mark = {"smallhighseen"};
   newsubtable->classes["smallhighseen"].basefunction = Defaulbaseanchorfortop(*this, *newsubtable);
   newsubtable->classes["smallhighseen"].markfunction = Defaultopmarkanchor(*this, *newsubtable);
 
-  //hamzaabove.lamalef
+  // hamzaabove.lamalef
   newsubtable = new MarkBaseSubtable(lookup);
   lookup->subtables.append(newsubtable);
 
   newsubtable->name = "hamzaabove.lamalef";
-  newsubtable->base = { "lam.init.lamalef","^lam.medi.laf" };
-  newsubtable->classes["hamzaabove"].mark = { "hamzaabove.lamalef" };
+  newsubtable->base = {"lam.init.lamalef", "^lam.medi.laf"};
+  newsubtable->classes["hamzaabove"].mark = {"hamzaabove.lamalef"};
   newsubtable->classes["hamzaabove"].basefunction = Defaulbaseanchorfortop(*this, *newsubtable);
   newsubtable->classes["hamzaabove"].markfunction = Defaultopmarkanchor(*this, *newsubtable);
 
-  //hamzabelow
+  // hamzabelow
   newsubtable = new MarkBaseSubtable(lookup);
   lookup->subtables.append(newsubtable);
 
   newsubtable->name = "hamzabelow";
-  newsubtable->base = { "^alef[.]" };
-  newsubtable->classes["hamzabelow"].mark = { "hamzabelow" };
+  newsubtable->base = {"^alef[.]"};
+  newsubtable->classes["hamzabelow"].mark = {"hamzabelow"};
   newsubtable->classes["hamzabelow"].basefunction = Defaulbaseanchorforlow(*this, *newsubtable);
   newsubtable->classes["hamzabelow"].markfunction = Defaullowmarkanchor(*this, *newsubtable);
 
-  //wasla
+  // wasla
   newsubtable = new MarkBaseSubtable(lookup);
   lookup->subtables.append(newsubtable);
 
   newsubtable->name = "wasla";
-  newsubtable->base = { "^alef[.]" };
-  newsubtable->classes["wasla"].mark = { "wasla" };
+  newsubtable->base = {"^alef[.]"};
+  newsubtable->classes["wasla"].mark = {"wasla"};
   newsubtable->classes["wasla"].basefunction = Defaulbaseanchorfortop(*this, *newsubtable);
   newsubtable->classes["wasla"].markfunction = Defaultopmarkanchor(*this, *newsubtable);
 
-  //smalllowseen
+  // smalllowseen
   newsubtable = new MarkBaseSubtable(lookup);
   lookup->subtables.append(newsubtable);
 
   newsubtable->name = "smalllowseen";
-  newsubtable->base = { "^sad[.]medi" };
-  newsubtable->classes["smalllowseen"].mark = { "smalllowseen" };
+  newsubtable->base = {"^sad[.]medi"};
+  newsubtable->classes["smalllowseen"].mark = {"smalllowseen"};
   newsubtable->classes["smalllowseen"].basefunction = Defaulbaseanchorforlow(*this, *newsubtable);
   newsubtable->classes["smalllowseen"].markfunction = Defaullowmarkanchor(*this, *newsubtable);
 
-
   return lookup;
-
-
-
 }
 Lookup* OldMadina::defaultwaqfmarktobase() {
   Lookup* lookup = new Lookup(m_layout);
@@ -979,13 +939,11 @@ Lookup* OldMadina::defaultwaqfmarktobase() {
   lookup->feature = "mark";
   lookup->type = Lookup::mark2base;
 
-
   auto basefunction = [this](QString glyphName, QString className, QPoint adjust, GlyphParameters parameters) -> QPoint {
     GlyphVis& curr = glyphs[glyphName];
 
     int height = std::max((int)curr.height + 100, 900);
-    int width = 0; // curr.bbox.llx;
-
+    int width = 0;  // curr.bbox.llx;
 
     width += adjust.x();
     height += adjust.y();
@@ -999,7 +957,6 @@ Lookup* OldMadina::defaultwaqfmarktobase() {
     int height = 0;
     int width = 0;
 
-
     width += adjust.x();
     height += adjust.y();
 
@@ -1010,10 +967,9 @@ Lookup* OldMadina::defaultwaqfmarktobase() {
   lookup->subtables.append(newsubtable);
 
   newsubtable->name = "defaultwaqfmarktobase";
-  newsubtable->base = { "isol|fina|smallwaw|smallyeh" };
+  newsubtable->base = {"isol|fina|smallwaw|smallyeh"};
 
-
-  newsubtable->classes["waqfmarks"].mark = { "waqfmarks" };
+  newsubtable->classes["waqfmarks"].mark = {"waqfmarks"};
   newsubtable->classes["waqfmarks"].basefunction = basefunction;
   newsubtable->classes["waqfmarks"].markfunction = markfunction;
 
@@ -1025,7 +981,6 @@ Lookup* OldMadina::defaultdotmarks() {
   lookup->feature = "mark";
   lookup->type = Lookup::mark2base;
   lookup->flags = 0;
-
 
   MarkBaseSubtable* newsubtable = new MarkBaseSubtable(lookup);
   lookup->subtables.append(newsubtable);
@@ -1042,48 +997,46 @@ Lookup* OldMadina::defaultdotmarks() {
         };*/
 
   newsubtable->name = "onedotup";
-  newsubtable->base = { "^behshape|^hah|^fehshape|^dal|^reh|^sad|^tah|^ain" };
-  newsubtable->classes["onedotup"].mark = { "onedotup" };
+  newsubtable->base = {"^behshape|^hah|^fehshape|^dal|^reh|^sad|^tah|^ain"};
+  newsubtable->classes["onedotup"].mark = {"onedotup"};
   newsubtable->classes["onedotup"].basefunction = Defaulbaseanchorfortopdots(*this, *newsubtable);
   newsubtable->classes["onedotup"].markfunction = Defaultopmarkanchor(*this, *newsubtable);
 
   newsubtable = new MarkBaseSubtable(lookup);
   lookup->subtables.append(newsubtable);
   newsubtable->name = "twodotsup";
-  newsubtable->base = { "^behshape|^fehshape|^heh" };
-  newsubtable->classes["twodotsup"].mark = { "twodotsup" };
+  newsubtable->base = {"^behshape|^fehshape|^heh"};
+  newsubtable->classes["twodotsup"].mark = {"twodotsup"};
   newsubtable->classes["twodotsup"].basefunction = Defaulbaseanchorfortopdots(*this, *newsubtable);
   newsubtable->classes["twodotsup"].markfunction = Defaultopmarkanchor(*this, *newsubtable);
 
   newsubtable = new MarkBaseSubtable(lookup);
   lookup->subtables.append(newsubtable);
   newsubtable->name = "three_dots";
-  newsubtable->base = { "^behshape|^seen" };
-  newsubtable->classes["three_dots"].mark = { "three_dots" };
+  newsubtable->base = {"^behshape|^seen"};
+  newsubtable->classes["three_dots"].mark = {"three_dots"};
   newsubtable->classes["three_dots"].basefunction = Defaulbaseanchorfortopdots(*this, *newsubtable);
   newsubtable->classes["three_dots"].markfunction = Defaultopmarkanchor(*this, *newsubtable);
 
   newsubtable = new MarkBaseSubtable(lookup);
   lookup->subtables.append(newsubtable);
   newsubtable->name = "onedotdown";
-  newsubtable->base = { "^behshape|^hah" };
-  newsubtable->classes["onedotdown"].mark = { "onedotdown" };
+  newsubtable->base = {"^behshape|^hah"};
+  newsubtable->classes["onedotdown"].mark = {"onedotdown"};
   newsubtable->classes["onedotdown"].basefunction = Defaulbaseanchorforlowdots(*this, *newsubtable);
   newsubtable->classes["onedotdown"].markfunction = Defaullowmarkanchor(*this, *newsubtable);
 
   newsubtable = new MarkBaseSubtable(lookup);
   lookup->subtables.append(newsubtable);
   newsubtable->name = "twodotsdown";
-  newsubtable->base = { "^behshape" };
-  newsubtable->classes["twodotsdown"].mark = { "twodotsdown" };
+  newsubtable->base = {"^behshape"};
+  newsubtable->classes["twodotsdown"].mark = {"twodotsdown"};
   newsubtable->classes["twodotsdown"].basefunction = Defaulbaseanchorforlowdots(*this, *newsubtable);
   newsubtable->classes["twodotsdown"].markfunction = Defaullowmarkanchor(*this, *newsubtable);
 
   return lookup;
-
 }
 Lookup* OldMadina::defaultmkmk() {
-
   Lookup* lookup = new Lookup(m_layout);
   lookup->name = "defaultmkmk";
   lookup->feature = "mkmk";
@@ -1094,9 +1047,9 @@ Lookup* OldMadina::defaultmkmk() {
   lookup->subtables.append(subtable);
 
   subtable->name = "defaultmkmktop";
-  subtable->base = { "hamzaabove","hamzaabove.small","hamzaabove.joined","hamzaabove.lamalef", "shadda","smallalef","smallalef.joined","smallalef.replacement","smallhighseen", "smallhighwaw","smallhighyeh" };
+  subtable->base = {"hamzaabove", "hamzaabove.small", "hamzaabove.joined", "hamzaabove.lamalef", "shadda", "smallalef", "smallalef.joined", "smallalef.replacement", "smallhighseen", "smallhighwaw", "smallhighyeh"};
 
-  subtable->classes["topmarks"].mark = { "topmarks" };
+  subtable->classes["topmarks"].mark = {"topmarks"};
   subtable->classes["topmarks"].basefunction = Defaultmarkabovemark(*this, *subtable);
   subtable->classes["topmarks"].markfunction = Defaultopmarkanchor(*this, *subtable);
 
@@ -1104,9 +1057,9 @@ Lookup* OldMadina::defaultmkmk() {
   lookup->subtables.append(subtable);
 
   subtable->name = "defaultmkmkbottom";
-  subtable->base = { "hamzabelow","hamzaabove.joined","smallhighyeh" };
+  subtable->base = {"hamzabelow", "hamzaabove.joined", "smallhighyeh"};
 
-  subtable->classes["lowmarks"].mark = { "lowmarks" };
+  subtable->classes["lowmarks"].mark = {"lowmarks"};
   subtable->classes["lowmarks"].basefunction = Defaulbaseanchorforlow(*this, *subtable);
   subtable->classes["lowmarks"].markfunction = Defaullowmarkanchor(*this, *subtable);
 
@@ -1114,9 +1067,9 @@ Lookup* OldMadina::defaultmkmk() {
   lookup->subtables.append(subtable);
 
   subtable->name = "defaultmkmkmeemiqlab";
-  subtable->base = { "fatha","damma" };// "kasra"
+  subtable->base = {"fatha", "damma"};  // "kasra"
 
-  subtable->classes["meemiqlab"].mark = { "meemiqlab" };
+  subtable->classes["meemiqlab"].mark = {"meemiqlab"};
   subtable->classes["meemiqlab"].basefunction = Defaultmarkabovemark(*this, *subtable);
   subtable->classes["meemiqlab"].markfunction = Defaultopmarkanchor(*this, *subtable);
 
@@ -1124,36 +1077,32 @@ Lookup* OldMadina::defaultmkmk() {
   lookup->subtables.append(subtable);
 
   subtable->name = "defaultmkmksmalllowmeem";
-  subtable->base = { "kasra" };
+  subtable->base = {"kasra"};
 
-  subtable->classes["smalllowmeem"].mark = { "smalllowmeem" };
+  subtable->classes["smalllowmeem"].mark = {"smalllowmeem"};
   subtable->classes["smalllowmeem"].basefunction = Defaultmarkbelowmark(*this, *subtable);
   subtable->classes["smalllowmeem"].markfunction = Defaullowmarkanchor(*this, *subtable);
-
-
 
   subtable = new MarkBaseSubtable(lookup);
   lookup->subtables.append(subtable);
 
   subtable->name = "smallhighseenwaqf.qaf";
-  subtable->base = { "smallhighseen" };
+  subtable->base = {"smallhighseen"};
 
-  subtable->classes["waqf.qaf"].mark = { "waqf.qaf" };
+  subtable->classes["waqf.qaf"].mark = {"waqf.qaf"};
   subtable->classes["waqf.qaf"].basefunction = Defaultmarkabovemark(*this, *subtable);
   subtable->classes["waqf.qaf"].markfunction = Defaultopmarkanchor(*this, *subtable);
-
 
   // hamzaabove.joined
   subtable = new MarkBaseSubtable(lookup);
   lookup->subtables.append(subtable);
 
   subtable->name = "hamzaabovejoined";
-  subtable->base = { "maddahabove" };
+  subtable->base = {"maddahabove"};
 
-  subtable->classes["hamzaabove.joined"].mark = { "hamzaabove.joined" };
-  subtable->classes["hamzaabove.joined"].basefunction = nullptr; //;new Defaultmarkabovemark(*this, *smallhighseen);
-  subtable->classes["hamzaabove.joined"].markfunction = nullptr; // new Defaultopmarkanchor(*this, *smallhighseen);
-
+  subtable->classes["hamzaabove.joined"].mark = {"hamzaabove.joined"};
+  subtable->classes["hamzaabove.joined"].basefunction = nullptr;  //;new Defaultmarkabovemark(*this, *smallhighseen);
+  subtable->classes["hamzaabove.joined"].markfunction = nullptr;  // new Defaultopmarkanchor(*this, *smallhighseen);
 
   m_layout->addLookup(lookup);
 
@@ -1163,21 +1112,20 @@ Lookup* OldMadina::defaultmkmk() {
   lookup->name = "smallalefjoined";
   lookup->feature = "mkmk";
   lookup->type = Lookup::mark2mark;
-  lookup->markGlyphSetIndex = m_layout->addMarkSet({ (quint16)glyphs["smallalef.joined"].charcode , (quint16)glyphs["hamzaabove.joined"].charcode });
+  lookup->markGlyphSetIndex = m_layout->addMarkSet({(quint16)glyphs["smallalef.joined"].charcode, (quint16)glyphs["hamzaabove.joined"].charcode});
   lookup->flags = lookup->flags | Lookup::Flags::UseMarkFilteringSet;
 
   subtable = new MarkBaseSubtable(lookup);
   lookup->subtables.append(subtable);
 
   subtable->name = "smallalefjoined";
-  subtable->base = { "hamzaabove.joined" };
+  subtable->base = {"hamzaabove.joined"};
 
-  subtable->classes["smallalef.joined"].mark = { "smallalef.joined" };
-  //subtable->classes["smallalef.joined"].baseanchors = { { "smallalef.joined", 1 } }
-  subtable->classes["smallalef.joined"].markanchors = { { "smallalef.joined", QPoint(200,0) } };
+  subtable->classes["smallalef.joined"].mark = {"smallalef.joined"};
+  // subtable->classes["smallalef.joined"].baseanchors = { { "smallalef.joined", 1 } }
+  subtable->classes["smallalef.joined"].markanchors = {{"smallalef.joined", QPoint(200, 0)}};
 
   return lookup;
-
 }
 Lookup* OldMadina::defaultmarkdotmarks() {
   Lookup* lookup = new Lookup(m_layout);
@@ -1186,21 +1134,17 @@ Lookup* OldMadina::defaultmarkdotmarks() {
   lookup->type = Lookup::mark2mark;
   lookup->flags = 0;
 
-
   MarkBaseSubtable* topsubtable = new MarkBaseSubtable(lookup);
   lookup->subtables.append(topsubtable);
 
   topsubtable->name = "defaultmarkdotmarkstop";
-  topsubtable->base = { "topdotmarks" };
+  topsubtable->base = {"topdotmarks"};
 
   auto basetopfunction = [this, topsubtable](QString glyphName, QString className, QPoint adjust, GlyphParameters parameters) -> QPoint {
     GlyphVis& curr = glyphs[glyphName];
 
-
     int width = curr.width * 0.5;
     int height = (int)curr.height + 80;
-
-
 
     width = width + adjust.x();
     height = height + adjust.y();
@@ -1215,7 +1159,7 @@ Lookup* OldMadina::defaultmarkdotmarks() {
   topsubtable->classes["topmarks"].basefunction = basetopfunction;
   topsubtable->classes["topmarks"].markfunction = Defaultopmarkanchor(*this, *topsubtable);
 
-  topsubtable->classes["shadda"].mark = { "shadda" };
+  topsubtable->classes["shadda"].mark = {"shadda"};
   topsubtable->classes["shadda"].basefunction = basetopfunction;
   topsubtable->classes["shadda"].markfunction = Defaultopmarkanchor(*this, *topsubtable);
 
@@ -1226,13 +1170,13 @@ Lookup* OldMadina::defaultmarkdotmarks() {
   lookup->feature = "mkmk";
   lookup->type = Lookup::mark2mark;
   lookup->flags = 0;
-  lookup->setGlyphSet({ "downdotmarks","lowmarks" });
+  lookup->setGlyphSet({"downdotmarks", "lowmarks"});
 
   MarkBaseSubtable* bottomsubtable = new MarkBaseSubtable(lookup);
   lookup->subtables.append(bottomsubtable);
 
   bottomsubtable->name = "defaultmarkdotmarksbottom";
-  bottomsubtable->base = { "downdotmarks" };
+  bottomsubtable->base = {"downdotmarks"};
 
   auto basedownfunction = [this, bottomsubtable](QString glyphName, QString className, QPoint adjust, GlyphParameters parameters) -> QPoint {
     GlyphVis& curr = glyphs[glyphName];
@@ -1240,20 +1184,17 @@ Lookup* OldMadina::defaultmarkdotmarks() {
     int depth = -(int)curr.depth + 50;
     int width = curr.width * 0.5;
 
-
     width = width + adjust.x();
     depth = depth - adjust.y();
 
     return QPoint(width, -depth);
   };
 
-  bottomsubtable->classes["lowmarks"].mark = { "lowmarks" };
+  bottomsubtable->classes["lowmarks"].mark = {"lowmarks"};
   bottomsubtable->classes["lowmarks"].basefunction = basedownfunction;
   bottomsubtable->classes["lowmarks"].markfunction = Defaullowmarkanchor(*this, *bottomsubtable);
 
-
   return lookup;
-
 }
 Lookup* OldMadina::defaultwaqfmarkabovemarkprecise() {
   Lookup* lookup = new Lookup(m_layout);
@@ -1266,7 +1207,6 @@ Lookup* OldMadina::defaultwaqfmarkabovemarkprecise() {
   QSet<quint16> bases = classtoUnicode("bases");
 
   for (auto topmark : classes["topmarks"]) {
-
     QString sublookupName = topmark;
 
     Lookup* sublookup = new Lookup(m_layout);
@@ -1281,54 +1221,45 @@ Lookup* OldMadina::defaultwaqfmarkabovemarkprecise() {
     sublookup->subtables.append(marksubtable);
 
     marksubtable->name = sublookup->name;
-    marksubtable->base = { "bases" };
+    marksubtable->base = {"bases"};
 
-
-    marksubtable->classes["waqfmarks"].mark = { "waqfmarks" };
+    marksubtable->classes["waqfmarks"].mark = {"waqfmarks"};
     marksubtable->classes["waqfmarks"].basefunction = Defaulbaseanchorfortop(*this, *marksubtable);
     marksubtable->classes["waqfmarks"].markfunction = Defaultopmarkanchor(*this, *marksubtable);
 
-
     ChainingSubtable* newsubtable = new ChainingSubtable(lookup);
     lookup->subtables.append(newsubtable);
-
-
 
     newsubtable->name = "topmarks_" + topmark;
 
     newsubtable->compiledRule = ChainingSubtable::CompiledRule();
 
     newsubtable->compiledRule.backtrack.append(bases);
-    newsubtable->compiledRule.backtrack.append(QSet{ (quint16)glyphs[topmark].charcode });
+    newsubtable->compiledRule.backtrack.append(QSet{(quint16)glyphs[topmark].charcode});
     newsubtable->compiledRule.input.append(waqfmarks);
 
-    newsubtable->compiledRule.lookupRecords.append({ 0,sublookupName });
+    newsubtable->compiledRule.lookupRecords.append({0, sublookupName});
   }
 
-
-
   return lookup;
-
 }
 Lookup* OldMadina::tajweedcolorcpp() {
-
   Lookup* single = new Lookup(m_layout);
   single->name = "tajweedcolor.green";
   single->feature = "";
   single->type = Lookup::singleadjustment;
   m_layout->addLookup(single);
 
-  ValueRecord green{ 99, 200, 77, 0 };
-  ValueRecord gray{ 200, 200, 200, 0 };
-  ValueRecord lkalkala{ 200, 200, 200, 0 };
+  ValueRecord green{99, 200, 77, 0};
+  ValueRecord gray{200, 200, 200, 0};
+  ValueRecord lkalkala{200, 200, 200, 0};
 
   SingleAdjustmentSubtable* newsubtable = new SingleAdjustmentSubtable(single, 3);
   single->subtables.append(newsubtable);
   newsubtable->name = single->name;
-  for (auto className : { "bases" ,"marks" }) {
-    auto  unicodes = m_layout->classtoUnicode(className);
+  for (auto className : {"bases", "marks"}) {
+    auto unicodes = m_layout->classtoUnicode(className);
     for (auto unicode : unicodes) {
-
       newsubtable->singlePos[unicode] = green;
     }
   }
@@ -1342,10 +1273,9 @@ Lookup* OldMadina::tajweedcolorcpp() {
   newsubtable = new SingleAdjustmentSubtable(single, 3);
   single->subtables.append(newsubtable);
   newsubtable->name = single->name;
-  for (auto className : { "^meem|^behshape|onedotup|^noon" ,"marks" }) {
-    auto  unicodes = m_layout->classtoUnicode(className);
+  for (auto className : {"^meem|^behshape|onedotup|^noon", "marks"}) {
+    auto unicodes = m_layout->classtoUnicode(className);
     for (auto unicode : unicodes) {
-
       newsubtable->singlePos[unicode] = gray;
     }
   }
@@ -1359,13 +1289,12 @@ Lookup* OldMadina::tajweedcolorcpp() {
   newsubtable = new SingleAdjustmentSubtable(single, 3);
   single->subtables.append(newsubtable);
   newsubtable->name = single->name;
-  for (auto className : { "^tah|^behshape|^dal|^hah|^kaf|^fehshape" ,"marks" }) {
-    auto  unicodes = m_layout->classtoUnicode(className);
+  for (auto className : {"^tah|^behshape|^dal|^hah|^kaf|^fehshape", "marks"}) {
+    auto unicodes = m_layout->classtoUnicode(className);
     for (auto unicode : unicodes) {
       newsubtable->singlePos[unicode] = lkalkala;
     }
   }
-
 
   Lookup* lookup = new Lookup(m_layout);
   lookup->name = "tajweedcolor";
@@ -1373,7 +1302,7 @@ Lookup* OldMadina::tajweedcolorcpp() {
   lookup->type = Lookup::chainingpos;
   lookup->flags = 0;
 
-  //tajweedcolor_meemiqlab1
+  // tajweedcolor_meemiqlab1
   ChainingSubtable* chainingsubtable = new ChainingSubtable(lookup);
   lookup->subtables.append(chainingsubtable);
 
@@ -1384,10 +1313,10 @@ Lookup* OldMadina::tajweedcolorcpp() {
   chainingsubtable->compiledRule.input.append(classtoUnicode("^noon"));
   chainingsubtable->compiledRule.input.append(classtoUnicode("meemiqlab"));
 
-  chainingsubtable->compiledRule.lookupRecords.append({ 0,"lgray" });
-  chainingsubtable->compiledRule.lookupRecords.append({ 1,"green" });
+  chainingsubtable->compiledRule.lookupRecords.append({0, "lgray"});
+  chainingsubtable->compiledRule.lookupRecords.append({1, "green"});
 
-  //tajweedcolor_meemiqlab2
+  // tajweedcolor_meemiqlab2
   chainingsubtable = new ChainingSubtable(lookup);
   lookup->subtables.append(chainingsubtable);
 
@@ -1399,11 +1328,11 @@ Lookup* OldMadina::tajweedcolorcpp() {
   chainingsubtable->compiledRule.input.append(classtoUnicode("onedotup"));
   chainingsubtable->compiledRule.input.append(classtoUnicode("meemiqlab"));
 
-  chainingsubtable->compiledRule.lookupRecords.append({ 0,"lgray" });
-  chainingsubtable->compiledRule.lookupRecords.append({ 1,"lgray" });
-  chainingsubtable->compiledRule.lookupRecords.append({ 2,"green" });
+  chainingsubtable->compiledRule.lookupRecords.append({0, "lgray"});
+  chainingsubtable->compiledRule.lookupRecords.append({1, "lgray"});
+  chainingsubtable->compiledRule.lookupRecords.append({2, "green"});
 
-  //tajweedcolor_meemnoon
+  // tajweedcolor_meemnoon
   chainingsubtable = new ChainingSubtable(lookup);
   lookup->subtables.append(chainingsubtable);
 
@@ -1415,27 +1344,22 @@ Lookup* OldMadina::tajweedcolorcpp() {
   chainingsubtable->compiledRule.input.append(classtoUnicode("shadda"));
   chainingsubtable->compiledRule.input.append(classtoUnicode("marks"));
 
-  chainingsubtable->compiledRule.lookupRecords.append({ 0,"green" });
-  chainingsubtable->compiledRule.lookupRecords.append({ 1,"green" });
-  chainingsubtable->compiledRule.lookupRecords.append({ 2,"green" });
-
+  chainingsubtable->compiledRule.lookupRecords.append({0, "green"});
+  chainingsubtable->compiledRule.lookupRecords.append({1, "green"});
+  chainingsubtable->compiledRule.lookupRecords.append({2, "green"});
 
   return lookup;
-
-
 }
 Lookup* OldMadina::pointmarks() {
-
   Lookup* lookup = new Lookup(m_layout);
   lookup->name = "pointmarks";
   lookup->feature = "mark";
   lookup->type = Lookup::chainingpos;
   lookup->flags = 0;
-  //lookup->markGlyphSetIndex = m_layout->addMarkSet({ (quint16)glyphs["smallalef"].charcode });
-  //lookup->flags = lookup->flags | Lookup::Flags::UseMarkFilteringSet;
+  // lookup->markGlyphSetIndex = m_layout->addMarkSet({ (quint16)glyphs["smallalef"].charcode });
+  // lookup->flags = lookup->flags | Lookup::Flags::UseMarkFilteringSet;
 
   for (auto pointmark : classes["dotmarks"]) {
-
     QString sublookupName = pointmark;
 
     Lookup* sublookup = new Lookup(m_layout);
@@ -1450,45 +1374,34 @@ Lookup* OldMadina::pointmarks() {
     sublookup->subtables.append(marksubtable);
 
     marksubtable->name = sublookup->name;
-    marksubtable->base = { "bases" };
+    marksubtable->base = {"bases"};
 
-    marksubtable->classes["topmarks"].mark = { "topmarks" };
+    marksubtable->classes["topmarks"].mark = {"topmarks"};
     marksubtable->classes["topmarks"].basefunction = Defaulbaseanchorfortop(*this, *marksubtable);
     marksubtable->classes["topmarks"].markfunction = Defaultopmarkanchor(*this, *marksubtable);
 
-
-    marksubtable->classes["lowmarks"].mark = { "lowmarks" };
+    marksubtable->classes["lowmarks"].mark = {"lowmarks"};
     marksubtable->classes["lowmarks"].basefunction = Defaulbaseanchorforlow(*this, *marksubtable);
     marksubtable->classes["lowmarks"].markfunction = Defaullowmarkanchor(*this, *marksubtable);
 
-
     ChainingSubtable* newsubtable = new ChainingSubtable(lookup);
     lookup->subtables.append(newsubtable);
-
-
 
     newsubtable->name = "pointmarks_" + pointmark;
 
     newsubtable->compiledRule = ChainingSubtable::CompiledRule();
 
-    newsubtable->compiledRule.backtrack.append({ classtoUnicode("bases") });
-    newsubtable->compiledRule.input.append(QSet{ (quint16)glyphs[pointmark].charcode });
+    newsubtable->compiledRule.backtrack.append({classtoUnicode("bases")});
+    newsubtable->compiledRule.input.append(QSet{(quint16)glyphs[pointmark].charcode});
     newsubtable->compiledRule.input.append(classtoUnicode("marks"));
 
-    newsubtable->compiledRule.lookupRecords.append({ 1,sublookupName });
+    newsubtable->compiledRule.lookupRecords.append({1, sublookupName});
   }
 
-
-
   return lookup;
-
-
 }
 
 Lookup* OldMadina::ayanumberskern() {
-
-
-
   auto& ayaGlyph = glyphs["endofaya"];
   auto digitySet = classtoUnicode("digits");
   qint16 yoffset = 120;
@@ -1508,7 +1421,7 @@ Lookup* OldMadina::ayanumberskern() {
   for (auto digit : digitySet) {
     auto& onesglyph = glyphs[m_layout->glyphNamePerCode.value(digit)];
     qint16 kern = -(ayaGlyph.width / 2 - onesglyph.width / 2);
-    singleadjsubtable->singlePos[digit] = { 700,yoffset,0,0 };
+    singleadjsubtable->singlePos[digit] = {700, yoffset, 0, 0};
   }
 
   // two digits
@@ -1524,7 +1437,7 @@ Lookup* OldMadina::ayanumberskern() {
   singleadjsubtable->name = sublookup->name;
 
   for (auto digit : digitySet) {
-    singleadjsubtable->singlePos[digit] = { 500,yoffset,0,0 };
+    singleadjsubtable->singlePos[digit] = {500, yoffset, 0, 0};
   }
 
   // 1 digit
@@ -1543,7 +1456,7 @@ Lookup* OldMadina::ayanumberskern() {
     auto& onesglyph = glyphs[m_layout->glyphNamePerCode.value(digit)];
     int leftBearing = 0;
     qint16 kern = leftBearing + (ayaGlyph.width - leftBearing) / 2 + onesglyph.width / 2;
-    singleadjsubtable->singlePos[digit] = { kern,yoffset,0,0 };
+    singleadjsubtable->singlePos[digit] = {kern, yoffset, 0, 0};
   }
 
   // up
@@ -1559,62 +1472,50 @@ Lookup* OldMadina::ayanumberskern() {
   singleadjsubtable->name = sublookup->name;
 
   for (auto digit : digitySet) {
-    singleadjsubtable->singlePos[digit] = { 0,yoffset,0,0 };
+    singleadjsubtable->singlePos[digit] = {0, yoffset, 0, 0};
   }
 
-
-
-
-
-  //main lokkup
-
-
+  // main lokkup
 
   Lookup* lookup = new Lookup(m_layout);
   lookup->name = "ayanumberskern";
   lookup->feature = "kern";
   lookup->type = Lookup::chainingpos;
   lookup->flags = 0;
-  //lookup->markGlyphSetIndex = m_layout->addMarkSet({ (quint16)glyphs["smallalef"].charcode });
-  //lookup->flags = lookup->flags | Lookup::Flags::IgnoreMarks;
-
-
-
+  // lookup->markGlyphSetIndex = m_layout->addMarkSet({ (quint16)glyphs["smallalef"].charcode });
+  // lookup->flags = lookup->flags | Lookup::Flags::IgnoreMarks;
 
   ChainingSubtable* subtable = new ChainingSubtable(lookup);
   lookup->subtables.append(subtable);
   subtable->name = "ayanumbers3digits";
   subtable->compiledRule = ChainingSubtable::CompiledRule();
-  //subtable->compiledRule.backtrack = {{(int16_t)ayaGlyph.charcode}};
-  subtable->compiledRule.input = { {(uint16_t)ayaGlyph.charcode}, digitySet,digitySet,digitySet };
-  subtable->compiledRule.lookupRecords.append({ 1,"l1" });
-  subtable->compiledRule.lookupRecords.append({ 2,"l1" });
-  subtable->compiledRule.lookupRecords.append({ 3,"l1" });
+  // subtable->compiledRule.backtrack = {{(int16_t)ayaGlyph.charcode}};
+  subtable->compiledRule.input = {{(uint16_t)ayaGlyph.charcode}, digitySet, digitySet, digitySet};
+  subtable->compiledRule.lookupRecords.append({1, "l1"});
+  subtable->compiledRule.lookupRecords.append({2, "l1"});
+  subtable->compiledRule.lookupRecords.append({3, "l1"});
 
   subtable = new ChainingSubtable(lookup);
   lookup->subtables.append(subtable);
   subtable->name = "ayanumbers2digits";
-  //subtable->compiledRule.backtrack = {{(int16_t)ayaGlyph.charcode}};
+  // subtable->compiledRule.backtrack = {{(int16_t)ayaGlyph.charcode}};
   subtable->compiledRule = ChainingSubtable::CompiledRule();
-  subtable->compiledRule.input = { {(uint16_t)ayaGlyph.charcode}, digitySet,digitySet };
-  subtable->compiledRule.lookupRecords.append({ 1,"l2" });
-  subtable->compiledRule.lookupRecords.append({ 2,"l2" });
+  subtable->compiledRule.input = {{(uint16_t)ayaGlyph.charcode}, digitySet, digitySet};
+  subtable->compiledRule.lookupRecords.append({1, "l2"});
+  subtable->compiledRule.lookupRecords.append({2, "l2"});
 
   subtable = new ChainingSubtable(lookup);
   lookup->subtables.append(subtable);
   subtable->name = "ayanumbers1digit";
-  //subtable->compiledRule.backtrack = {{(quint16)ayaGlyph.charcode}};
+  // subtable->compiledRule.backtrack = {{(quint16)ayaGlyph.charcode}};
   subtable->compiledRule = ChainingSubtable::CompiledRule();
-  subtable->compiledRule.input = { {(uint16_t)ayaGlyph.charcode}, digitySet };
-  subtable->compiledRule.lookupRecords.append({ 1,"l3" });
+  subtable->compiledRule.input = {{(uint16_t)ayaGlyph.charcode}, digitySet};
+  subtable->compiledRule.lookupRecords.append({1, "l3"});
 
   return lookup;
-
-
 }
 
 Lookup* OldMadina::ayanumbers() {
-
   QString ayaName = "endofaya";
 
   quint16 endofaya = m_layout->glyphCodePerName[ayaName];
@@ -1637,20 +1538,11 @@ Lookup* OldMadina::ayanumbers() {
     int tensdigit = (i / 10) % 10;
     int hundredsdigit = i / 100;
     if (extended) {
-      ligaturesubtable->ligatures.append({ code, {endofaya, (quint16)(m_layout->unicodeToGlyphCode.value(1632 + hundredsdigit)),
-                                                   (quint16)(m_layout->unicodeToGlyphCode.value(1632 + tensdigit)),
-                                                   (quint16)(m_layout->unicodeToGlyphCode.value(1632 + onesdigit)) } });
+      ligaturesubtable->ligatures.append({code, {endofaya, (quint16)(m_layout->unicodeToGlyphCode.value(1632 + hundredsdigit)), (quint16)(m_layout->unicodeToGlyphCode.value(1632 + tensdigit)), (quint16)(m_layout->unicodeToGlyphCode.value(1632 + onesdigit))}});
+    } else {
+      ligaturesubtable->ligatures.append({code, {(quint16)(m_layout->unicodeToGlyphCode.value(1632 + onesdigit)), (quint16)(m_layout->unicodeToGlyphCode.value(1632 + tensdigit)), (quint16)(m_layout->unicodeToGlyphCode.value(1632 + hundredsdigit)), endofaya}});
+      ligaturesubtable->ligatures.append({code, {endofaya, (quint16)(m_layout->unicodeToGlyphCode.value(1632 + hundredsdigit)), (quint16)(m_layout->unicodeToGlyphCode.value(1632 + tensdigit)), (quint16)(m_layout->unicodeToGlyphCode.value(1632 + onesdigit))}});
     }
-    else {
-      ligaturesubtable->ligatures.append({ code, { (quint16)(m_layout->unicodeToGlyphCode.value(1632 + onesdigit)),
-                                                   (quint16)(m_layout->unicodeToGlyphCode.value(1632 + tensdigit)),
-                                                   (quint16)(m_layout->unicodeToGlyphCode.value(1632 + hundredsdigit)),endofaya } });
-      ligaturesubtable->ligatures.append({ code, {endofaya,(quint16)(m_layout->unicodeToGlyphCode.value(1632 + hundredsdigit)),
-                                                  (quint16)(m_layout->unicodeToGlyphCode.value(1632 + tensdigit)),
-                                                  (quint16)(m_layout->unicodeToGlyphCode.value(1632 + onesdigit)) } });
-    }
-
-
   }
 
   // ligature
@@ -1669,16 +1561,11 @@ Lookup* OldMadina::ayanumbers() {
     int onesdigit = i % 10;
     int tensdigit = i / 10;
     if (extended) {
-      ligaturesubtable->ligatures.append({ code,{endofaya, (quint16)(m_layout->unicodeToGlyphCode.value(1632 + tensdigit)),
-                                                  (quint16)(m_layout->unicodeToGlyphCode.value(1632 + onesdigit)) } });
+      ligaturesubtable->ligatures.append({code, {endofaya, (quint16)(m_layout->unicodeToGlyphCode.value(1632 + tensdigit)), (quint16)(m_layout->unicodeToGlyphCode.value(1632 + onesdigit))}});
+    } else {
+      ligaturesubtable->ligatures.append({code, {(quint16)(m_layout->unicodeToGlyphCode.value(1632 + onesdigit)), (quint16)(m_layout->unicodeToGlyphCode.value(1632 + tensdigit)), endofaya}});
+      ligaturesubtable->ligatures.append({code, {endofaya, (quint16)(m_layout->unicodeToGlyphCode.value(1632 + tensdigit)), (quint16)(m_layout->unicodeToGlyphCode.value(1632 + onesdigit))}});
     }
-    else {
-      ligaturesubtable->ligatures.append({ code,{(quint16)(m_layout->unicodeToGlyphCode.value(1632 + onesdigit)),
-                                                  (quint16)(m_layout->unicodeToGlyphCode.value(1632 + tensdigit)),endofaya } });
-      ligaturesubtable->ligatures.append({ code,{endofaya,(quint16)(m_layout->unicodeToGlyphCode.value(1632 + tensdigit)),
-                                                 (quint16)(m_layout->unicodeToGlyphCode.value(1632 + onesdigit)) } });
-    }
-
   }
 
   // ligature
@@ -1694,72 +1581,63 @@ Lookup* OldMadina::ayanumbers() {
 
   for (int i = 1; i < 10; i++) {
     quint16 code = m_layout->glyphCodePerName[QString("%1%2").arg(ayaName).arg(i)];
-    ligaturesubtable->ligatures.append({ code,{endofaya,(quint16)(m_layout->unicodeToGlyphCode.value(1632 + i))} });
-    ligaturesubtable->ligatures.append({ code,{(quint16)(m_layout->unicodeToGlyphCode.value(1632 + i)),endofaya} });
+    ligaturesubtable->ligatures.append({code, {endofaya, (quint16)(m_layout->unicodeToGlyphCode.value(1632 + i))}});
+    ligaturesubtable->ligatures.append({code, {(quint16)(m_layout->unicodeToGlyphCode.value(1632 + i)), endofaya}});
   }
 
-  //main lokkup
-
-
+  // main lokkup
 
   Lookup* lookup = new Lookup(m_layout);
   lookup->name = "ayanumbers";
   lookup->feature = "rlig";
   lookup->type = Lookup::chainingsub;
   lookup->flags = 0;
-  //lookup->markGlyphSetIndex = m_layout->addMarkSet({ (quint16)glyphs["smallalef"].charcode });
-  //lookup->flags = lookup->flags | Lookup::Flags::IgnoreMarks;
+  // lookup->markGlyphSetIndex = m_layout->addMarkSet({ (quint16)glyphs["smallalef"].charcode });
+  // lookup->flags = lookup->flags | Lookup::Flags::IgnoreMarks;
 
   auto digitySet = classtoUnicode("digits");
 
   auto digitySetplusendofaya = digitySet;
   digitySetplusendofaya.insert(endofaya);
 
-
   ChainingSubtable* subtable = new ChainingSubtable(lookup);
   lookup->subtables.append(subtable);
   subtable->name = "ayanumbers3digits";
   subtable->compiledRule = ChainingSubtable::CompiledRule();
   if (extended) {
-    subtable->compiledRule.input = { {endofaya},digitySet,digitySet,digitySet };
-  }
-  else {
-    //subtable->compiledRule.input = {digitySet,digitySet,digitySet,{endofaya} };
-    subtable->compiledRule.input = { digitySetplusendofaya,digitySet,digitySet,digitySetplusendofaya };
+    subtable->compiledRule.input = {{endofaya}, digitySet, digitySet, digitySet};
+  } else {
+    // subtable->compiledRule.input = {digitySet,digitySet,digitySet,{endofaya} };
+    subtable->compiledRule.input = {digitySetplusendofaya, digitySet, digitySet, digitySetplusendofaya};
   }
 
-  subtable->compiledRule.lookupRecords.append({ 0,"l1" });
+  subtable->compiledRule.lookupRecords.append({0, "l1"});
 
   subtable = new ChainingSubtable(lookup);
   lookup->subtables.append(subtable);
   subtable->name = "ayanumbers2digits";
   subtable->compiledRule = ChainingSubtable::CompiledRule();
   if (extended) {
-    subtable->compiledRule.input = { {endofaya},digitySet,digitySet };
+    subtable->compiledRule.input = {{endofaya}, digitySet, digitySet};
+  } else {
+    subtable->compiledRule.input = {digitySetplusendofaya, digitySet, digitySetplusendofaya};
   }
-  else {
-    subtable->compiledRule.input = { digitySetplusendofaya,digitySet,digitySetplusendofaya };
-  }
-  subtable->compiledRule.lookupRecords.append({ 0,"l2" });
+  subtable->compiledRule.lookupRecords.append({0, "l2"});
 
   subtable = new ChainingSubtable(lookup);
   lookup->subtables.append(subtable);
   subtable->name = "ayanumbers1digit";
   subtable->compiledRule = ChainingSubtable::CompiledRule();
   if (extended) {
-    subtable->compiledRule.input = { {endofaya},digitySet };
+    subtable->compiledRule.input = {{endofaya}, digitySet};
+  } else {
+    subtable->compiledRule.input = {digitySetplusendofaya, digitySetplusendofaya};
   }
-  else {
-
-    subtable->compiledRule.input = { digitySetplusendofaya,digitySetplusendofaya };
-  }
-  subtable->compiledRule.lookupRecords.append({ 0,"l3" });
+  subtable->compiledRule.lookupRecords.append({0, "l3"});
 
   return lookup;
-
 }
 Lookup* OldMadina::forheh() {
-
   Lookup* single = new Lookup(m_layout);
   single->name = "forheh.l1";
   single->feature = "";
@@ -1770,15 +1648,13 @@ Lookup* OldMadina::forheh() {
   single->subtables.append(singlesubtable);
   singlesubtable->name = single->name;
 
-
   for (auto& glyph : glyphs) {
     if (classes["haslefttatweel"].contains(glyph.name)) {
       QString destName = QStringLiteral("%1.pluslt_%2").arg(glyph.name).arg((int)((glyph.charlt + 2) * 100));
       if (glyphs.contains(destName)) {
         singlesubtable->subst[glyphs[glyph.name].charcode] = glyphs[destName].charcode;
       }
-    }
-    else if (classes["haslefttatweel"].contains(glyph.originalglyph) && glyph.name.contains("pluslt")) {
+    } else if (classes["haslefttatweel"].contains(glyph.originalglyph) && glyph.name.contains("pluslt")) {
       QString destName = QStringLiteral("%1.pluslt_%2").arg(glyph.originalglyph).arg((int)((glyph.charlt + 2) * 100));
       if (glyphs.contains(destName)) {
         singlesubtable->subst[glyphs[glyph.name].charcode] = glyphs[destName].charcode;
@@ -1786,13 +1662,12 @@ Lookup* OldMadina::forheh() {
     }
   }
 
-
   Lookup* lookup = new Lookup(m_layout);
   lookup->name = "forheh";
   lookup->feature = "rlig";
   lookup->type = Lookup::chainingsub;
   lookup->flags = 0;
-  //lookup->markGlyphSetIndex = m_layout->addMarkSet({ (quint16)glyphs["smallalef"].charcode });
+  // lookup->markGlyphSetIndex = m_layout->addMarkSet({ (quint16)glyphs["smallalef"].charcode });
   lookup->flags = lookup->flags | Lookup::Flags::IgnoreMarks;
 
   ChainingSubtable* newsubtable = new ChainingSubtable(lookup);
@@ -1807,17 +1682,14 @@ Lookup* OldMadina::forheh() {
     newsubtable->compiledRule.input.append(QSet(keys.begin(), keys.end()));
   }
 
+  // newsubtable->compiledRule.input.append({ (quint16)glyphs["heh.medi"].charcode,(quint16)glyphs["heh.medi.forsmalllalef"].charcode });
+  newsubtable->compiledRule.lookahead.append(classtoUnicode("^heh.medi"));  //  { (quint16)glyphs["heh.medi"].charcode });
 
-  //newsubtable->compiledRule.input.append({ (quint16)glyphs["heh.medi"].charcode,(quint16)glyphs["heh.medi.forsmalllalef"].charcode });
-  newsubtable->compiledRule.lookahead.append(classtoUnicode("^heh.medi")); //  { (quint16)glyphs["heh.medi"].charcode });
-
-  newsubtable->compiledRule.lookupRecords.append({ 0,"l1" });
+  newsubtable->compiledRule.lookupRecords.append({0, "l1"});
 
   return lookup;
-
 }
 Lookup* OldMadina::forhamza() {
-
   Lookup* single = new Lookup(m_layout);
   single->name = "forhamza.l1";
   single->feature = "";
@@ -1837,8 +1709,7 @@ Lookup* OldMadina::forhamza() {
       if (glyphs.contains(destName)) {
         singlesubtable->subst[glyphs[glyph.name].charcode] = glyphs[destName].charcode;
       }
-    }
-    else if (classes["haslefttatweel"].contains(glyph.originalglyph) && glyph.name.contains("pluslt")) {
+    } else if (classes["haslefttatweel"].contains(glyph.originalglyph) && glyph.name.contains("pluslt")) {
       QString destName = QStringLiteral("%1.pluslt_%2").arg(glyph.originalglyph).arg((int)((glyph.charlt + tatweel) * 100));
       if (glyphs.contains(destName)) {
         singlesubtable->subst[glyphs[glyph.name].charcode] = glyphs[destName].charcode;
@@ -1851,39 +1722,36 @@ Lookup* OldMadina::forhamza() {
   ligature->name = "forhamza.l2";
   ligature->feature = "";
   ligature->type = Lookup::ligature;
-  //ligature->markGlyphSetIndex = m_layout->addMarkSet({ (quint16)glyphs["hamzaabove"].charcode,(quint16)glyphs["smallhighyeh"].charcode,(quint16)glyphs["smallhighwaw"].charcode ,(quint16)glyphs["smallhighnoon"].charcode });
-  //ligature->flags = ligature->flags | Lookup::Flags::UseMarkFilteringSet;
+  // ligature->markGlyphSetIndex = m_layout->addMarkSet({ (quint16)glyphs["hamzaabove"].charcode,(quint16)glyphs["smallhighyeh"].charcode,(quint16)glyphs["smallhighwaw"].charcode ,(quint16)glyphs["smallhighnoon"].charcode });
+  // ligature->flags = ligature->flags | Lookup::Flags::UseMarkFilteringSet;
   m_layout->addLookup(ligature);
 
   LigatureSubtable* ligaturesubtable = new LigatureSubtable(ligature);
   ligature->subtables.append(ligaturesubtable);
   ligaturesubtable->name = ligature->name;
 
-  ligaturesubtable->ligatures.append({ (quint16)glyphs["hamzaabove"].charcode,{ (quint16)glyphs["hamzaabove"].charcode  , 0x200D } });
-  ligaturesubtable->ligatures.append({ (quint16)glyphs["hamzaabove.joined"].charcode,{ 0x200D,(quint16)glyphs["hamzaabove"].charcode } });
-  ligaturesubtable->ligatures.append({ (quint16)glyphs["hamzaabove.joined"].charcode,{ (quint16)glyphs["tatweel"].charcode,(quint16)glyphs["hamzaabove"].charcode } });
-  ligaturesubtable->ligatures.append({ (quint16)glyphs["smallhighyeh"].charcode,{ 0x200D,(quint16)glyphs["smallhighyeh"].charcode } });
-  ligaturesubtable->ligatures.append({ (quint16)glyphs["smallhighyeh"].charcode,{ (quint16)glyphs["tatweel"].charcode,(quint16)glyphs["smallhighyeh"].charcode } });
-  //ligaturesubtable->ligatures.append({ (quint16)glyphs["smallhighwaw"].charcode,{ 0x200D,(quint16)glyphs["smallhighwaw"].charcode } });
-  //ligaturesubtable->ligatures.append({ (quint16)glyphs["smallhighwaw"].charcode,{ (quint16)glyphs["tatweel"].charcode,(quint16)glyphs["smallhighwaw"].charcode } });
+  ligaturesubtable->ligatures.append({(quint16)glyphs["hamzaabove"].charcode, {(quint16)glyphs["hamzaabove"].charcode, 0x200D}});
+  ligaturesubtable->ligatures.append({(quint16)glyphs["hamzaabove.joined"].charcode, {0x200D, (quint16)glyphs["hamzaabove"].charcode}});
+  ligaturesubtable->ligatures.append({(quint16)glyphs["hamzaabove.joined"].charcode, {(quint16)glyphs["tatweel"].charcode, (quint16)glyphs["hamzaabove"].charcode}});
+  ligaturesubtable->ligatures.append({(quint16)glyphs["smallhighyeh"].charcode, {0x200D, (quint16)glyphs["smallhighyeh"].charcode}});
+  ligaturesubtable->ligatures.append({(quint16)glyphs["smallhighyeh"].charcode, {(quint16)glyphs["tatweel"].charcode, (quint16)glyphs["smallhighyeh"].charcode}});
+  // ligaturesubtable->ligatures.append({ (quint16)glyphs["smallhighwaw"].charcode,{ 0x200D,(quint16)glyphs["smallhighwaw"].charcode } });
+  // ligaturesubtable->ligatures.append({ (quint16)glyphs["smallhighwaw"].charcode,{ (quint16)glyphs["tatweel"].charcode,(quint16)glyphs["smallhighwaw"].charcode } });
 
-  ligaturesubtable->ligatures.append({ (quint16)glyphs["smallhighnoon"].charcode,{ 0x200D,(quint16)glyphs["smallhighnoon"].charcode } });
-  ligaturesubtable->ligatures.append({ (quint16)glyphs["smallhighnoon"].charcode,{ (quint16)glyphs["tatweel"].charcode,(quint16)glyphs["smallhighnoon"].charcode } });
-
+  ligaturesubtable->ligatures.append({(quint16)glyphs["smallhighnoon"].charcode, {0x200D, (quint16)glyphs["smallhighnoon"].charcode}});
+  ligaturesubtable->ligatures.append({(quint16)glyphs["smallhighnoon"].charcode, {(quint16)glyphs["tatweel"].charcode, (quint16)glyphs["smallhighnoon"].charcode}});
 
   Lookup* lookup = new Lookup(m_layout);
   lookup->name = "forhamza";
   lookup->feature = "rlig";
   lookup->type = Lookup::chainingsub;
-  lookup->markGlyphSetIndex = m_layout->addMarkSet({
-    //(quint16)glyphs["smallhighwaw"].charcode,
-    (quint16)glyphs["hamzaabove"].charcode,
-    (quint16)glyphs["smallhighyeh"].charcode,
-    (quint16)glyphs["smallhighnoon"].charcode,
-    (quint16)glyphs["roundedfilledhigh"].charcode
-    });
+  lookup->markGlyphSetIndex = m_layout->addMarkSet({//(quint16)glyphs["smallhighwaw"].charcode,
+                                                    (quint16)glyphs["hamzaabove"].charcode,
+                                                    (quint16)glyphs["smallhighyeh"].charcode,
+                                                    (quint16)glyphs["smallhighnoon"].charcode,
+                                                    (quint16)glyphs["roundedfilledhigh"].charcode});
   lookup->flags = lookup->flags | Lookup::Flags::UseMarkFilteringSet;
-  //lookup->flags = lookup->flags | Lookup::Flags::IgnoreMarks;
+  // lookup->flags = lookup->flags | Lookup::Flags::IgnoreMarks;
 
   ChainingSubtable* newsubtable = new ChainingSubtable(lookup);
   lookup->subtables.append(newsubtable);
@@ -1892,21 +1760,19 @@ Lookup* OldMadina::forhamza() {
 
   newsubtable->compiledRule = ChainingSubtable::CompiledRule();
 
-  //newsubtable->compiledRule.input.append(singlesubtable->subst.keys().toSet());
+  // newsubtable->compiledRule.input.append(singlesubtable->subst.keys().toSet());
   auto keys = singlesubtable->subst.keys();
   if (!keys.isEmpty()) {
     newsubtable->compiledRule.input.append(QSet(keys.begin(), keys.end()));
   }
 
+  newsubtable->compiledRule.input.append({0x200D, (quint16)glyphs["tatweel"].charcode});
+  newsubtable->compiledRule.input.append({(quint16)glyphs["hamzaabove"].charcode, (quint16)glyphs["smallhighyeh"].charcode, (quint16)glyphs["smallhighnoon"].charcode});
 
-  newsubtable->compiledRule.input.append({ 0x200D ,  (quint16)glyphs["tatweel"].charcode });
-  newsubtable->compiledRule.input.append({ (quint16)glyphs["hamzaabove"].charcode,(quint16)glyphs["smallhighyeh"].charcode, (quint16)glyphs["smallhighnoon"].charcode });
+  newsubtable->compiledRule.lookupRecords.append({0, "l1"});
+  newsubtable->compiledRule.lookupRecords.append({1, "l2"});
 
-  newsubtable->compiledRule.lookupRecords.append({ 0,"l1" });
-  newsubtable->compiledRule.lookupRecords.append({ 1,"l2" });
-
-
-  //roundedfilledhigh
+  // roundedfilledhigh
   newsubtable = new ChainingSubtable(lookup);
   lookup->subtables.append(newsubtable);
 
@@ -1914,24 +1780,21 @@ Lookup* OldMadina::forhamza() {
 
   newsubtable->compiledRule = ChainingSubtable::CompiledRule();
 
-  //newsubtable->compiledRule.input.append(singlesubtable->subst.keys().toSet());
+  // newsubtable->compiledRule.input.append(singlesubtable->subst.keys().toSet());
   keys = singlesubtable->subst.keys();
   if (!keys.isEmpty()) {
     newsubtable->compiledRule.input.append(QSet(keys.begin(), keys.end()));
   }
 
-  newsubtable->compiledRule.input.append(QSet{ (quint16)glyphs["roundedfilledhigh"].charcode, });
+  newsubtable->compiledRule.input.append(QSet{
+      (quint16)glyphs["roundedfilledhigh"].charcode,
+  });
 
-  newsubtable->compiledRule.lookupRecords.append({ 0,"l1" });
-
+  newsubtable->compiledRule.lookupRecords.append({0, "l1"});
 
   return lookup;
-
 }
 Lookup* OldMadina::shrinkstretchlt() {
-
-
-
   Lookup* lookup;
   int count = 1;
   for (float i = -0.1; i >= -0.7; i = i - 0.1) {
@@ -1941,20 +1804,15 @@ Lookup* OldMadina::shrinkstretchlt() {
   }
 
   return nullptr;
-
 }
 Lookup* OldMadina::shrinkstretchlt(float lt, QString featureName) {
-
-
-
-  //m_layout->addLookup(forwaw(), false);
+  // m_layout->addLookup(forwaw(), false);
 
   QString lookupName;
 
   if (lt < 0) {
     lookupName = QString("minuslt_%1").arg(lt * -100);
-  }
-  else {
+  } else {
     lookupName = QString("pluslt_%1").arg(lt * -100);
   }
 
@@ -1970,28 +1828,25 @@ Lookup* OldMadina::shrinkstretchlt(float lt, QString featureName) {
   singlesubtable->name = single->name;
 
   for (auto& glyph : glyphs) {
-    //QRegularExpression reg2("beginchar\\((.*?),(.*?),(.*?),(.*?)\\);");
+    // QRegularExpression reg2("beginchar\\((.*?),(.*?),(.*?),(.*?)\\);");
     QRegularExpression regname("(.*)[.](minuslt|pluslt)_(.*)");
     QRegularExpressionMatch match = regname.match(glyph.name);
     if (match.hasMatch()) {
       QString name = match.captured(1);
       QString plusminus = match.captured(2);
       int value = match.captured(3).toInt();
-    }
-    else if (classes["haslefttatweel"].contains(glyph.name)) {
+    } else if (classes["haslefttatweel"].contains(glyph.name)) {
       if (lt < 0) {
         QString destName = QStringLiteral("%1.minuslt_%2").arg(glyph.name).arg((int)(lt * -100));
         if (glyphs.contains(destName)) {
           singlesubtable->subst[glyphs[glyph.name].charcode] = glyphs[destName].charcode;
         }
-      }
-      else {
+      } else {
         QString destName = QStringLiteral("%1.pluslt_%2").arg(glyph.name).arg((int)(lt * 100));
         if (glyphs.contains(destName)) {
           singlesubtable->subst[glyphs[glyph.name].charcode] = glyphs[destName].charcode;
         }
       }
-
     }
     /*
                 if (match.hasMatch()) {
@@ -2012,13 +1867,11 @@ Lookup* OldMadina::shrinkstretchlt(float lt, QString featureName) {
                 }*/
   }
 
-
   Lookup* lookup = new Lookup(m_layout);
   lookup->name = lookupName;
   lookup->feature = featureName;
   lookup->type = Lookup::chainingsub;
   lookup->flags = 0;
-
 
   ChainingSubtable* newsubtable = new ChainingSubtable(lookup);
   lookup->subtables.append(newsubtable);
@@ -2027,19 +1880,17 @@ Lookup* OldMadina::shrinkstretchlt(float lt, QString featureName) {
 
   newsubtable->compiledRule = ChainingSubtable::CompiledRule();
 
-  //newsubtable->compiledRule.input.append(singlesubtable->subst.keys().toSet());
+  // newsubtable->compiledRule.input.append(singlesubtable->subst.keys().toSet());
   auto keys = singlesubtable->subst.keys();
   if (!keys.isEmpty()) {
     newsubtable->compiledRule.input.append(QSet(keys.begin(), keys.end()));
   }
 
-  newsubtable->compiledRule.lookupRecords.append({ 0,"l1" });
+  newsubtable->compiledRule.lookupRecords.append({0, "l1"});
 
   return lookup;
-
 }
 Lookup* OldMadina::forsmallhighwaw() {
-
   Lookup* single = new Lookup(m_layout);
   single->name = "forsmallhighwaw.l1";
   single->feature = "";
@@ -2059,8 +1910,7 @@ Lookup* OldMadina::forsmallhighwaw() {
       if (glyphs.contains(destName)) {
         singlesubtable->subst[glyphs[glyph.name].charcode] = glyphs[destName].charcode;
       }
-    }
-    else if (classes["haslefttatweel"].contains(glyph.originalglyph) && glyph.name.contains("pluslt")) {
+    } else if (classes["haslefttatweel"].contains(glyph.originalglyph) && glyph.name.contains("pluslt")) {
       QString destName = QStringLiteral("%1.pluslt_%2").arg(glyph.originalglyph).arg((int)((glyph.charlt + tatweel) * 100));
       if (glyphs.contains(destName)) {
         singlesubtable->subst[glyphs[glyph.name].charcode] = glyphs[destName].charcode;
@@ -2079,19 +1929,17 @@ Lookup* OldMadina::forsmallhighwaw() {
   ligature->subtables.append(ligaturesubtable);
   ligaturesubtable->name = ligature->name;
 
-  ligaturesubtable->ligatures.append({ (quint16)glyphs["smallhighwaw"].charcode,{ 0x034F,(quint16)glyphs["smallhighwaw"].charcode } });
+  ligaturesubtable->ligatures.append({(quint16)glyphs["smallhighwaw"].charcode, {0x034F, (quint16)glyphs["smallhighwaw"].charcode}});
 
-  //main lookup
+  // main lookup
   Lookup* lookup = new Lookup(m_layout);
   lookup->name = "forsmallhighwaw";
   lookup->feature = "rlig";
   lookup->type = Lookup::chainingsub;
-  lookup->markGlyphSetIndex = m_layout->addMarkSet(QList{ (quint16)glyphs["smallhighwaw"].charcode });
+  lookup->markGlyphSetIndex = m_layout->addMarkSet(QList{(quint16)glyphs["smallhighwaw"].charcode});
   lookup->flags = lookup->flags | Lookup::Flags::UseMarkFilteringSet;
 
-
-
-  //forsmallalefwithmaddah
+  // forsmallalefwithmaddah
   ChainingSubtable* newsubtable = new ChainingSubtable(lookup);
   lookup->subtables.append(newsubtable);
 
@@ -2099,24 +1947,20 @@ Lookup* OldMadina::forsmallhighwaw() {
 
   newsubtable->compiledRule = ChainingSubtable::CompiledRule();
 
-  //newsubtable->compiledRule.input.append(singlesubtable->subst.keys().toSet());
+  // newsubtable->compiledRule.input.append(singlesubtable->subst.keys().toSet());
   auto keys = singlesubtable->subst.keys();
   if (!keys.isEmpty()) {
     newsubtable->compiledRule.input.append(QSet(keys.begin(), keys.end()));
   }
-  newsubtable->compiledRule.input.append(QSet{ (quint16)0x034F });
-  newsubtable->compiledRule.input.append(QSet{ (quint16)glyphs["smallhighwaw"].charcode });
+  newsubtable->compiledRule.input.append(QSet{(quint16)0x034F});
+  newsubtable->compiledRule.input.append(QSet{(quint16)glyphs["smallhighwaw"].charcode});
 
-  newsubtable->compiledRule.lookupRecords.append({ 0,"l1" });
-  newsubtable->compiledRule.lookupRecords.append({ 1,"l2" });
-
-
+  newsubtable->compiledRule.lookupRecords.append({0, "l1"});
+  newsubtable->compiledRule.lookupRecords.append({1, "l2"});
 
   return lookup;
-
 }
 Lookup* OldMadina::forsmalllalef() {
-
   Lookup* single = new Lookup(m_layout);
   single->name = "forsmallalef.l1";
   single->feature = "";
@@ -2136,8 +1980,7 @@ Lookup* OldMadina::forsmalllalef() {
       if (glyphs.contains(destName)) {
         singlesubtable->subst[glyphs[glyph.name].charcode] = glyphs[destName].charcode;
       }
-    }
-    else if (classes["haslefttatweel"].contains(glyph.originalglyph) && glyph.name.contains("pluslt")) {
+    } else if (classes["haslefttatweel"].contains(glyph.originalglyph) && glyph.name.contains("pluslt")) {
       QString destName = QStringLiteral("%1.pluslt_%2").arg(glyph.originalglyph).arg((int)((glyph.charlt + tatweel) * 100));
       if (glyphs.contains(destName)) {
         singlesubtable->subst[glyphs[glyph.name].charcode] = glyphs[destName].charcode;
@@ -2147,7 +1990,7 @@ Lookup* OldMadina::forsmalllalef() {
 
   singlesubtable->subst[glyphs["smallalef"].charcode] = glyphs["smallalef.joined"].charcode;
 
-  //followed by maddahabove
+  // followed by maddahabove
   single = new Lookup(m_layout);
   single->name = "forsmallalef.l2";
   single->feature = "";
@@ -2167,8 +2010,7 @@ Lookup* OldMadina::forsmalllalef() {
       if (glyphs.contains(destName)) {
         singlesubtable->subst[glyphs[glyph.name].charcode] = glyphs[destName].charcode;
       }
-    }
-    else if (classes["haslefttatweel"].contains(glyph.originalglyph) && glyph.name.contains("pluslt")) {
+    } else if (classes["haslefttatweel"].contains(glyph.originalglyph) && glyph.name.contains("pluslt")) {
       QString destName = QStringLiteral("%1.pluslt_%2").arg(glyph.originalglyph).arg((int)((glyph.charlt + tatweel) * 100));
       if (glyphs.contains(destName)) {
         singlesubtable->subst[glyphs[glyph.name].charcode] = glyphs[destName].charcode;
@@ -2176,18 +2018,16 @@ Lookup* OldMadina::forsmalllalef() {
     }
   }
 
-  //main lookup
+  // main lookup
   Lookup* lookup = new Lookup(m_layout);
   lookup->name = "forsmallalef";
   lookup->feature = "rlig";
   lookup->type = Lookup::chainingsub;
   lookup->flags = 0;
-  lookup->markGlyphSetIndex = m_layout->addMarkSet({ (quint16)glyphs["smallalef"].charcode , (quint16)glyphs["maddahabove"].charcode });
+  lookup->markGlyphSetIndex = m_layout->addMarkSet({(quint16)glyphs["smallalef"].charcode, (quint16)glyphs["maddahabove"].charcode});
   lookup->flags = lookup->flags | Lookup::Flags::UseMarkFilteringSet;
 
-
-
-  //forsmallalefwithmaddah
+  // forsmallalefwithmaddah
   ChainingSubtable* newsubtable = new ChainingSubtable(lookup);
   lookup->subtables.append(newsubtable);
 
@@ -2195,19 +2035,19 @@ Lookup* OldMadina::forsmalllalef() {
 
   newsubtable->compiledRule = ChainingSubtable::CompiledRule();
 
-  //newsubtable->compiledRule.input.append(singlesubtable->subst.keys().toSet());
+  // newsubtable->compiledRule.input.append(singlesubtable->subst.keys().toSet());
   auto keys = singlesubtable->subst.keys();
   if (!keys.isEmpty()) {
     newsubtable->compiledRule.input.append(QSet(keys.begin(), keys.end()));
   }
 
-  newsubtable->compiledRule.input.append(QSet{ (quint16)glyphs["smallalef"].charcode });
-  newsubtable->compiledRule.input.append(QSet{ (quint16)glyphs["maddahabove"].charcode });
+  newsubtable->compiledRule.input.append(QSet{(quint16)glyphs["smallalef"].charcode});
+  newsubtable->compiledRule.input.append(QSet{(quint16)glyphs["maddahabove"].charcode});
 
-  newsubtable->compiledRule.lookupRecords.append({ 0,"l2" });
-  newsubtable->compiledRule.lookupRecords.append({ 1,"l1" });
+  newsubtable->compiledRule.lookupRecords.append({0, "l2"});
+  newsubtable->compiledRule.lookupRecords.append({1, "l1"});
 
-  //forsmallalef
+  // forsmallalef
   newsubtable = new ChainingSubtable(lookup);
   lookup->subtables.append(newsubtable);
 
@@ -2215,19 +2055,18 @@ Lookup* OldMadina::forsmalllalef() {
 
   newsubtable->compiledRule = ChainingSubtable::CompiledRule();
 
-  //newsubtable->compiledRule.input.append(singlesubtable->subst.keys().toSet());
+  // newsubtable->compiledRule.input.append(singlesubtable->subst.keys().toSet());
   keys = singlesubtable->subst.keys();
   if (!keys.isEmpty()) {
     newsubtable->compiledRule.input.append(QSet(keys.begin(), keys.end()));
   }
 
-  newsubtable->compiledRule.input.append(QSet{ (quint16)glyphs["smallalef"].charcode });
+  newsubtable->compiledRule.input.append(QSet{(quint16)glyphs["smallalef"].charcode});
 
+  newsubtable->compiledRule.lookupRecords.append({0, "l1"});
+  newsubtable->compiledRule.lookupRecords.append({1, "l1"});
 
-  newsubtable->compiledRule.lookupRecords.append({ 0,"l1" });
-  newsubtable->compiledRule.lookupRecords.append({ 1,"l1" });
-
-  //forsmallalef
+  // forsmallalef
   newsubtable = new ChainingSubtable(lookup);
   lookup->subtables.append(newsubtable);
 
@@ -2235,27 +2074,22 @@ Lookup* OldMadina::forsmalllalef() {
 
   newsubtable->compiledRule = ChainingSubtable::CompiledRule();
 
-  //newsubtable->compiledRule.input.append(singlesubtable->subst.keys().toSet());
+  // newsubtable->compiledRule.input.append(singlesubtable->subst.keys().toSet());
   keys = singlesubtable->subst.keys();
   if (!keys.isEmpty()) {
     newsubtable->compiledRule.input.append(QSet(keys.begin(), keys.end()));
   }
 
-  newsubtable->compiledRule.input.append(QSet{ (quint16)glyphs["maddahabove"].charcode });
-  newsubtable->compiledRule.input.append(QSet{ (quint16)glyphs["smallalef"].charcode });
+  newsubtable->compiledRule.input.append(QSet{(quint16)glyphs["maddahabove"].charcode});
+  newsubtable->compiledRule.input.append(QSet{(quint16)glyphs["smallalef"].charcode});
 
-
-  newsubtable->compiledRule.lookupRecords.append({ 0,"l1" });
-  newsubtable->compiledRule.lookupRecords.append({ 2,"l1" });
-
-
+  newsubtable->compiledRule.lookupRecords.append({0, "l1"});
+  newsubtable->compiledRule.lookupRecords.append({2, "l1"});
 
   return lookup;
-
 }
 
 Lookup* OldMadina::forwaw() {
-
   Lookup* single = new Lookup(m_layout);
   single->name = "forwaw.l1";
   single->feature = "";
@@ -2275,8 +2109,7 @@ Lookup* OldMadina::forwaw() {
       if (glyphs.contains(destName)) {
         singlesubtable->subst[glyphs[glyph.name].charcode] = glyphs[destName].charcode;
       }
-    }
-    else if (classes["haslefttatweel"].contains(glyph.originalglyph) && glyph.name.contains("pluslt")) {
+    } else if (classes["haslefttatweel"].contains(glyph.originalglyph) && glyph.name.contains("pluslt")) {
       QString destName = QStringLiteral("%1.pluslt_%2").arg(glyph.originalglyph).arg((int)((glyph.charlt + tatweel) * 100));
       if (glyphs.contains(destName)) {
         singlesubtable->subst[glyphs[glyph.name].charcode] = glyphs[destName].charcode;
@@ -2284,14 +2117,13 @@ Lookup* OldMadina::forwaw() {
     }
   }
 
-
   Lookup* lookup = new Lookup(m_layout);
   lookup->name = "forwaw";
   lookup->feature = "rlig";
   lookup->type = Lookup::chainingsub;
   lookup->flags = 0;
-  //lookup->markGlyphSetIndex = m_layout->addMarkSet({ (quint16)glyphs["smallalef"].charcode });
-  //lookup->flags = lookup->flags | Lookup::Flags::UseMarkFilteringSet;
+  // lookup->markGlyphSetIndex = m_layout->addMarkSet({ (quint16)glyphs["smallalef"].charcode });
+  // lookup->flags = lookup->flags | Lookup::Flags::UseMarkFilteringSet;
   lookup->flags = lookup->flags | Lookup::Flags::IgnoreMarks;
 
   ChainingSubtable* newsubtable = new ChainingSubtable(lookup);
@@ -2301,20 +2133,18 @@ Lookup* OldMadina::forwaw() {
 
   newsubtable->compiledRule = ChainingSubtable::CompiledRule();
 
-  //newsubtable->compiledRule.input.append(singlesubtable->subst.keys().toSet());
+  // newsubtable->compiledRule.input.append(singlesubtable->subst.keys().toSet());
   auto keys = singlesubtable->subst.keys();
   if (!keys.isEmpty()) {
     newsubtable->compiledRule.input.append(QSet(keys.begin(), keys.end()));
   }
 
-  newsubtable->compiledRule.input.append(QSet{ (quint16)glyphs["waw.fina"].charcode });
+  newsubtable->compiledRule.input.append(QSet{(quint16)glyphs["waw.fina"].charcode});
 
-  newsubtable->compiledRule.lookupRecords.append({ 0,"l1" });
+  newsubtable->compiledRule.lookupRecords.append({0, "l1"});
 
   return lookup;
 }
-
-
 
 Lookup* OldMadina::populatecvxx() {
   int cvNumber = 1;
@@ -2337,37 +2167,36 @@ Lookup* OldMadina::populatecvxx() {
   }
 
   return nullptr;
-
 }
 
 Lookup* OldMadina::glyphalternates() {
+  if (isForCoreText) return nullptr;
 
   bool isExtended = m_layout->isExtended();
 
   unordered_map<QString, QString> mappings;
 
+  mappings.insert({"noon.isol", "noon.isol.expa"});
+  mappings.insert({"behshape.isol", "behshape.isol.expa"});
+  mappings.insert({"feh.isol", "feh.isol.expa"});
+  mappings.insert({"qaf.isol", "qaf.isol.expa"});
+  mappings.insert({"seen.isol", "seen.isol.expa"});
+  mappings.insert({"sad.isol", "sad.isol.expa"});
+  mappings.insert({"yehshape.isol", "yehshape.isol.expa"});
+  mappings.insert({"alefmaksura.isol", "alefmaksura.isol.expa"});
 
-  mappings.insert({ "noon.isol","noon.isol.expa" });
-  mappings.insert({ "behshape.isol","behshape.isol.expa" });
-  mappings.insert({ "feh.isol","feh.isol.expa" });
-  mappings.insert({ "qaf.isol","qaf.isol.expa" });
-  mappings.insert({ "seen.isol","seen.isol.expa" });
-  mappings.insert({ "sad.isol","sad.isol.expa" });
-  mappings.insert({ "yehshape.isol","yehshape.isol.expa" });
-  mappings.insert({ "alefmaksura.isol","alefmaksura.isol.expa" });
-
-  mappings.insert({ "noon.fina","noon.fina.expa" });
-  mappings.insert({ "noon.fina.afterbeh","noon.fina.expa.afterbeh" });
-  mappings.insert({ "kaf.fina","kaf.fina.expa" });
-  mappings.insert({ "kaf.fina.afterlam","kaf.fina.afterlam.expa" });
-  mappings.insert({ "behshape.fina","behshape.fina.expa" });
-  mappings.insert({ "feh.fina","feh.fina.expa" });
-  mappings.insert({ "qaf.fina","qaf.fina.expa" });
-  mappings.insert({ "seen.fina","seen.fina.expa" });
-  mappings.insert({ "sad.fina","sad.fina.expa" });
-  mappings.insert({ "alef.fina","alef.fina" });
-  mappings.insert({ "yehshape.fina","yehshape.fina.expa" });
-  mappings.insert({ "yehshape.fina.ii","yehshape.fina.ii.expa" });
+  mappings.insert({"noon.fina", "noon.fina.expa"});
+  mappings.insert({"noon.fina.afterbeh", "noon.fina.expa.afterbeh"});
+  mappings.insert({"kaf.fina", "kaf.fina.expa"});
+  mappings.insert({"kaf.fina.afterlam", "kaf.fina.afterlam.expa"});
+  mappings.insert({"behshape.fina", "behshape.fina.expa"});
+  mappings.insert({"feh.fina", "feh.fina.expa"});
+  mappings.insert({"qaf.fina", "qaf.fina.expa"});
+  mappings.insert({"seen.fina", "seen.fina.expa"});
+  mappings.insert({"sad.fina", "sad.fina.expa"});
+  mappings.insert({"alef.fina", "alef.fina"});
+  mappings.insert({"yehshape.fina", "yehshape.fina.expa"});
+  mappings.insert({"yehshape.fina.ii", "yehshape.fina.ii.expa"});
 
   struct AltFeature {
     struct Subst {
@@ -2380,15 +2209,18 @@ Lookup* OldMadina::glyphalternates() {
 
   std::vector<AltFeature> altfeatures;
 
-  altfeatures.push_back({ "cv10",{{"behshape.medi","behshape.medi.expa"}} });
-  altfeatures.push_back({ "cv11",{{"heh.init.beforemeem","heh.init"},{"meem.fina.afterheh","meem.fina"}} });
-  altfeatures.push_back({ "cv12",{{"behshape.init.beforehah","behshape.init"},{"hah.medi.afterbeh","hah.medi" }, {"hah.medi.afterbeh.beforeyeh","hah.medi.beforeyeh"}} });
-  altfeatures.push_back({ "cv13",{{"meem.init.beforehah","meem.init" },{"hah.medi.aftermeem","hah.medi" }} });
-  altfeatures.push_back({ "cv14",{{"fehshape.init.beforehah","fehshape.init" },{"hah.medi.afterfeh","hah.medi" }} });
-  altfeatures.push_back({ "cv15",{{"lam.init.lam_hah","lam.init" },{"hah.medi.lam_hah","hah.medi" }} });
-  altfeatures.push_back({ "cv16",{{"hah.init.ii","hah.init" },{"hah.medi.ii","hah.medi" },{"ain.init.finjani","ain.init"} } });
-  altfeatures.push_back({ "cv17",{{ "seen.init.beforereh","seen.init" },{"seen.medi.beforereh","seen.medi"}, {"reh.fina.afterseen","reh.fina"},{"sad.medi.beforereh","sad.medi"},{"sad.init.beforereh","sad.init"}} });
-  altfeatures.push_back({ "cv18",{{ "hah.init.beforemeem","hah.init" },{"meem.medi.afterhah","meem.medi" }, } });
+  altfeatures.push_back({"cv10", {{"behshape.medi", "behshape.medi.expa"}}});
+  altfeatures.push_back({"cv11", {{"heh.init.beforemeem", "heh.init"}, {"meem.fina.afterheh", "meem.fina"}}});
+  altfeatures.push_back({"cv12", {{"behshape.init.beforehah", "behshape.init"}, {"hah.medi.afterbeh", "hah.medi"}, {"hah.medi.afterbeh.beforeyeh", "hah.medi.beforeyeh"}}});
+  altfeatures.push_back({"cv13", {{"meem.init.beforehah", "meem.init"}, {"hah.medi.aftermeem", "hah.medi"}}});
+  altfeatures.push_back({"cv14", {{"fehshape.init.beforehah", "fehshape.init"}, {"hah.medi.afterfeh", "hah.medi"}}});
+  altfeatures.push_back({"cv15", {{"lam.init.lam_hah", "lam.init"}, {"hah.medi.lam_hah", "hah.medi"}}});
+  altfeatures.push_back({"cv16", {{"hah.init.ii", "hah.init"}, {"hah.medi.ii", "hah.medi"}, {"ain.init.finjani", "ain.init"}}});
+  altfeatures.push_back({"cv17", {{"seen.init.beforereh", "seen.init"}, {"seen.medi.beforereh", "seen.medi"}, {"reh.fina.afterseen", "reh.fina"}, {"sad.medi.beforereh", "sad.medi"}, {"sad.init.beforereh", "sad.init"}}});
+  altfeatures.push_back({"cv18", {
+                                     {"hah.init.beforemeem", "hah.init"},
+                                     {"meem.medi.afterhah", "meem.medi"},
+                                 }});
 
   for (auto& feature : altfeatures) {
     Lookup* alternate = new Lookup(m_layout);
@@ -2403,7 +2235,6 @@ Lookup* OldMadina::glyphalternates() {
     alternate->name = alternate->name;
 
     for (auto mapping : feature.alternates) {
-
       QVector<ExtendedGlyph> alternates;
       int code = m_layout->glyphCodePerName[mapping.glyph];
       int substcode = m_layout->glyphCodePerName[mapping.substitute];
@@ -2412,7 +2243,7 @@ Lookup* OldMadina::glyphalternates() {
       if (code == 0 || substcode == 0) {
         throw new std::runtime_error("Glyph name invalid");
       }
-      alternates.append({ substcode,0,0 });
+      alternates.append({substcode, 0, 0});
       alternateSubtable->alternates[code] = alternates;
 
       for (double leftTatweel = 0.5; leftTatweel <= std::min(valueLimits.maxLeft, 6.0F); leftTatweel += 0.5) {
@@ -2422,65 +2253,61 @@ Lookup* OldMadina::glyphalternates() {
         GlyphVis* newglyph = m_layout->getAlternate(code, parameters, !isExtended, !isExtended);
         if (newglyph != nullptr) {
           QVector<ExtendedGlyph> alternates2;
-          alternates2.append({ substcode,leftTatweel,0 });
+          alternates2.append({substcode, leftTatweel, 0});
           alternateSubtable->alternates[newglyph->charcode] = alternates2;
         }
       }
     }
   }
 
-
-
-  //decomp
+  // decomp
   unordered_map<QString, QString> mappingsdecomp;
 
-  mappingsdecomp.insert({ "behshape.medi","behshape.medi.expa" });
+  mappingsdecomp.insert({"behshape.medi", "behshape.medi.expa"});
 
-  mappingsdecomp.insert({ "heh.init.beforemeem","heh.init" });
-  mappingsdecomp.insert({ "meem.fina.afterheh","meem.fina" });
+  mappingsdecomp.insert({"heh.init.beforemeem", "heh.init"});
+  mappingsdecomp.insert({"meem.fina.afterheh", "meem.fina"});
 
-  mappingsdecomp.insert({ "behshape.init.beforehah","behshape.init" });
-  mappingsdecomp.insert({ "hah.medi.afterbeh","hah.medi" });
+  mappingsdecomp.insert({"behshape.init.beforehah", "behshape.init"});
+  mappingsdecomp.insert({"hah.medi.afterbeh", "hah.medi"});
 
-  mappingsdecomp.insert({ "meem.init.beforehah","meem.init" });
-  mappingsdecomp.insert({ "hah.medi.aftermeem","hah.medi" });
+  mappingsdecomp.insert({"meem.init.beforehah", "meem.init"});
+  mappingsdecomp.insert({"hah.medi.aftermeem", "hah.medi"});
 
-  mappingsdecomp.insert({ "fehshape.init.beforehah","fehshape.init" });
-  mappingsdecomp.insert({ "hah.medi.afterfeh","hah.medi" });
-  mappingsdecomp.insert({ "hah.medi.afterbeh.beforeyeh","hah.medi" });
+  mappingsdecomp.insert({"fehshape.init.beforehah", "fehshape.init"});
+  mappingsdecomp.insert({"hah.medi.afterfeh", "hah.medi"});
+  mappingsdecomp.insert({"hah.medi.afterbeh.beforeyeh", "hah.medi"});
 
+  mappingsdecomp.insert({"lam.init.lam_hah", "lam.init"});
+  mappingsdecomp.insert({"hah.medi.lam_hah", "hah.medi"});
 
+  mappingsdecomp.insert({"hah.init.ii", "hah.init"});
+  mappingsdecomp.insert({"hah.medi.ii", "hah.medi"});
 
-  mappingsdecomp.insert({ "lam.init.lam_hah","lam.init" });
-  mappingsdecomp.insert({ "hah.medi.lam_hah","hah.medi" });
+  mappingsdecomp.insert({"seen.init.beforereh", "seen.init"});
+  mappingsdecomp.insert({"reh.fina.afterseen", "reh.fina"});
 
-  mappingsdecomp.insert({ "hah.init.ii","hah.init" });
-  mappingsdecomp.insert({ "hah.medi.ii","hah.medi" });
+  mappingsdecomp.insert({"hah.init.beforemeem", "hah.init"});
+  mappingsdecomp.insert({"meem.medi.afterhah", "meem.medi"});
+  mappingsdecomp.insert({"sad.medi.beforereh", "sad.medi"});
+  mappingsdecomp.insert({"sad.init.beforereh", "sad.init"});
 
-  mappingsdecomp.insert({ "seen.init.beforereh","seen.init" });
-  mappingsdecomp.insert({ "reh.fina.afterseen","reh.fina" });
+  mappingsdecomp.insert({"ain.init.finjani", "ain.init"});
 
-  mappingsdecomp.insert({ "hah.init.beforemeem","hah.init" });
-  mappingsdecomp.insert({ "meem.medi.afterhah","meem.medi" });
-  mappingsdecomp.insert({ "sad.medi.beforereh","sad.medi" });
-  mappingsdecomp.insert({ "sad.init.beforereh","sad.init" });
-
-  mappingsdecomp.insert({ "ain.init.finjani","ain.init" });
-
-  //kafs
-  mappingsdecomp.insert({ "kaf.init.beforelam","kaf.init.ii" });
-  mappingsdecomp.insert({ "kaf.init.beforelam.ii","kaf.init.ii" });  
-  mappingsdecomp.insert({ "kaf.medi.beforelam","kaf.medi.ii" });
-  mappingsdecomp.insert({ "kaf.medi.beforelam.ii","kaf.medi.ii" });
-  mappingsdecomp.insert({ "lam.fina.afterkaf","lam.fina" });
-  mappingsdecomp.insert({ "lam.medi.afterkaf","lam.medi" });
-  mappingsdecomp.insert({ "alef.fina.afterkaf","alef.fina" });
-  mappingsdecomp.insert({ "kaf.init","kaf.init.ii" });
-  mappingsdecomp.insert({ "kaf.init.iii","kaf.init.ii" });
-  mappingsdecomp.insert({ "kaf.init.iv","kaf.init.ii" });
-  mappingsdecomp.insert({ "kaf.medi","kaf.medi.ii" });
-  mappingsdecomp.insert({ "kaf.medi.beforemeem","kaf.medi.ii" });
-  mappingsdecomp.insert({ "meem.fina.afterkaf","meem.fina" });
+  // kafs
+  mappingsdecomp.insert({"kaf.init.beforelam", "kaf.init.ii"});
+  mappingsdecomp.insert({"kaf.init.beforelam.ii", "kaf.init.ii"});
+  mappingsdecomp.insert({"kaf.medi.beforelam", "kaf.medi.ii"});
+  mappingsdecomp.insert({"kaf.medi.beforelam.ii", "kaf.medi.ii"});
+  mappingsdecomp.insert({"lam.fina.afterkaf", "lam.fina"});
+  mappingsdecomp.insert({"lam.medi.afterkaf", "lam.medi"});
+  mappingsdecomp.insert({"alef.fina.afterkaf", "alef.fina"});
+  mappingsdecomp.insert({"kaf.init", "kaf.init.ii"});
+  mappingsdecomp.insert({"kaf.init.iii", "kaf.init.ii"});
+  mappingsdecomp.insert({"kaf.init.iv", "kaf.init.ii"});
+  mappingsdecomp.insert({"kaf.medi", "kaf.medi.ii"});
+  mappingsdecomp.insert({"kaf.medi.beforemeem", "kaf.medi.ii"});
+  mappingsdecomp.insert({"meem.fina.afterkaf", "meem.fina"});
 
   Lookup* alternate = new Lookup(m_layout);
   alternate->name = "cv03";
@@ -2494,7 +2321,6 @@ Lookup* OldMadina::glyphalternates() {
   alternate->name = alternate->name;
 
   for (auto mapping : mappingsdecomp) {
-
     QVector<ExtendedGlyph> alternates;
     int code = m_layout->glyphCodePerName[mapping.first];
     int substcode = m_layout->glyphCodePerName[mapping.second];
@@ -2503,7 +2329,7 @@ Lookup* OldMadina::glyphalternates() {
     if (code == 0 || substcode == 0) {
       throw new std::runtime_error("Glyph name invalid");
     }
-    alternates.append({ substcode,0,0 });
+    alternates.append({substcode, 0, 0});
     alternateSubtable->alternates[code] = alternates;
 
     for (double leftTatweel = 0.5; leftTatweel <= std::min(valueLimits.maxLeft, 6.0F); leftTatweel += 0.5) {
@@ -2513,19 +2339,17 @@ Lookup* OldMadina::glyphalternates() {
       GlyphVis* newglyph = m_layout->getAlternate(code, parameters, !isExtended, !isExtended);
       if (newglyph != nullptr) {
         QVector<ExtendedGlyph> alternates2;
-        alternates2.append({ substcode,leftTatweel,0 });
+        alternates2.append({substcode, leftTatweel, 0});
         alternateSubtable->alternates[newglyph->charcode] = alternates2;
       }
     }
-
-
   }
 
   int cvNumber = 1;
 
-  //cv01
+  // cv01
   alternate = new Lookup(m_layout);
-  //alternate->name = QString("cv%1").arg(cvNumber++, 2, 10, QLatin1Char('0'));
+  // alternate->name = QString("cv%1").arg(cvNumber++, 2, 10, QLatin1Char('0'));
   alternate->name = "cv01";
   alternate->feature = alternate->name;
   alternate->type = Lookup::alternate;
@@ -2536,9 +2360,7 @@ Lookup* OldMadina::glyphalternates() {
   alternate->subtables.append(alternateSubtable);
   alternateSubtable->name = alternate->name;
 
-
   for (auto mapping : mappings) {
-
     QVector<ExtendedGlyph> alternates;
     int code = m_layout->glyphCodePerName[mapping.first];
     int substcode = m_layout->glyphCodePerName[mapping.second];
@@ -2546,32 +2368,29 @@ Lookup* OldMadina::glyphalternates() {
     if (code == 0 || substcode == 0) {
       throw new std::runtime_error("Glyph name invalid");
     }
-    alternates.append({ substcode,0,0 });
-    alternates.append({ substcode,1,0 });
-    alternates.append({ substcode,2,0 });
-    alternates.append({ substcode,3,0 });
-    alternates.append({ substcode,4,0 });
-    alternates.append({ substcode,5,0 });
-    alternates.append({ substcode,6,0 });
-    alternates.append({ substcode,7,0 });
-    alternates.append({ substcode,8,0 });
-    alternates.append({ substcode,9,0 });
-    alternates.append({ substcode,10,0 });
-    alternates.append({ substcode,11,0 });
+    alternates.append({substcode, 0, 0});
+    alternates.append({substcode, 1, 0});
+    alternates.append({substcode, 2, 0});
+    alternates.append({substcode, 3, 0});
+    alternates.append({substcode, 4, 0});
+    alternates.append({substcode, 5, 0});
+    alternates.append({substcode, 6, 0});
+    alternates.append({substcode, 7, 0});
+    alternates.append({substcode, 8, 0});
+    alternates.append({substcode, 9, 0});
+    alternates.append({substcode, 10, 0});
+    alternates.append({substcode, 11, 0});
     alternateSubtable->alternates[code] = alternates;
   }
 
   unordered_map<QString, QString> mappingLigaRightOnlys;
 
-  mappingLigaRightOnlys.insert({ "ain.init.finjani","ain.init" });
-  mappingLigaRightOnlys.insert({ "hah.init.ii", "hah.init" });
-  mappingLigaRightOnlys.insert({ "hah.medi.ii","hah.medi" });
-  mappingLigaRightOnlys.insert({ "behshape.init.beforereh","behshape.init" });
-
-  
+  mappingLigaRightOnlys.insert({"ain.init.finjani", "ain.init"});
+  mappingLigaRightOnlys.insert({"hah.init.ii", "hah.init"});
+  mappingLigaRightOnlys.insert({"hah.medi.ii", "hah.medi"});
+  mappingLigaRightOnlys.insert({"behshape.init.beforereh", "behshape.init"});
 
   for (auto mapping : mappingLigaRightOnlys) {
-
     QVector<ExtendedGlyph> alternates;
     int code = m_layout->glyphCodePerName[mapping.first];
     int substcode = m_layout->glyphCodePerName[mapping.second];
@@ -2579,16 +2398,16 @@ Lookup* OldMadina::glyphalternates() {
     if (code == 0 || substcode == 0) {
       throw new std::runtime_error("Glyph name invalid");
     }
-    alternates.append({ substcode,1,0 });
-    alternates.append({ substcode,2,0 });
-    alternates.append({ substcode,3,0 });
-    alternates.append({ substcode,4,0 });
-    alternates.append({ substcode,5,0 });
-    alternates.append({ substcode,6,0 });
+    alternates.append({substcode, 1, 0});
+    alternates.append({substcode, 2, 0});
+    alternates.append({substcode, 3, 0});
+    alternates.append({substcode, 4, 0});
+    alternates.append({substcode, 5, 0});
+    alternates.append({substcode, 6, 0});
     alternateSubtable->alternates[code] = alternates;
   }
 
-  //behshape.medi
+  // behshape.medi
   auto& valueLimits = m_layout->expandableGlyphs["behshape.medi"];
   auto glyphCode = m_layout->glyphCodePerName["behshape.medi"];
   int substcode = m_layout->glyphCodePerName["behshape.medi.expa"];
@@ -2600,7 +2419,7 @@ Lookup* OldMadina::glyphalternates() {
     parameters.righttatweel = 0.0;
     GlyphVis* newglyph = m_layout->getAlternate(glyphCode, parameters, !isExtended, !isExtended);
     for (double leftTatweel2 = leftTatweel + 1; leftTatweel2 <= std::min(valueLimits.maxLeft, 6.0F); leftTatweel2 += 1) {
-      alternates.append({ substcode,leftTatweel2,0 });
+      alternates.append({substcode, leftTatweel2, 0});
     }
     alternateSubtable->alternates[newglyph->charcode] = alternates;
   }
@@ -2618,9 +2437,7 @@ Lookup* OldMadina::glyphalternates() {
   alternate->subtables.append(alternateSubtable);
   alternateSubtable->name = alternate->name;*/
 
-
   for (auto& glyph : m_layout->expandableGlyphs) {
-
     if (mappings.find(glyph.first) != mappings.end()) continue;
 
     if (glyph.first == "kasra") continue;
@@ -2645,7 +2462,7 @@ Lookup* OldMadina::glyphalternates() {
           if (leftTatweel2 > 6) {
             leftTatweel2 = 6;
           }
-          alternates.append({ glyphCode,leftTatweel2,0 });
+          alternates.append({glyphCode, leftTatweel2, 0});
         }
         /*
         for (double leftTatweel2 = leftTatweel + 1; leftTatweel2 <= std::min(valueLimits.maxLeft, 6.0F); leftTatweel2 += 1) {
@@ -2657,7 +2474,7 @@ Lookup* OldMadina::glyphalternates() {
   }
 
   alternate = new Lookup(m_layout);
-  //alternate->name = QString("cv%1").arg(cvNumber++, 2, 10, QLatin1Char('0'));
+  // alternate->name = QString("cv%1").arg(cvNumber++, 2, 10, QLatin1Char('0'));
   alternate->name = "cv02";
   alternate->feature = alternate->name;
   alternate->type = Lookup::alternate;
@@ -2669,14 +2486,13 @@ Lookup* OldMadina::glyphalternates() {
   alternate->name = alternate->name;
 
   for (auto& glyph : m_layout->expandableGlyphs) {
-
     auto glyphCode = m_layout->glyphCodePerName[glyph.first];
     auto valueLimits = glyph.second;
 
     if (valueLimits.maxRight > 0) {
       QVector<ExtendedGlyph> alternates;
       for (double righttatweel = 0.5; righttatweel <= std::min(valueLimits.maxRight, 6.0F); righttatweel += 0.5) {
-        alternates.append({ glyphCode,0,righttatweel });
+        alternates.append({glyphCode, 0, righttatweel});
       }
       alternateSubtable->alternates[glyphCode] = alternates;
     };
@@ -2689,12 +2505,10 @@ Lookup* OldMadina::glyphalternates() {
         parameters.righttatweel = 0.0;
         GlyphVis* newglyph = m_layout->getAlternate(glyphCode, parameters, !isExtended, !isExtended);
         for (double righttatweel = 0.5; righttatweel <= std::min(valueLimits.maxRight, 6.0F); righttatweel += 0.5) {
-          alternates.append({ glyphCode,leftTatweel,righttatweel });
+          alternates.append({glyphCode, leftTatweel, righttatweel});
         }
         alternateSubtable->alternates[newglyph->charcode] = alternates;
       }
-
-
     }
   }
 
@@ -2710,7 +2524,6 @@ Lookup* OldMadina::glyphalternates() {
   alternate->subtables.append(alternateSubtable);
   alternateSubtable->name = alternate->name;
   for (auto& glyph : m_layout->expandableGlyphs) {
-
     auto glyphCode = m_layout->glyphCodePerName[glyph.first];
     auto valueLimits = glyph.second;
 
@@ -2721,12 +2534,12 @@ Lookup* OldMadina::glyphalternates() {
     }
       */
     for (float tatweel = -0.1; tatweel >= -0.5F; tatweel += -0.1) {
-      alternates.append({ glyphCode,std::max(tatweel,valueLimits.minLeft),std::max(tatweel,valueLimits.minRight) });
+      alternates.append({glyphCode, std::max(tatweel, valueLimits.minLeft), std::max(tatweel, valueLimits.minRight)});
     }
-    if(alternates.size() > 0){
+    if (alternates.size() > 0) {
       alternateSubtable->alternates[glyphCode] = alternates;
     }
-    
+
     /*
     if (valueLimits.minLeft < 0 && valueLimits.minRight < 0) {
       QVector<ExtendedGlyph> alternates;
@@ -2742,9 +2555,7 @@ Lookup* OldMadina::glyphalternates() {
         alternateSubtable->alternates[glyphCode] = alternates;
     }
     */
-
   }
 
   return nullptr;
-
 }

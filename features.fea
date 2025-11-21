@@ -1638,13 +1638,113 @@ feature calt {
   lookup convertsmallaleftochar;  
   lookup marks.addwidth;
   lookup othercalt;
-} calt;
+} calt; 
+
+lookup rehwawcursivecoretext {
+
+  feature curs;
+
+  lookupflag IgnoreMarks;
+
+  @rehwaw = [reh.fina.afterbehshape reh.fina.afterseen reh.isol waw.isol reh.fina waw.fina];
+
+  pos @rehwaw @rehwaw'lookup rehwawcursivecpp;
+
+  lookup rehwawisolkern.l1 {
+    pos /[.]isol/ <0 0 -150 0>;
+  } rehwawisolkern.l1;
+  lookup rehwawisolkern.rehfinaafterbehshape.l2{
+    pos [dal.isol] <0 26 -150 0>;
+    pos [reh.isol] <0 13 -67 0>;
+    pos [qaf.isol] <0 34 -173 0>;
+    pos [noon.isol] <0 83 -177 0>;
+    pos [heh.isol] <0 23 -120 0>;
+    pos [waw.isol] <0 69 -67 0>;
+    pos [alefmaksura.isol] <0 83 -137 0>;
+    pos [yehshape.isol] <0 97 -137 0>;
+    pos [alefmaksura.isol.expa] <0 66 -117 0>;
+    pos [yehshape.isol.expa] <0 60 -158 0>;
+    pos [qaf.isol.expa] <0 46 -98 0>;
+  } rehwawisolkern.rehfinaafterbehshape.l2;
+  lookup rehwawisolkern.rehfinaafterseen.l3{
+    pos [alef.isol] <0 13 -96 0>;
+    pos [dal.isol] <0 -48 -150 0>;
+    pos [reh.isol] <0 -27 -81 0>;
+    pos [ain.isol] <0 -40 -150 0>;
+    pos [waw.isol] <0 -27 -39 0>;
+    pos [alefmaksura.isol] <0 0 -81 0>;
+    pos [yehshape.isol] <0 57 -173 0>;
+  } rehwawisolkern.rehfinaafterseen.l3;
+  lookup rehwawisolkern.rehisol.l4{
+    pos [reh.isol] <0 9 -83 0>;
+    pos [noon.isol] <0 0 -86 0>;
+    pos [waw.isol] <0 0 -46 0>;
+    pos [alefmaksura.isol] <0 69 -116 0>;
+    pos [yehshape.isol] <0 57 -122 0>;
+    pos [alefmaksura.isol.expa] <0 44 -150 0>;
+    pos [yehshape.isol.expa] <0 50 -170 0>;
+    pos [qaf.isol.expa] <0 38 -182 0>;
+  } rehwawisolkern.rehisol.l4;
+  lookup rehwawisolkern.wawisol.l5{
+    pos [alef.isol] <0 0 -97 0>;
+    pos [reh.isol] <0 0 -55 0>;
+    pos [noon.isol] <0 0 -69 0>;
+    pos [waw.isol] <0 0 -58 0>;
+    pos [alefmaksura.isol] <0 57 -81 0>;
+    pos [yehshape.isol] <0 34 -93 0>;
+    pos [alef.isol.ii] <0 309 -55 0>;
+    pos [yehshape.isol.expa] <0 22 -128 0>;
+  } rehwawisolkern.wawisol.l5;
+  lookup rehwawisolkern.rehfina.l6{
+    pos [alef.isol] <0 -26 -130 0>;
+    pos [reh.isol] <0 -38 -112 0>;
+    pos [meem.isol] <0 -116 -174 0>;
+  } rehwawisolkern.rehfina.l6;
+  lookup rehwawisolkern.wawfina.l7{
+    pos [hamza.isol] <0 -18 -112 0>;
+    pos [alef.isol] <0 0 -68 0>;
+    pos [reh.isol] <0 0 -112 0>;
+    pos [meem.isol] <0 -82 -150 0>;
+    pos [alefmaksura.isol] <0 32 -134 0>;
+    pos [meem.isol.ii] <0 -64 -160 0>;
+  } rehwawisolkern.wawfina.l7;
+  pos [reh.fina.afterbehshape] [ dal.isol reh.isol qaf.isol noon.isol heh.isol waw.isol alefmaksura.isol yehshape.isol alefmaksura.isol.expa yehshape.isol.expa qaf.isol.expa]'lookup rehwawisolkern.rehfinaafterbehshape.l2 /[.]init/;
+  pos [reh.fina.afterseen] [ alef.isol dal.isol reh.isol ain.isol waw.isol alefmaksura.isol yehshape.isol]'lookup rehwawisolkern.rehfinaafterseen.l3 /[.]init/;
+  pos [reh.isol] [ reh.isol noon.isol waw.isol alefmaksura.isol yehshape.isol alefmaksura.isol.expa yehshape.isol.expa qaf.isol.expa]'lookup rehwawisolkern.rehisol.l4 /[.]init/;
+  pos [waw.isol] [ alef.isol reh.isol noon.isol waw.isol alefmaksura.isol yehshape.isol alef.isol.ii yehshape.isol.expa]'lookup rehwawisolkern.wawisol.l5 /[.]init/;
+  pos [reh.fina] [ alef.isol reh.isol meem.isol]'lookup rehwawisolkern.rehfina.l6 /[.]init/;
+  pos [waw.fina] [ hamza.isol alef.isol reh.isol meem.isol alefmaksura.isol meem.isol.ii]'lookup rehwawisolkern.wawfina.l7 /[.]init/;
+  pos [ reh.fina.afterseen reh.fina.afterbehshape reh.isol waw.isol reh.fina waw.fina] /[.]isol/'lookup rehwawisolkern.l1 /[.]init/;
+
+  pos @rehwaw /[.]isol|[.]init/'lookup rehwawcursivecpp;
+
+} rehwawcursivecoretext;
+
+
+lookup coretextfix {
+
+  feature curs;
+
+  lookupflag IgnoreMarks;
+
+  @rehwaw = [reh.fina.afterbehshape reh.fina.afterseen reh.isol waw.isol reh.fina waw.fina];
+
+  pos @rehwaw /[.]init/' (/[.]medi/{0,10})'lookup allcursivejoinnortl  /[.]fina/'lookup allcursivejoinnortl;
+
+} coretextfix;
+
+  
 
 feature curs {
-  lookup isolkern;
+  lookup isolkern;      
   lookup cursivejoin;
   lookup rehwawcursivecpp;
   
+  # For CoreText
+  #lookup rehwawcursivecoretext; 
+  #lookup allcursivejoinnortl;  
+  #lookup coretextfix;  
+
 } curs;
 
 feature kern {  
