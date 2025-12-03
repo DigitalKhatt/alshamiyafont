@@ -705,10 +705,15 @@ lookup isolkern {
     pos /^alef.fina/ <100 0 100 0>;    
   } isolkern.o2;
 
+  lookup isolkern.o3 {			
+    pos [alef.fina.laf] <100 0 100 0>;
+  } isolkern.o3;
+
   pos [alef.fina.laf]' [hah.init]'<0 0 -100 0>;
 
   pos [alef.fina.lamalef]'<-100 0 -100 0> [hah.init hah.init.ii];
-  pos [alef.fina.lamalef]'<70 0 70 0> /^lam.init/;
+  pos [alef.fina.lamalef]'<70 0 70 0> [/^lam.init/];
+  pos [alef.fina.lamalef]'<120 0 120 0> [alef.isol];
   pos [alef.fina.lamalef]'<-50 0 -50 0>;
 
   pos [alef.isol /^alef.fina/]' [lam.init.lam_hah lam.init.allah]';
@@ -728,9 +733,9 @@ lookup isolkern {
 
   pos /^endofaya/'lookup isolkern.o1 rubelhizb;
 
-  pos [/[.]isol/ /[.]fina/ smallwaw smallyeh rubelhizb]'lookup isolkern.o1  [/[.]init/ /[.]isol/ smallwaw smallyeh];	
+  pos [alef.fina.laf]'lookup isolkern.o3 [kaf.init.beforelam.ii];
 
-
+  pos [/[.]isol/ /[.]fina/ smallwaw smallyeh rubelhizb]'lookup isolkern.o1  [/[.]init/ /[.]isol/ smallwaw smallyeh];
 
 } isolkern;
 
@@ -952,7 +957,7 @@ lookup othercalt {
     sub hamzaabove by hamzaabove.small;
     #sub kaf.medi.beforelam by kaf.medi.beforelam.ii;
     #sub kaf.init by kaf.init.iii;
-    #sub kaf.init.beforelam by kaf.init.beforelam.ii;
+    sub kaf.init.beforelam by kaf.init.beforelam.ii;
   } othercalt.l1;
 
   lookup othercalt.l2 {
@@ -987,7 +992,7 @@ lookup othercalt {
 
   sub [ain.fina ain.isol]' (onedotup?)' (shadda?)' [kasratan]'lookup othercalt.l5;
   
-  
+  sub [alef.fina.laf]' [kaf.init.beforelam]'lookup othercalt.l1;
 
 
 } othercalt;
