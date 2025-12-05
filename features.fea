@@ -610,12 +610,52 @@ lookup basmala {
     } basmala.l4;
     
     sub  behshape.init.beforeseen'lookup basmala.l1.new seen.medi.afterbeh'lookup basmala.l1.new  meem.fina.ii'lookup basmala.l1.new
-         space'lookup basmala.l4  alef.isol' lam.init.allah' lam.medi.allah' heh.fina.allah'
+         space'  alef.isol' lam.init.allah' lam.medi.allah' heh.fina.allah'
          space' alef.isol' lam.init'  reh.fina'  hah.init.beforemeem' /^meem.medi.afterhah/'lookup basmala.l1.new /^noon.fina/'lookup basmala.l3
-         space'lookup basmala.l4 alef.isol' lam.init'  reh.fina'  hah.init'lookup basmala.l1.new   behshape.medi'lookup basmala.l1.new  meem.fina.ii'lookup basmala.l2;
+         space' alef.isol' lam.init'  reh.fina'  hah.init'lookup basmala.l1.new   behshape.medi'lookup basmala.l1.new  meem.fina.ii'lookup basmala.l2;
 
 } basmala;
+#if isForCoreText
+lookup basmala.kern {
 
+  feature basm;
+
+  lookupflag IgnoreMarks;
+
+  lookup basmala.kern.l1 {
+      lookupflag IgnoreMarks ;
+      pos cursive reh.fina <anchor 0 0> <anchor 0 0> ;
+      pos cursive /^hah.init/ <anchor 400 100 > <anchor 0 0>;
+  } basmala.kern.l1;
+
+  lookup basmala.kern.l2 {
+        lookupflag IgnoreMarks RightToLeft;
+      pos cursive alef.isol <anchor 0 0> <anchor 0 0> ;
+      pos cursive lam.init <anchor 480 100 > <anchor 150 150>;
+  } basmala.kern.l2;
+
+  lookup basmala.kern.l3 {
+      lookupflag IgnoreMarks RightToLeft;
+      pos cursive alef.isol <anchor 560 -49> <anchor NULL> ;
+      pos cursive /^noon.fina.basmala/ <anchor NULL> <anchor 0 0>;
+  } basmala.kern.l3;
+
+    lookup basmala.kern.l4 {
+      lookupflag IgnoreMarks RightToLeft;
+      pos cursive alef.isol <anchor 0 0 > <anchor NULL> ;
+      pos cursive /^meem.fina.basmala/ <anchor NULL> <anchor 0 0>;
+  } basmala.kern.l4;
+
+    #pos  alef.isol'lookup basmala.curs.l3 lam.init'lookup basmala.curs.l2  reh.fina'   /^hah.init/'lookup basmala.curs.l1  /^behshape.medi/'  /^meem.fina.basmala/';
+
+    pos [meem.fina.basmala]' space' [alef.isol]'<0 0 -200 0>; 
+    pos [noon.fina.basmala]' space' [alef.isol]'<0 0 -1800 0>; 
+
+    pos reh.fina'  hah.init.beforemeem'<0 0 -50 0>; 
+
+
+} basmala.kern ;
+#else
 lookup basmala.curs {
 
     feature basm;
@@ -652,6 +692,7 @@ lookup basmala.curs {
 
 
 } basmala.curs ;
+#endif; 
 
 lookup basmalafatiha {
 
@@ -1639,86 +1680,341 @@ feature calt {
   lookup marks.addwidth;
   lookup othercalt;
 } calt; 
-
+#if isForCoreText
 lookup rehwawcursivecoretext {
-
   feature curs;
-
   lookupflag IgnoreMarks;
-
-  @rehwaw = [reh.fina.afterbehshape reh.fina.afterseen reh.isol waw.isol reh.fina waw.fina];
-
-  pos @rehwaw @rehwaw'lookup rehwawcursivecpp;
-
-  lookup rehwawisolkern.l1 {
+  @rehwaw =[ reh.fina.afterbehshape reh.fina.afterseen reh.isol waw.isol reh.fina waw.fina ];
+  lookup rehwawcursivecoretext.l1 {
     pos /[.]isol/ <0 0 -150 0>;
-  } rehwawisolkern.l1;
-  lookup rehwawisolkern.rehfinaafterbehshape.l2{
+  } rehwawcursivecoretext.l1;
+  lookup rehwawcursivecoretext.rehfinaafterbehshape.l2{
     pos [dal.isol] <0 26 -150 0>;
-    pos [reh.isol] <0 13 -67 0>;
     pos [qaf.isol] <0 34 -173 0>;
     pos [noon.isol] <0 83 -177 0>;
     pos [heh.isol] <0 23 -120 0>;
-    pos [waw.isol] <0 69 -67 0>;
     pos [alefmaksura.isol] <0 83 -137 0>;
     pos [yehshape.isol] <0 97 -137 0>;
     pos [alefmaksura.isol.expa] <0 66 -117 0>;
     pos [yehshape.isol.expa] <0 60 -158 0>;
     pos [qaf.isol.expa] <0 46 -98 0>;
-  } rehwawisolkern.rehfinaafterbehshape.l2;
-  lookup rehwawisolkern.rehfinaafterseen.l3{
+  } rehwawcursivecoretext.rehfinaafterbehshape.l2;
+  lookup rehwawcursivecoretext.rehfinaafterseen.l3{
     pos [alef.isol] <0 13 -96 0>;
     pos [dal.isol] <0 -48 -150 0>;
-    pos [reh.isol] <0 -27 -81 0>;
     pos [ain.isol] <0 -40 -150 0>;
-    pos [waw.isol] <0 -27 -39 0>;
     pos [alefmaksura.isol] <0 0 -81 0>;
     pos [yehshape.isol] <0 57 -173 0>;
-  } rehwawisolkern.rehfinaafterseen.l3;
-  lookup rehwawisolkern.rehisol.l4{
-    pos [reh.isol] <0 9 -83 0>;
+  } rehwawcursivecoretext.rehfinaafterseen.l3;
+  lookup rehwawcursivecoretext.rehisol.l4{
     pos [noon.isol] <0 0 -86 0>;
-    pos [waw.isol] <0 0 -46 0>;
     pos [alefmaksura.isol] <0 69 -116 0>;
     pos [yehshape.isol] <0 57 -122 0>;
     pos [alefmaksura.isol.expa] <0 44 -150 0>;
     pos [yehshape.isol.expa] <0 50 -170 0>;
     pos [qaf.isol.expa] <0 38 -182 0>;
-  } rehwawisolkern.rehisol.l4;
-  lookup rehwawisolkern.wawisol.l5{
+  } rehwawcursivecoretext.rehisol.l4;
+  lookup rehwawcursivecoretext.wawisol.l5{
     pos [alef.isol] <0 0 -97 0>;
-    pos [reh.isol] <0 0 -55 0>;
     pos [noon.isol] <0 0 -69 0>;
-    pos [waw.isol] <0 0 -58 0>;
     pos [alefmaksura.isol] <0 57 -81 0>;
     pos [yehshape.isol] <0 34 -93 0>;
     pos [alef.isol.ii] <0 309 -55 0>;
     pos [yehshape.isol.expa] <0 22 -128 0>;
-  } rehwawisolkern.wawisol.l5;
-  lookup rehwawisolkern.rehfina.l6{
+  } rehwawcursivecoretext.wawisol.l5;
+  lookup rehwawcursivecoretext.rehfina.l6{
     pos [alef.isol] <0 -26 -130 0>;
-    pos [reh.isol] <0 -38 -112 0>;
     pos [meem.isol] <0 -116 -174 0>;
-  } rehwawisolkern.rehfina.l6;
-  lookup rehwawisolkern.wawfina.l7{
+  } rehwawcursivecoretext.rehfina.l6;
+  lookup rehwawcursivecoretext.wawfina.l7{
     pos [hamza.isol] <0 -18 -112 0>;
     pos [alef.isol] <0 0 -68 0>;
-    pos [reh.isol] <0 0 -112 0>;
     pos [meem.isol] <0 -82 -150 0>;
     pos [alefmaksura.isol] <0 32 -134 0>;
     pos [meem.isol.ii] <0 -64 -160 0>;
-  } rehwawisolkern.wawfina.l7;
-  pos [reh.fina.afterbehshape] [ dal.isol reh.isol qaf.isol noon.isol heh.isol waw.isol alefmaksura.isol yehshape.isol alefmaksura.isol.expa yehshape.isol.expa qaf.isol.expa]'lookup rehwawisolkern.rehfinaafterbehshape.l2 /[.]init/;
-  pos [reh.fina.afterseen] [ alef.isol dal.isol reh.isol ain.isol waw.isol alefmaksura.isol yehshape.isol]'lookup rehwawisolkern.rehfinaafterseen.l3 /[.]init/;
-  pos [reh.isol] [ reh.isol noon.isol waw.isol alefmaksura.isol yehshape.isol alefmaksura.isol.expa yehshape.isol.expa qaf.isol.expa]'lookup rehwawisolkern.rehisol.l4 /[.]init/;
-  pos [waw.isol] [ alef.isol reh.isol noon.isol waw.isol alefmaksura.isol yehshape.isol alef.isol.ii yehshape.isol.expa]'lookup rehwawisolkern.wawisol.l5 /[.]init/;
-  pos [reh.fina] [ alef.isol reh.isol meem.isol]'lookup rehwawisolkern.rehfina.l6 /[.]init/;
-  pos [waw.fina] [ hamza.isol alef.isol reh.isol meem.isol alefmaksura.isol meem.isol.ii]'lookup rehwawisolkern.wawfina.l7 /[.]init/;
-  pos [ reh.fina.afterseen reh.fina.afterbehshape reh.isol waw.isol reh.fina waw.fina] /[.]isol/'lookup rehwawisolkern.l1 /[.]init/;
-
+  } rehwawcursivecoretext.wawfina.l7;
+  pos @rehwaw @rehwaw'lookup rehwawcursivecpp;
+  pos [reh.fina.afterbehshape] [ dal.isol qaf.isol noon.isol heh.isol alefmaksura.isol yehshape.isol alefmaksura.isol.expa yehshape.isol.expa qaf.isol.expa]'lookup rehwawcursivecoretext.rehfinaafterbehshape.l2 /[.]init/;
+  pos [reh.fina.afterseen] [ alef.isol dal.isol ain.isol alefmaksura.isol yehshape.isol]'lookup rehwawcursivecoretext.rehfinaafterseen.l3 /[.]init/;
+  pos [reh.isol] [ noon.isol alefmaksura.isol yehshape.isol alefmaksura.isol.expa yehshape.isol.expa qaf.isol.expa]'lookup rehwawcursivecoretext.rehisol.l4 /[.]init/;
+  pos [waw.isol] [ alef.isol noon.isol alefmaksura.isol yehshape.isol alef.isol.ii yehshape.isol.expa]'lookup rehwawcursivecoretext.wawisol.l5 /[.]init/;
+  pos [reh.fina] [ alef.isol meem.isol]'lookup rehwawcursivecoretext.rehfina.l6 /[.]init/;
+  pos [waw.fina] [ hamza.isol alef.isol meem.isol alefmaksura.isol meem.isol.ii]'lookup rehwawcursivecoretext.wawfina.l7 /[.]init/;
+  pos @rehwaw /[.]isol/'lookup rehwawcursivecoretext.l1 /[.]init/;
   pos @rehwaw /[.]isol|[.]init/'lookup rehwawcursivecpp;
-
 } rehwawcursivecoretext;
+lookup adjustverticalpos {
+  feature curs;
+  lookupflag IgnoreMarks;
+  pos [heh.init.beforemeem] [meem.fina.afterheh]'<0 33 0 0>;
+  pos [heh.init.beforemeem] [meem.fina.afterkaf]'<0 33 0 0>;
+  pos [lam.medi.laf] [alefmaksura.isol]'<0 153 0 0>;
+  pos [lam.medi.laf] [yehshape.isol]'<0 153 0 0>;
+  pos [lam.medi.laf] [alef.fina.laf]'<0 -22 0 0>;
+  pos [lam.medi.laf] [alef.fina.lamalef]'<0 97 0 0>;
+  pos [lam.medi.laf] [yehshape.fina.ii]'<0 153 0 0>;
+  pos [lam.medi.laf] [yehshape.fina]'<0 298 0 0>;
+  pos [lam.medi.laf] [yehshape.fina.ii.expa]'<0 107 0 0>;
+  pos [lam.medi.laf] [alefmaksura.isol.expa]'<0 107 0 0>;
+  pos [lam.medi.laf] [yehshape.isol.expa]'<0 107 0 0>;
+  pos [lam.medi.laf] [yehshape.fina.expa]'<0 298 0 0>;
+  pos [lam.medi.laf.afterkaf] [alefmaksura.isol]'<0 153 0 0>;
+  pos [lam.medi.laf.afterkaf] [yehshape.isol]'<0 153 0 0>;
+  pos [lam.medi.laf.afterkaf] [alef.fina.laf]'<0 -22 0 0>;
+  pos [lam.medi.laf.afterkaf] [alef.fina.lamalef]'<0 97 0 0>;
+  pos [lam.medi.laf.afterkaf] [yehshape.fina.ii]'<0 153 0 0>;
+  pos [lam.medi.laf.afterkaf] [yehshape.fina]'<0 298 0 0>;
+  pos [lam.medi.laf.afterkaf] [yehshape.fina.ii.expa]'<0 107 0 0>;
+  pos [lam.medi.laf.afterkaf] [alefmaksura.isol.expa]'<0 107 0 0>;
+  pos [lam.medi.laf.afterkaf] [yehshape.isol.expa]'<0 107 0 0>;
+  pos [lam.medi.laf.afterkaf] [yehshape.fina.expa]'<0 298 0 0>;
+  pos [lam.init.lamalef] [alefmaksura.isol]'<0 56 0 0>;
+  pos [lam.init.lamalef] [yehshape.isol]'<0 56 0 0>;
+  pos [lam.init.lamalef] [alef.fina.laf]'<0 -119 0 0>;
+  pos [lam.init.lamalef] [yehshape.fina.ii]'<0 56 0 0>;
+  pos [lam.init.lamalef] [yehshape.fina]'<0 201 0 0>;
+  pos [lam.init.lamalef] [yehshape.fina.ii.expa]'<0 10 0 0>;
+  pos [lam.init.lamalef] [alefmaksura.isol.expa]'<0 10 0 0>;
+  pos [lam.init.lamalef] [yehshape.isol.expa]'<0 10 0 0>;
+  pos [lam.init.lamalef] [yehshape.fina.expa]'<0 201 0 0>;
+  pos [behshape.init.beforeyeh] [alefmaksura.isol]'<0 78 0 0>;
+  pos [behshape.init.beforeyeh] [yehshape.isol]'<0 78 0 0>;
+  pos [behshape.init.beforeyeh] [alef.fina.laf]'<0 -97 0 0>;
+  pos [behshape.init.beforeyeh] [alef.fina.lamalef]'<0 22 0 0>;
+  pos [behshape.init.beforeyeh] [yehshape.fina.ii]'<0 78 0 0>;
+  pos [behshape.init.beforeyeh] [yehshape.fina]'<0 223 0 0>;
+  pos [behshape.init.beforeyeh] [yehshape.fina.ii.expa]'<0 32 0 0>;
+  pos [behshape.init.beforeyeh] [alefmaksura.isol.expa]'<0 32 0 0>;
+  pos [behshape.init.beforeyeh] [yehshape.isol.expa]'<0 32 0 0>;
+  pos [behshape.init.beforeyeh] [yehshape.fina.expa]'<0 223 0 0>;
+  pos [behshape.medi.beforeyeh] [alefmaksura.isol]'<0 -136 0 0>;
+  pos [behshape.medi.beforeyeh] [yehshape.isol]'<0 -136 0 0>;
+  pos [behshape.medi.beforeyeh] [alef.fina.laf]'<0 -311 0 0>;
+  pos [behshape.medi.beforeyeh] [alef.fina.lamalef]'<0 -192 0 0>;
+  pos [behshape.medi.beforeyeh] [yehshape.fina.ii]'<0 -136 0 0>;
+  pos [behshape.medi.beforeyeh] [yehshape.fina]'<0 9 0 0>;
+  pos [behshape.medi.beforeyeh] [yehshape.fina.ii.expa]'<0 -182 0 0>;
+  pos [behshape.medi.beforeyeh] [alefmaksura.isol.expa]'<0 -182 0 0>;
+  pos [behshape.medi.beforeyeh] [yehshape.isol.expa]'<0 -182 0 0>;
+  pos [behshape.medi.beforeyeh] [yehshape.fina.expa]'<0 9 0 0>;
+  pos [seen.init.beforeyeh] [alefmaksura.isol]'<0 -136 0 0>;
+  pos [seen.init.beforeyeh] [yehshape.isol]'<0 -136 0 0>;
+  pos [seen.init.beforeyeh] [alef.fina.laf]'<0 -311 0 0>;
+  pos [seen.init.beforeyeh] [alef.fina.lamalef]'<0 -192 0 0>;
+  pos [seen.init.beforeyeh] [yehshape.fina.ii]'<0 -136 0 0>;
+  pos [seen.init.beforeyeh] [yehshape.fina]'<0 9 0 0>;
+  pos [seen.init.beforeyeh] [yehshape.fina.ii.expa]'<0 -182 0 0>;
+  pos [seen.init.beforeyeh] [alefmaksura.isol.expa]'<0 -182 0 0>;
+  pos [seen.init.beforeyeh] [yehshape.isol.expa]'<0 -182 0 0>;
+  pos [seen.init.beforeyeh] [yehshape.fina.expa]'<0 9 0 0>;
+  pos [seen.medi.beforeyeh] [alefmaksura.isol]'<0 -136 0 0>;
+  pos [seen.medi.beforeyeh] [yehshape.isol]'<0 -136 0 0>;
+  pos [seen.medi.beforeyeh] [alef.fina.laf]'<0 -311 0 0>;
+  pos [seen.medi.beforeyeh] [alef.fina.lamalef]'<0 -192 0 0>;
+  pos [seen.medi.beforeyeh] [yehshape.fina.ii]'<0 -136 0 0>;
+  pos [seen.medi.beforeyeh] [yehshape.fina]'<0 9 0 0>;
+  pos [seen.medi.beforeyeh] [yehshape.fina.ii.expa]'<0 -182 0 0>;
+  pos [seen.medi.beforeyeh] [alefmaksura.isol.expa]'<0 -182 0 0>;
+  pos [seen.medi.beforeyeh] [yehshape.isol.expa]'<0 -182 0 0>;
+  pos [seen.medi.beforeyeh] [yehshape.fina.expa]'<0 9 0 0>;
+  pos [lam.init.beforeyeh] [alefmaksura.isol]'<0 -54 0 0>;
+  pos [lam.init.beforeyeh] [yehshape.isol]'<0 -54 0 0>;
+  pos [lam.init.beforeyeh] [alef.fina.laf]'<0 -229 0 0>;
+  pos [lam.init.beforeyeh] [alef.fina.lamalef]'<0 -110 0 0>;
+  pos [lam.init.beforeyeh] [yehshape.fina.ii]'<0 -54 0 0>;
+  pos [lam.init.beforeyeh] [yehshape.fina]'<0 91 0 0>;
+  pos [lam.init.beforeyeh] [yehshape.fina.ii.expa]'<0 -100 0 0>;
+  pos [lam.init.beforeyeh] [alefmaksura.isol.expa]'<0 -100 0 0>;
+  pos [lam.init.beforeyeh] [yehshape.isol.expa]'<0 -100 0 0>;
+  pos [lam.init.beforeyeh] [yehshape.fina.expa]'<0 91 0 0>;
+  pos [lam.medi.beforeyeh] [alefmaksura.isol]'<0 -118 0 0>;
+  pos [lam.medi.beforeyeh] [yehshape.isol]'<0 -118 0 0>;
+  pos [lam.medi.beforeyeh] [alef.fina.laf]'<0 -293 0 0>;
+  pos [lam.medi.beforeyeh] [alef.fina.lamalef]'<0 -174 0 0>;
+  pos [lam.medi.beforeyeh] [yehshape.fina.ii]'<0 -118 0 0>;
+  pos [lam.medi.beforeyeh] [yehshape.fina]'<0 27 0 0>;
+  pos [lam.medi.beforeyeh] [yehshape.fina.ii.expa]'<0 -164 0 0>;
+  pos [lam.medi.beforeyeh] [alefmaksura.isol.expa]'<0 -164 0 0>;
+  pos [lam.medi.beforeyeh] [yehshape.isol.expa]'<0 -164 0 0>;
+  pos [lam.medi.beforeyeh] [yehshape.fina.expa]'<0 27 0 0>;
+  pos [meem.init.beforeyeh] [alefmaksura.isol]'<0 -9 0 0>;
+  pos [meem.init.beforeyeh] [yehshape.isol]'<0 -9 0 0>;
+  pos [meem.init.beforeyeh] [alef.fina.laf]'<0 -184 0 0>;
+  pos [meem.init.beforeyeh] [alef.fina.lamalef]'<0 -65 0 0>;
+  pos [meem.init.beforeyeh] [yehshape.fina.ii]'<0 -9 0 0>;
+  pos [meem.init.beforeyeh] [yehshape.fina]'<0 136 0 0>;
+  pos [meem.init.beforeyeh] [yehshape.fina.ii.expa]'<0 -55 0 0>;
+  pos [meem.init.beforeyeh] [alefmaksura.isol.expa]'<0 -55 0 0>;
+  pos [meem.init.beforeyeh] [yehshape.isol.expa]'<0 -55 0 0>;
+  pos [meem.init.beforeyeh] [yehshape.fina.expa]'<0 136 0 0>;
+  pos [meem.medi.beforeyeh] [alefmaksura.isol]'<0 -91 0 0>;
+  pos [meem.medi.beforeyeh] [yehshape.isol]'<0 -91 0 0>;
+  pos [meem.medi.beforeyeh] [alef.fina.laf]'<0 -266 0 0>;
+  pos [meem.medi.beforeyeh] [alef.fina.lamalef]'<0 -147 0 0>;
+  pos [meem.medi.beforeyeh] [yehshape.fina.ii]'<0 -91 0 0>;
+  pos [meem.medi.beforeyeh] [yehshape.fina]'<0 54 0 0>;
+  pos [meem.medi.beforeyeh] [yehshape.fina.ii.expa]'<0 -137 0 0>;
+  pos [meem.medi.beforeyeh] [alefmaksura.isol.expa]'<0 -137 0 0>;
+  pos [meem.medi.beforeyeh] [yehshape.isol.expa]'<0 -137 0 0>;
+  pos [meem.medi.beforeyeh] [yehshape.fina.expa]'<0 54 0 0>;
+  pos [fehshape.init.beforeyeh] [alefmaksura.isol]'<0 77 0 0>;
+  pos [fehshape.init.beforeyeh] [yehshape.isol]'<0 77 0 0>;
+  pos [fehshape.init.beforeyeh] [alef.fina.laf]'<0 -98 0 0>;
+  pos [fehshape.init.beforeyeh] [alef.fina.lamalef]'<0 21 0 0>;
+  pos [fehshape.init.beforeyeh] [yehshape.fina.ii]'<0 77 0 0>;
+  pos [fehshape.init.beforeyeh] [yehshape.fina]'<0 222 0 0>;
+  pos [fehshape.init.beforeyeh] [yehshape.fina.ii.expa]'<0 31 0 0>;
+  pos [fehshape.init.beforeyeh] [alefmaksura.isol.expa]'<0 31 0 0>;
+  pos [fehshape.init.beforeyeh] [yehshape.isol.expa]'<0 31 0 0>;
+  pos [fehshape.init.beforeyeh] [yehshape.fina.expa]'<0 222 0 0>;
+  pos [fehshape.medi.beforeyeh] [alefmaksura.isol]'<0 -64 0 0>;
+  pos [fehshape.medi.beforeyeh] [yehshape.isol]'<0 -64 0 0>;
+  pos [fehshape.medi.beforeyeh] [alef.fina.laf]'<0 -239 0 0>;
+  pos [fehshape.medi.beforeyeh] [alef.fina.lamalef]'<0 -120 0 0>;
+  pos [fehshape.medi.beforeyeh] [yehshape.fina.ii]'<0 -64 0 0>;
+  pos [fehshape.medi.beforeyeh] [yehshape.fina]'<0 81 0 0>;
+  pos [fehshape.medi.beforeyeh] [yehshape.fina.ii.expa]'<0 -110 0 0>;
+  pos [fehshape.medi.beforeyeh] [alefmaksura.isol.expa]'<0 -110 0 0>;
+  pos [fehshape.medi.beforeyeh] [yehshape.isol.expa]'<0 -110 0 0>;
+  pos [fehshape.medi.beforeyeh] [yehshape.fina.expa]'<0 81 0 0>;
+  pos [hah.init.beforeyeh] [alefmaksura.isol]'<0 -31 0 0>;
+  pos [hah.init.beforeyeh] [yehshape.isol]'<0 -31 0 0>;
+  pos [hah.init.beforeyeh] [alef.fina.laf]'<0 -206 0 0>;
+  pos [hah.init.beforeyeh] [alef.fina.lamalef]'<0 -87 0 0>;
+  pos [hah.init.beforeyeh] [yehshape.fina.ii]'<0 -31 0 0>;
+  pos [hah.init.beforeyeh] [yehshape.fina]'<0 114 0 0>;
+  pos [hah.init.beforeyeh] [yehshape.fina.ii.expa]'<0 -77 0 0>;
+  pos [hah.init.beforeyeh] [alefmaksura.isol.expa]'<0 -77 0 0>;
+  pos [hah.init.beforeyeh] [yehshape.isol.expa]'<0 -77 0 0>;
+  pos [hah.init.beforeyeh] [yehshape.fina.expa]'<0 114 0 0>;
+  pos [hah.medi.afterbeh.beforeyeh] [alefmaksura.isol]'<0 56 0 0>;
+  pos [hah.medi.afterbeh.beforeyeh] [yehshape.isol]'<0 56 0 0>;
+  pos [hah.medi.afterbeh.beforeyeh] [alef.fina.laf]'<0 -119 0 0>;
+  pos [hah.medi.afterbeh.beforeyeh] [yehshape.fina.ii]'<0 56 0 0>;
+  pos [hah.medi.afterbeh.beforeyeh] [yehshape.fina]'<0 201 0 0>;
+  pos [hah.medi.afterbeh.beforeyeh] [yehshape.fina.ii.expa]'<0 10 0 0>;
+  pos [hah.medi.afterbeh.beforeyeh] [alefmaksura.isol.expa]'<0 10 0 0>;
+  pos [hah.medi.afterbeh.beforeyeh] [yehshape.isol.expa]'<0 10 0 0>;
+  pos [hah.medi.afterbeh.beforeyeh] [yehshape.fina.expa]'<0 201 0 0>;
+  pos [hah.medi.afterlam.beforeyeh] [alefmaksura.isol]'<0 56 0 0>;
+  pos [hah.medi.afterlam.beforeyeh] [yehshape.isol]'<0 56 0 0>;
+  pos [hah.medi.afterlam.beforeyeh] [alef.fina.laf]'<0 -119 0 0>;
+  pos [hah.medi.afterlam.beforeyeh] [yehshape.fina.ii]'<0 56 0 0>;
+  pos [hah.medi.afterlam.beforeyeh] [yehshape.fina]'<0 201 0 0>;
+  pos [hah.medi.afterlam.beforeyeh] [yehshape.fina.ii.expa]'<0 10 0 0>;
+  pos [hah.medi.afterlam.beforeyeh] [alefmaksura.isol.expa]'<0 10 0 0>;
+  pos [hah.medi.afterlam.beforeyeh] [yehshape.isol.expa]'<0 10 0 0>;
+  pos [hah.medi.afterlam.beforeyeh] [yehshape.fina.expa]'<0 201 0 0>;
+  pos [hah.medi.beforeyeh] [alefmaksura.isol]'<0 -31 0 0>;
+  pos [hah.medi.beforeyeh] [yehshape.isol]'<0 -31 0 0>;
+  pos [hah.medi.beforeyeh] [alef.fina.laf]'<0 -206 0 0>;
+  pos [hah.medi.beforeyeh] [alef.fina.lamalef]'<0 -87 0 0>;
+  pos [hah.medi.beforeyeh] [yehshape.fina.ii]'<0 -31 0 0>;
+  pos [hah.medi.beforeyeh] [yehshape.fina]'<0 114 0 0>;
+  pos [hah.medi.beforeyeh] [yehshape.fina.ii.expa]'<0 -77 0 0>;
+  pos [hah.medi.beforeyeh] [alefmaksura.isol.expa]'<0 -77 0 0>;
+  pos [hah.medi.beforeyeh] [yehshape.isol.expa]'<0 -77 0 0>;
+  pos [hah.medi.beforeyeh] [yehshape.fina.expa]'<0 114 0 0>;
+  pos [heh.init.beforeyeh] [alefmaksura.isol]'<0 19 0 0>;
+  pos [heh.init.beforeyeh] [yehshape.isol]'<0 19 0 0>;
+  pos [heh.init.beforeyeh] [alef.fina.laf]'<0 -156 0 0>;
+  pos [heh.init.beforeyeh] [alef.fina.lamalef]'<0 -37 0 0>;
+  pos [heh.init.beforeyeh] [yehshape.fina.ii]'<0 19 0 0>;
+  pos [heh.init.beforeyeh] [yehshape.fina]'<0 164 0 0>;
+  pos [heh.init.beforeyeh] [yehshape.fina.ii.expa]'<0 -27 0 0>;
+  pos [heh.init.beforeyeh] [alefmaksura.isol.expa]'<0 -27 0 0>;
+  pos [heh.init.beforeyeh] [yehshape.isol.expa]'<0 -27 0 0>;
+  pos [heh.init.beforeyeh] [yehshape.fina.expa]'<0 164 0 0>;
+  pos [heh.medi.beforeyeh] [alefmaksura.isol]'<0 19 0 0>;
+  pos [heh.medi.beforeyeh] [yehshape.isol]'<0 19 0 0>;
+  pos [heh.medi.beforeyeh] [alef.fina.laf]'<0 -156 0 0>;
+  pos [heh.medi.beforeyeh] [alef.fina.lamalef]'<0 -37 0 0>;
+  pos [heh.medi.beforeyeh] [yehshape.fina.ii]'<0 19 0 0>;
+  pos [heh.medi.beforeyeh] [yehshape.fina]'<0 164 0 0>;
+  pos [heh.medi.beforeyeh] [yehshape.fina.ii.expa]'<0 -27 0 0>;
+  pos [heh.medi.beforeyeh] [alefmaksura.isol.expa]'<0 -27 0 0>;
+  pos [heh.medi.beforeyeh] [yehshape.isol.expa]'<0 -27 0 0>;
+  pos [heh.medi.beforeyeh] [yehshape.fina.expa]'<0 164 0 0>;
+  pos [sad.init.beforeyeh] [alefmaksura.isol]'<0 -130 0 0>;
+  pos [sad.init.beforeyeh] [yehshape.isol]'<0 -130 0 0>;
+  pos [sad.init.beforeyeh] [alef.fina.laf]'<0 -305 0 0>;
+  pos [sad.init.beforeyeh] [alef.fina.lamalef]'<0 -186 0 0>;
+  pos [sad.init.beforeyeh] [yehshape.fina.ii]'<0 -130 0 0>;
+  pos [sad.init.beforeyeh] [yehshape.fina]'<0 15 0 0>;
+  pos [sad.init.beforeyeh] [yehshape.fina.ii.expa]'<0 -176 0 0>;
+  pos [sad.init.beforeyeh] [alefmaksura.isol.expa]'<0 -176 0 0>;
+  pos [sad.init.beforeyeh] [yehshape.isol.expa]'<0 -176 0 0>;
+  pos [sad.init.beforeyeh] [yehshape.fina.expa]'<0 15 0 0>;
+  pos [sad.medi.beforeyeh] [alefmaksura.isol]'<0 -130 0 0>;
+  pos [sad.medi.beforeyeh] [yehshape.isol]'<0 -130 0 0>;
+  pos [sad.medi.beforeyeh] [alef.fina.laf]'<0 -305 0 0>;
+  pos [sad.medi.beforeyeh] [alef.fina.lamalef]'<0 -186 0 0>;
+  pos [sad.medi.beforeyeh] [yehshape.fina.ii]'<0 -130 0 0>;
+  pos [sad.medi.beforeyeh] [yehshape.fina]'<0 15 0 0>;
+  pos [sad.medi.beforeyeh] [yehshape.fina.ii.expa]'<0 -176 0 0>;
+  pos [sad.medi.beforeyeh] [alefmaksura.isol.expa]'<0 -176 0 0>;
+  pos [sad.medi.beforeyeh] [yehshape.isol.expa]'<0 -176 0 0>;
+  pos [sad.medi.beforeyeh] [yehshape.fina.expa]'<0 15 0 0>;
+  pos [ain.init.beforeyeh] [alefmaksura.isol]'<0 28 0 0>;
+  pos [ain.init.beforeyeh] [yehshape.isol]'<0 28 0 0>;
+  pos [ain.init.beforeyeh] [alef.fina.laf]'<0 -147 0 0>;
+  pos [ain.init.beforeyeh] [alef.fina.lamalef]'<0 -28 0 0>;
+  pos [ain.init.beforeyeh] [yehshape.fina.ii]'<0 28 0 0>;
+  pos [ain.init.beforeyeh] [yehshape.fina]'<0 173 0 0>;
+  pos [ain.init.beforeyeh] [yehshape.fina.ii.expa]'<0 -18 0 0>;
+  pos [ain.init.beforeyeh] [alefmaksura.isol.expa]'<0 -18 0 0>;
+  pos [ain.init.beforeyeh] [yehshape.isol.expa]'<0 -18 0 0>;
+  pos [ain.init.beforeyeh] [yehshape.fina.expa]'<0 173 0 0>;
+  pos [ain.medi.beforeyeh] [alefmaksura.isol]'<0 -53 0 0>;
+  pos [ain.medi.beforeyeh] [yehshape.isol]'<0 -53 0 0>;
+  pos [ain.medi.beforeyeh] [alef.fina.laf]'<0 -228 0 0>;
+  pos [ain.medi.beforeyeh] [alef.fina.lamalef]'<0 -109 0 0>;
+  pos [ain.medi.beforeyeh] [yehshape.fina.ii]'<0 -53 0 0>;
+  pos [ain.medi.beforeyeh] [yehshape.fina]'<0 92 0 0>;
+  pos [ain.medi.beforeyeh] [yehshape.fina.ii.expa]'<0 -99 0 0>;
+  pos [ain.medi.beforeyeh] [alefmaksura.isol.expa]'<0 -99 0 0>;
+  pos [ain.medi.beforeyeh] [yehshape.isol.expa]'<0 -99 0 0>;
+  pos [ain.medi.beforeyeh] [yehshape.fina.expa]'<0 92 0 0>;
+  pos [tah.init.beforeyeh] [alefmaksura.isol]'<0 -116 0 0>;
+  pos [tah.init.beforeyeh] [yehshape.isol]'<0 -116 0 0>;
+  pos [tah.init.beforeyeh] [alef.fina.laf]'<0 -291 0 0>;
+  pos [tah.init.beforeyeh] [alef.fina.lamalef]'<0 -172 0 0>;
+  pos [tah.init.beforeyeh] [yehshape.fina.ii]'<0 -116 0 0>;
+  pos [tah.init.beforeyeh] [yehshape.fina]'<0 29 0 0>;
+  pos [tah.init.beforeyeh] [yehshape.fina.ii.expa]'<0 -162 0 0>;
+  pos [tah.init.beforeyeh] [alefmaksura.isol.expa]'<0 -162 0 0>;
+  pos [tah.init.beforeyeh] [yehshape.isol.expa]'<0 -162 0 0>;
+  pos [tah.init.beforeyeh] [yehshape.fina.expa]'<0 29 0 0>;
+  pos [tah.medi.beforeyeh] [alefmaksura.isol]'<0 -116 0 0>;
+  pos [tah.medi.beforeyeh] [yehshape.isol]'<0 -116 0 0>;
+  pos [tah.medi.beforeyeh] [alef.fina.laf]'<0 -291 0 0>;
+  pos [tah.medi.beforeyeh] [alef.fina.lamalef]'<0 -172 0 0>;
+  pos [tah.medi.beforeyeh] [yehshape.fina.ii]'<0 -116 0 0>;
+  pos [tah.medi.beforeyeh] [yehshape.fina]'<0 29 0 0>;
+  pos [tah.medi.beforeyeh] [yehshape.fina.ii.expa]'<0 -162 0 0>;
+  pos [tah.medi.beforeyeh] [alefmaksura.isol.expa]'<0 -162 0 0>;
+  pos [tah.medi.beforeyeh] [yehshape.isol.expa]'<0 -162 0 0>;
+  pos [tah.medi.beforeyeh] [yehshape.fina.expa]'<0 29 0 0>;
+  pos [kaf.init.beforeyeh] [alefmaksura.isol]'<0 56 0 0>;
+  pos [kaf.init.beforeyeh] [yehshape.isol]'<0 56 0 0>;
+  pos [kaf.init.beforeyeh] [alef.fina.laf]'<0 -119 0 0>;
+  pos [kaf.init.beforeyeh] [yehshape.fina.ii]'<0 56 0 0>;
+  pos [kaf.init.beforeyeh] [yehshape.fina]'<0 201 0 0>;
+  pos [kaf.init.beforeyeh] [yehshape.fina.ii.expa]'<0 10 0 0>;
+  pos [kaf.init.beforeyeh] [alefmaksura.isol.expa]'<0 10 0 0>;
+  pos [kaf.init.beforeyeh] [yehshape.isol.expa]'<0 10 0 0>;
+  pos [kaf.init.beforeyeh] [yehshape.fina.expa]'<0 201 0 0>;
+  pos [kaf.medi.beforeyeh] [alefmaksura.isol]'<0 -54 0 0>;
+  pos [kaf.medi.beforeyeh] [yehshape.isol]'<0 -54 0 0>;
+  pos [kaf.medi.beforeyeh] [alef.fina.laf]'<0 -229 0 0>;
+  pos [kaf.medi.beforeyeh] [alef.fina.lamalef]'<0 -110 0 0>;
+  pos [kaf.medi.beforeyeh] [yehshape.fina.ii]'<0 -54 0 0>;
+  pos [kaf.medi.beforeyeh] [yehshape.fina]'<0 91 0 0>;
+  pos [kaf.medi.beforeyeh] [yehshape.fina.ii.expa]'<0 -100 0 0>;
+  pos [kaf.medi.beforeyeh] [alefmaksura.isol.expa]'<0 -100 0 0>;
+  pos [kaf.medi.beforeyeh] [yehshape.isol.expa]'<0 -100 0 0>;
+  pos [kaf.medi.beforeyeh] [yehshape.fina.expa]'<0 91 0 0>;
+} adjustverticalpos;
 
 
 lookup coretextfix {
@@ -1732,19 +2028,21 @@ lookup coretextfix {
   pos @rehwaw /[.]init/' (/[.]medi/{0,10})'lookup allcursivejoinnortl  /[.]fina/'lookup allcursivejoinnortl;
 
 } coretextfix;
-
+#endif;
   
 
 feature curs {
+#if isForCoreText
+  lookup adjustverticalpos;
+#endif;
   lookup isolkern;      
   lookup cursivejoin;
   lookup rehwawcursivecpp;
-  
-  # For CoreText
-  #lookup rehwawcursivecoretext; 
-  #lookup allcursivejoinnortl;  
-  #lookup coretextfix;  
-
+#if isForCoreText  
+  lookup rehwawcursivecoretext; 
+  lookup allcursivejoinnortl;  
+  lookup coretextfix;  
+#endif;
 } curs;
 
 feature kern {  
@@ -1770,7 +2068,11 @@ feature mkmk {
 
 feature basm {
   lookup basmala;
-  lookup basmala.curs;
+#if isForCoreText
+    lookup basmala.kern;
+#else
+    lookup basmala.curs;
+#endif;  
 } basm;
 
 feature bism {
