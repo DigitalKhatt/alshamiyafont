@@ -13,3 +13,4 @@ defAxis("scaleX","SCLX",50,100,200,"params100");
 newinternal digitscale; digitscale := 0.8;
 ayadigitheight:= 105;
 ayadigitkern:=40;
+behshape_medi_beforeyeh_y := -126;

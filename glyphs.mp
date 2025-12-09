@@ -1718,7 +1718,7 @@ z1 .. tension 1.12667 and 1 ..
 leftbearing := 0;
 rightbearing := -300;
 
-setCursiveAnchor(ltrcursive,z1,ExitAnchor);
+setCursiveAnchor(ltrcursive,z1,ExitAnchorRTL);
 setCursiveAnchor(rtlcursive,z2, EntryAnchorRTL);
 
 hah.medi.afterbeh.beforeyeh.width1 := x3 -x2;
@@ -1900,7 +1900,7 @@ fill
 (756.889,472.222) .. tension 1 and 9.28107 ..
 (800.028,165.098) ..
 liii1 ( (856.959,102.773), (155.768,-131.173), (-73.3025,1.44676) ) setranchor
-(882.098,0.482253) rightjoinii
+(882,0) rightjoinii
 liii1 ( (850.63,1.19341), (213.638,-158.179), (-76.196,-0.964508) ) ..
 liii1 ( (779.644,34.5564), (6.26929,-14.9498), (-3.37577,-4.82253) ) ..
 (753.844,75.0065) ..
@@ -1919,7 +1919,7 @@ liii1 ( (779.644,34.5564), (6.26929,-14.9498), (-3.37577,-4.82253) ) ..
 leftbearing := -300;
 
 %labels(1,mark);
-setCursiveAnchor(ltrcursive,z.mark, ExitAnchor);
+setCursiveAnchor(ltrcursive,z.mark, ExitAnchorRTL);
 
 enddefchar;
 defchar(lam.medi.laf.afterkaf,-1,-1,-1,-1);
@@ -1932,7 +1932,7 @@ enddefchar;
 defchar(alef.fina.laf,-1,-1,-1,-1);
 %%backgroundimage:images/lam.alef.fina.jpg,-2688.41,-1063.8,1,0,0,1
 %%beginparams
-z11 = (551.888,185.693);
+z11 = (552,187);
 
 %%beginverbatim
 
@@ -1961,7 +1961,7 @@ fill
 
 
 
-setCursiveAnchor(ltrcursive,z11, EntryAnchor);
+setCursiveAnchor(ltrcursive,z11, EntryAnchorRTL);
 
 enddefchar;
 beginchar(lam.init.lamalef,-1,-1,-1,-1);
@@ -1971,7 +1971,7 @@ lamalef.isol_(lefttatweel,righttatweel);
 
 cutGlyph(z1,z2,false);
 
-setCursiveAnchor(ltrcursive,z1, ExitAnchor);
+setCursiveAnchor(ltrcursive,z1, ExitAnchorRTL);
 
 leftbearing := 0;
 
@@ -1983,7 +1983,7 @@ lamalef.isol_(lefttatweel,righttatweel);
 
 cutGlyph(z1,z2,true);
 
-setCursiveAnchor(ltrcursive,z1, EntryAnchor);
+setCursiveAnchor(ltrcursive,z1, EntryAnchorRTL);
 
 
 rightbearing := -250;
@@ -2095,7 +2095,7 @@ fill
 %%beginbody
 leftbearing:=0;
 rightbearing := 50;
-setCursiveAnchor(ltrcursive,z1,ExitAnchor);
+setCursiveAnchor(ltrcursive,z1,ExitAnchorRTL);
 enddefchar;
 defchar(behshape.init.beforeseen,-1,-1,-1,-1);
 %%backgroundimage:images/behbeforeseen.jpg,-1057.82,-1108.29,1,0,0,1
@@ -2430,7 +2430,7 @@ pair leftanchor;
 
 tr_ := identity shifted (0,-ypart rightanchor);
 
-setCursiveAnchor(behmedinoon,z.mark2, ExitAnchor);
+setCursiveAnchor(behmedinoon,z.mark2, ExitAnchorRTL);
 
 
 
@@ -2440,7 +2440,7 @@ enddefchar;
 defchar(behshape.medi.beforeyeh,-1,-1,-1,-1);
 %%backgroundimage:images/behshape.medi.beforeyeh.jpg,-3,-1041,1,0,0,1
 %%beginparams
-z1 = (585,-126);
+z1 = (585,behshape_medi_beforeyeh_y);
 z3 = (86,39); % z2
 
 %%beginverbatim
@@ -2477,7 +2477,7 @@ z1 {up} .. tension 5.20073 and 1.17598 ..
 %%beginbody
 
 
-setCursiveAnchor(ltrcursive,z1,ExitAnchor);
+setCursiveAnchor(ltrcursive,z1,ExitAnchorRTL);
 
 
 enddefchar;
@@ -2687,7 +2687,7 @@ seen.twosinnas_(0,0);
 picture pic_;pic_ := image(behshape.medi.beforeyeh_(0,-0.2));
 draw pic_ shifted (leftanchor-rightanchor);
 
-setCursiveAnchor(ltrcursive,z1  shifted (leftanchor-rightanchor),ExitAnchor);
+setCursiveAnchor(ltrcursive,z1  shifted (leftanchor-rightanchor),ExitAnchorRTL);
 
 
 
@@ -2850,7 +2850,7 @@ pic_ := image(
 save rightanchor;pair rightanchor;clearxy;
 behshape.medi.beforeyeh_(0,-0.3);
 shift_ := leftanchor - rightanchor;
-setCursiveAnchor(ltrcursive,z1  shifted shift_,ExitAnchor);
+setCursiveAnchor(ltrcursive,z1  shifted shift_,ExitAnchorRTL);
 );
 
 draw pic_ shifted shift_;
@@ -3078,7 +3078,7 @@ leftbearing := 0;
 rightbearing:=70;
 
 
-setCursiveAnchor(ltrcursive,z1,ExitAnchor);
+setCursiveAnchor(ltrcursive,z1,ExitAnchorRTL);
 
 enddefchar;
 defchar(lam.init.lam_hah,-1,-1,-1,-1);
@@ -3262,7 +3262,7 @@ leftbearing := 0;
 
 
 
-setCursiveAnchor(ltrcursive,z1,ExitAnchor);
+setCursiveAnchor(ltrcursive,z1,ExitAnchorRTL);
 enddefchar;
 defchar(lam.fina,-1,-1,-1,-1);
 %%backgroundimage:images/lam.fina.jpg,-30.628,-1096.76,1,0,0,1
@@ -3427,7 +3427,7 @@ fill
 %%beginbody
 leftbearing := 0;
 
-setCursiveAnchor(ltrcursive,z1,ExitAnchor);
+setCursiveAnchor(ltrcursive,z1,ExitAnchorRTL);
 enddefchar;
 defchar(meem.init.beforehah,-1,-1,-1,-1);
 %%backgroundimage:images/meemhah.jpg,-996,-1058,1,0,0,1
@@ -3592,7 +3592,7 @@ fill
 %%endpaths
 %%beginbody
 leftbearing := 0 ;
-setCursiveAnchor(ltrcursive,z1,ExitAnchor);
+setCursiveAnchor(ltrcursive,z1,ExitAnchorRTL);
 
 enddefchar;
 defchar(meem.fina,-1,-1,-1,-1);
@@ -3671,8 +3671,8 @@ fill
 
 %%endpaths
 %%beginbody
-setCursiveAnchor(hehmeem,z2, EntryAnchor);
-setCursiveAnchor(kafmeem,z1, EntryAnchor);
+setCursiveAnchor(hehmeem,z2, EntryAnchorRTL);
+setCursiveAnchor(kafmeem,z1, EntryAnchorRTL);
 
 enddefchar;
 defchar(meem.fina.afterkaf,-1,-1,-1,-1);
@@ -3753,7 +3753,7 @@ z2 = (475,155);
 noon.isol_(0,0);
 
 setCursiveAnchor(behnoon,z2, EntryAnchorRTL);
-setCursiveAnchor(behmedinoon,z2, EntryAnchor);
+setCursiveAnchor(behmedinoon,z2, EntryAnchorRTL);
 
 %tr_ := tr_ shifted (0,-50);
 enddefchar;
@@ -4122,7 +4122,7 @@ leftbearing := 0;
 rightbearing:= 60;
 
 
-setCursiveAnchor(ltrcursive,z1,ExitAnchor);
+setCursiveAnchor(ltrcursive,z1,ExitAnchorRTL);
 enddefchar;
 defchar(fehshape.medi,-1,-1,-1,-1);
 %%backgroundimage:images/feh.medi.jpg,-1984.61,-1218.02,1,0,0,1
@@ -4213,7 +4213,7 @@ liii1 ( (220,31), (103,-32), (35,-35) ) ..
 %%beginbody
 
 
-setCursiveAnchor(ltrcursive,z3,ExitAnchor);
+setCursiveAnchor(ltrcursive,z3,ExitAnchorRTL);
 enddefchar;
 defchar(feh.fina,-1,-1,-1,-1);
 %%backgroundimage:images/feh.fina.jpg,37.9816,-1111.26,1,0,0,1
@@ -4490,7 +4490,7 @@ z1 .. tension 1.85673 and 1.2212 ..
 %%endpaths
 %%beginbody
 leftanchor := z1;
-setCursiveAnchor(ltrcursive,z1,ExitAnchor);
+setCursiveAnchor(ltrcursive,z1,ExitAnchorRTL);
 enddefchar;
 defchar(hah.medi,-1,-1,-1,-1);
 %%backgroundimage:images/hah.medi.jpg,-1391.94,-1008.04,1,0,0,1
@@ -4679,7 +4679,7 @@ currentpicture := nullpicture;fill  ppp_3;
 
 %hah.init.beforeyeh_(lefttatweel,righttatweel);
 
-setCursiveAnchor(ltrcursive,z1,ExitAnchor);
+setCursiveAnchor(ltrcursive,z1,ExitAnchorRTL);
 enddefchar;
 defchar(hah.fina,-1,-1,-1,-1);
 %%backgroundimage:images/hah.fina.jpg,-6,-1286,1,0,0,1
@@ -5095,7 +5095,7 @@ draw heh.shape.i.pic shifted z1;
 
 
 
-setCursiveAnchor(hehmeem,z2, ExitAnchor);
+setCursiveAnchor(hehmeem,z2, ExitAnchorRTL);
 leftbearing :=0;
 rightbearing  := -0;
 
@@ -5131,7 +5131,7 @@ fill
 %%beginbody
 draw heh.shape.i.pic shifted z1;
 
-setCursiveAnchor(ltrcursive,z2,ExitAnchor);
+setCursiveAnchor(ltrcursive,z2,ExitAnchorRTL);
 enddefchar;
 defchar(heh.medi,-1,-1,-1,-1);
 %%backgroundimage:images/heh.medi.jpg,-499.565,-1073.94,1,0,0,1
@@ -5222,7 +5222,7 @@ liii1 ( (344,24), (77.8,-31.2), (-4.49074,-23.9444) ) ..
 
 save pic_; picture pic_;pic_:= image(heh.init.beforeyeh_(0,0));
 draw pic_ shifted z.shift1 ;
-setCursiveAnchor(ltrcursive,z2 shifted z.shift1,ExitAnchor);
+setCursiveAnchor(ltrcursive,z2 shifted z.shift1,ExitAnchorRTL);
 enddefchar;
 defchar(heh.fina,-1,-1,-1,-1);
 %%backgroundimage:images/heh.fina.jpg,-108.071,-1394.97,1,0,0,1
@@ -5531,7 +5531,7 @@ save rightanchor;pair rightanchor;clearxy;
 behshape.medi.beforeyeh_(0,0.5);
 show rightanchor;
 shift_ := tmp_p_  - rightanchor;
-setCursiveAnchor(ltrcursive,z1  shifted shift_,ExitAnchor);
+setCursiveAnchor(ltrcursive,z1  shifted shift_,ExitAnchorRTL);
 );
 
 draw pic_ shifted shift_;
@@ -5747,7 +5747,7 @@ fill
 %%beginbody
 leftbearing := 0;
 
-setCursiveAnchor(ltrcursive,z1,ExitAnchor);
+setCursiveAnchor(ltrcursive,z1,ExitAnchorRTL);
 
 enddefchar;
 defchar(ain.init.finjani,-1,-1,-1,-1);
@@ -5868,7 +5868,7 @@ z1 .. tension 0.75 and 1.48739 ..
 %%beginbody
 leftbearing := 0;
 
-setCursiveAnchor(ltrcursive,z3,ExitAnchor);
+setCursiveAnchor(ltrcursive,z3,ExitAnchorRTL);
 enddefchar;
 defchar(ain.fina,-1,-1,-1,-1);
 %%backgroundimage:images/ain.fina.jpg,-9.4405,-1152.47,1,0,0,1
@@ -6040,7 +6040,7 @@ fill
 %%endpaths
 %%beginbody
 
-setCursiveAnchor(ltrcursive,z1,ExitAnchor);
+setCursiveAnchor(ltrcursive,z1,ExitAnchorRTL);
 
 enddefchar;
 defchar(tah.medi,-1,-1,-1,-1);
@@ -6205,11 +6205,11 @@ z.yeh.shape.ii.1 .. tension 4.3658 and 1.86562 ..
 leftbearing := 0;
 enddefchar;
 defchar(yehshape.fina.ii,-1,-1,-1,-1);
-%%backgroundimage:images/yehshape.fina.ii.jpg,-60,-931,1,0,0,1
+%%backgroundimage:images/yehshape.fina.ii.jpg,-60,-932,1,0,0,1
 %%beginparams
-z1 = (349,29);
-z4 = (103.444,66.8333); % z3
-z5 = (524,-23);
+z1 = (349,30);
+z4 = (103,68); % z3
+z5 = (524,-22);
 
 %%beginverbatim
 
@@ -6222,28 +6222,29 @@ z3 = z1 + z4;
 %%beginpaths
 
 fill
-(22,-36) .. tension 1.15253 and 2.73859 ..
- {right}(133.417,185.083) .. tension 1 and 1 ..
- {down}(149.547,167.464) .. tension 2.78482 and 1 ..
- {down}(89.3198,29.6297) .. tension 1 and 0.915494 ..
- {right}(268.641,-112.034) .. tension 1.09661 and 6.40317 ..
+(22,-35) .. tension 1.15253 and 2.73859 ..
+ {right}(133.417,186.083) .. tension 1 and 1 ..
+ {down}(149.547,168.464) .. tension 2.78482 and 1 ..
+ {down}(89.3198,30.6297) .. tension 1 and 0.915494 ..
+ {right}(268.641,-111.034) .. tension 1.09661 and 6.40317 ..
  {up}z5 .. tension 1.03121 and 1 ..
-(510.025,-7.82217) .. tension 2.35499 and 2.16529 ..
+(510.025,-6.82217) .. tension 2.35499 and 2.16529 ..
  {up}z1 .. tension 10.1756 and 1.97052 ..
  {right}z3 .. tension 1.39519 and 1.43919 ..
-(576.398,75.023) .. tension 1 and 1 ..
+(576.398,76.023) .. tension 1 and 1 ..
  {down}z2 .. tension 1.40985 and 1.14232 ..
- {left}(255,-206) .. tension 0.907684 and 1 ..
+ {left}(255,-205) .. tension 0.907684 and 1 ..
  {up} cycle
 ;
 
 %%endpaths
 %%beginbody
 rightbearing := x1 - x2;
-setCursiveAnchor(ltrcursive,z1,EntryAnchor);
+setCursiveAnchor(ltrcursive,z1,EntryAnchorRTL);
+tr_ := tr_ shifted(0,100 -y1);
 %show rightbearing;
 enddefchar;
-defchar(yehshape.fina.beforebeh,-1,-1,-1,-1);
+defchar(yehshape.fina.afterbeh,-1,-1,-1,-1);
 %%beginbody
 
 
@@ -6252,14 +6253,17 @@ yehshape.fina.ii_(lefttatweel,righttatweel);
 cutGlyph(z5,z2,false);
 
 
-setCursiveAnchor(ltrcursive,z5,EntryAnchor);
+setCursiveAnchor(ltrcursive,z5,EntryAnchorRTL);
 
+show y5;
+
+tr_ := tr_ shifted(0,behshape_medi_beforeyeh_y-y5 - ypart tr_);
 
 enddefchar;
 defchar(alefmaksura.isol,1609,-1,-1,-1);
 %%backgroundimage:images/yeh.isol.jpg,-63,-1017,1,0,0,1
 %%beginbody
-yehshape.fina.beforebeh_(lefttatweel,0);
+yehshape.fina.afterbeh_(lefttatweel,0);
 
 pair shift_;
 picture pic_;
@@ -6272,6 +6276,8 @@ shift_ := z5 - z.yeh.shape.i.1;
 draw pic_ shifted shift_;
 rightbearing := 0;
 
+tr_ := tr_ shifted(0,y1- ypart tr_);
+
 enddefchar;
 defchar(yehshape.isol,1610,-1,-1,-1);
 %%beginbody
@@ -6281,7 +6287,7 @@ enddefchar;
 beginchar(yehshape.fina,-1,-1,-1,-1);
 %%backgroundimage:images/yeh.fina.jpg,75,-1047,1,0,0,1
 %%beginbody
-yehshape.fina.beforebeh_(0,0);
+yehshape.fina.afterbeh_(0,0);
 
 pair shift_;
 picture pic_;
@@ -6295,7 +6301,7 @@ draw pic_ shifted shift_;
 rightanchor := rightanchor shifted shift_;;
 
 
-tr_ := tr_ shifted (0, -ypart rightanchor);
+tr_ := tr_ shifted (0, -ypart rightanchor -ypart tr_);
 
 endchar;
 defchar(kaf.isol,1603,-1,-1,-1);
@@ -6569,7 +6575,7 @@ fill
 %%beginbody
 leftbearing := 0;
 
-setCursiveAnchor(ltrcursive,z1,ExitAnchor);
+setCursiveAnchor(ltrcursive,z1,ExitAnchorRTL);
 
 rightbearing := -(xpart (urcorner currentpicture) - x4); 
 
@@ -6656,7 +6662,7 @@ brdmv ( (315,229), (7,4), (-61,-47) ) .. tension 1 and 1 ..
 %%endpaths
 %%beginbody
 
-setCursiveAnchor(kafmeem,z1, EntryAnchor);
+setCursiveAnchor(kafmeem,z1, EntryAnchorRTL);
 
 enddefchar;
 defchar(kaf.medi.beforeyeh,-1,-1,-1,-1);
@@ -6701,7 +6707,7 @@ liii1 ( (317.023,164.25), (0,0), (-12,-4) ) .. tension 1 and 6.08207 ..
 
 leftbearing:= 0;
 
-setCursiveAnchor(ltrcursive,z1,ExitAnchor);
+setCursiveAnchor(ltrcursive,z1,ExitAnchorRTL);
 
 enddefchar;
 defchar(kaf.medi.beforelam,-1,-1,-1,-1);
@@ -7466,7 +7472,7 @@ noon.isol.expa_(lefttatweel,0);
 
 
 setCursiveAnchor(behnoon,z.mark1, EntryAnchorRTL);
-setCursiveAnchor(behmedinoon,z.mark1, EntryAnchor);
+setCursiveAnchor(behmedinoon,z.mark1, EntryAnchorRTL);
 
 tr_ := tr_ shifted (0,-50);
 
@@ -7568,10 +7574,10 @@ rightanchor := z10;
 
 enddefchar;
 defchar(yehshape.fina.ii.expa,-1,-1,-1,-1);
-%%backgroundimage:images/yehexpa.jpg,-1054.37,-714.11,1,0,0,1
+%%backgroundimage:images/yehexpa.jpg,-1050.22,-670.564,1,0,0,1
 %%beginparams
-z1 = (342,72);
-z5 = (538,24);
+z1 = (346,30);
+z5 = (542,-18);
 
 %%beginverbatim
 
@@ -7585,25 +7591,26 @@ z2 = z5 + behshape.medi.beforeyeh.p1 ;
 %%beginpaths
 
 fill
-leii0 ( (-246.01,100.275), (tatweel_,0) ) .. tension 1.15253 and 0.75 ..
- {right}leii0 ( (-230.96,129.497), (tatweel_,2.4) ) .. tension 8.86649 and 0.75 ..
-leii0 ( (-32.7361,-24.7533), (tatweel_,2.4) ) .. tension 1.50093 and 1 ..
- {right}leii0 ( (175.174,-85.314), (-364.98,-53.68) ) .. tension 1 and leii0 ( 4.89967, 0.2 ) ..
+leii0 ( (-241.863,56.7294), (tatweel_,0) ) .. tension 1.15253 and 0.75 ..
+ {right}leii0 ( (-226.813,85.9514), (tatweel_,2.4) ) .. tension 8.86649 and 0.75 ..
+leii0 ( (-28.5889,-68.2989), (tatweel_,2.4) ) .. tension 1.50093 and 1 ..
+ {right}leii0 ( (179.321,-128.86), (-364.98,-53.68) ) .. tension 1 and leii0 ( 4.89967, 0.2 ) ..
  {up}z5 .. tension 3.33775 and 2.54305 ..
  {up}z1 .. tension 1 and 1 ..
- {right}(435.99,144) .. tension 1 and 1.03375 ..
+ {right}(440.137,100.454) .. tension 1 and 1.03375 ..
  {down}z2 .. tension leii0 ( 1.63545, 0.15 ) and 1 ..
- {left}leii0 ( (165.471,-187.296), (-385.86,-55.84) ) .. tension 1 and 1.23984 ..
-leii0 ( (-67.3844,-125.002), (tatweel_,6) ) .. tension 1 and 1.78941 ..
+ {left}leii0 ( (169.618,-230.842), (-385.86,-55.84) ) .. tension 1 and 1.23984 ..
+leii0 ( (-63.2372,-168.548), (tatweel_,6) ) .. tension 1 and 1.78941 ..
  {up} cycle
 ;
 
 %%endpaths
 %%beginbody
 rightbearing := x1 - x2;
-setCursiveAnchor(ltrcursive,z1,EntryAnchor);
+setCursiveAnchor(ltrcursive,z1,EntryAnchorRTL);
+tr_ := tr_ shifted(0,100 -y1);
 enddefchar;
-defchar(yehshape.fina.beforebeh.expa,-1,-1,-1,-1);
+defchar(yehshape.fina.afterbeh.expa,-1,-1,-1,-1);
 %%beginbody
 
 
@@ -7611,14 +7618,16 @@ yehshape.fina.ii.expa_(lefttatweel,righttatweel);
 
 cutGlyph(z5,z2,false);
 
+tr_ := tr_ shifted(0,behshape_medi_beforeyeh_y-y5- ypart tr_);
 
-setCursiveAnchor(ltrcursive,z5,EntryAnchor);
+
+setCursiveAnchor(ltrcursive,z5,EntryAnchorRTL);
 enddefchar;
 defchar(alefmaksura.isol.expa,-1,-1,-1,-1);
 %%beginbody
 
 %%beginbody
-yehshape.fina.beforebeh.expa_(lefttatweel,0);
+yehshape.fina.afterbeh.expa_(lefttatweel,0);
 
 pair shift_;
 picture pic_;
@@ -7630,7 +7639,7 @@ shift_ := z5 - z.yeh.shape.i.1;
 
 draw pic_ shifted shift_;
 rightbearing := 0;
-
+tr_ := tr_ shifted(0,y1- ypart tr_);
 
 enddefchar;
 defchar(yehshape.isol.expa,-1,-1,-1,-1);
@@ -7641,7 +7650,7 @@ defchar(yehshape.fina.expa,-1,-1,-1,-1);
 %%beginbody
 
 %%beginbody
-yehshape.fina.beforebeh.expa_(lefttatweel,0);
+yehshape.fina.afterbeh.expa_(lefttatweel,0);
 
 pair shift_;
 picture pic_;
@@ -7655,7 +7664,7 @@ draw pic_ shifted shift_;
 rightanchor := rightanchor shifted shift_;;
 rightbearing := 0;
 
-tr_ := tr_ shifted (0, -ypart rightanchor);
+tr_ := tr_ shifted (0, -ypart rightanchor -ypart tr_);
 
 
 

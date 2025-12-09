@@ -1,24 +1,27 @@
 #pragma once
-#include "automedina.h"
 #include "GlyphVis.h"
-#include "Subtable.h"
 #include "Lookup.h"
+#include "Subtable.h"
+#include "automedina.h"
 
 class OldMadina : public Automedina {
-public:
+ public:
   OldMadina(OtLayout* layout, Font* font, bool extended);
   Lookup* getLookup(QString lookupName) override;
-  CalcAnchor  getanchorCalcFunctions(QString functionName, Subtable* subtable) override;
+  CalcAnchor getanchorCalcFunctions(QString functionName, Subtable* subtable) override;
+  PairAdjustFunc getPairAdjustFunction(std::string functionName, Subtable* subtable) override;
+
   void generateSubstEquivGlyphs() override;
-  ~OldMadina(){}
-private:
+  ~OldMadina() {}
+
+ private:
   Lookup* defaultmarkposition();
   Lookup* defaultwaqfmarktobase();
   Lookup* forsmalllalef();
   Lookup* forsmallhighwaw();
   Lookup* forhamza();
   Lookup* forheh();
-  Lookup* forwaw();  
+  Lookup* forwaw();
   Lookup* cursivejoin();
   Lookup* pointmarks();
   Lookup* defaultwaqfmarkabovemarkprecise();
@@ -27,15 +30,13 @@ private:
   Lookup* defaultmkmk();
   Lookup* ayanumbers();
   Lookup* ayanumberskern();
-  Lookup* rehwawcursivecpp();  
+  Lookup* rehwawcursivecpp();
   Lookup* tajweedcolorcpp();
   Lookup* populatecvxx();
   Lookup* glyphalternates();
-  //Justification
+  // Justification
   Lookup* shrinkstretchlt(float lt, QString featureName);
   Lookup* shrinkstretchlt();
   void addchars();
   void generateGlyphs();
-  bool toMacOS = false;
 };
-

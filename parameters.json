@@ -1,80 +1,4 @@
 {
-    "basmala.curs.l1": {
-        "subtable1": {
-            "entryParameters": {
-                "ain.isol": [
-                    625,
-                    501
-                ],
-                "alef.isol": [
-                    6,
-                    -189
-                ],
-                "fehshape.init": [
-                    102,
-                    -370
-                ],
-                "hah.init": [
-                    -78,
-                    -111
-                ],
-                "hamzabelow": [
-                    -19,
-                    -193
-                ],
-                "kaf.init": [
-                    -335,
-                    -637
-                ],
-                "kaf.init.beforelam": [
-                    0,
-                    -101
-                ],
-                "lam.init": [
-                    -120,
-                    160
-                ],
-                "reh.isol": [
-                    41,
-                    180
-                ],
-                "waw.isol": [
-                    -76,
-                    370
-                ]
-            }
-        }
-    },
-    "basmala.curs.l2": {
-        "subtable1": {
-            "entryParameters": {
-                "lam.init": [
-                    -225,
-                    -80
-                ]
-            }
-        }
-    },
-    "basmala.curs.l3": {
-        "subtable1": {
-            "entryParameters": {
-                "alef.isol": [
-                    -2209,
-                    15
-                ]
-            }
-        }
-    },
-    "basmala.curs.l4": {
-        "subtable1": {
-            "entryParameters": {
-                "alef.isol": [
-                    69,
-                    -55
-                ]
-            }
-        }
-    },
     "caltmkmk.hah.1": {
         "subtable1": {
             "kasra": {
@@ -500,6 +424,10 @@
                     "sad.fina": [
                         242,
                         -16
+                    ],
+                    "sad.fina.expa": [
+                        -300,
+                        200
                     ],
                     "sad.isol": [
                         192,
@@ -1074,8 +1002,8 @@
                         69
                     ],
                     "behshape.medi.beforeyeh": [
-                        86,
-                        -147
+                        46,
+                        -87
                     ],
                     "dal.fina.afterlam": [
                         -34,
@@ -2961,6 +2889,10 @@
                         -243,
                         0
                     ],
+                    "behshape.medi.afterbeh": [
+                        -360,
+                        0
+                    ],
                     "fehshape.init": [
                         -336,
                         -13
@@ -3986,6 +3918,10 @@
                 ],
                 "lam.isol": [
                     83,
+                    -41
+                ],
+                "reh.isol": [
+                    0,
                     -41
                 ],
                 "waw.isol": [
