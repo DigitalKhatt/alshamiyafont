@@ -188,9 +188,14 @@ lookup behbehinit {
     sub lam.init by lam.init.beforebeh;
     sub behshape.init by behshape.init.beforebeh;
     sub behshape.medi by behshape.medi.afterbeh;      
-  } behbehinit.l1;  
+  } behbehinit.l1; 
 
-  sub [behshape.init lam.init]'lookup behbehinit.l1   [behshape.medi]'lookup behbehinit.l1;
+  lookup behbehinit.l2 {    
+    sub behshape.medi by behshape.medi.afterlam;      
+  } behbehinit.l2;  
+
+  sub [behshape.init]'lookup behbehinit.l1   [behshape.medi]'lookup behbehinit.l1;
+  sub [lam.init]'lookup behbehinit.l1   [behshape.medi]'lookup behbehinit.l2;
 
 } behbehinit;
 
@@ -796,9 +801,10 @@ lookup altIgnoreMarks {
 
   lookup altIgnoreMarks.l1 {   
     sub kaf.init.beforelam by kaf.init.beforelam.ii;
+    sub kaf.init by kaf.init.short;
   } altIgnoreMarks.l1;
 
-  sub [alef.isol alef.fina alef.fina.lamalef alef.fina.laf]' [kaf.init.beforelam]'lookup altIgnoreMarks.l1;
+  sub [alef.isol alef.fina alef.fina.lamalef alef.fina.laf]' [kaf.init.beforelam kaf.init]'lookup altIgnoreMarks.l1;
 
 
 } altIgnoreMarks;
@@ -868,7 +874,7 @@ lookup isolkern {
 
   pos [alef.isol /^alef.fina/]' [lam.init.lam_hah lam.init.allah]';
 
-  pos [alef.isol /^alef.fina/]'lookup isolkern.o2 [/^lam.init/ /^alef.isol/];
+  pos [/^alef.isol/ /^alef.fina/]'lookup isolkern.o2 [/^lam.init/ /^alef.isol/];
 
   pos [waw.fina]' [dal.isol]' [ain.isol]'<0 -30 0 0>; 
 
@@ -878,7 +884,7 @@ lookup isolkern {
 
   pos /^reh|^waw/'<-200 0 -200 0> [space];
   
-  pos /^reh|^waw/';
+  pos /^reh|^waw/'<-100 0 -100 0>;
 
   pos /^endofaya/'lookup isolkern.o1 rubelhizb;
 
@@ -886,12 +892,48 @@ lookup isolkern {
 
 } isolkern;
 
-lookup kernadjust {
+lookup kernAdjustIgnoreMarks {
+  feature kern;	
+
+  lookupflag IgnoreMarks;
+
+  lookup kernAdjustIgnoreMarks.l1 {
+    lookupflag UseMarkFilteringSet [@topmarks @topdotmarks];
+    pos [/^behshape.init/]'<0 0 120 0> [@topmarks @topdotmarks];
+  }kernAdjustIgnoreMarks.l1;
+
+  lookup kernAdjustIgnoreMarks.l2 {
+    lookupflag UseMarkFilteringSet [@topmarks @topdotmarks];
+    pos [/^behshape.init/]'<0 0 100 0> [@topmarks @topdotmarks];
+  }kernAdjustIgnoreMarks.l2;
+
+  lookup kernAdjustIgnoreMarks.l3 {
+    lookupflag UseMarkFilteringSet [@topmarks @topdotmarks];
+    pos [/^behshape.init/]'<0 0 100 0> [@topmarks @topdotmarks];
+  }kernAdjustIgnoreMarks.l3;
+
+  pos [alef.fina.lamalef]' [/^behshape.init/]'lookup kernAdjustIgnoreMarks.l1;
+  pos [alef.fina]' [/^behshape.init/]'lookup kernAdjustIgnoreMarks.l2;
+  pos [alef.isol]' [/^behshape.init/]'lookup kernAdjustIgnoreMarks.l3;
+  
+
+} kernAdjustIgnoreMarks;
+
+lookup kernAdjustWithMarks {
   feature kern;	
 
   pos /^waw[.]isol/'<220 0 220 0> (@marks{0,3})' /^alef.isol/' /^hamzabelow/';
 
-} kernadjust;
+} kernAdjustWithMarks;
+
+lookup hamzaabovekern {
+  feature kern;	
+
+  lookupflag UseMarkFilteringSet [hamzaabove];	
+
+  pos [alef.isol]'<50 0 50 0> [hamzaabove]' [kaf.init.short]';
+
+} hamzaabovekern;
 
 lookup adjustmarks {
 
@@ -1450,9 +1492,9 @@ feature calt {
   
   @haslefttatweel = [
     behshape.init hah.init seen.init sad.init tah.init ain.init fehshape.init kaf.init kaf.init.ii lam.init meem.init
-    heh.init heh.medi behshape.medi behshape.medi.afterbeh behshape.medi.beforeseen hah.medi hah.medi.afterbeh hah.medi.lam_hah 
+    heh.init heh.medi behshape.medi behshape.medi.afterbeh behshape.medi.afterlam behshape.medi.beforeseen hah.medi hah.medi.afterbeh hah.medi.lam_hah 
     hah.medi.aftermeem hah.medi.afterfeh hah.medi.aftersad seen.medi seen.medi.afterbeh sad.medi tah.medi ain.medi fehshape.medi kaf.medi lam.medi lam.medi.afterkaf
-    meem.medi meem.medi.afterhah kaf.init.ii kaf.init.iii
+    meem.medi meem.medi.afterhah kaf.init.ii kaf.init.iii kaf.init.short
   ];
   
   lookup multiplebehshape;
@@ -1473,11 +1515,13 @@ feature curs {
   lookup adjustverticalpos;
   lookup isolkern;
   lookup cursivejoin;
-  lookup rehwawcursivecpp;  
+  #lookup rehwawcursivecpp;  
 } curs;
 
 feature kern {    
-  lookup kernadjust;	
+  lookup kernAdjustIgnoreMarks;
+  lookup kernAdjustWithMarks;	
+  lookup hamzaabovekern;
 } kern;
 
 feature mark {

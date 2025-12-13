@@ -266,8 +266,8 @@
                         0
                     ],
                     "behshape.init": [
-                        -31,
-                        -2
+                        29,
+                        18
                     ],
                     "behshape.init.beforebeh": [
                         -38,
@@ -286,16 +286,16 @@
                         -13
                     ],
                     "behshape.medi": [
-                        10,
+                        -30,
                         31
                     ],
                     "behshape.medi.afterbeh": [
-                        -38,
-                        38
+                        -58,
+                        118
                     ],
                     "behshape.medi.beforereh": [
-                        -78,
-                        93
+                        -38,
+                        113
                     ],
                     "behshape.medi.beforeseen": [
                         -84,
@@ -318,8 +318,8 @@
                         12
                     ],
                     "dal.fina.afterlam": [
-                        -21,
-                        -18
+                        39,
+                        -38
                     ],
                     "dal.isol": [
                         -25,
@@ -346,7 +346,7 @@
                         -15
                     ],
                     "fehshape.medi": [
-                        -39,
+                        21,
                         -23
                     ],
                     "fehshape.medi.beforeyeh": [
@@ -378,7 +378,7 @@
                         62
                     ],
                     "hah.medi.ii": [
-                        -193,
+                        -93,
                         58
                     ],
                     "hah.medi.lam_hah": [
@@ -554,8 +554,8 @@
                         132
                     ],
                     "behshape.init.beforebeh": [
-                        58,
-                        138
+                        98,
+                        158
                     ],
                     "behshape.init.beforehah": [
                         213,
@@ -578,8 +578,12 @@
                         148
                     ],
                     "behshape.medi.afterbeh": [
-                        48,
+                        68,
                         161
+                    ],
+                    "behshape.medi.afterlam": [
+                        100,
+                        120
                     ],
                     "behshape.medi.basmala": [
                         68,
@@ -631,7 +635,7 @@
                     ],
                     "behshape.init.beforebeh": [
                         -40,
-                        15
+                        35
                     ],
                     "behshape.init.beforehah": [
                         -67,
@@ -654,8 +658,8 @@
                         -138
                     ],
                     "behshape.medi.afterbeh": [
-                        -59,
-                        40
+                        -35,
+                        52
                     ],
                     "behshape.medi.beforereh": [
                         -38,
@@ -1372,7 +1376,7 @@
                         -33
                     ],
                     "behshape.init.beforebeh": [
-                        -34,
+                        -14,
                         -45
                     ],
                     "behshape.init.beforeseen": [
@@ -1476,8 +1480,8 @@
                         -81
                     ],
                     "lam.init.lam_hah": [
-                        -225,
-                        -71
+                        -65,
+                        -31
                     ],
                     "lam.init.lamalef": [
                         108,
@@ -1638,7 +1642,7 @@
                         -289
                     ],
                     "waw.fina": [
-                        162,
+                        102,
                         -185
                     ],
                     "yehshape.fina.afterbeh": [
@@ -1785,6 +1789,10 @@
                         -7,
                         -29
                     ],
+                    "kaf.init.short": [
+                        0,
+                        -40
+                    ],
                     "kaf.medi": [
                         -23,
                         -53
@@ -1930,7 +1938,7 @@
                         -164
                     ],
                     "behshape.init": [
-                        -24,
+                        16,
                         -70
                     ],
                     "behshape.init.beforebeh": [
@@ -1970,7 +1978,7 @@
                         -28
                     ],
                     "behshape.medi.afterbeh": [
-                        -19,
+                        -39,
                         -187
                     ],
                     "behshape.medi.beforereh": [
@@ -2062,8 +2070,8 @@
                         -23
                     ],
                     "hah.medi.lam_hah": [
-                        -186,
-                        -87
+                        -126,
+                        -67
                     ],
                     "hamza.isol": [
                         -8,
@@ -2318,8 +2326,8 @@
                         15
                     ],
                     "reh.fina": [
-                        36,
-                        -30
+                        116,
+                        -190
                     ],
                     "reh.fina.afterbehshape": [
                         109,
@@ -2396,6 +2404,10 @@
                     "seen.medi.afterbeh": [
                         -40,
                         -180
+                    ],
+                    "seen.medi.beforereh": [
+                        100,
+                        -40
                     ],
                     "seen.medi.beforeyeh": [
                         -113,
@@ -2736,6 +2748,10 @@
                     "behshape.medi.afterbeh": [
                         -138,
                         -34
+                    ],
+                    "behshape.medi.afterlam": [
+                        -120,
+                        0
                     ],
                     "behshape.medi.expa": [
                         -127,
@@ -3094,20 +3110,20 @@
                         81
                     ],
                     "behshape.init.beforebeh": [
-                        -23,
-                        -150
+                        -3,
+                        70
                     ],
                     "behshape.init.beforehah": [
                         103,
                         145
                     ],
                     "behshape.init.beforenoon": [
-                        20,
-                        -201
+                        80,
+                        -1
                     ],
                     "behshape.init.beforereh": [
-                        103,
-                        104
+                        64,
+                        49
                     ],
                     "behshape.init.beforeseen": [
                         -48,
@@ -3170,8 +3186,8 @@
                         104
                     ],
                     "behshape.init.beforenoon": [
-                        95,
-                        70
+                        115,
+                        -50
                     ],
                     "behshape.init.beforereh": [
                         55,
@@ -3242,8 +3258,8 @@
                         104
                     ],
                     "behshape.init.beforenoon": [
-                        94,
-                        82
+                        81,
+                        -25
                     ],
                     "behshape.init.beforereh": [
                         47,
@@ -3391,7 +3407,7 @@
                     ],
                     "fehshape.init": [
                         67,
-                        -114
+                        106
                     ],
                     "fehshape.init.beforeyeh": [
                         0,
@@ -3746,8 +3762,8 @@
                         11
                     ],
                     "meem.isol": [
-                        62,
-                        227
+                        102,
+                        567
                     ],
                     "noon.isol": [
                         -69,
@@ -3822,8 +3838,8 @@
                         -135
                     ],
                     "fehshape.init": [
-                        54,
-                        -151
+                        114,
+                        129
                     ],
                     "heh.init": [
                         78,
@@ -3893,68 +3909,6 @@
                     321,
                     0,
                     0
-                ]
-            }
-        }
-    },
-    "rehwawcursivecpp": {
-        "rehfina": {
-            "entryParameters": {
-            }
-        },
-        "rehfinaafterbehshape": {
-            "entryParameters": {
-                "alefmaksura.isol": [
-                    27,
-                    -97
-                ],
-                "behshape.init.beforenoon": [
-                    8,
-                    -98
-                ],
-                "behshape.init.beforereh": [
-                    48,
-                    -136
-                ],
-                "lam.isol": [
-                    83,
-                    -41
-                ],
-                "reh.isol": [
-                    0,
-                    -41
-                ],
-                "waw.isol": [
-                    41,
-                    -27
-                ],
-                "yehshape.isol": [
-                    -54,
-                    -97
-                ]
-            }
-        },
-        "rehisol": {
-            "entryParameters": {
-                "reh.isol": [
-                    55,
-                    0
-                ]
-            }
-        },
-        "wawfina": {
-            "entryParameters": {
-            }
-        },
-        "wawisol": {
-            "entryParameters": {
-                "alef.isol.ii": [
-                    -27,
-                    -69
-                ],
-                "reh.isol": [
-                    48,
-                    -48
                 ]
             }
         }

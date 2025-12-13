@@ -390,6 +390,7 @@ OldMadina::OldMadina(OtLayout* layout, Font* font, bool extended) : Automedina{l
   layout->expandableGlyphs["kaf.init"] = {20, -0.5, 0, 0};
   layout->expandableGlyphs["kaf.init.ii"] = {20, -1.5, 6, -1};
   layout->expandableGlyphs["kaf.init.iii"] = {20, -0.5, 0, 0};
+  layout->expandableGlyphs["kaf.init.short"] = {20, -0.5, 0, 0};
 
   layout->expandableGlyphs["lam.init"] = {20, -1, 0, 0};
   layout->expandableGlyphs["meem.init"] = {20, -0.5, 0, 0};
@@ -400,6 +401,7 @@ OldMadina::OldMadina(OtLayout* layout, Font* font, bool extended) : Automedina{l
 
   layout->expandableGlyphs["behshape.medi"] = {20, -0.5, 20, -0.5};
   layout->expandableGlyphs["behshape.medi.afterbeh"] = {20, -0.5, 0, 0};
+  layout->expandableGlyphs["behshape.medi.afterlam"] = {20, -0.5, 0, 0};
   layout->expandableGlyphs["behshape.medi.beforeseen"] = {20, 0, 20, 0};
   layout->expandableGlyphs["behshape.medi.beforereh"] = {20, -0.3, 20, -0.3};
   layout->expandableGlyphs["behshape.medi.beforenoon"] = {20, -0.4, 20, -0.4};
