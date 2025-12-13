@@ -665,7 +665,7 @@ lookup marks.addwidth {
 
 
   lookup marks.addwidth.1 {
-    sub fatha add 1 0;		
+    sub fatha add 0.5 0;		
   } marks.addwidth.1;
 
   sub lam.medi.allah' shadda' fatha'lookup marks.addwidth.1;
