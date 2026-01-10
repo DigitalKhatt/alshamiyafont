@@ -14,6 +14,70 @@
 
 using namespace std;
 
+class DefaultBaseOfWaqfToMark : public AnchorCalc {
+ public:
+  DefaultBaseOfWaqfToMark(Automedina& y, MarkBaseSubtable& subtable) : _y(y), _subtable(subtable) {}
+  QPoint operator()(QString glyphName, QString className, QPoint adjust, GlyphParameters parameters) override {
+    GlyphVis* curr = &_y.glyphs[glyphName];
+    curr = curr->getAlternate(parameters);
+
+    int width = curr->width * 0.5;
+    int height = curr->height + 30;
+
+    width = width + adjust.x();
+    height = height + adjust.y();
+
+    return QPoint(width, height);
+  };
+
+ private:
+  Automedina& _y;
+  MarkBaseSubtable& _subtable;
+};
+
+class DefaultBaseOfWaqfToBase : public AnchorCalc {
+ public:
+  DefaultBaseOfWaqfToBase(Automedina& y, MarkBaseSubtable& subtable) : _y(y), _subtable(subtable) {}
+  QPoint operator()(QString glyphName, QString className, QPoint adjust, GlyphParameters parameters) override {
+    GlyphVis* curr = &_y.glyphs[glyphName];
+    curr = curr->getAlternate(parameters);
+
+    int height = std::max((int)curr->height + 100, 900);
+    int width = 0;  // curr.bbox.llx;
+
+    width += adjust.x();
+    height += adjust.y();
+
+    return QPoint(width, height);
+  };
+
+ private:
+  Automedina& _y;
+  MarkBaseSubtable& _subtable;
+};
+
+class DefaultMarkOfWaqfToBase : public AnchorCalc {
+ public:
+  DefaultMarkOfWaqfToBase(Automedina& y, MarkBaseSubtable& subtable) : _y(y), _subtable(subtable) {}
+  QPoint operator()(QString glyphName, QString className, QPoint adjust, GlyphParameters parameters) override {
+    GlyphVis* curr = &_y.glyphs[glyphName];
+    curr = curr->getAlternate(parameters);
+
+    int height = 0;
+    int width = 0;
+    // curr->width / 4;
+
+    width += adjust.x();
+    height += adjust.y();
+
+    return QPoint(width, height);
+  };
+
+ private:
+  Automedina& _y;
+  MarkBaseSubtable& _subtable;
+};
+
 void OldMadina::generateSubstEquivGlyphs() {
   return;
 
@@ -380,7 +444,8 @@ OldMadina::OldMadina(OtLayout* layout, Font* font, bool extended) : Automedina{l
   layout->expandableGlyphs["qaf.isol.expa"] = {20, 0, 0, 0};
   layout->expandableGlyphs["qaf.fina.expa"] = {20, 0, 0, 0};
 
-  layout->expandableGlyphs["behshape.init"] = {20, 0, 0, 0};
+  layout->expandableGlyphs["behshape.init"] = {20, -1, 0, 0};
+  layout->expandableGlyphs["behshape.init.beforereh"] = {20, -0.5, 0, 0};
   layout->expandableGlyphs["hah.init"] = {20, -0.5, 0, 0};
   layout->expandableGlyphs["seen.init"] = {20, -0.5, 0, 0};
   layout->expandableGlyphs["sad.init"] = {20, -0.5, 0, 0};
@@ -402,12 +467,12 @@ OldMadina::OldMadina(OtLayout* layout, Font* font, bool extended) : Automedina{l
   layout->expandableGlyphs["behshape.medi"] = {20, -0.5, 20, -0.5};
   layout->expandableGlyphs["behshape.medi.afterbeh"] = {20, -0.5, 0, 0};
   layout->expandableGlyphs["behshape.medi.afterlam"] = {20, -0.5, 0, 0};
-  layout->expandableGlyphs["behshape.medi.beforeseen"] = {20, 0, 20, 0};
+  layout->expandableGlyphs["behshape.medi.beforeseen"] = {20, -0.3, 20, -0.3};
   layout->expandableGlyphs["behshape.medi.beforereh"] = {20, -0.3, 20, -0.3};
   layout->expandableGlyphs["behshape.medi.beforenoon"] = {20, -0.4, 20, -0.4};
   layout->expandableGlyphs["behshape.medi.beforeyeh"] = {0, 0, 20, -1};
 
-  layout->expandableGlyphs["hah.medi"] = {20, -1.3, 20, -1};
+  layout->expandableGlyphs["hah.medi"] = {20, -0.5, 20, 0};
   layout->expandableGlyphs["hah.medi.afterbeh"] = {20, -1, 0, 0};
   layout->expandableGlyphs["hah.medi.lam_hah"] = {20, -1, 0, 0};
   layout->expandableGlyphs["hah.medi.aftermeem"] = {20, -1, 0, 0};
@@ -421,7 +486,7 @@ OldMadina::OldMadina(OtLayout* layout, Font* font, bool extended) : Automedina{l
   layout->expandableGlyphs["seen.medi.beforeyeh"] = {0, 0, 20, -0.4};
   layout->expandableGlyphs["sad.medi"] = {20, -0.5, 20, -0.5};
   layout->expandableGlyphs["tah.medi"] = {20, -0.5, 20, -0.5};
-  layout->expandableGlyphs["ain.medi"] = {20, -0.5, 20, -0.5};
+  layout->expandableGlyphs["ain.medi"] = {20, -0.1, 20, -0.1};
   layout->expandableGlyphs["ain.medi.beforeyeh"] = {0, 0, 20, -0.3};
   layout->expandableGlyphs["fehshape.medi"] = {20, -0.1, 20, -0.1};
   layout->expandableGlyphs["fehshape.medi.beforeyeh"] = {0, 0, 20, -0.5};
@@ -448,12 +513,12 @@ OldMadina::OldMadina(OtLayout* layout, Font* font, bool extended) : Automedina{l
   layout->expandableGlyphs["meem.fina"] = {0.0, 0.0, 20, -0.3};
   layout->expandableGlyphs["meem.fina.ii"] = {0.0, 0.0, 20, -0.3};
   layout->expandableGlyphs["behshape.fina"] = {2.0, -1.0, 20, -0.1};
-  layout->expandableGlyphs["qaf.fina"] = {0.0, 0.0, 20, -0.5};
+  layout->expandableGlyphs["qaf.fina"] = {0.0, -1, 20, -0.5};
   layout->expandableGlyphs["lam.fina"] = {0.0, 0.0, 20, -0.5};
   layout->expandableGlyphs["kaf.fina"] = {0.0, 0.0, 20, -0.3};
   layout->expandableGlyphs["noon.fina"] = {0.0, 0.0, 20, -0.1};
   layout->expandableGlyphs["noon.fina.basmala"] = {20, 0.0, 0, 0};
-  layout->expandableGlyphs["reh.fina"] = {0.0, 0.0, 20, 0};
+  layout->expandableGlyphs["reh.fina"] = {0.0, 0.0, 20, -0.5};
   layout->expandableGlyphs["ain.fina"] = {0.0, 0.0, 20, -0.3};
 
   layout->expandableGlyphs["fatha"] = {20, -1.0, 0, 0};
@@ -488,6 +553,12 @@ CalcAnchor OldMadina::getanchorCalcFunctions(QString functionName,
     return Defaulbaseanchorfortop(*this, *(MarkBaseSubtable*)(subtable));
   } else if (functionName == "joinedsmalllettersbaseanchor") {
     return Joinedsmalllettersbaseanchor(*this, *(MarkBaseSubtable*)(subtable));
+  } else if (functionName == "DefaultBaseOfWaqfToMark") {
+    return DefaultBaseOfWaqfToMark(*this, *(MarkBaseSubtable*)(subtable));
+  } else if (functionName == "DefaultBaseOfWaqfToBase") {
+    return DefaultBaseOfWaqfToBase(*this, *(MarkBaseSubtable*)(subtable));
+  } else if (functionName == "DefaultMarkOfWaqfToBase") {
+    return DefaultMarkOfWaqfToBase(*this, *(MarkBaseSubtable*)(subtable));
   } else {
     return ret;
   }
@@ -931,30 +1002,6 @@ Lookup* OldMadina::defaultwaqfmarktobase() {
   lookup->feature = "mark";
   lookup->type = Lookup::mark2base;
 
-  auto basefunction = [this](QString glyphName, QString className, QPoint adjust, GlyphParameters parameters) -> QPoint {
-    GlyphVis& curr = glyphs[glyphName];
-
-    int height = std::max((int)curr.height + 100, 900);
-    int width = 0;  // curr.bbox.llx;
-
-    width += adjust.x();
-    height += adjust.y();
-
-    return QPoint(width, height);
-  };
-
-  auto markfunction = [this](QString glyphName, QString className, QPoint adjust, GlyphParameters parameters) -> QPoint {
-    GlyphVis& curr = glyphs[glyphName];
-
-    int height = 0;
-    int width = 0;
-
-    width += adjust.x();
-    height += adjust.y();
-
-    return QPoint(width, height);
-  };
-
   MarkBaseSubtable* newsubtable = new MarkBaseSubtable(lookup);
   lookup->subtables.append(newsubtable);
 
@@ -962,8 +1009,8 @@ Lookup* OldMadina::defaultwaqfmarktobase() {
   newsubtable->base = {"isol|fina|smallwaw|smallyeh"};
 
   newsubtable->classes["waqfmarks"].mark = {"waqfmarks"};
-  newsubtable->classes["waqfmarks"].basefunction = basefunction;
-  newsubtable->classes["waqfmarks"].markfunction = markfunction;
+  newsubtable->classes["waqfmarks"].basefunction = DefaultBaseOfWaqfToBase(*this, *newsubtable);
+  newsubtable->classes["waqfmarks"].markfunction = DefaultMarkOfWaqfToBase(*this, *newsubtable);
 
   return lookup;
 }
@@ -1064,26 +1111,41 @@ Lookup* OldMadina::defaultmkmk() {
   subtable->classes["smalllowmeem"].basefunction = Defaultmarkbelowmark(*this, *subtable);
   subtable->classes["smalllowmeem"].markfunction = Defaullowmarkanchor(*this, *subtable);
 
-  subtable = new MarkBaseSubtable(lookup);
-  lookup->subtables.append(subtable);
-
-  subtable->name = "smallhighseenwaqf.qaf";
-  subtable->base = {"smallhighseen"};
-
-  subtable->classes["waqf.qaf"].mark = {"waqf.qaf"};
-  subtable->classes["waqf.qaf"].basefunction = Defaultmarkabovemark(*this, *subtable);
-  subtable->classes["waqf.qaf"].markfunction = Defaultopmarkanchor(*this, *subtable);
-
   // hamzaabove.joined
-  subtable = new MarkBaseSubtable(lookup);
+  // subtable = new MarkBaseSubtable(lookup);
+  // lookup->subtables.append(subtable);
+
+  // subtable->name = "hamzaabovejoined";
+  // subtable->base = {"maddahabove"};
+
+  // subtable->classes["hamzaabove.joined"].mark = {"hamzaabove.joined"};
+  // subtable->classes["hamzaabove.joined"].basefunction = nullptr;  //;new Defaultmarkabovemark(*this, *smallhighseen);
+  // subtable->classes["hamzaabove.joined"].markfunction = nullptr;  // new Defaultopmarkanchor(*this, *smallhighseen);
+
+  // waqf
+
+  /*subtable = new MarkBaseSubtable(lookup);
   lookup->subtables.append(subtable);
 
-  subtable->name = "hamzaabovejoined";
-  subtable->base = {"maddahabove"};
+  subtable->name = "waqfsubtable";
+  subtable->base = {"topmarks"};
 
-  subtable->classes["hamzaabove.joined"].mark = {"hamzaabove.joined"};
-  subtable->classes["hamzaabove.joined"].basefunction = nullptr;  //;new Defaultmarkabovemark(*this, *smallhighseen);
-  subtable->classes["hamzaabove.joined"].markfunction = nullptr;  // new Defaultopmarkanchor(*this, *smallhighseen);
+  auto basefunctionwaqf = [this](QString glyphName, QString className, QPoint adjust, GlyphParameters parameters) -> QPoint {
+    GlyphVis* curr = &glyphs[glyphName];
+    curr = curr->getAlternate(parameters);
+
+    int width = curr->width * 0.5;
+    int height = curr->height + 30;
+
+    width = width + adjust.x();
+    height = height + adjust.y();
+
+    return QPoint(width, height);
+  };
+
+  subtable->classes["waqf"].mark = {"waqfmarks"};
+  subtable->classes["waqf"].basefunction = basefunctionwaqf;
+  subtable->classes["waqf"].markfunction = Defaultopmarkanchor(*this, *subtable);*/
 
   m_layout->addLookup(lookup);
 
