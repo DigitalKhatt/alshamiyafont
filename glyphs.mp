@@ -191,6 +191,45 @@ bldmv ( (147.419,115.563), (14,9), (24.6109,-2.21837) ) .. tension 1 and 1.91014
 
 %%endpaths
 enddefchar;
+defchar(seenmeem,-1,-1,6,-1);
+%%backgroundimage:images/seenmeem.init.jpg,-841,-940,1,0,0,1
+%%beginparams
+z1 = (145,162);
+z2 = (212,215);
+
+%%beginpaths
+
+fill
+(148.407,124.172) .. tension 2.22 and 0.75 ..
+ {up}z1 .. tension 1.06769 and 1.30926 ..
+ {right}(266.803,372.268) .. tension 1.3642 and 0.75 ..
+ {right}(386,311) .. tension 0.790684 and 1.60042 ..
+ {right}(499.833,436.5) .. tension 1 and 1 ..
+ {down}(521,411.167) .. tension 1 and 1 ..
+ {down}(520,369) .. tension 2.1367 and 0.862175 ..
+ {right}(567.5,343.355) .. tension 1 and 1.28554 ..
+ {up}(569.967,393.172) .. tension 0.866445 and 1.60216 ..
+ {right}(608,469) .. tension 1.33513 and 1.33096 ..
+ {down}(650.5,360.5) .. tension 1.8503 and 0.849583 ..
+ {left}(557.667,242.5) .. tension 1 and 1.60004 ..
+ {left}(484.319,268.681) .. tension 1 and 1 ..
+(457,249) .. tension 1 and 1 ..
+ {left}(360,216.894) .. tension 1 and 1 ..
+(267,253) .. tension 1 and 2.26847 ..
+ {left}(249.736,266.685) .. tension 1 and 2.66616 ..
+ {down}z2 .. tension 0.938952 and 1.69393 ..
+ {down}(366.883,72.523) .. tension 1.80011 and 0.860258 ..
+ {left}(329.399,4.64076) .. tension 1.19321 and 2.37678 ..
+ {left}(212.168,51.8217) .. tension 1.89682 and 1 ..
+liii0 ( (93.7327,14.2223), (10.3935,5.05091), (74.8585,0.286143) ) .. tension 1 and 1 ..
+liii0 ( (35.3462,2.00701), (-86.3333,-29.8333), (108.144,-1.5791) ) leftjoin
+liii0 ( (82.3822,100.592), (-51.4468,-17.142), (69.2888,-0.661753) ) .. tension 1 and 1 ..
+liii0 ( (117.889,107.67), (-0.949846,-1.12731), (37.1313,3.07623) ) .. tension 1 and 1.91014 ..
+ cycle
+;
+
+%%endpaths
+enddefchar;
 beginchar(notdef,0,-1,-1,-1);
 %%backgroundimage:images/nodef.png,-752.949,-1178.7,8,0,0,8
 
@@ -2945,6 +2984,18 @@ setCursiveAnchor(rtcursii,z.seenreh  shifted (leftanchor-rightanchor),ExitAnchor
 pair leftanchor, rightanchor;
 
 enddefchar;
+defchar(seen.init.beforemeem,-1,-1,-1,-1);
+%%beginbody
+
+
+seenmeem_(lefttatweel-0.2,righttatweel);
+
+cutGlyph(z1,z2,true);
+
+leftanchor := z2;
+
+
+enddefchar;
 defchar(seen.medi,-1,-1,-1,-1);
 %%backgroundimage:images/seen.medi.jpg,-1009.12,-1169.72,1,0,0,1
 %%beginparams
@@ -3828,6 +3879,16 @@ defchar(meem.medi.afterlam,-1,-1,-1,-1);
 
 
 lammeem_(lefttatweel,righttatweel);
+
+cutGlyph(z1,z2,false);
+
+rightanchor := z2;
+enddefchar;
+defchar(meem.medi.afterseen,-1,-1,-1,-1);
+%%beginbody
+
+
+seenmeem_(lefttatweel-0.2,righttatweel);
 
 cutGlyph(z1,z2,false);
 

@@ -1399,6 +1399,10 @@
                         151,
                         153
                     ],
+                    "meem.medi.afterseen": [
+                        100,
+                        20
+                    ],
                     "meem.medi.beforeyeh": [
                         69,
                         0
@@ -4351,6 +4355,16 @@
                 "alef.isol": [
                     16,
                     -164
+                ]
+            }
+        }
+    },
+    "shrink.kern1.l3": {
+        "subtable1": {
+            "entryParameters": {
+                "behshape.init.beforenoon": [
+                    140,
+                    -133
                 ]
             }
         }

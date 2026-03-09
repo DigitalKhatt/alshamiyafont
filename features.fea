@@ -1471,9 +1471,16 @@ lookup shrink.gsub1 {
     sub fatha add -0.5 0;    
   } shrink.gsub1.l2;   
 
+  lookup shrink.gsub1.l3 {
+    sub seen.init by seen.init.beforemeem;
+    sub meem.medi by meem.medi.afterseen;      		    
+  } shrink.gsub1.l3; 
+
   sub [lam.init]'lookup shrink.gsub1.l1 [sukun fatha]' [meem.medi]'lookup shrink.gsub1.l1 [fatha ]'lookup shrink.gsub1.l2;
 
   sub [lam.init]'lookup shrink.gsub1.l1 [sukun]' [meem.medi]'lookup shrink.gsub1.l1 [damma] [seen.medi] [sukun];
+
+  sub [seen.init]'lookup shrink.gsub1.l3 [fatha]' [meem.medi]'lookup shrink.gsub1.l3 [kasra]' ;
 
 } shrink.gsub1;
 
@@ -1570,7 +1577,7 @@ lookup shrink.kern1 {
   pos [alef.fina]'<-50 0 -50 0> [hamzaabove]' [fatha]' [noon.isol]'; 
   
   pos [reh.fina]'<-150 0 -150 0> [damma]' [hah.isol]' [onedotdown]' [damma]';
-  pos [alef.isol]'<-150 0 -150 0> [maddahabove]' [behshape.init]' [hamzabelow]';
+  pos [alef.isol]'<-50 0 -50 0> [maddahabove]' [behshape.init]' [hamzabelow]';
 
   pos [dal.fina]' [fatha]' [smallalef.isol]'<0 50 -150 0>;
   pos [alef.fina]'<-50 0 -50 0> [maddahabove]' [behshape.init]' [hamzabelow]';
@@ -1583,6 +1590,14 @@ lookup shrink.kern1 {
   pos [alef.isol]'<-100 0 -100 0> [maddahabove]' [behshape.init.beforereh]' [hamzabelow]';
 
   pos [reh.fina.afterseen]' [kasratanidgham]' /^space/'<-100 0 -100 0>  /^endofaya/;
+
+  lookup shrink.kern1.l3 {
+    lookupflag IgnoreMarks ;
+    pos cursive [dal.fina.afterlam] <anchor NULL> <anchor 0 0> ;
+    pos cursive [behshape.init.beforenoon] <anchor 0 0> <anchor NULL> ;    
+  } shrink.kern1.l3; 
+
+  pos [dal.fina.afterlam]' [onedotup]' [kasra]' [behshape.init.beforenoon]'lookup shrink.kern1.l3 [twodotsdown];
   
 } shrink.kern1;
 
@@ -1623,7 +1638,9 @@ lookup shrink1 {
 
   feature sk04;
 
-  lookupflag IgnoreMarks;
+  lookupflag IgnoreMarks;  
+
+  sub [fehshape.medi]' [sad.medi]';
 
   sub [hah.init]' [seen.medi]';
 
@@ -1644,6 +1661,8 @@ lookup shrink2 {
 
   lookupflag IgnoreMarks;
 
+  sub [fehshape.medi]' [sad.medi]';
+
   sub [hah.init]' [seen.medi]';
 
   sub [/init/ /medi/]' [tah.medi]';
@@ -1655,6 +1674,8 @@ lookup shrink2 {
   sub [ain.medi]' [hah.medi.ii]';
 
   sub [hah.medi.aftersad]' [feh.fina]';
+
+  
   
 
   sub @bases'lookup shrink1.l1;
@@ -1712,6 +1733,8 @@ lookup shrink.space {
   lookupflag IgnoreMarks;  
 
   sub /^alef/ /^space/' /^alef/ ;
+
+  sub [alef.fina.lamalef]' /^space/' [kaf.init.beforelam]' ;
 
   sub [/^hamza.isol/ /^alef[.]isol/ /^alef[.]fina/ /^waw/ /^reh/ /^dal/ ] /^space/'lookup shrink.space.l1;  
 

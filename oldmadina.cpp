@@ -501,6 +501,7 @@ OldMadina::OldMadina(OtLayout* layout, Font* font, bool extended) : Automedina{l
   layout->expandableGlyphs["lam.medi.beforeheh"] = {0, 0, 20, -0.5};
   layout->expandableGlyphs["lam.medi.afterkaf"] = {20, -1, 0, 0};
   layout->expandableGlyphs["meem.medi"] = {20, -0.5, 20, -0.5};
+  layout->expandableGlyphs["meem.medi.afterseen"] = {20, -0.5, 0, 0};
   layout->expandableGlyphs["meem.medi.afterhah"] = {20, -0.5, 0, 0};
   layout->expandableGlyphs["meem.medi.beforeyeh"] = {0, 0, 20, -0.3};
 
