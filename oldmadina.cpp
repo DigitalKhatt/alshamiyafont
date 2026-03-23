@@ -440,9 +440,11 @@ OldMadina::OldMadina(OtLayout* layout, Font* font, bool extended) : Automedina{l
   layout->expandableGlyphs["seen.isol.expa"] = {20, 0, 0, 0};
   layout->expandableGlyphs["seen.fina.expa"] = {20, 0, 20, -0.4};
   layout->expandableGlyphs["feh.isol.expa"] = {20, -1, 0, 0};
+  layout->expandableGlyphs["feh.isol"] = {2, -2, 0, 0};
   layout->expandableGlyphs["feh.fina.expa"] = {20, 0, 20, -0.4};
   layout->expandableGlyphs["qaf.isol.expa"] = {20, 0, 0, 0};
-  layout->expandableGlyphs["qaf.fina.expa"] = {20, 0, 0, 0};
+
+  layout->expandableGlyphs["lam.isol"] = {0, -0.5, 0, 0};
 
   layout->expandableGlyphs["behshape.init"] = {20, -1, 0, 0};
   layout->expandableGlyphs["behshape.init.beforereh"] = {20, -0.5, 0, 0};
@@ -451,11 +453,11 @@ OldMadina::OldMadina(OtLayout* layout, Font* font, bool extended) : Automedina{l
   layout->expandableGlyphs["sad.init"] = {20, -0.5, 0, 0};
   layout->expandableGlyphs["tah.init"] = {20, 0, 0, 0};
   layout->expandableGlyphs["ain.init"] = {20, -0.7, 0, 0};
-  layout->expandableGlyphs["fehshape.init"] = {20, -0.5, 0, 0};
-  layout->expandableGlyphs["kaf.init"] = {20, -0.5, 0, 0};
+  layout->expandableGlyphs["fehshape.init"] = {20, -1, 0, 0};
+  layout->expandableGlyphs["kaf.init"] = {20, -1.5, 0, 0};
   layout->expandableGlyphs["kaf.init.ii"] = {20, -1.5, 6, -1};
   layout->expandableGlyphs["kaf.init.iii"] = {20, -0.5, 0, 0};
-  layout->expandableGlyphs["kaf.init.short"] = {20, -0.5, 0, 0};
+  layout->expandableGlyphs["kaf.init.short"] = {20, -1.5, 0, 0};
 
   layout->expandableGlyphs["lam.init"] = {20, -1, 0, 0};
   layout->expandableGlyphs["meem.init"] = {20, -0.5, 0, 0};
@@ -465,8 +467,8 @@ OldMadina::OldMadina(OtLayout* layout, Font* font, bool extended) : Automedina{l
   layout->expandableGlyphs["heh.medi.beforeyeh"] = {0, 0, 20, -0.5};
 
   layout->expandableGlyphs["behshape.medi"] = {20, -0.5, 20, -0.5};
-  layout->expandableGlyphs["behshape.medi.afterbeh"] = {20, -0.5, 0, 0};
-  layout->expandableGlyphs["behshape.medi.afterlam"] = {20, -0.5, 0, 0};
+  layout->expandableGlyphs["behshape.medi.afterbeh"] = {20, -1, 0, 0};
+  layout->expandableGlyphs["behshape.medi.afterlam"] = {20, -1, 0, 0};
   layout->expandableGlyphs["behshape.medi.beforeseen"] = {20, -0.3, 20, -0.3};
   layout->expandableGlyphs["behshape.medi.beforereh"] = {20, -0.3, 20, -0.3};
   layout->expandableGlyphs["behshape.medi.beforenoon"] = {20, -0.4, 20, -0.4};
@@ -481,17 +483,17 @@ OldMadina::OldMadina(OtLayout* layout, Font* font, bool extended) : Automedina{l
   layout->expandableGlyphs["hah.medi.ii"] = {0, 0, 20, -0.3};
   layout->expandableGlyphs["hah.medi.beforeyeh"] = {0, 0, 20, -0.5};
   layout->expandableGlyphs["seen.medi"] = {20, -0.2, 20, -0.2};
-  layout->expandableGlyphs["seen.medi.afterbeh"] = {20, -0.5, 20, -0.5};
+  layout->expandableGlyphs["seen.medi.afterbeh"] = {20, -0.3, 20, -0.3};
   layout->expandableGlyphs["seen.medi.beforereh"] = {0, 0, 20, -0.5};
   layout->expandableGlyphs["seen.medi.beforeyeh"] = {0, 0, 20, -0.4};
   layout->expandableGlyphs["sad.medi"] = {20, -0.5, 20, -0.5};
   layout->expandableGlyphs["tah.medi"] = {20, -0.5, 20, -0.5};
   layout->expandableGlyphs["ain.medi"] = {20, -0.1, 20, -0.1};
   layout->expandableGlyphs["ain.medi.beforeyeh"] = {0, 0, 20, -0.3};
-  layout->expandableGlyphs["fehshape.medi"] = {20, -0.1, 20, -0.1};
+  layout->expandableGlyphs["fehshape.medi"] = {20, -0.5, 20, -0.7};
   layout->expandableGlyphs["fehshape.medi.beforeyeh"] = {0, 0, 20, -0.5};
 
-  layout->expandableGlyphs["kaf.medi"] = {20, -1.5, 20, -1.5};
+  layout->expandableGlyphs["kaf.medi"] = {20, -1.2, 20, -1.5};
   layout->expandableGlyphs["kaf.medi.beforemeem"] = {0, 0, 20, 0};
   layout->expandableGlyphs["kaf.medi.beforeyeh"] = {0, 0, 20, -1};
   layout->expandableGlyphs["kaf.medi.beforelam"] = {0, 0, 20, -1};
@@ -503,7 +505,7 @@ OldMadina::OldMadina(OtLayout* layout, Font* font, bool extended) : Automedina{l
   layout->expandableGlyphs["meem.medi"] = {20, -0.5, 20, -0.5};
   layout->expandableGlyphs["meem.medi.afterseen"] = {20, -0.5, 0, 0};
   layout->expandableGlyphs["meem.medi.afterhah"] = {20, -0.5, 0, 0};
-  layout->expandableGlyphs["meem.medi.beforeyeh"] = {0, 0, 20, -0.3};
+  layout->expandableGlyphs["meem.medi.beforeyeh"] = {0, -0.5, 20, -0.3};
 
   layout->expandableGlyphs["lam.medi.laf"] = {0.0, 0.0, 20, -0.5};
   layout->expandableGlyphs["dal.fina"] = {0.0, 0.0, 20, -0.5};
@@ -515,9 +517,9 @@ OldMadina::OldMadina(OtLayout* layout, Font* font, bool extended) : Automedina{l
   layout->expandableGlyphs["meem.fina.ii"] = {0.0, 0.0, 20, -0.3};
   layout->expandableGlyphs["behshape.fina"] = {2.0, -1.0, 20, -0.1};
   layout->expandableGlyphs["qaf.fina"] = {0.0, -1, 20, -0.5};
-  layout->expandableGlyphs["lam.fina"] = {0.0, 0.0, 20, -0.5};
-  layout->expandableGlyphs["kaf.fina"] = {0.0, 0.0, 20, -0.3};
-  layout->expandableGlyphs["noon.fina"] = {0.0, 0.0, 20, -0.1};
+  layout->expandableGlyphs["lam.fina"] = {0.0, -1, 20, -0.5};
+  layout->expandableGlyphs["kaf.fina"] = {0.0, -1, 20, -0.3};
+  layout->expandableGlyphs["noon.fina"] = {0.0, -1.0, 20, -0.1};
   layout->expandableGlyphs["noon.fina.basmala"] = {20, 0.0, 0, 0};
   layout->expandableGlyphs["reh.fina"] = {0.0, 0.0, 20, -0.5};
   layout->expandableGlyphs["ain.fina"] = {0.0, 0.0, 20, -0.3};
@@ -526,6 +528,14 @@ OldMadina::OldMadina(OtLayout* layout, Font* font, bool extended) : Automedina{l
   layout->expandableGlyphs["kasra"] = {20, -1.0, 0, 0};
   layout->expandableGlyphs["space"] = {20, -2, 0.0, 0.0};
   layout->expandableGlyphs["kasratan"] = {20, -0.7, 0.0, 0.0};
+
+  layout->expandableGlyphs["yehshape.fina.ii"] = {1, -1, 0.0, 0.0};
+  layout->expandableGlyphs["alefmaksura.isol"] = {1, -1, 0.0, 0.0};
+  layout->expandableGlyphs["yehshape.isol"] = {1, -1, 0.0, 0.0};
+  layout->expandableGlyphs["yehshape.fina.afterbeh"] = {0, -1, 0, 0};
+  layout->expandableGlyphs["noon.fina.afterbeh"] = {0, -1, 0, 0};
+  layout->expandableGlyphs["noon.isol"] = {0, -1, 0, 0};
+  layout->expandableGlyphs["dal.isol"] = {0, -1, 0, 0};
 
   // kashida_ii
 
@@ -2260,10 +2270,8 @@ Lookup* OldMadina::glyphalternates() {
   altfeatures.push_back({"cv15", {{"lam.init.lam_hah", "lam.init"}, {"hah.medi.lam_hah", "hah.medi"}}});
   altfeatures.push_back({"cv16", {{"hah.init.ii", "hah.init"}, {"hah.medi.ii", "hah.medi"}, {"ain.init.finjani", "ain.init"}}});
   altfeatures.push_back({"cv17", {{"seen.init.beforereh", "seen.init"}, {"seen.medi.beforereh", "seen.medi"}, {"reh.fina.afterseen", "reh.fina"}, {"sad.medi.beforereh", "sad.medi"}, {"sad.init.beforereh", "sad.init"}}});
-  altfeatures.push_back({"cv18", {
-                                     {"hah.init.beforemeem", "hah.init"},
-                                     {"meem.medi.afterhah", "meem.medi"},
-                                 }});
+  altfeatures.push_back({"cv18", {{"hah.init.beforemeem", "hah.init"}, {"meem.medi.afterhah", "meem.medi"}}});
+  altfeatures.push_back({"cv19", {{"lam.init.beforedal", "lam.init"}, {"dal.fina.afterlam", "dal.fina"}}});
 
   for (auto& feature : altfeatures) {
     Lookup* alternate = new Lookup(m_layout);

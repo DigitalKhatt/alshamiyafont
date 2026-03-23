@@ -149,10 +149,10 @@ fill
  {left}z2 .. tension 0.901215 and 1 ..
 (273.6,62) .. tension 1 and 1.35771 ..
  {left}(245.169,75.9992) .. tension 1.91622 and 1 ..
-bldmv ( (196.626,46.0063), (27.3935,20.0509), (33.8863,4.45281) ) .. tension 1 and 1 ..
-bldmv ( (109.875,7.93602), (-11.3333,9.16667), (85.8089,-3.32754) ) leftjoin
-bldmv ( (125.982,106.592), (-12,3), (100.614,8.77701) ) .. tension 1 and 1 ..
-bldmv ( (208.75,145.223), (14,9), (19.4026,-0.482255) ) .. tension 1 and 0.997106 ..
+liii0 ( (196.626,46.0063), (27.3935,20.0509), (33.8863,12.4528) ) .. tension 1 and 1 ..
+liii0 ( (109.875,7.93602), (-11.3333,9.16667), (46.8089,-6.32754) ) leftjoin
+liii0 ( (125.982,106.592), (-12,3), (44.614,-5.22299) ) .. tension 1 and 1 ..
+liii0 ( (208.75,145.223), (14,9), (11.4026,4.51774) ) .. tension 1 and 0.997106 ..
  {right} cycle
 ;
 
@@ -229,6 +229,122 @@ liii0 ( (117.889,107.67), (-0.949846,-1.12731), (37.1313,3.07623) ) .. tension 1
 ;
 
 %%endpaths
+enddefchar;
+defchar(hehmeem,-1,-1,6,-1);
+%%backgroundimage:images/hehmeem.jpg,-53.0366,-1263.54,1,0,0,1
+%%beginparams
+z1 = (193,183);
+z2 = (222,126);
+
+%%beginpaths
+
+fill
+(8.34684,-113.128) .. tension 1.29274 and 1.06821 ..
+(88.8747,25.0933) .. tension 1 and 4.0878 ..
+ {up}(131.958,47.5655) .. tension 1 and 1 ..
+ {left}(123.958,52.5655) .. tension 1 and 1 ..
+ {left}(90.958,40.5655) .. tension 1 and 1 ..
+ {up}(72.958,53.5655) .. tension 1.87074 and 1 ..
+z1 .. tension 1 and 4.57836 ..
+ {up}(268.547,227.013) .. tension 1 and 1 ..
+ {up}(257.887,272.013) .. tension 1.4599 and 1 ..
+(276.582,362.119) .. tension 1 and 4.84609 ..
+ {up}(291.577,407.566) .. tension 2.48783 and 1 ..
+(283.771,428.696) .. tension 1 and 1 ..
+ {up}(281.958,459.566) .. tension 1 and 1 ..
+ {right}(318.958,527.566) .. tension 1.32383 and 1 ..
+(445.958,438.566) .. tension 1 and 1 ..
+ {down}(574.958,275.566) .. tension 1 and 1 ..
+ {left}(499.958,157.566) .. tension 1 and 1 ..
+(386.641,180.728) .. tension 2.38874 and 2.05535 ..
+ {left}(360.958,184.566) .. tension 1.64347 and 18.6024 ..
+ {down}z2 .. tension 2.1722 and 1.84398 ..
+(303.724,63.2815) .. tension 1 and 1 ..
+ {down}(311.958,39.9058) .. tension 1 and 2.05207 ..
+ {left}(268.795,-23.2925) .. tension 1 and 1 ..
+ {left}(252.907,-21.2455) .. tension 1.94119 and 1.62561 ..
+(84.4842,-53.3485) .. tension 1 and 2.11318 ..
+ {down}(57.0413,-83.9905) .. tension 4.70475 and 2.25875 ..
+ {down}(113.958,-417.434) .. tension 1 and 1.59444 ..
+ {left}(86.1355,-530.845) .. tension 1 and 1 ..
+ {up}(59.3722,-489.881) .. tension 1.40951 and 1.01394 ..
+ {up} cycle
+;
+fill
+(346.747,372.166) .. tension 1.44898 and 3.99326 ..
+ {down}(309.547,313.366) .. tension 1 and 1 ..
+ {right}(359.207,280.024) .. tension 1 and 1 ..
+ {up}(383.207,302.824) .. tension 4.91807 and 1 ..
+ {left} cycle
+;
+fill
+(448.747,318.166) .. tension 1 and 1 ..
+ {down}(431.947,283.366) .. tension 1.6986 and 1.30364 ..
+ {right}(503.028,248.095) .. tension 1 and 1 ..
+ {up}(511.147,259.366) .. tension 8.46171 and 2.01642 ..
+ {left} cycle
+;
+
+%%endpaths
+%%beginbody
+
+savepicture:=1;
+enddefchar;
+defchar(lamseenmeem,-1,-1,6,-1);
+%%backgroundimage:images/lamseenmeem.jpg,-448,-1085,1,0,0,1
+%%beginparams
+z1 = (82,181);
+z11 = (587,296);
+z2 = (134,183);
+z22 = (594,198);
+
+%%beginpaths
+
+fill
+z1 .. tension 2.22 and 0.75 ..
+(124,272) .. tension 1.06769 and 1.30926 ..
+ {right}(203.275,326.004) .. tension 1.67069 and 0.75 ..
+ {right}(313,259.315) .. tension 0.958545 and 1 ..
+(357.639,279.514) .. tension 1 and 0.960414 ..
+ {right}(413.833,342.5) .. tension 1 and 1 ..
+ {down}(430,321.167) .. tension 1 and 1 ..
+ {down}(419,277) .. tension 2.1367 and 0.862175 ..
+ {right}(460.5,263.355) .. tension 1.69843 and 1.28554 ..
+(495.967,321.172) .. tension 0.866445 and 1.60216 ..
+ {right}(528.421,358.315) .. tension 1.33513 and 1.33096 ..
+ {down}(543.5,337.5) .. tension 1.8503 and 1 ..
+ {down}(539,317) .. tension 1 and 1 ..
+ {right}z11 .. tension 1 and 1 ..
+ {up}(620,321) .. tension 4.1354 and 8.08847 ..
+(590,590) .. tension 1 and 1 ..
+ {up}(570,635) .. tension 1 and 1.91342 ..
+ {right}(624,763) .. tension 1 and 1 ..
+(654,684) .. tension 1 and 1 ..
+ {down}(695,654) .. tension 1 and 1.63542 ..
+ {down}(661,560) .. tension 1 and 1 ..
+ {down}(688,317) .. tension 1.34043 and 0.810853 ..
+ {left}z22 .. tension 1 and 1.60004 ..
+ {left}(505.319,209.681) .. tension 1.48506 and 0.75 ..
+ {left}(446,166) .. tension 1 and 1.72239 ..
+ {left}(371,181.894) .. tension 1 and 1 ..
+ {left}(291,161) .. tension 1 and 1 ..
+(215.278,184.028) .. tension 1 and 3.18922 ..
+ {left}(169.856,225.805) .. tension 1.47445 and 2.66616 ..
+ {down}z2 .. tension 0.938952 and 1 ..
+(211.227,112.269) .. tension 1 and 1.69393 ..
+ {down}(266.883,65.523) .. tension 1.80011 and 1.17817 ..
+ {left}(215.399,-9.35924) .. tension 2.24255 and 4.69557 ..
+ {left}(123.168,38.8217) .. tension 1.89682 and 1 ..
+liii0 ( (71.7327,16.2223), (10.3935,5.05091), (74.8585,0.286143) ) .. tension 1 and 1 ..
+liii0 ( (35.3462,2.00701), (-86.3333,-29.8333), (108.144,-1.5791) ) leftjoin
+liii0 ( (44.3822,101.592), (-51.4468,-17.142), (69.2888,-0.661753) ) .. tension 1 and 1 ..
+liii0 ( (70.889,117.67), (-0.949846,-1.12731), (37.1313,3.07623) ) .. tension 2.16814 and 1.91014 ..
+ cycle
+;
+
+%%endpaths
+%%beginbody
+tr_ := tr_ shifted (0,-140);
 enddefchar;
 beginchar(notdef,0,-1,-1,-1);
 %%backgroundimage:images/nodef.png,-752.949,-1178.7,8,0,0,8
@@ -1696,12 +1812,12 @@ righttatweel := righttatweel - 0.5;
 %%beginpaths
 
 fill
-(248.642,-221.865) .. tension 0.826526 and 0.960362 ..
- {up}(75.4047,-53.972) .. tension 1.35039 and 2.92755 ..
- {right}(162.52,100.373) .. tension 0.75 and 1.12749 ..
- {down}(180.739,75.4229) .. tension 5.01017 and 0.75 ..
- {down}(146.483,-14.7034) .. tension 1.05712 and 0.75 ..
- {right}(287.8,-122.371) .. tension 1.26404 and 1.12703 ..
+liii0 ( (248.642,-221.865), (0,0), (44,27) ) .. tension 0.826526 and 0.960362 ..
+ {up}liii0 ( (75.4047,-53.972), (0,0), (78,-2) ) .. tension 1.35039 and 2.92755 ..
+ {right}liii0 ( (162.52,100.373), (0,0), (78,-2) ) .. tension 0.75 and 1.12749 ..
+ {down}liii0 ( (180.739,75.4229), (0,0), (78,-2) ) .. tension 5.01017 and 0.75 ..
+ {down}liii0 ( (146.483,-14.7034), (0,0), (78,-2) ) .. tension 1.05712 and 0.75 ..
+ {right}liii0 ( (287.8,-122.371), (0,0), (44,27) ) .. tension 1.26404 and 1.12703 ..
  {up}(474.188,-16.1554) .. tension 0.868291 and 2.41803 ..
  {up}(411.774,127.37) .. tension 6.32194 and 0.766362 ..
  {right}(449.841,195.363) .. tension 1.56573 and 1 ..
@@ -2179,13 +2295,13 @@ z1 = bldmv ( (141,456), (-17.3083,-9.28014), (-17.3199,-18.0564) );
 %%beginpaths
 
 fill
-bldmv ( (124,6), (52.6917,10.7199), (39.7621,-4.49811) ) leftjoin
+bldmv ( (124,6), (52.6917,10.7199), (44.7621,-1.49811) ) leftjoin
 bldmv ( (128.418,103.837), (6.80976,-11.4876), (56.3361,4.10979) ) .. tension 0.96304 and 2.2848 ..
  {up}(197.674,135.302) .. tension 0.850657 and 1.2957 ..
- {up}(133,239) .. tension 1 and 1.79715 ..
- {right}(171,311) .. tension 1.69959 and 1 ..
+ {up}liii0 ( (133,239), (0,0), (25,-36) ) .. tension 1 and 1.79715 ..
+ {right}liii0 ( (171,311), (0,0), (25,-36) ) .. tension 1.69959 and 1 ..
  {down}(260,157) .. tension 1.35341 and 1 ..
-liii0 ( (212,39), (0,0), (-0.578704,-21.412) ) .. tension 1 and 1 ..
+liii0 ( (212,39), (0,0), (0.421296,-8.412) ) .. tension 1 and 1 ..
  cycle
 ;
 
@@ -2294,6 +2410,41 @@ rightbearing := 50;
 setCursiveAnchor(ltrcursive,z1,ExitAnchorRTL);
 enddefchar;
 defchar(behshape.init.beforeseen,-1,-1,-1,-1);
+%%backgroundimage:images/behbeforeseen.4.jpg,-2080,-1109,1,0,0,1
+%%beginparams
+leftVerticalRatio := 6;
+z1 = (193,20);
+
+%%beginverbatim
+
+
+lefttatweel := lefttatweel - 0.5;
+
+
+%%endverbatim
+
+%%beginpaths
+
+fill
+z1 ..
+(149.838,5.54376) leftjoin
+(144.441,100.966) .. tension 1 and 1.35344 ..
+ {up}(171.877,114.977) .. tension 2.16429 and 1.93469 ..
+(119.66,245.471) .. tension 1 and 1 ..
+(88.5184,277.182) .. tension 1 and 1.46208 ..
+(72.3968,283.116) .. tension 1 and 1.46844 ..
+ {up}(52.7645,320.231) .. tension 0.91899 and 1.74988 ..
+ {right}(85.0017,410.426) .. tension 1.89227 and 2.10862 ..
+(227.297,132.521) {down} .. tension 0.75 and 1.58927 ..
+ cycle
+;
+
+%%endpaths
+%%beginbody
+
+
+enddefchar;
+defchar(behshape.init.beforeseen.iv,-1,-1,-1,-1);
 %%backgroundimage:images/behbeforeseen.3.jpg,-977.06,-931.698,1,0,0,1
 %%beginparams
 leftVerticalRatio := 6;
@@ -3044,7 +3195,69 @@ liii0 ( (55.8534,99.1187), (-8.33333,-14.5833), (78.3661,2.81314) ) .. tension 1
 
 setMarkAnchor(smallhighwaw,z.mark1);
 enddefchar;
+defchar(seen.medi.betweenlammeem,-1,-1,-1,-1);
+%%beginbody
+
+
+lamseenmeem_(0,0);
+
+cutGlyph(z1,z2,true);
+cutGlyph(z11,z22,false);
+
+
+leftanchor := z2;
+rightanchor := z22;
+
+enddefchar;
 defchar(seen.medi.afterbeh,-1,-1,-1,-1);
+%%backgroundimage:images/behbeforeseen.4.jpg,-1638.52,-1135.28,1,0,0,1
+%%beginparams
+leftVerticalRatio := 10;
+rightVerticalRatio := 10;
+z.mark1 = (87,277);
+
+%%beginverbatim
+
+
+%righttatweel := righttatweel - 0.5;
+%lefttatweel := lefttatweel - 0.5;
+
+%%endverbatim
+
+%%beginpaths
+
+fill
+(103.644,132.468) .. tension 1 and 0.924762 ..
+ {right}(144.11,178.423) .. tension 1 and 1 ..
+ {down}(164.167,153.584) .. tension 0.75 and 2.50213 ..
+ {down}(144.251,103.471) .. tension 2.79834 and 0.75 ..
+ {right}(214.087,93.0489) .. tension 1.08033 and 1.08543 ..
+(268.497,108.929) .. tension 1.50755 and 0.941043 ..
+ {right}(332.803,183.053) .. tension 1 and 1 ..
+ {down}(353.028,162.5) .. tension 1 and 2.64995 ..
+ {down}(330.7,113.451) .. tension 1.36817 and 0.75 ..
+ {right}(362.88,101.314) .. tension 1.0078 and 1.42494 ..
+ {right}(461.519,203.152) .. tension 1 and 1 ..
+ {down}(479.545,180.609) .. tension 1 and 1.7669 ..
+liii1 ( (470.866,135.885), (0,0), (-2.97394,-20.978) ) setranchor
+(529.416,21.7499) rightjoinii
+liii1 ( (427.671,53.8602), (0,0), (0,0) ) .. tension 1.10912 and 1 ..
+ {left}(421.528,57.6389) .. tension 2.05721 and 0.75 ..
+ {left}(338.527,11.6944) .. tension 1.33775 and 2.64002 ..
+ {left}(267.483,28.2052) .. tension 2.5191 and 0.75 ..
+ {left}(205.773,5.23687) .. tension 0.75 and 2.42182 ..
+ {left}(94.7504,29.3248) .. tension 2.03941 and 4.68961 ..
+ {left}liii0 ( (55.8973,9.62962), (-45.8912,-5.74846), (52.0834,0.321533) ) leftjoin
+liii0 ( (55.8534,99.1187), (-12.6736,-5.90274), (73.0613,6.67116) ) .. tension 1 and 1.69521 ..
+ cycle
+;
+
+%%endpaths
+%%beginbody
+
+setMarkAnchor(smallhighwaw,z.mark1);
+enddefchar;
+defchar(seen.medi.afterbeh.i,-1,-1,-1,-1);
 %%backgroundimage:images/behbeforeseen.2.jpg,-805.824,-1036.28,1,0,0,1
 %%beginparams
 leftVerticalRatio := 10;
@@ -3269,18 +3482,18 @@ pair leftanchor;
 
 
 enddefchar;
-beginchar(lam.isol,1604,-1,-1,-1);
+defchar(lam.isol,1604,-1,-1,-1);
 %%backgroundimage:images/lam.isol.jpg,-108.107,-1338.3,1,0,0,1
 
 %%beginpaths
 
 fill
-(-26.6111,22.25) .. tension 1 and 4.94198 ..
- {right}(69.141,198.715) .. tension 0.927469 and 1 ..
- {down}(80.9723,184.743) .. tension 0.987321 and 1 ..
- {down}(41.457,80.295) .. tension 0.947674 and 1.03981 ..
- {right}(213.917,-52.4722) .. tension 1.18638 and 2.26577 ..
- {up}(411.384,36.8413) .. tension 3.77527 and 18.2673 ..
+liii0 ( (-26.6111,22.25), (0,0), (135,10) ) .. tension 1 and 4.94198 ..
+ {right}liii0 ( (69.141,198.715), (0,0), (135,10) ) .. tension 0.927469 and 1 ..
+ {down}liii0 ( (80.9723,184.743), (0,0), (135,10) ) .. tension 0.987321 and 1 ..
+ {down}liii0 ( (41.457,80.295), (0,0), (135,10) ) .. tension 0.947674 and 1.03981 ..
+ {right}liii0 ( (213.917,-52.4722), (0,0), (135,10) ) .. tension 1.18638 and 1.55246 ..
+ {up}(411.384,36.8413) .. tension 1.07128 and 18.2673 ..
 (383.019,295.642) .. tension 16.3689 and 16.3689 ..
 (362.958,538.329) .. tension 2.62357 and 0.75 ..
  {up}(337.224,603.952) .. tension 1 and 2.05753 ..
@@ -3289,12 +3502,12 @@ fill
  {down}(459.627,619.629) .. tension 0.75 and 9.76203 ..
 (438.57,521.706) {down} .. tension 1.12252 and 1.59686 ..
  {down}(472.806,99.972) .. tension 0.793905 and 1.16165 ..
- {left}(196.62,-151.426) .. tension 1.04764 and 0.892519 ..
+ {left}liii0 ( (196.62,-151.426), (0,0), (135,10) ) .. tension 1.04764 and 0.892519 ..
  {up} cycle
 ;
 
 %%endpaths
-endchar;
+enddefchar;
 defchar(lam.init,-1,-1,-1,-1);
 %%backgroundimage:images/lam_init.jpg,-1489.61,-1177.49,1,0,0,1
 
@@ -3322,6 +3535,19 @@ liii0 ( (121.135,106.489), (-38.3333,-19.1667), (9.02778,-6.25) ) .. tension 1 a
 
 %%endpaths
 %%beginbody
+
+enddefchar;
+defchar(lam.init.beforeseenmeem,-1,-1,-1,-1);
+%%beginbody
+
+
+lamseenmeem_(0,0);
+
+
+cutGlyph(z11,z22,true);
+
+leftanchor := z22;
+
 
 enddefchar;
 defchar(lam.init.beforebeh,-1,-1,-1,-1);
@@ -3601,7 +3827,7 @@ leftbearing := 0;
 setCursiveAnchor(ltrcursive,z1,ExitAnchorRTL);
 enddefchar;
 defchar(lam.fina,-1,-1,-1,-1);
-%%backgroundimage:images/lam.fina.jpg,-30.628,-1096.76,1,0,0,1
+%%backgroundimage:images/lam.fina.jpg,-49.788,-1121.24,1,0,0,1
 
 %%beginverbatim
 
@@ -3612,21 +3838,24 @@ rightVerticalRatio := 5;
 %%beginpaths
 
 fill
-(34.4,-64) .. tension 1 and 3.93398 ..
- {right}(142.4,109) .. tension 1 and 1 ..
- {down}(154.4,91.2) .. tension 1.11576 and 1 ..
- {down}(103.8,-19) .. tension 0.943093 and 0.873211 ..
- {right}(276.8,-142) .. tension 1.15616 and 1 ..
-(470.8,-51.6) .. tension 1 and 2.83043 ..
- {up}(471.8,14.2) .. tension 18.5463 and 4.51974 ..
- {up}(421.2,571.2) .. tension 1.1566 and 2.11456 ..
- {right}(468,659.4) .. tension 5.30238 and 0.817189 ..
-(525,329.083) .. tension 1 and 1.58225 ..
-liii1 ( (567,170), (41.3611,-17.1065), (-15.0556,-108.972) ) setranchor
-(627,0) rightjoinii
-liii1 ( (529.85,57.7445), (0,0), (9.83796,-101.273) ) {curl1} .. tension 10.4742 and 1 ..
- {down}(536.6,-38.2) .. tension 1.07609 and 1 ..
- {left}(238.2,-243.2) .. tension 1 and 1 ..
+liii0 ( (13.1252,-38.0431), (0,0), (112.32,17.28) ) .. tension 1 and 3.93398 ..
+ {right}liii0 ( (121.44,133.48), (0,0), (112.32,17.28) ) .. tension 1 and 1 ..
+ {down}liii0 ( (133.44,115.68), (0,0), (112.32,17.28) ) .. tension 1.11576 and 1 ..
+ {down}liii0 ( (84.84,4.48), (0,0), (112.32,17.28) ) .. tension 0.943093 and 0.873211 ..
+ {right}liii0 ( (255.84,-114.52), (0,0), (106.32,27.28) ) .. tension 1.15616 and 1 ..
+(442.24,-36.72) .. tension 1 and 1.10935 ..
+ {up}(451.64,38.68) .. tension 18.5463 and 0.929979 ..
+ {up}(401.04,595.68) .. tension 2.27481 and 1.77686 ..
+ {right}(447.84,683.88) .. tension 5.30238 and 0.817189 ..
+(490.84,400.563) .. tension 1 and 3.36986 ..
+liii1 ( (529,185), (8,3), (19,-106) ) .. tension 1 and 3.46159 ..
+liii1 ( (593.84,115.48), (68.3611,-29.1065), (-63.2826,-14.964) ) setranchor
+(651.84,-0.0548639) rightjoinii
+liii1 ( (593,7.99997), (0,0), (-72.3737,-8.18748) ) .. tension 1 and 1 ..
+liii1 ( (525.611,52.2458), (0,0), (-2.28688,-47.924) ) .. tension 1 and 1.52021 ..
+ {left}liii1 ( (522.292,54.7718), (0,0), (-1.86054,-47.6764) ) .. tension 4.59064 and 1 ..
+ {down}(518.755,9.42815) .. tension 1.07609 and 0.825991 ..
+ {left}liii0 ( (236.18,-222.456), (0,0), (106.32,27.28) ) .. tension 0.894257 and 1.0463 ..
  {up} cycle
 ;
 
@@ -3635,7 +3864,7 @@ enddefchar;
 defchar(lam.fina.afterkaf,-1,-1,-1,-1);
 %%beginbody
 
-lam.fina_(lefttatweel,righttatweel+0.1);
+lam.fina_(lefttatweel,righttatweel);
 
 enddefchar;
 beginchar(meem.isol,1605,-1,-1,-1);
@@ -3894,10 +4123,20 @@ cutGlyph(z1,z2,false);
 
 rightanchor := z2;
 enddefchar;
+defchar(meem.medi.afteralefseen,-1,-1,-1,-1);
+%%beginbody
+
+
+lamseenmeem_(lefttatweel,righttatweel);
+
+cutGlyph(z1,z2,false);
+
+rightanchor := z2;
+enddefchar;
 defchar(meem.medi.beforeyeh,-1,-1,-1,-1);
 %%backgroundimage:images/meem.medi_yeh.jpg,-523.035,-1103,1,0,0,1
 %%beginparams
-z1 = (-94,-44);
+z1 = liii0 ( (-94,-44), (0,0), (284,110) );
 
 %%beginverbatim
 
@@ -3912,10 +4151,10 @@ z1 = (-94,-44);
 %%beginpaths
 
 fill
-(26.6389,-33.0463) .. tension 1 and 1 ..
- {left}(-86.838,-48.4722) .. tension 1.24663 and 0.818793 ..
+liii0 ( (26.6389,-33.0463), (0,0), (279,123) ) .. tension 1 and 1 ..
+ {left}liii0 ( (-86.838,-48.4722), (0,0), (284,110) ) .. tension 1.24663 and 0.818793 ..
  {up}z1 .. tension atleast 1.31847 ..
-(-15.9676,26.5139) .. tension 2.43688 and 0.75 ..
+liii0 ( (-15.9676,26.5139), (0,0), (292,101) ) .. tension 2.43688 and 0.75 ..
 (211.783,120.19) .. tension 0.75 and 1.43202 ..
  {right}(366.275,219.049) .. tension 2.82523 and 1.58165 ..
 (424,158) .. tension 1.21643 and 1.01257 ..
@@ -3984,7 +4223,6 @@ enddefchar;
 defchar(meem.fina.afterheh,-1,-1,-1,-1);
 %%backgroundimage:images/kaf_meem.jpg,-614,-1096,1,0,0,1
 %%beginparams
-z1 = (-2,48);
 z2 = (-111,99);
 
 %%beginverbatim
@@ -4018,12 +4256,54 @@ fill
 %%endpaths
 %%beginbody
 setCursiveAnchor(hehmeem,z2, EntryAnchorRTL);
-setCursiveAnchor(kafmeem,z1, EntryAnchorRTL);
+
+
+enddefchar;
+defchar(meem.fina.afterheh.ii,-1,-1,-1,-1);
+%%beginbody
+
+
+hehmeem_(0,0);
+
+cutGlyph(z1,z2,false);
+
+rightanchor := z2;
 
 enddefchar;
 defchar(meem.fina.afterkaf,-1,-1,-1,-1);
+%%backgroundimage:images/kaf.medi_meem.jpg,-1405.69,-1150.92,1,0,0,1
+%%beginparams
+z1 = (216,99);
+
+%%beginpaths
+
+fill
+(-207,-205.6) .. tension 2.3795 and 1 ..
+(-180,-176) .. tension 2.10533 and 4.24422 ..
+ {up}(64.8,-55.6) .. tension 2.44071 and 1 ..
+ {up}(54.4,18.4) .. tension 0.977125 and 1.53964 ..
+ {right}(176,157.2) .. tension 1.13889 and 1.03381 ..
+ {down}(269.8,37.6) .. tension 1.49551 and 1.0177 ..
+ {left}(187,-96.6) .. tension 0.75 and 2.17286 ..
+ {left}(124.6,-84) .. tension 1.58995 and 0.75 ..
+(62.4,-151) .. tension 1.33087 and 2.1233 ..
+ {left}(-176,-226.4) .. tension 1 and 1 ..
+ {up} cycle
+;
+fill
+(123.187,40.8555) .. tension 2.7762 and 0.991189 ..
+ {right}(184.856,5.2343) .. tension 1.16789 and 1 ..
+ {up}(197.106,24.2213) .. tension 1.43117 and 1.05068 ..
+ {left}(143.643,62.3963) .. tension 1.24458 and 0.98443 ..
+ {down} cycle
+;
+
+%%endpaths
 %%beginbody
-meem.fina.afterheh_(0,0);
+
+setCursiveAnchor(kafmeem,z1, EntryAnchorRTL);
+
+
 enddefchar;
 defchar(meem.fina.ii,-1,-1,-1,-1);
 %%backgroundimage:images/meem.fina.ii.jpg,67.0556,-1012.52,1,0,0,1
@@ -4061,17 +4341,17 @@ enddefchar;
 defchar(noon.isol,-1,-1,-1,-1);
 %%backgroundimage:images/noon_isol2.jpg,-27,-1208,1,0,0,1
 %%beginparams
-z.mark1 = (180,335);
+z.mark1 = liii0 ( (180,335), (0,0), (70,20) );
 
 %%beginpaths
 
 fill
-(226.197,-130.532) .. tension 0.826526 and 0.960362 ..
- {up}(50.1825,33.1947) .. tension 1.35039 and 1.76007 ..
- {right}(140.075,205.595) .. tension 0.75 and 1.12749 ..
- {down}(157.6,183.423) .. tension 1.80193 and 0.75 ..
- {down}(117.788,53.0188) .. tension 1.30132 and 0.75 ..
- {right}(256.328,-31.0368) .. tension 1.32488 and 2.26811 ..
+liii0 ( (226.197,-130.532), (0,0), (42,22) ) .. tension 0.826526 and 0.960362 ..
+ {up}liii0 ( (50.1825,33.1947), (0,0), (69,-6) ) .. tension 1.35039 and 1.76007 ..
+ {right}liii0 ( (140.075,205.595), (0,0), (69,-6) ) .. tension 0.75 and 1.12749 ..
+ {down}liii0 ( (157.6,183.423), (0,0), (69,-6) ) .. tension 1.80193 and 0.75 ..
+ {down}liii0 ( (117.788,53.0188), (0,0), (69,-6) ) .. tension 1.30132 and 0.75 ..
+ {right}liii0 ( (256.328,-31.0368), (0,0), (42,22) ) .. tension 1.32488 and 2.26811 ..
  {up}(465.819,50.3505) .. tension 0.893232 and 3.17992 ..
  {up}(392.801,253.426) .. tension 6.32194 and 1.6036 ..
  {right}(430.175,317.252) .. tension 4.75112 and 0.805273 ..
@@ -4096,7 +4376,7 @@ z2 = (475,155);
 
 %%endverbatim
 %%beginbody
-noon.isol_(0,0);
+noon.isol_(lefttatweel,rightatweel);
 
 setCursiveAnchor(ltrcursive,z2, EntryAnchorRTL);
 
@@ -4476,10 +4756,10 @@ rightbearing:= 60;
 setCursiveAnchor(ltrcursive,z1,ExitAnchorRTL);
 enddefchar;
 defchar(fehshape.medi,-1,-1,-1,-1);
-%%backgroundimage:images/feh.medi.jpg,-1984.61,-1218.02,1,0,0,1
+%%backgroundimage:images/feh.medi.jpg,-1960.45,-1219.69,1,0,0,1
 %%beginparams
-z1 = (197.334,346.111);
-z2 = (168.22,248.555);
+z1 = (216,347);
+z2 = (190,250);
 
 %%beginverbatim
 
@@ -4491,24 +4771,26 @@ z2 = (168.22,248.555);
 %%beginpaths
 
 fill
-(50.1663,4.91677) leftjoin
-bldmv ( (65.3057,105.222), (0,0), (58.5278,-0.388889) ) .. tension 1 and 1 ..
-bldmv ( (163.889,150.305), (0,0), (12,-3) ) .. tension 0.780713 and 2.11326 ..
- {up}(201.083,192) .. tension 1.2515 and 1.5005 ..
+liii0 ( (36.0459,2.41677), (0,0), (98.46,-3.21502) ) leftjoin
+liii0 ( (89.4723,106.889), (0,0), (68.5747,-4.80954) ) .. tension 1 and 1 ..
+liii0 ( (188.055,151.972), (0,0), (12,4.2338) ) .. tension 0.780713 and 2.11326 ..
+ {up}(225.249,193.667) .. tension 1.2515 and 1.5005 ..
  {left}z2 .. tension 4.37336 and 4.30722 ..
  {right}z1 .. tension 2.71544 and 1 ..
- {down}(258.611,226.5) .. tension 1.00284 and 1 ..
+ {down}(282.777,228.167) .. tension 1.00284 and 1 ..
+liii0 ( (222.13,96.7399), (0,0), (-11.2847,-34.7222) ) .. tension 1 and 1 ..
  cycle
 ;
 fill
-(46.7778,161.139) .. tension 1 and 2.2705 ..
+(70.9444,162.806) .. tension 1 and 2.2705 ..
  {right}z1 .. tension 5.38976 and 5.98541 ..
  {left}z2 .. tension 1 and 5.65574 ..
- {down}(104.5,190.667) .. tension 1.28385 and 1.89317 ..
-brdmv ( (174.833,129.306), (0,0), (-16.6389,-10.2778) ) .. tension 1 and 1 ..
-brdmv ( (227.639,108.028), (0,0), (-59.9167,3.36111) ) setranchor
-(303,0) rightjoinii
-(241.11,5.94446) .. tension 1 and 1 ..
+ {down}(128.666,192.334) .. tension 1.28385 and 1.89317 ..
+liii1 ( (197.07,129.044), (0,0), (-11.8164,-0.632737) ) .. tension 1 and 1 ..
+liii1 ( (281.223,103.425), (0,0), (-76.3936,-0.0950338) ) setranchor
+(327.166,1.66667) rightjoinii
+liii1 ( (253.059,9.94202), (0,0), (-44.4637,-10.8989) ) .. tension 1 and 1 ..
+liii1 ( (133.622,65.1042), (0,0), (19.7724,-46.2963) ) .. tension 1 and 1 ..
  {up} cycle
 ;
 
@@ -5060,27 +5342,31 @@ liii1 ( (466,48), (181,-54), (-34,5) ) ..
 hah.isol_(0,0);
 tr_ := tr_ shifted (0,-ypart tr_ -29);
 enddefchar;
-beginchar(dal.isol,1583,-1,-1,-1);
+defchar(dal.isol,1583,-1,-1,-1);
 %%backgroundimage:images/dal.isol.2.jpg,-644.238,-1246.88,1,0,0,1
 
 %%beginpaths
 
 fill
-(64.7644,78.9411) .. tension 1 and 1.83466 ..
- {right}(85.6255,117.247) .. tension 1.03809 and 1 ..
- {right}(155.987,110.524) .. tension 1 and 4.13212 ..
- {up}(329.209,159.774) .. tension 2.45993 and 1 ..
-(211.987,303.83) .. tension 1 and 1.61495 ..
- {up}(178.709,324.858) .. tension 3.32475 and 0.82863 ..
- {right}(215.82,398.469) .. tension 1.47023 and 1.19247 ..
- {down}(382.348,178.83) .. tension 0.849554 and 1.9499 ..
-(345.931,61.6911) .. tension 2.10594 and 1 ..
- {left}(110.209,13.3855) .. tension 0.7731 and 1 ..
+liii0 ( (64.7644,78.9411), (0,0), (0,0) ) .. tension 1 and 1.83466 ..
+ {right}liii0 ( (85.6255,117.247), (0,0), (6,4) ) .. tension 1.03809 and 1 ..
+ {right}liii0 ( (155.987,110.524), (0,0), (2,9) ) .. tension 1 and 4.13212 ..
+ {up}liii0 ( (329.209,159.774), (0,0), (-58,-5) ) .. tension 2.45993 and 1 ..
+liii0 ( (211.987,303.83), (0,0), (-14,-40) ) .. tension 1 and 1.61495 ..
+ {up}liii0 ( (178.709,324.858), (0,0), (-21,-33) ) .. tension 3.32475 and 0.82863 ..
+ {right}liii0 ( (215.82,398.469), (0,0), (-29,-32) ) .. tension 1.47023 and 1.19247 ..
+ {down}liii0 ( (382.348,178.83), (0,0), (-48,-4) ) .. tension 0.849554 and 1.9499 ..
+liii0 ( (345.931,61.6911), (0,0), (-40,2) ) .. tension 2.10594 and 1 ..
+ {left}liii0 ( (110.209,13.3855), (0,0), (0,0) ) .. tension 0.7731 and 1 ..
  {up} cycle
 ;
 
 %%endpaths
-endchar;
+%%beginbody
+
+%%backgroundimage:images/dal.isol.min.jpg,-896.6,-998,1,0,0,1
+
+enddefchar;
 defchar(dal.fina,-1,-1,-1,-1);
 %%backgroundimage:images/dal.fina.jpg,-94.16,-930.94,1,0,0,1
 %%beginparams
@@ -5231,9 +5517,9 @@ fill
  {right}(40.6666,-196.667) .. tension 1.20626 and 1 ..
 (221.882,-123.325) .. tension 1 and 1.96358 ..
  {up}(314.863,19.1761) .. tension 2.88036 and 0.914551 ..
- {up}(264.461,98.215) .. tension 1 and 1.64347 ..
- {right}(295.069,181.539) .. tension 0.976552 and 1 ..
-(322.814,168.353) .. tension 1.22707 and 1.22707 ..
+ {up}liii1 ( (264.461,98.215), (0,0), (90,-91) ) .. tension 1 and 1.64347 ..
+ {right}liii1 ( (295.069,181.539), (0,0), (90,-91) ) .. tension 0.976552 and 1 ..
+liii1 ( (322.814,168.353), (0,0), (90,-91) ) .. tension 1.22707 and 1.22707 ..
 liii1 ( (417.798,106.729), (14.6518,-8.83759), (-73.7847,8.68056) ) setranchor
 (471,0) rightjoinii
 liii1 ( (435.341,1.90815), (0.417345,0.208672), (-84.9128,-1.64962) ) .. tension 1.3584 and 1 ..
@@ -5573,6 +5859,26 @@ setCursiveAnchor(hehmeem,z2, ExitAnchorRTL);
 leftbearing :=0;
 rightbearing  := -0;
 
+
+enddefchar;
+defchar(heh.init.beforemeem.ii,-1,-1,-1,-1);
+%%beginbody
+
+
+hehmeem_(0,0);
+
+
+cutGlyph(z1,z2,true);
+
+i_ := 0;
+path p;
+for item within hehmeem.pic:
+i_ := i_ + 1;
+p := pathpart item;
+if i_ > 1 : fill p; fi
+endfor
+
+leftanchor := z2;
 
 enddefchar;
 defchar(heh.init.beforeyeh,-1,-1,-1,-1);
@@ -6625,6 +6931,12 @@ z.yeh.shape.i.1 = (540,99);
 
 z.yeh.shape.i.2 = z.yeh.shape.i.1 + behshape.medi.beforeyeh.p1 ;
 
+minA0 := -2;
+maxA0 := 2;
+
+x33 := -minA0 *nuqta;
+x34 := -maxA0 *nuqta;
+
 %%endverbatim
 
 %%beginpaths
@@ -6632,12 +6944,12 @@ z.yeh.shape.i.2 = z.yeh.shape.i.1 + behshape.medi.beforeyeh.p1 ;
 fill
 z.yeh.shape.i.1 .. tension 1.84145 and 1 ..
 (508.639,105.518) .. tension 1 and 1 ..
- {up}(361,205) .. tension 1 and 2.19609 ..
- {right}(583.305,519.894) .. tension 1.08196 and 9.18809 ..
- {down}(648,452) .. tension 1.24106 and 2.58028 ..
- {left}(617,374) .. tension 0.862877 and 1 ..
- {left}(558,418) .. tension 2.15632 and 1.89965 ..
- {down}(419,266) .. tension 1 and 1 ..
+ {up}liii0 ( (361,205), (0,0), (0,0) ) .. tension 1 and 2.19609 ..
+ {right}liii0 ( (583.305,519.894), (0,0), (-36,-113) ) .. tension 1.08196 and 9.18809 ..
+ {down}liii0 ( (648,452), (0,0), (-36,-113) ) .. tension 1.24106 and 2.58028 ..
+ {left}liii0 ( (617,374), (0,0), (-36,-113) ) .. tension 0.862877 and 1 ..
+ {left}liii0 ( (558,418), (0,0), (-36,-113) ) .. tension 2.15632 and 1.89965 ..
+ {down}liii0 ( (419,266), (0,0), (0,0) ) .. tension 1 and 1 ..
  {right}(517,199) .. tension 0.882164 and 1 ..
  {right}(573,202) .. tension 1.2704 and 1.15802 ..
  {down}z.yeh.shape.i.2 .. tension 4.33099 and 3.90181 ..
@@ -6682,7 +6994,7 @@ defchar(yehshape.fina.ii,-1,-1,-1,-1);
 %%backgroundimage:images/yehshape.fina.ii.jpg,-60,-932,1,0,0,1
 %%beginparams
 z1 = (349,30);
-z4 = (103,68); % z3
+z4 = (98,68); % z3
 z5 = (524,-22);
 
 %%beginverbatim
@@ -6690,24 +7002,29 @@ z5 = (524,-22);
 z2 = z5 + behshape.medi.beforeyeh.p1;
 z3 = z1 + z4;
 
-%(497.525,1.20559)
+minA0 := -2;
+maxA0 := 2;
+
+x33 := -minA0 *nuqta;
+x34 := -maxA0 *nuqta;
+
 %%endverbatim
 
 %%beginpaths
 
 fill
-(22,-35) .. tension 1.15253 and 2.73859 ..
- {right}(133.417,186.083) .. tension 1 and 1 ..
- {down}(149.547,168.464) .. tension 2.78482 and 1 ..
- {down}(89.3198,30.6297) .. tension 1 and 0.915494 ..
- {right}(268.641,-111.034) .. tension 1.09661 and 6.40317 ..
+liii0 ( (22,-35), (x34,0), (x33,0) ) .. tension 1.15253 and 2.73859 ..
+ {right}liii0 ( (133.417,186.083), (x34,0), (x33,0) ) .. tension 1 and 1 ..
+ {down}liii0 ( (149.547,168.464), (x34,0), (x33,0) ) .. tension 2.78482 and 1 ..
+ {down}liii0 ( (89.3198,30.6297), (x34,0), (x33,0) ) .. tension 1 and 0.915494 ..
+ {right}liii0 ( (268.641,-110.034), (115 + x34,6), (-139 + x33,66) ) .. tension 1.09661 and 6.40317 ..
  {up}z5 .. tension 1.03121 and 1 ..
 (510.025,-6.82217) .. tension 2.35499 and 2.16529 ..
  {up}z1 .. tension 10.1756 and 1.97052 ..
  {right}z3 .. tension 1.39519 and 1.43919 ..
 (576.398,76.023) .. tension 1 and 1 ..
  {down}z2 .. tension 1.40985 and 1.14232 ..
- {left}(255,-205) .. tension 0.907684 and 1 ..
+ {left}liii0 ( (255,-205), (115 + x34,6), (-139 + x33,66) ) .. tension 0.907684 and 1 ..
  {up} cycle
 ;
 
@@ -6737,13 +7054,13 @@ enddefchar;
 defchar(alefmaksura.isol,1609,-1,-1,-1);
 %%backgroundimage:images/yeh.isol.jpg,-63,-1017,1,0,0,1
 %%beginbody
-yehshape.fina.afterbeh_(lefttatweel,0);
+yehshape.fina.afterbeh_(lefttatweel,righttatweel);
 
 pair shift_;
 picture pic_;
 
 pic_ := image(
-yeh.shape.i_(0,0);
+yeh.shape.i_(lefttatweel,righttatweel);
 shift_ := z5 - z.yeh.shape.i.1;
 );
 
@@ -6755,7 +7072,7 @@ tr_ := tr_ shifted(0,y1- ypart tr_);
 enddefchar;
 defchar(yehshape.isol,1610,-1,-1,-1);
 %%beginbody
-alefmaksura.isol_(0,0);
+alefmaksura.isol_(lefttatweel,righttatweel);
 
 enddefchar;
 beginchar(yehshape.fina,-1,-1,-1,-1);
@@ -6841,7 +7158,7 @@ fill
  {down}(84.2608,558.6) .. tension 6.25338 and 0.946181 ..
  {down}z1 .. tension 0.857029 and 1 ..
 bldmv ( (273.061,19.4), (0,0), (2,-8) ) leftjoin
-bldmv ( (252.061,117.4), (0,0), (11,-5) ) .. tension 1 and 1 ..
+bldmv ( (252.061,117.4), (0,0), (15,-4) ) .. tension 1 and 1 ..
  {up}(300.461,153.4) .. tension 1.67402 and 5.60646 ..
 (264.861,229) .. tension 2.28057 and 3.04053 ..
 (93.0608,408.8) .. tension 2.52601 and 1.16312 ..
@@ -6879,7 +7196,7 @@ fill
  {down}(89.136,566.872) .. tension 6.25338 and 0.946181 ..
  {down}z1 .. tension 0.857029 and 1 ..
 bldmv ( (278.936,17.672), (0,0), (2,-8) ) leftjoin
-bldmv ( (257.936,115.672), (0,0), (11,-5) ) .. tension 1 and 1 ..
+bldmv ( (257.936,115.672), (0,0), (13,-6) ) .. tension 1 and 1 ..
  {up}(306.336,151.672) .. tension 1.67402 and 5.60646 ..
 (270.736,227.272) .. tension 2.28057 and 1.87672 ..
  {left}(117.936,404.272) .. tension 1 and 0.75 ..
@@ -7071,9 +7388,9 @@ minRight := -2;
 fill
 z4 .. tension 3.46395 and 0.75 ..
  {down}(251.12,139.44) .. tension 0.857029 and 1 ..
-liii0 ( (147.32,4.84), (0,0), (15.9444,-6.16204) ) leftjoin
-liii0 ( bldmv ( (149.931,101.496), (0,0), (28,-7) ), (-20,-13.3333), (14.782,4.75741) ) .. tension 1 and 1 ..
-liii0 ( (182.762,109.391), (0,0), (11.5925,-7.42262) ) .. tension 1 and 1 ..
+liii0 ( (147.32,4.84), (0,0), (19.6283,-3.48286) ) leftjoin
+liii0 ( bldmv ( (149.931,101.831), (0,0), (28,-7) ), (-20,-13.3333), (4.73506,6.7668) ) .. tension 1 and 1 ..
+liii0 ( (182.762,109.391), (0,0), (12.2623,4.63371) ) .. tension 1 and 1 ..
  {up}(198.32,132.44) .. tension 1.67402 and 1 ..
 (19.92,384.24) .. tension 1 and 1 ..
  {up}(1.92,419.04) .. tension 1 and 1 ..
@@ -7094,10 +7411,9 @@ liii1 ( (510.364,16.7789), (66.4396,16.9571), (-29.6111,-13.9444) ) .. tension 1
 %%endpaths
 enddefchar;
 defchar(kaf.medi.beforemeem,-1,-1,-1,-1);
-%%backgroundimage:images/kaf.medi_meem.jpg,-207,-1079,1,0,0,1
+%%backgroundimage:images/kaf.medi_meem.jpg,-1405.69,-1150.92,1,0,0,1
 %%beginparams
-z1 = (243,70);
-z4 = (187,454);
+z1 = (216,99);
 
 %%beginverbatim
 
@@ -7108,35 +7424,32 @@ minRight := -2;
 %%beginpaths
 
 fill
-(208,570) .. tension 1.68637 and 24.1761 ..
- {right}(603,784) .. tension 0.75 and 1 ..
- {down}(619,766) .. tension 1 and 2.54535 ..
-(588,693) .. tension 9.18768 and 4.3056 ..
- {down}z4 .. tension 8.85555 and 0.75 ..
- {down}(332,159) .. tension 0.857029 and 4.27751 ..
- {left}bldmv ( (252,31), (0,0), (9,-16) ) ..
- {up}bldmv ( (188,89), (0,0), (28,-7) ) .. tension 1 and 1 ..
- {up}(282,148) .. tension 1.67402 and 6.04181 ..
-(217,284) .. tension 2.28057 and 0.75 ..
- {up}(135,415) .. tension 1.59828 and 1.21903 ..
- cycle
-;
-fill
-(225,340) .. tension 1 and 7.01714 ..
-z4 {right} .. tension 12.9016 and 1 ..
-brdmv ( (267,376), (0,0), (-8,-8) ) .. tension 1 and 1 ..
-brdmv ( (413,242), (41,2), (-29,-34) ) ..
-brdmv ( (586,116), (333,-59), (-156,-8) ) setranchor
-(675,3) rightjoinii
-brdmv ( (537,37), (476,-103), (-176,-2) ) ..
-brdmv ( (315,229), (7,4), (-61,-47) ) .. tension 1 and 1 ..
- cycle
+(352.927,230.553) .. tension 3.27123 and 1 ..
+ {down}(352.54,164.534) .. tension 0.857029 and 4.27751 ..
+ {left}(252,31) ..
+ {up}z1 .. tension 1 and 1 ..
+ {up}(301.167,169.667) .. tension 2.89649 and 6.04181 ..
+(96.1667,466.5) .. tension 2.28057 and 1.02477 ..
+ {up}(82.5867,526.08) .. tension 1.59828 and 1 ..
+(167.667,660.833) .. tension 2.344 and 3.00262 ..
+ {right}(663.1,885.027) .. tension 0.75 and 1 ..
+ {down}(674.333,857.5) .. tension 1 and 1.50854 ..
+(634.833,788.333) .. tension 4.28162 and 1.47466 ..
+(153.5,555.333) .. tension 1 and 0.830341 ..
+ {down}(146,540) .. tension 4.78817 and 1 ..
+(417.667,281.667) .. tension 1 and 2.29765 ..
+(600.68,116.8) setranchor
+(675,0) rightjoinii
+(633.833,4.1667) .. tension 1 and 1 ..
+(500,101) .. tension 1 and 1 ..
+(372.087,218.907) .. tension 1 and 2.14762 ..
+ {left} cycle
 ;
 
 %%endpaths
 %%beginbody
 
-setCursiveAnchor(kafmeem,z1, EntryAnchorRTL);
+setCursiveAnchor(kafmeem,z1, ExitAnchorRTL);
 
 enddefchar;
 defchar(kaf.medi.beforeyeh,-1,-1,-1,-1);
@@ -7245,11 +7558,11 @@ rightVerticalRatio := 5;
 %%beginpaths
 
 fill
-(-1,169) .. tension 0.951748 and 3.9031 ..
- {right}(104,341) .. tension 1 and 1 ..
- {down}(114,318) .. tension 1.4295 and 1.62263 ..
- {down}(74,233) .. tension 0.918805 and 0.914803 ..
- {right}(281,82) .. tension 0.810168 and 3.22513 ..
+liii0 ( (-1,169), (0,0), (103,5) ) .. tension 0.951748 and 3.9031 ..
+ {right}liii0 ( (104,341), (0,0), (103,5) ) .. tension 1 and 1 ..
+ {down}liii0 ( (114,318), (0,0), (103,5) ) .. tension 1.4295 and 1.62263 ..
+ {down}liii0 ( (74,233), (0,0), (103,5) ) .. tension 0.918805 and 0.914803 ..
+ {right}liii0 ( (281,82), (0,0), (103,5) ) .. tension 0.810168 and 3.22513 ..
  {up}(642,195) .. tension 5.82038 and 2.64594 ..
  {up}(589,611) .. tension 2.30568 and 2.10163 ..
  {right}(633,677) .. tension 2.70961 and 1.87371 ..
@@ -7258,21 +7571,21 @@ liii1 ( (728,147), (-3,17), (0,0) ) setranchor
 (776,2) rightjoinii
 (653,107) {dir -127.628} .. tension 3.58671 and 1 ..
 (601,63) .. tension 1.31527 and 1 ..
- {left}(269,-20) .. tension 0.75 and 0.963844 ..
+ {left}liii0 ( (269,-20), (0,0), (103,5) ) .. tension 0.75 and 0.963844 ..
  {up} cycle
 ;
 fill
-(241,255) .. tension 1.6784 and 1.33888 ..
- {right}(257,278) .. tension 4.85985 and 0.75 ..
- {right}(320,258) .. tension 1.49002 and 3.05366 ..
- {up}(360,274) .. tension 2.28459 and 0.896193 ..
- {up}(300,326) .. tension 1.25921 and 2.02954 ..
- {right}(423,492) .. tension 1 and 2.20322 ..
- {down}(473,454) .. tension 2.69063 and 1.03732 ..
- {left}(424,388) .. tension 2.46845 and 1.44632 ..
- {down}(390,387) .. tension 1.47561 and 0.948091 ..
- {down}(457,325) .. tension 1.16642 and 1.25532 ..
- {left}(344,193) .. tension 1 and 2.03546 ..
+liii0 ( (241,255), (0,0), (53,1) ) .. tension 1.6784 and 1.33888 ..
+ {right}liii0 ( (257,278), (0,0), (53,1) ) .. tension 4.85985 and 0.75 ..
+ {right}liii0 ( (320,258), (0,0), (53,1) ) .. tension 1.49002 and 3.05366 ..
+ {up}liii0 ( (360,274), (0,0), (53,1) ) .. tension 2.28459 and 0.896193 ..
+ {up}liii0 ( (300,326), (0,0), (53,1) ) .. tension 1.25921 and 2.02954 ..
+ {right}liii0 ( (423,492), (0,0), (53,1) ) .. tension 1 and 2.20322 ..
+ {down}liii0 ( (473,454), (0,0), (53,1) ) .. tension 2.69063 and 1.03732 ..
+ {left}liii0 ( (424,388), (0,0), (53,1) ) .. tension 2.46845 and 1.44632 ..
+ {down}liii0 ( (390,387), (0,0), (53,1) ) .. tension 1.47561 and 0.948091 ..
+ {down}liii0 ( (457,325), (0,0), (53,1) ) .. tension 1.16642 and 1.25532 ..
+ {left}liii0 ( (344,193), (0,0), (53,1) ) .. tension 1 and 2.03546 ..
  {up} cycle
 ;
 
