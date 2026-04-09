@@ -406,8 +406,8 @@
                         23
                     ],
                     "behshape.medi.afterbeh": [
-                        -26,
-                        -9
+                        -45,
+                        -18
                     ],
                     "behshape.medi.beforereh": [
                         -57,
@@ -805,7 +805,7 @@
                     ],
                     "behshape.medi.afterlam": [
                         100,
-                        120
+                        139
                     ],
                     "behshape.medi.basmala": [
                         68,
@@ -821,7 +821,7 @@
                     ],
                     "behshape.medi.beforeseen": [
                         122,
-                        85
+                        104
                     ],
                     "behshape.medi.beforeyeh": [
                         187,
@@ -1332,20 +1332,24 @@
                         -93
                     ],
                     "lam.fina": [
-                        46,
-                        46
+                        -40,
+                        17
                     ],
                     "lam.fina.afterkaf": [
                         150,
                         23
                     ],
                     "lam.init": [
-                        19,
-                        17
+                        -12,
+                        9
                     ],
                     "lam.init.allah": [
                         -30,
                         8
+                    ],
+                    "lam.init.beforebeh": [
+                        -20,
+                        62
                     ],
                     "lam.init.beforedal": [
                         4,
@@ -1380,8 +1384,8 @@
                         -143
                     ],
                     "meem.fina": [
-                        86,
-                        120
+                        -14,
+                        100
                     ],
                     "meem.fina.basmala": [
                         24,
@@ -1398,14 +1402,6 @@
                     "meem.init.beforeyeh": [
                         91,
                         -20
-                    ],
-                    "meem.isol": [
-                        65,
-                        491
-                    ],
-                    "meem.isol.ii": [
-                        151,
-                        153
                     ],
                     "meem.medi.afterseen": [
                         100,
@@ -1681,6 +1677,10 @@
                         -7,
                         -295
                     ],
+                    "kaf.init.ii": [
+                        -240,
+                        -96
+                    ],
                     "kaf.init.ii.pluslt_100": [
                         -240,
                         -20
@@ -1698,8 +1698,8 @@
                         -175
                     ],
                     "lam.fina": [
-                        163,
-                        -81
+                        107,
+                        -53
                     ],
                     "lam.fina.afterkaf": [
                         68,
@@ -2531,6 +2531,10 @@
                         -79,
                         -62
                     ],
+                    "lam.medi.beforemeem": [
+                        -60,
+                        -60
+                    ],
                     "lam.medi.beforeyeh": [
                         -74,
                         -88
@@ -2571,14 +2575,6 @@
                         -43,
                         -60
                     ],
-                    "meem.isol": [
-                        39,
-                        -5
-                    ],
-                    "meem.isol.ii": [
-                        104,
-                        -34
-                    ],
                     "meem.medi": [
                         30,
                         -37
@@ -2589,7 +2585,7 @@
                     ],
                     "meem.medi.afterlam": [
                         -153,
-                        235
+                        67
                     ],
                     "noon.fina.expa": [
                         40,
@@ -2982,16 +2978,16 @@
             "hamzabelow": {
                 "baseparameters": {
                     "behshape.init": [
-                        40,
-                        60
+                        31,
+                        69
                     ],
                     "behshape.init.beforebeh": [
-                        40,
-                        20
+                        1,
+                        21
                     ],
                     "behshape.init.beforenoon": [
-                        83,
-                        -16
+                        26,
+                        -83
                     ],
                     "behshape.init.beforereh": [
                         48,
@@ -3100,8 +3096,8 @@
                         0
                     ],
                     "behshape.medi.expa": [
-                        -127,
-                        0
+                        -177,
+                        -16
                     ],
                     "fehshape.init": [
                         -100,
@@ -3380,8 +3376,8 @@
                         -85
                     ],
                     "kaf.medi.ii": [
-                        95,
-                        0
+                        46,
+                        16
                     ],
                     "seen.init": [
                         152,
@@ -3891,6 +3887,10 @@
                         58,
                         61
                     ],
+                    "meem.isol": [
+                        -40,
+                        60
+                    ],
                     "qaf.isol": [
                         -42,
                         14
@@ -3914,6 +3914,10 @@
                     "heh.isol": [
                         -98,
                         9
+                    ],
+                    "meem.isol": [
+                        -20,
+                        100
                     ]
                 }
             },
@@ -3930,6 +3934,10 @@
                     "heh.isol": [
                         -105,
                         79
+                    ],
+                    "meem.isol": [
+                        -20,
+                        80
                     ]
                 }
             }
@@ -4047,6 +4055,10 @@
                         -16,
                         83
                     ],
+                    "hah.isol": [
+                        72,
+                        576
+                    ],
                     "hamza.isol": [
                         0,
                         81
@@ -4099,14 +4111,6 @@
                         140,
                         103
                     ],
-                    "meem.isol": [
-                        65,
-                        507
-                    ],
-                    "meem.isol.ii": [
-                        -29,
-                        25
-                    ],
                     "noon.isol": [
                         -46,
                         -23
@@ -4156,12 +4160,8 @@
                         34
                     ],
                     "meem.isol": [
-                        84,
-                        210
-                    ],
-                    "meem.isol.ii": [
-                        -72,
-                        67
+                        0,
+                        86
                     ],
                     "noon.isol": [
                         -81,
@@ -4198,10 +4198,6 @@
                     "lam.isol": [
                         -69,
                         11
-                    ],
-                    "meem.isol": [
-                        102,
-                        567
                     ],
                     "noon.isol": [
                         -69,
@@ -4282,6 +4278,10 @@
                     "hah.init": [
                         0,
                         83
+                    ],
+                    "hah.isol": [
+                        72,
+                        576
                     ],
                     "heh.init": [
                         78,

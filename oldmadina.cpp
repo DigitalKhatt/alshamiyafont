@@ -508,7 +508,7 @@ OldMadina::OldMadina(OtLayout* layout, Font* font, bool extended) : Automedina{l
   layout->expandableGlyphs["meem.medi.beforeyeh"] = {0, -0.5, 20, -0.3};
 
   layout->expandableGlyphs["lam.medi.laf"] = {0.0, 0.0, 20, -0.5};
-  layout->expandableGlyphs["dal.fina"] = {0.0, 0.0, 20, -0.5};
+  layout->expandableGlyphs["dal.fina"] = {0.0, -1, 20, -0.5};
   layout->expandableGlyphs["heh.fina"] = {0.0, 0.0, 20, -0.5};
   layout->expandableGlyphs["hah.fina"] = {0.0, 0.0, 20, -0.5};
   layout->expandableGlyphs["seen.fina"] = {0, 0, 20, -0.4};
@@ -518,7 +518,9 @@ OldMadina::OldMadina(OtLayout* layout, Font* font, bool extended) : Automedina{l
   layout->expandableGlyphs["behshape.fina"] = {2.0, -1.0, 20, -0.1};
   layout->expandableGlyphs["qaf.fina"] = {0.0, -1, 20, -0.5};
   layout->expandableGlyphs["lam.fina"] = {0.0, -1, 20, -0.5};
+  layout->expandableGlyphs["lam.fina.afterkaf"] = {0.0, -1, 0, 0};
   layout->expandableGlyphs["kaf.fina"] = {0.0, -1, 20, -0.3};
+  layout->expandableGlyphs["kaf.fina.afterlam"] = {0.0, -1, 0, 0};
   layout->expandableGlyphs["noon.fina"] = {0.0, -1.0, 20, -0.1};
   layout->expandableGlyphs["noon.fina.basmala"] = {20, 0.0, 0, 0};
   layout->expandableGlyphs["reh.fina"] = {0.0, 0.0, 20, -0.5};
@@ -2226,31 +2228,6 @@ Lookup* OldMadina::populatecvxx() {
 Lookup* OldMadina::glyphalternates() {
   bool isExtended = m_layout->isExtended();
 
-  unordered_map<QString, QString> mappings;
-
-  mappings.insert({"noon.isol", "noon.isol.expa"});
-  mappings.insert({"behshape.isol", "behshape.isol.expa"});
-  mappings.insert({"feh.isol", "feh.isol.expa"});
-  mappings.insert({"qaf.isol", "qaf.isol.expa"});
-  mappings.insert({"seen.isol", "seen.isol.expa"});
-  mappings.insert({"sad.isol", "sad.isol.expa"});
-  mappings.insert({"yehshape.isol", "yehshape.isol.expa"});
-  mappings.insert({"alefmaksura.isol", "alefmaksura.isol.expa"});
-
-  mappings.insert({"noon.fina", "noon.fina.expa"});
-  mappings.insert({"noon.fina.afterbeh", "noon.fina.expa.afterbeh"});
-  mappings.insert({"kaf.fina", "kaf.fina.expa"});
-  mappings.insert({"kaf.fina.afterlam", "kaf.fina.afterlam.expa"});
-  mappings.insert({"behshape.fina", "behshape.fina.expa"});
-  mappings.insert({"feh.fina", "feh.fina.expa"});
-  mappings.insert({"qaf.fina", "qaf.fina.expa"});
-  mappings.insert({"seen.fina", "seen.fina.expa"});
-  mappings.insert({"sad.fina", "sad.fina.expa"});
-  mappings.insert({"alef.fina", "alef.fina"});
-  mappings.insert({"yehshape.fina", "yehshape.fina.expa"});
-  mappings.insert({"yehshape.fina.ii", "yehshape.fina.ii.expa"});
-  mappings.insert({"yehshape.fina.afterbeh", "yehshape.fina.afterbeh.expa"});
-
   struct AltFeature {
     struct Subst {
       QString glyph;
@@ -2272,6 +2249,7 @@ Lookup* OldMadina::glyphalternates() {
   altfeatures.push_back({"cv17", {{"seen.init.beforereh", "seen.init"}, {"seen.medi.beforereh", "seen.medi"}, {"reh.fina.afterseen", "reh.fina"}, {"sad.medi.beforereh", "sad.medi"}, {"sad.init.beforereh", "sad.init"}}});
   altfeatures.push_back({"cv18", {{"hah.init.beforemeem", "hah.init"}, {"meem.medi.afterhah", "meem.medi"}}});
   altfeatures.push_back({"cv19", {{"lam.init.beforedal", "lam.init"}, {"dal.fina.afterlam", "dal.fina"}}});
+  // altfeatures.push_back({"cv20", {{"kaf.init.beforelam", "kaf.init.ii"}, {"kaf.init.beforelam.ii", "kaf.init.ii"}, {"kaf.medi.beforelam", "kaf.medi.ii"}, {"kaf.medi.beforelam.ii", "kaf.medi.ii"}}});
 
   for (auto& feature : altfeatures) {
     Lookup* alternate = new Lookup(m_layout);
@@ -2355,6 +2333,7 @@ Lookup* OldMadina::glyphalternates() {
   mappingsdecomp.insert({"alef.fina.afterkaf", "alef.fina"});
   mappingsdecomp.insert({"kaf.init", "kaf.init.ii"});
   mappingsdecomp.insert({"kaf.init.iii", "kaf.init.ii"});
+  mappingsdecomp.insert({"kaf.init.short", "kaf.init.ii"});
   mappingsdecomp.insert({"kaf.medi", "kaf.medi.ii"});
   mappingsdecomp.insert({"kaf.medi.beforemeem", "kaf.medi.ii"});
   mappingsdecomp.insert({"meem.fina.afterkaf", "meem.fina"});
@@ -2409,6 +2388,31 @@ Lookup* OldMadina::glyphalternates() {
   alternateSubtable = new AlternateSubtableWithTatweel(alternate);
   alternate->subtables.append(alternateSubtable);
   alternateSubtable->name = alternate->name;
+
+  unordered_map<QString, QString> mappings;
+
+  mappings.insert({"noon.isol", "noon.isol.expa"});
+  mappings.insert({"behshape.isol", "behshape.isol.expa"});
+  mappings.insert({"feh.isol", "feh.isol.expa"});
+  mappings.insert({"qaf.isol", "qaf.isol.expa"});
+  mappings.insert({"seen.isol", "seen.isol.expa"});
+  mappings.insert({"sad.isol", "sad.isol.expa"});
+  mappings.insert({"yehshape.isol", "yehshape.isol.expa"});
+  mappings.insert({"alefmaksura.isol", "alefmaksura.isol.expa"});
+
+  mappings.insert({"noon.fina", "noon.fina.expa"});
+  mappings.insert({"noon.fina.afterbeh", "noon.fina.expa.afterbeh"});
+  mappings.insert({"kaf.fina", "kaf.fina.expa"});
+  mappings.insert({"kaf.fina.afterlam", "kaf.fina.afterlam.expa"});
+  mappings.insert({"behshape.fina", "behshape.fina.expa"});
+  mappings.insert({"feh.fina", "feh.fina.expa"});
+  mappings.insert({"qaf.fina", "qaf.fina.expa"});
+  mappings.insert({"seen.fina", "seen.fina.expa"});
+  mappings.insert({"sad.fina", "sad.fina.expa"});
+  mappings.insert({"alef.fina", "alef.fina"});
+  mappings.insert({"yehshape.fina", "yehshape.fina.expa"});
+  mappings.insert({"yehshape.fina.ii", "yehshape.fina.ii.expa"});
+  mappings.insert({"yehshape.fina.afterbeh", "yehshape.fina.afterbeh.expa"});
 
   for (auto mapping : mappings) {
     QVector<ExtendedGlyph> alternates;
@@ -2545,21 +2549,21 @@ Lookup* OldMadina::glyphalternates() {
         alternates.append({glyphCode, 0, righttatweel});
       }
       alternateSubtable->alternates[glyphCode] = alternates;
-    };
 
-    if (valueLimits.maxLeft > 0 && valueLimits.maxRight > 0) {
-      for (double leftTatweel = 0.5; leftTatweel <= std::min(valueLimits.maxLeft, 3.0F); leftTatweel += 0.5) {
-        QVector<ExtendedGlyph> alternates;
-        GlyphParameters parameters;
-        parameters.lefttatweel = leftTatweel;
-        parameters.righttatweel = 0.0;
-        GlyphVis* newglyph = m_layout->getAlternate(glyphCode, parameters, !isExtended, !isExtended);
-        for (double righttatweel = 0.5; righttatweel <= std::min(valueLimits.maxRight, 6.0F); righttatweel += 0.5) {
-          alternates.append({glyphCode, leftTatweel, righttatweel});
+      if (valueLimits.maxLeft > 0) {
+        for (double leftTatweel = 0.5; leftTatweel <= std::min(valueLimits.maxLeft, 6.0F); leftTatweel += 0.5) {
+          QVector<ExtendedGlyph> alternates;
+          GlyphParameters parameters;
+          parameters.lefttatweel = leftTatweel;
+          parameters.righttatweel = 0.0;
+          GlyphVis* newglyph = m_layout->getAlternate(glyphCode, parameters, !isExtended, !isExtended);
+          for (double righttatweel = 0.5; righttatweel <= std::min(valueLimits.maxRight, 6.0F); righttatweel += 0.5) {
+            alternates.append({glyphCode, leftTatweel, righttatweel});
+          }
+          alternateSubtable->alternates[newglyph->charcode] = alternates;
         }
-        alternateSubtable->alternates[newglyph->charcode] = alternates;
       }
-    }
+    };
   }
 
   // for shrinking
