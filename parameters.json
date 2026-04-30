@@ -123,6 +123,22 @@
             }
         }
     },
+    "adjustmarks.8": {
+        "subtable1": {
+            "damma": {
+                "baseparameters": {
+                    "hah.init.beforemeem": [
+                        -180,
+                        152
+                    ],
+                    "meem.medi.afterhah": [
+                        -40,
+                        -138
+                    ]
+                }
+            }
+        }
+    },
     "ainjeemkasra.1": {
         "subtable1": {
             "kasra": {
@@ -571,6 +587,10 @@
                         -56,
                         28
                     ],
+                    "hah.init.beforemeem": [
+                        -180,
+                        40
+                    ],
                     "hah.init.ii": [
                         -98,
                         55
@@ -1012,11 +1032,11 @@
                         -45
                     ],
                     "alef.fina.laf": [
-                        -30,
-                        -13
+                        -50,
+                        -53
                     ],
                     "alef.fina.lamalef": [
-                        -2,
+                        17,
                         -69
                     ],
                     "alef.isol": [

@@ -37,6 +37,6 @@ class OldMadina : public Automedina {
   // Justification
   Lookup* shrinkstretchlt(float lt, QString featureName);
   Lookup* shrinkstretchlt();
-  void addchars();
+  void addEndOfAyas(QString ayaName, bool isColored, int maxWidth);
   void generateGlyphs();
 };

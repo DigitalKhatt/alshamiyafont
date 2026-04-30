@@ -346,37 +346,6 @@ liii0 ( (70.889,117.67), (-0.949846,-1.12731), (37.1313,3.07623) ) .. tension 2.
 %%beginbody
 tr_ := tr_ shifted (0,-140);
 enddefchar;
-beginchar(notdef,0,-1,-1,-1);
-%%backgroundimage:images/nodef.png,-752.949,-1178.7,8,0,0,8
-
-%%beginpaths
-
-fill
-(-42.2071,588.054) .. tension 1 and 1 ..
- {right}(165.312,781.92) .. tension 1 and 1 ..
- {down}(350.438,636.595) .. tension 1 and 1 ..
- {left}(279.936,518.4) .. tension 1 and 1 ..
- {up}(186.624,586.829) .. tension 0.93744 and 1.09623 ..
- {up}(256.666,697.075) .. tension 1 and 1 ..
- {left}(184.55,740.275) .. tension 1 and 1 ..
- {down}(78.7968,659.405) .. tension 1 and 1 ..
- {down}(201.898,363.101) .. tension 1 and 3.43742 ..
- {left}(168.269,223.776) .. tension 1.56096 and 1 ..
- {up}(151.046,269.088) .. tension 1 and 1 ..
- {up} cycle
-;
-fill
-(73.6776,83.6076) .. tension 1 and 1 ..
-(234.921,86.5935) .. tension 1 and 1 ..
- cycle
-;
-
-%%endpaths
-%%beginbody
-% glyphname:space
-%%begincomponents
-%%endcomponents
-endchar;
 defchar(lammeemfina,-1,-1,6,-1);
 %%backgroundimage:images/lammeemfina.jpg,-20,-1088,1,0,0,1
 %%beginparams
@@ -422,6 +391,37 @@ liii1 ( (318.6,123.4), (34,-21), (0,0) ) setranchor
 
 savepicture:=1;
 enddefchar;
+beginchar(notdef,0,-1,-1,-1);
+%%backgroundimage:images/nodef.png,-752.949,-1178.7,8,0,0,8
+
+%%beginpaths
+
+fill
+(-42.2071,588.054) .. tension 1 and 1 ..
+ {right}(165.312,781.92) .. tension 1 and 1 ..
+ {down}(350.438,636.595) .. tension 1 and 1 ..
+ {left}(279.936,518.4) .. tension 1 and 1 ..
+ {up}(186.624,586.829) .. tension 0.93744 and 1.09623 ..
+ {up}(256.666,697.075) .. tension 1 and 1 ..
+ {left}(184.55,740.275) .. tension 1 and 1 ..
+ {down}(78.7968,659.405) .. tension 1 and 1 ..
+ {down}(201.898,363.101) .. tension 1 and 3.43742 ..
+ {left}(168.269,223.776) .. tension 1.56096 and 1 ..
+ {up}(151.046,269.088) .. tension 1 and 1 ..
+ {up} cycle
+;
+fill
+(73.6776,83.6076) .. tension 1 and 1 ..
+(234.921,86.5935) .. tension 1 and 1 ..
+ cycle
+;
+
+%%endpaths
+%%beginbody
+% glyphname:space
+%%begincomponents
+%%endcomponents
+endchar;
 beginchar(null,1,-1,-1,-1);
 %%beginbody
 charwd := 0;
@@ -586,7 +586,255 @@ fill
 leftbearing:=0;
 rightbearing:=100;
 endchar;
-defchar(endofaya,1757,-1,-1,-1);
+beginchar(endofaya,1757,-1,-1,-1);
+%%backgroundimage:images/ayah.colored.jpg,-2634.97,-1083.45,1,0,0,1
+%%beginparams
+z1 = (407,1000);
+
+%%beginverbatim
+
+save _color; color _color[];
+_color1 := (165.0/255,143.0/255,106.0/255); %dacc8f (yellow)
+_color2:= (116.0/255,181.0/255,130.0/255); %bed0a6 (green)
+_color3:= (56.0/255,52.0/255,49.0/255);  % (brown)
+%%endverbatim
+
+%%beginpaths
+
+controlledPath (0,0)(_pi)(
+z1 .. tension 1.34662 and 1 ..
+(431.833,965) .. tension 2.17161 and 1 ..
+(522.279,877.278) .. tension 1.73063 and 1 ..
+(707.223,783.333) .. tension 0.75 and 2.66808 ..
+(911.307,662.5) .. tension 1 and 1.46852 ..
+ {down}(1004.73,585.491) .. tension 1.37528 and 1.56249 ..
+(953.457,535.428) .. tension 1 and 0.817256 ..
+ {left}(879.29,522.12) .. tension 1 and 1.76908 ..
+ {left}(793.283,548.805) .. tension 1.51394 and 0.75 ..
+ {left}(736.37,523.422) .. tension 2.44791 and 0.87884 ..
+ {left}(550.43,610.154) .. tension 1 and 2.36011 ..
+ {left}(x1,530) .. tension 1 and 1 ..
+ {right} cycle
+);
+controlledPath (1,0)(_pii)(
+(x1,590.834) .. tension 1.48291 and 1 ..
+ {right}(554.452,653) .. tension 1 and 5.79299 ..
+ {right}(737.326,565.851) .. tension 1 and 0.75 ..
+ {right}(793.277,589.167) .. tension 1 and 1 ..
+ {right}(886.501,557.798) .. tension 1 and 2.67019 ..
+ {up}(961.333,587.833) .. tension 9.69283 and 3.11289 ..
+(655.638,768.917) .. tension 1 and 1.38385 ..
+(442.305,888) .. tension 1 and 2.77377 ..
+(x1,930.166) .. tension 3.61131 and 3.89693 ..
+ {right} cycle
+);
+controlledPath (2,0)(_piii)(
+(572.025,763.374) .. tension 4.26468 and 1 ..
+(638.488,732.237) .. tension 1 and 6.10119 ..
+ {down}(728.965,667.182) .. tension 2.36638 and 1.96816 ..
+ {left}(706.582,635.434) .. tension 4.5127 and 1 ..
+(616.732,689.63) .. tension 1 and 4.54003 ..
+ {up}(548.021,728.521) .. tension 2.1223 and 2.35586 ..
+ {right} cycle
+);
+
+%%endpaths
+%%beginbody
+
+path _path[];
+
+z.center2 =  (x1,y1 - 760);
+
+picture _temppic;
+_temppic := image(
+
+_path1 := _pi;
+_path2 := subpath(0,length _path1 -1) of _path1;
+_path22 := _path2 .. (reverse _path2 reflectedabout (z1, z1 + (0,10))) .. cycle;
+fill _path22 withcolor _color3;
+
+_path3 := _pii;
+_path4 := subpath(0,length _path3 -1 ) of _path3;
+fill _path4 .. reverse _path4 reflectedabout (z1, z1 + (0,10)) .. cycle  withcolor _color1;
+
+_path5 := _piii;
+fill _path5 withcolor _color3;
+fill _path5 reflectedabout (z1, z1 + (0,10)) withcolor _color3;
+
+
+z.center =  (x1,ypart point 0 of _path5) + (0,-20);
+fill fullcircle scaled 120  shifted z.center withcolor _color3;
+
+def refaxe = (z.center2, z.center2 + (10,0)) enddef;
+
+draw currentpicture reflectedabout refaxe;
+
+save diag;
+
+diag1 = 1190;
+diag2 = 1120;
+
+_path6 := (halfcircle rotated 90 )scaled diag1  shifted z.center2;
+_path7 := reverse (halfcircle rotated 90) scaled diag2  shifted z.center2;
+
+_path8 := (halfcircle rotated -90 )scaled diag1  shifted z.center2;
+_path9 := reverse (halfcircle rotated -90) scaled diag2  shifted z.center2;
+
+
+
+_path10 = mybuildcycle(_path6, _path22 reflectedabout refaxe,_path7,_path22);
+_path11 = mybuildcycle(_path8,_path22 ,_path9,_path22 reflectedabout refaxe);
+
+
+fill _path10 withcolor _color2;
+fill _path11 withcolor _color2;
+
+diag1 := 1020;
+diag2 := 950;
+
+_path6 := (halfcircle rotated 90 )scaled diag1  shifted z.center2;
+_path7 := reverse (halfcircle rotated 90) scaled diag2  shifted z.center2;
+
+_path8 := (halfcircle rotated -90 )scaled diag1  shifted z.center2;
+_path9 := reverse (halfcircle rotated -90) scaled diag2  shifted z.center2;
+
+
+
+_path10 := mybuildcycle(_path6, _path22 reflectedabout refaxe,_path7,_path22);
+_path11 := mybuildcycle(_path8,_path22 ,_path9,_path22 reflectedabout refaxe);
+
+
+fill _path10 withcolor _color2;
+fill _path11 withcolor _color2;
+
+
+
+);
+
+draw _temppic;
+currentpicture := currentpicture  scaled 0.78 shifted (0,76);
+
+
+
+
+savepicture := 1;
+
+if useColoredAya : coloredglyph:="endofaya.colored"; fi
+
+
+
+endchar;
+beginchar(endofaya.colored,-1,-1,5,-1);
+%%backgroundimage:images/ayah.colored.jpg,-2634.97,-1083.45,1,0,0,1
+%%beginparams
+z1 = (407,1000);
+
+%%beginverbatim
+
+save _color; color _color[];
+_color1 := (165.0/255,143.0/255,106.0/255); %dacc8f (yellow)
+_color2:= (96.0/255,161.0/255,110.0/255); %bed0a6 (green)
+_color3:= (56.0/255,52.0/255,49.0/255);  % (brown)
+%%endverbatim
+
+%%beginpaths
+
+controlledPath (0,0)(_pi)(
+z1 .. tension 1.34662 and 1 ..
+(431.833,965) .. tension 2.17161 and 1 ..
+(521.279,871.278) .. tension 1.73063 and 1 ..
+(707.223,783.333) .. tension 0.75 and 2.66808 ..
+(908.307,654.5) .. tension 1 and 1.46852 ..
+ {down}(1004.73,585.491) .. tension 1.37528 and 1.56249 ..
+(939.457,532.428) .. tension 1 and 0.817256 ..
+ {left}(909.29,511.12) .. tension 1 and 1 ..
+ {left}(867.308,520.411) .. tension 1 and 1.98337 ..
+ {left}(789.329,492.546) .. tension 1.40592 and 1.76908 ..
+ {left}(772.283,514.805) .. tension 1.51394 and 0.75 ..
+ {left}(732.37,503.422) .. tension 2.44791 and 0.87884 ..
+ {left}(551.43,604.154) .. tension 1 and 2.36011 ..
+ {left}(x1,530) .. tension 1 and 1 ..
+ {right} cycle
+);
+controlledPath (1,0)(_pii)(
+(x1,590.834) .. tension 1.48291 and 1 ..
+ {right}(551.452,656) .. tension 1 and 5.79299 ..
+ {right}(737.326,565.851) .. tension 1 and 0.75 ..
+ {right}(793.277,589.167) .. tension 1 and 1 ..
+ {right}(856.501,572.798) .. tension 1 and 2.67019 ..
+ {up}(924.333,581.833) .. tension 9.69283 and 1 ..
+(655.638,768.917) .. tension 1 and 0.950567 ..
+(442.305,888) .. tension 1 and 2.77377 ..
+(x1,930.166) .. tension 3.61131 and 3.89693 ..
+ {right} cycle
+);
+controlledPath (2,0)(_piii)(
+(574.025,770.374) .. tension 4.26468 and 1 ..
+(640.488,739.237) .. tension 1 and 6.10119 ..
+ {down}(730.965,674.182) .. tension 2.36638 and 1.96816 ..
+ {left}(699.582,633.434) .. tension 4.5127 and 1 ..
+(612.732,679.63) .. tension 1 and 4.54003 ..
+ {up}(539.021,725.521) .. tension 2.1223 and 2.35586 ..
+ {right} cycle
+);
+
+%%endpaths
+%%beginbody
+
+path _path[];
+
+z.center2 =  (x1,y1 - 760);
+
+picture _temppic;
+_temppic := image(
+
+_path1 := _pi;
+_path2 := subpath(0,length _path1 -1) of _path1;
+_path22 := _path2 .. (reverse _path2 reflectedabout (z1, z1 + (0,10))) .. cycle;
+fill _path22 withcolor _color3;
+
+_path3 := _pii;
+_path4 := subpath(0,length _path3 -1 ) of _path3;
+fill _path4 .. reverse _path4 reflectedabout (z1, z1 + (0,10)) .. cycle  withcolor _color1;
+
+_path5 := _piii;
+fill _path5 withcolor _color3;
+fill _path5 reflectedabout (z1, z1 + (0,10)) withcolor _color3;
+
+
+z.center =  (x1,ypart point 0 of _path5) + (0,-20);
+fill fullcircle scaled 140  shifted z.center withcolor _color3;
+
+def refaxe = (z.center2, z.center2 + (10,0)) enddef;
+
+draw currentpicture reflectedabout refaxe;
+
+_path6 := (halfcircle rotated 90 )scaled 1170  shifted z.center2;
+_path7 := reverse (halfcircle rotated 90) scaled 920  shifted z.center2;
+
+_path8 := (halfcircle rotated -90 )scaled 1170  shifted z.center2;
+_path9 := reverse (halfcircle rotated -90) scaled 920  shifted z.center2;
+
+%fill _path6; fill _path7;
+
+_path10 = mybuildcycle(_path6, _path22 reflectedabout refaxe,_path7,_path22);
+_path11 = mybuildcycle(_path8,_path22 ,_path9,_path22 reflectedabout refaxe);
+
+
+fill _path10 withcolor _color2;
+fill _path11 withcolor _color2;
+
+
+);
+
+draw _temppic;
+currentpicture := currentpicture  scaled 0.78 shifted (0,76);
+
+savepicture := 1;
+coloredglyph := "";
+
+endchar;
+defchar(endofaya.iii,-1,-1,-1,-1);
 %%backgroundimage:images/aya2.JPG,-205.054,-919.225,1,0,0,1
 %%beginparams
 thickness_ := 20;
@@ -669,184 +917,6 @@ savepicture:=1;
 currentpicture := currentpicture shifted (0,30) scaled 0.84;
 
 enddefchar;
-beginchar(endofaya.ii,-1,-1,-1,-1);
-%%backgroundimage:images/hizb.jpg,-1277.59,-1060.2,1,0,0,1
-%%beginparams
-z1 = (407,1000);
-
-%%beginverbatim
-
-save _color; color _color[];
-_color1 := (229.0/255,216.0/255,164.0/255); %dacc8f (yellow)
-_color2:= (190.0/255,208.0/255,166.0/255); %bed0a6 (green)
-%%endverbatim
-
-%%beginpaths
-
-controlledPath (0,0)(_pi)(
-z1 .. tension 1.34662 and 1 ..
-(431,960) .. tension 2.17161 and 1 ..
-(505.307,881) .. tension 1 and 1 ..
-(709.307,780) .. tension 0.75 and 1 ..
-(903.307,652) .. tension 1 and 2.06235 ..
- {down}(963.443,607) .. tension 2.53564 and 1 ..
- {left}(869.926,545.965) .. tension 1 and 1 ..
- {left}(768.114,555.716) .. tension 1 and 1.30863 ..
- {left}(705.837,523.589) .. tension 1.57355 and 1 ..
- {left}(541.041,622) .. tension 1 and 1.6568 ..
- {left}(x1,550) .. tension 3.04005 and 10000 ..
- {right} cycle
-);
-controlledPath (1,0)(_pii)(
-(x1,601.834) .. tension 1 and 1 ..
- {right}(540.452,662) .. tension 1 and 5.79299 ..
- {right}(712.026,573.518) .. tension 1 and 0.75 ..
- {right}(769.11,601) .. tension 1 and 1 ..
- {right}(857.001,586.798) .. tension 1 and 2.67019 ..
- {up}(910,597) .. tension 9.69283 and 1 ..
-(697.305,746) .. tension 1 and 1 ..
-(442.305,888) .. tension 1 and 2.77377 ..
-(x1,930.166) .. tension 3.61131 and 3.89693 ..
- {right} cycle
-);
-controlledPath (2,0)(_piii)(
-(552.296,759.212) .. tension 4.26468 and 1 ..
-(637.016,727.431) .. tension 1 and 6.10119 ..
- {down}(720.965,669.876) .. tension 2.36638 and 1.96816 ..
- {left}(691.248,633.295) .. tension 4.5127 and 1 ..
-(609.816,681.713) .. tension 1 and 4.54003 ..
- {up}(530.557,718.372) .. tension 2.1223 and 2.35586 ..
- {right} cycle
-);
-
-%%endpaths
-%%beginbody
-
-path _path[];
-
-z.center2 =  (x1,y1 - 720);
-
-picture _temppic;
-_temppic := image(
-
-_path1 := _pi;
-_path2 := subpath(0,length _path1 -1) of _path1;
-fill _path2 .. (reverse _path2 reflectedabout (z1, z1 + (0,10))) .. cycle;
-
-_path3 := _pii;
-_path4 := subpath(0,length _path3 -1 ) of _path3;
-fill _path4 .. reverse _path4 reflectedabout (z1, z1 + (0,10)) .. cycle  withcolor _color1;
-
-_path5 := _piii;
-fill _path5;
-fill _path5 reflectedabout (z1, z1 + (0,10));
-
-
-z.center =  (x1,ypart point 0 of _path5);
-fill fullcircle scaled 125  shifted z.center;
-
-draw currentpicture reflectedabout (z.center2, z.center2 + (10,0));
-);
-
-fill fullcircle scaled 1120  shifted z.center2;
-fill reverse fullcircle scaled 1030  shifted z.center2 withcolor _color1;
-fill fullcircle scaled 940  shifted z.center2;
-fill reverse fullcircle scaled 850  shifted z.center2 withcolor _color2;
-draw _temppic;
-currentpicture := currentpicture  scaled 1.0467;
-
-savepicture := 1;
-
-coloredglyph:="endofaya.ii.colored";
-
-endchar;
-beginchar(endofaya.ii.colored,-1,-1,5,-1);
-%%backgroundimage:images/hizb.jpg,-1277.59,-1060.2,1,0,0,1
-%%beginparams
-z1 = (407,1000);
-
-%%beginverbatim
-
-save _color; color _color[];
-_color1 := (229.0/255,216.0/255,164.0/255); %dacc8f (yellow)
-_color2:= (190.0/255,208.0/255,166.0/255); %bed0a6 (green)
-%%endverbatim
-
-%%beginpaths
-
-controlledPath (0,0)(_pi)(
-z1 .. tension 1.34662 and 1 ..
-(431,960) .. tension 2.17161 and 1 ..
-(505.307,881) .. tension 1 and 1 ..
-(709.307,780) .. tension 0.75 and 1 ..
-(903.307,652) .. tension 1 and 2.06235 ..
- {down}(963.443,607) .. tension 2.53564 and 1 ..
- {left}(869.926,545.965) .. tension 1 and 1 ..
- {left}(768.114,555.716) .. tension 1 and 1.30863 ..
- {left}(705.837,523.589) .. tension 1.57355 and 1 ..
- {left}(541.041,622) .. tension 1 and 1.6568 ..
- {left}(x1,550) .. tension 3.04005 and 10000 ..
- {right} cycle
-);
-controlledPath (1,0)(_pii)(
-(x1,601.834) .. tension 1 and 1 ..
- {right}(540.452,662) .. tension 1 and 5.79299 ..
- {right}(712.026,573.518) .. tension 1 and 0.75 ..
- {right}(769.11,601) .. tension 1 and 1 ..
- {right}(857.001,586.798) .. tension 1 and 2.67019 ..
- {up}(910,597) .. tension 9.69283 and 1 ..
-(697.305,746) .. tension 1 and 1 ..
-(442.305,888) .. tension 1 and 2.77377 ..
-(x1,930.166) .. tension 3.61131 and 3.89693 ..
- {right} cycle
-);
-controlledPath (2,0)(_piii)(
-(552.296,759.212) .. tension 4.26468 and 1 ..
-(637.016,727.431) .. tension 1 and 6.10119 ..
- {down}(720.965,669.876) .. tension 2.36638 and 1.96816 ..
- {left}(691.248,633.295) .. tension 4.5127 and 1 ..
-(609.816,681.713) .. tension 1 and 4.54003 ..
- {up}(530.557,718.372) .. tension 2.1223 and 2.35586 ..
- {right} cycle
-);
-
-%%endpaths
-%%beginbody
-
-path _path[];
-
-z.center2 =  (x1,y1 - 720);
-
-picture _temppic;
-_temppic := image(
-
-_path1 := _pi;
-_path2 := subpath(0,length _path1 -1) of _path1;
-fill _path2 .. (reverse _path2 reflectedabout (z1, z1 + (0,10))) .. cycle;
-
-_path3 := _pii;
-_path4 := subpath(0,length _path3 -1 ) of _path3;
-fill _path4 .. reverse _path4 reflectedabout (z1, z1 + (0,10)) .. cycle  withcolor _color1;
-
-_path5 := _piii;
-fill _path5;
-fill _path5 reflectedabout (z1, z1 + (0,10));
-
-
-z.center =  (x1,ypart point 0 of _path5);
-fill fullcircle scaled 125  shifted z.center;
-
-draw currentpicture reflectedabout (z.center2, z.center2 + (10,0));
-);
-
-fill fullcircle scaled 1120  shifted z.center2;
-fill reverse fullcircle scaled 1030  shifted z.center2 withcolor _color1;
-fill fullcircle scaled 940  shifted z.center2;
-fill reverse fullcircle scaled 850  shifted z.center2 withcolor _color2;
-draw _temppic;
-currentpicture := currentpicture  scaled 1.0467;
-
-endchar;
 defchar(one_dot,-1,-1,-1,-1);
 %%backgroundimage:images/one_dot.jpg,-1291.7,-624.115,1,0,0,1
 

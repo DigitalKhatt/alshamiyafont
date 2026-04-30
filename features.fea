@@ -1362,6 +1362,10 @@ lookup adjustmarks {
     pos base [yehshape.fina.ii] <anchor function defaulbaseanchorfortop> markClass [waqf.sad] <anchor function defaultopmarkanchor> @waqf.sad;	
   } adjustmarks.7;
 
+  lookup adjustmarks.8 {
+    pos base [meem.medi.afterhah hah.init.beforemeem] <anchor function defaulbaseanchorfortop> markClass [damma] <anchor function defaultopmarkanchor> @damma;	
+  } adjustmarks.8;
+
   pos [behshape.init]' [onedotup]'lookup adjustmarks.1 [shadda]'lookup adjustmarks.1 [fatha]'lookup adjustmarks.1 [alef.fina]' [hamzaabove maddahabove]';
 
   pos [dal.isol]' [onedotup]' [fatha]'lookup adjustmarks.2 [alef.isol]' [maddahabove]';
@@ -1380,6 +1384,8 @@ lookup adjustmarks {
   pos [fehshape.medi.beforeyeh]' [onedotup]' [shadda]' [fathatanidgham]' [yehshape.fina.ii]' [waqf.sad]'lookup adjustmarks.7;
 
   pos [reh.fina.afterbehshape]' [fatha]'<0 100 0 0> [alefmaksura.isol.expa]'; 
+
+  pos [hah.init.beforemeem]' [onedotup]' [damma]'lookup adjustmarks.8 [meem.medi.afterhah]' [damma]'lookup adjustmarks.8;
 
 } adjustmarks;
 

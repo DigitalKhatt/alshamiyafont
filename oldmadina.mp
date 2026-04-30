@@ -14,3 +14,4 @@ newinternal digitscale; digitscale := 0.8;
 ayadigitheight:= 105;
 ayadigitkern:=40;
 behshape_medi_beforeyeh_y := -126;
+boolean useColoredAya;useColoredAya:=false;

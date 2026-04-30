@@ -123,41 +123,42 @@ void OldMadina::generateGlyphs() {
     if (name != "alternatechar") {
       GlyphVis& glyph = *glyphs.insert(name, GlyphVis(m_layout, edges));
 
-      m_layout->glyphNamePerCode[glyph.charcode] = glyph.name;
-      m_layout->glyphCodePerName[glyph.name] = glyph.charcode;
-      m_layout->unicodeToGlyphCode.insert(glyph.charcode, glyph.charcode);
+      if (edges->glyphtype != (int)GlyphType::GlyphTypeColored && edges->glyphtype != (int)GlyphType::GlyphTypeTemp) {
+        m_layout->glyphNamePerCode[glyph.charcode] = glyph.name;
+        m_layout->glyphCodePerName[glyph.name] = glyph.charcode;
+        m_layout->unicodeToGlyphCode.insert(glyph.charcode, glyph.charcode);
 
-      if (!classes["marks"].contains(glyph.name)) {
-        classes["bases"].insert(glyph.name);
-        m_layout->glyphGlobalClasses[glyph.charcode] = OtLayout::BaseGlyph;
-      } else {
-        m_layout->glyphGlobalClasses[glyph.charcode] = OtLayout::MarkGlyph;
-      }
+        if (!classes["marks"].contains(glyph.name)) {
+          classes["bases"].insert(glyph.name);
+          m_layout->glyphGlobalClasses[glyph.charcode] = OtLayout::BaseGlyph;
+        } else {
+          m_layout->glyphGlobalClasses[glyph.charcode] = OtLayout::MarkGlyph;
+        }
 
-      for (int i = 0; i < edges->numAnchors; i++) {
-        AnchorPoint anchor = edges->anchors[i];
-        if (anchor.anchorName) {
-          switch (anchor.type) {
-            case 1:
-              markAnchors[anchor.anchorName][glyph.charcode] = QPoint(anchor.x, anchor.y);
-              break;
-            case 2:
-              entryAnchors[anchor.anchorName][glyph.charcode] = QPoint(anchor.x, anchor.y);
-              break;
-            case 3:
-              exitAnchors[anchor.anchorName][glyph.charcode] = QPoint(anchor.x, anchor.y);
-            case 4:
-              entryAnchorsRTL[anchor.anchorName][glyph.charcode] = QPoint(anchor.x, anchor.y);
-              break;
-            case 5:
-              exitAnchorsRTL[anchor.anchorName][glyph.charcode] = QPoint(anchor.x, anchor.y);
-            default:
-              break;
+        for (int i = 0; i < edges->numAnchors; i++) {
+          AnchorPoint anchor = edges->anchors[i];
+          if (anchor.anchorName) {
+            switch (anchor.type) {
+              case 1:
+                markAnchors[anchor.anchorName][glyph.charcode] = QPoint(anchor.x, anchor.y);
+                break;
+              case 2:
+                entryAnchors[anchor.anchorName][glyph.charcode] = QPoint(anchor.x, anchor.y);
+                break;
+              case 3:
+                exitAnchors[anchor.anchorName][glyph.charcode] = QPoint(anchor.x, anchor.y);
+              case 4:
+                entryAnchorsRTL[anchor.anchorName][glyph.charcode] = QPoint(anchor.x, anchor.y);
+                break;
+              case 5:
+                exitAnchorsRTL[anchor.anchorName][glyph.charcode] = QPoint(anchor.x, anchor.y);
+              default:
+                break;
+            }
           }
         }
       }
     }
-
     edges = edges->next;
   }
 
@@ -196,17 +197,20 @@ void OldMadina::generateGlyphs() {
   m_layout->glyphs = glyphs;
 }
 
-void OldMadina::addchars() {
-  QString ayaName = "endofaya";
-
+void OldMadina::addEndOfAyas(QString ayaName, bool isColored, int maxWidth) {
   for (int ayaNumber = 1; ayaNumber <= 286; ayaNumber++) {
-    QString setcolored = "";  // QString("coloredglyph:=\"%1.colored%2\"").arg(ayaName).arg(ayaNumber);
-    QString data = QString("beginchar(%1%2,-1,-1,2,-1);\n%%beginbody\ngenAyaNumber(%1, %2,630);%3;endchar;").arg(ayaName).arg(ayaNumber).arg(setcolored);
+    QString setcolored;
+    if (isColored) {
+      setcolored = QString("coloredglyph:=\"%1.colored%2\"").arg(ayaName).arg(ayaNumber);
+    }
+    QString data = QString("beginchar(%1%2,-1,-1,2,-1);\n%%beginbody\ngenAyaNumber(%1, %2,%4);%3;endchar;").arg(ayaName).arg(ayaNumber).arg(setcolored).arg(maxWidth);
     m_layout->font->executeMetaPost(data);
     addedGlyphs.insert(QString("%1%2").arg(ayaName).arg(ayaNumber), data);
-    /*
-    data = QString("beginchar(%1.colored%2,-1,-1,5,-1);\n%%beginbody\ngenAyaNumber(%1.colored, %2,3000);endchar;").arg(ayaName).arg(ayaNumber);
-    m_layout->font->executeMetaPost(data);*/
+    if (isColored) {
+      data = QString("beginchar(%1.colored%2,-1,-1,5,-1);\n%%beginbody\ngenAyaNumber(%1.colored, %2,%3);endchar;").arg(ayaName).arg(ayaNumber).arg(maxWidth);
+      m_layout->font->executeMetaPost(data);
+      addedGlyphs.insert(QString("%1.colored%2").arg(ayaName).arg(ayaNumber), data);
+    }
   }
 }
 
@@ -410,7 +414,9 @@ OldMadina::OldMadina(OtLayout* layout, Font* font, bool extended) : Automedina{l
       //"alefmaksura"
   };
 
-  addchars();
+  auto useColoredAya = font->getBoolVariable("useColoredAya");
+
+  addEndOfAyas("endofaya", useColoredAya, 630);
 
   generateGlyphs();
 
