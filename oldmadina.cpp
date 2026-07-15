@@ -57,7 +57,7 @@ void OldMadina::generateGlyphs() {
     auto name = QString(edges->charname);
 
     if (name != "alternatechar") {
-      GlyphVis& glyph = *glyphs.insert(name, GlyphVis(m_layout, edges));
+      GlyphVis& glyph = glyphs.insert_or_assign(name.toStdString(), GlyphVis(m_layout, edges)).first->second;
 
       m_layout->glyphNamePerCode[glyph.charcode] = QString::fromStdString(glyph.name);
       m_layout->glyphCodePerName[QString::fromStdString(glyph.name)] = glyph.charcode;
@@ -97,7 +97,7 @@ void OldMadina::generateGlyphs() {
 
   auto addFake = [this](QString glyphName, std::uint16_t unicode, std::uint16_t codechar) {
     auto code = unicode;  // codechar; //layout.glyphNamePerCode.lastKey();
-    GlyphVis& glyph = *glyphs.insert(glyphName, GlyphVis());
+    GlyphVis& glyph = glyphs.insert_or_assign(glyphName.toStdString(), GlyphVis()).first->second;
     glyph.name = glyphName.toStdString();
     glyph.charcode = code;
 
@@ -643,7 +643,7 @@ Lookup* OldMadina::rehwawcursivecpp() {
 
   for (auto glyphcode : glyphcodes) {
     QString glyphName = m_layout->glyphNamePerCode[glyphcode];
-    auto& glyph = glyphs[glyphName];
+    auto& glyph = glyphs[glyphName.toStdString()];
 
     rehisol->anchors[glyphcode].entry = QPoint(glyph.width, 0);
     wawisol->anchors[glyphcode].entry = QPoint(glyph.width, 0);
@@ -930,7 +930,7 @@ Lookup* OldMadina::defaultwaqfmarktobase() {
   lookup->type = Lookup::mark2base;
 
   auto basefunction = [this](QString glyphName, QString className, QPoint adjust, GlyphParameters parameters) -> QPoint {
-    GlyphVis& curr = glyphs[glyphName];
+    GlyphVis& curr = glyphs[glyphName.toStdString()];
 
     int height = std::max((int)curr.height + 100, 900);
     int width = 0;  // curr.bbox.llx;
@@ -942,7 +942,7 @@ Lookup* OldMadina::defaultwaqfmarktobase() {
   };
 
   auto markfunction = [this](QString glyphName, QString className, QPoint adjust, GlyphParameters parameters) -> QPoint {
-    GlyphVis& curr = glyphs[glyphName];
+    GlyphVis& curr = glyphs[glyphName.toStdString()];
 
     int height = 0;
     int width = 0;
@@ -1131,7 +1131,7 @@ Lookup* OldMadina::defaultmarkdotmarks() {
   topsubtable->base = {"topdotmarks"};
 
   auto basetopfunction = [this, topsubtable](QString glyphName, QString className, QPoint adjust, GlyphParameters parameters) -> QPoint {
-    GlyphVis& curr = glyphs[glyphName];
+    GlyphVis& curr = glyphs[glyphName.toStdString()];
 
     int width = curr.width * 0.5;
     int height = (int)curr.height + 80;
@@ -1169,7 +1169,7 @@ Lookup* OldMadina::defaultmarkdotmarks() {
   bottomsubtable->base = {"downdotmarks"};
 
   auto basedownfunction = [this, bottomsubtable](QString glyphName, QString className, QPoint adjust, GlyphParameters parameters) -> QPoint {
-    GlyphVis& curr = glyphs[glyphName];
+    GlyphVis& curr = glyphs[glyphName.toStdString()];
 
     int depth = -(int)curr.depth + 50;
     int width = curr.width * 0.5;
@@ -1226,7 +1226,7 @@ Lookup* OldMadina::defaultwaqfmarkabovemarkprecise() {
     newsubtable->compiledRule = ChainingSubtable::CompiledRule();
 
     newsubtable->compiledRule.backtrack.push_back(bases);
-    newsubtable->compiledRule.backtrack.push_back(std::unordered_set{(std::uint16_t)glyphs[topmark].charcode});
+    newsubtable->compiledRule.backtrack.push_back(std::unordered_set{(std::uint16_t)glyphs[topmark.toStdString()].charcode});
     newsubtable->compiledRule.input.push_back(waqfmarks);
 
     newsubtable->compiledRule.lookupRecords.push_back({0, asStdString(sublookupName)});
@@ -1384,7 +1384,7 @@ Lookup* OldMadina::pointmarks() {
     newsubtable->compiledRule = ChainingSubtable::CompiledRule();
 
     newsubtable->compiledRule.backtrack.push_back({classtoUnicode("bases")});
-    newsubtable->compiledRule.input.push_back(std::unordered_set{(std::uint16_t)glyphs[pointmark].charcode});
+    newsubtable->compiledRule.input.push_back(std::unordered_set{(std::uint16_t)glyphs[pointmark.toStdString()].charcode});
     newsubtable->compiledRule.input.push_back(classtoUnicode("marks"));
 
     newsubtable->compiledRule.lookupRecords.push_back({1, asStdString(sublookupName)});
@@ -1411,7 +1411,7 @@ Lookup* OldMadina::ayanumberskern() {
   singleadjsubtable->name = asStdString(sublookup->name);
 
   for (auto digit : digitySet) {
-    auto& onesglyph = glyphs[m_layout->glyphNamePerCode.value(digit)];
+    auto& onesglyph = glyphs[m_layout->glyphNamePerCode.value(digit).toStdString()];
     qint16 kern = -(ayaGlyph.width / 2 - onesglyph.width / 2);
     singleadjsubtable->singlePos[digit] = {700, yoffset, 0, 0};
   }
@@ -1445,7 +1445,7 @@ Lookup* OldMadina::ayanumberskern() {
   singleadjsubtable->name = asStdString(sublookup->name);
 
   for (auto digit : digitySet) {
-    auto& onesglyph = glyphs[m_layout->glyphNamePerCode.value(digit)];
+    auto& onesglyph = glyphs[m_layout->glyphNamePerCode.value(digit).toStdString()];
     int leftBearing = 0;
     qint16 kern = leftBearing + (ayaGlyph.width - leftBearing) / 2 + onesglyph.width / 2;
     singleadjsubtable->singlePos[digit] = {kern, yoffset, 0, 0};
@@ -1640,16 +1640,16 @@ Lookup* OldMadina::forheh() {
   single->subtables.append(singlesubtable);
   singlesubtable->name = asStdString(single->name);
 
-  for (auto& glyph : glyphs) {
+  for (auto& [glyphKey, glyph] : glyphs) {
     if (classes["haslefttatweel"].contains(glyph.name)) {
       QString destName = QStringLiteral("%1.pluslt_%2").arg(QString::fromStdString(glyph.name)).arg((int)((glyph.charlt + 2) * 100));
-      if (glyphs.contains(destName)) {
-        singlesubtable->subst[glyphs[QString::fromStdString(glyph.name)].charcode] = glyphs[destName].charcode;
+      if (glyphs.contains(destName.toStdString())) {
+        singlesubtable->subst[glyphs[glyph.name].charcode] = glyphs[destName.toStdString()].charcode;
       }
     } else if (classes["haslefttatweel"].contains(glyph.originalglyph) && glyph.name.find("pluslt") != std::string::npos) {
       QString destName = QStringLiteral("%1.pluslt_%2").arg(QString::fromStdString(glyph.originalglyph)).arg((int)((glyph.charlt + 2) * 100));
-      if (glyphs.contains(destName)) {
-        singlesubtable->subst[glyphs[QString::fromStdString(glyph.name)].charcode] = glyphs[destName].charcode;
+      if (glyphs.contains(destName.toStdString())) {
+        singlesubtable->subst[glyphs[glyph.name].charcode] = glyphs[destName.toStdString()].charcode;
       }
     }
   }
@@ -1695,16 +1695,16 @@ Lookup* OldMadina::forhamza() {
 
   int tatweel = 2;
 
-  for (auto& glyph : glyphs) {
+  for (auto& [glyphKey, glyph] : glyphs) {
     if (classes["haslefttatweel"].contains(glyph.name)) {
       QString destName = QStringLiteral("%1.pluslt_%2").arg(QString::fromStdString(glyph.name)).arg((int)((glyph.charlt + tatweel) * 100));
-      if (glyphs.contains(destName)) {
-        singlesubtable->subst[glyphs[QString::fromStdString(glyph.name)].charcode] = glyphs[destName].charcode;
+      if (glyphs.contains(destName.toStdString())) {
+        singlesubtable->subst[glyphs[glyph.name].charcode] = glyphs[destName.toStdString()].charcode;
       }
     } else if (classes["haslefttatweel"].contains(glyph.originalglyph) && glyph.name.find("pluslt") != std::string::npos) {
       QString destName = QStringLiteral("%1.pluslt_%2").arg(QString::fromStdString(glyph.originalglyph)).arg((int)((glyph.charlt + tatweel) * 100));
-      if (glyphs.contains(destName)) {
-        singlesubtable->subst[glyphs[QString::fromStdString(glyph.name)].charcode] = glyphs[destName].charcode;
+      if (glyphs.contains(destName.toStdString())) {
+        singlesubtable->subst[glyphs[glyph.name].charcode] = glyphs[destName.toStdString()].charcode;
       }
     }
   }
@@ -1819,7 +1819,7 @@ Lookup* OldMadina::shrinkstretchlt(float lt, QString featureName) {
   single->subtables.append(singlesubtable);
   singlesubtable->name = asStdString(single->name);
 
-  for (auto& glyph : glyphs) {
+  for (auto& [glyphKey, glyph] : glyphs) {
     // QRegularExpression reg2("beginchar\\((.*?),(.*?),(.*?),(.*?)\\);");
     QRegularExpression regname("(.*)[.](minuslt|pluslt)_(.*)");
     QRegularExpressionMatch match = regname.match(QString::fromStdString(glyph.name));
@@ -1830,13 +1830,13 @@ Lookup* OldMadina::shrinkstretchlt(float lt, QString featureName) {
     } else if (classes["haslefttatweel"].contains(glyph.name)) {
       if (lt < 0) {
         QString destName = QStringLiteral("%1.minuslt_%2").arg(QString::fromStdString(glyph.name)).arg((int)(lt * -100));
-        if (glyphs.contains(destName)) {
-          singlesubtable->subst[glyphs[QString::fromStdString(glyph.name)].charcode] = glyphs[destName].charcode;
+        if (glyphs.contains(destName.toStdString())) {
+          singlesubtable->subst[glyphs[glyph.name].charcode] = glyphs[destName.toStdString()].charcode;
         }
       } else {
         QString destName = QStringLiteral("%1.pluslt_%2").arg(QString::fromStdString(glyph.name)).arg((int)(lt * 100));
-        if (glyphs.contains(destName)) {
-          singlesubtable->subst[glyphs[QString::fromStdString(glyph.name)].charcode] = glyphs[destName].charcode;
+        if (glyphs.contains(destName.toStdString())) {
+          singlesubtable->subst[glyphs[glyph.name].charcode] = glyphs[destName.toStdString()].charcode;
         }
       }
     }
@@ -1847,14 +1847,14 @@ Lookup* OldMadina::shrinkstretchlt(float lt, QString featureName) {
 
                 if (classes["haslefttatweel"].contains(glyph.name)) {
                         QString destName = QStringLiteral("%1.minuslt_%2").arg(QString::fromStdString(glyph.name)).arg((int)(lt * 100));
-                        if (glyphs.contains(destName)) {
-                                singlesubtable->subst[glyphs[QString::fromStdString(glyph.name)].charcode] = glyphs[destName].charcode;
+                        if (glyphs.contains(destName.toStdString())) {
+                                singlesubtable->subst[glyphs[glyph.name].charcode] = glyphs[destName.toStdString()].charcode;
                         }
                 }
                 else if (classes["haslefttatweel"].contains(glyph.originalglyph) && glyph.name.find("pluslt") != std::string::npos) {
                         QString destName = QStringLiteral("%1.pluslt_%2").arg(QString::fromStdString(glyph.originalglyph)).arg((int)((glyph.charlt - shrink) * 100));
-                        if (glyphs.contains(destName)) {
-                                singlesubtable->subst[glyphs[QString::fromStdString(glyph.name)].charcode] = glyphs[destName].charcode;
+                        if (glyphs.contains(destName.toStdString())) {
+                                singlesubtable->subst[glyphs[glyph.name].charcode] = glyphs[destName.toStdString()].charcode;
                         }
                 }*/
   }
@@ -1896,16 +1896,16 @@ Lookup* OldMadina::forsmallhighwaw() {
   single->subtables.append(singlesubtable);
   singlesubtable->name = asStdString(single->name);
 
-  for (auto& glyph : glyphs) {
+  for (auto& [glyphKey, glyph] : glyphs) {
     if (classes["haslefttatweel"].contains(glyph.name)) {
       QString destName = QStringLiteral("%1.pluslt_%2").arg(QString::fromStdString(glyph.name)).arg((int)((glyph.charlt + tatweel) * 100));
-      if (glyphs.contains(destName)) {
-        singlesubtable->subst[glyphs[QString::fromStdString(glyph.name)].charcode] = glyphs[destName].charcode;
+      if (glyphs.contains(destName.toStdString())) {
+        singlesubtable->subst[glyphs[glyph.name].charcode] = glyphs[destName.toStdString()].charcode;
       }
     } else if (classes["haslefttatweel"].contains(glyph.originalglyph) && glyph.name.find("pluslt") != std::string::npos) {
       QString destName = QStringLiteral("%1.pluslt_%2").arg(QString::fromStdString(glyph.originalglyph)).arg((int)((glyph.charlt + tatweel) * 100));
-      if (glyphs.contains(destName)) {
-        singlesubtable->subst[glyphs[QString::fromStdString(glyph.name)].charcode] = glyphs[destName].charcode;
+      if (glyphs.contains(destName.toStdString())) {
+        singlesubtable->subst[glyphs[glyph.name].charcode] = glyphs[destName.toStdString()].charcode;
       }
     }
   }
@@ -1966,16 +1966,16 @@ Lookup* OldMadina::forsmalllalef() {
   single->subtables.append(singlesubtable);
   singlesubtable->name = asStdString(single->name);
 
-  for (auto& glyph : glyphs) {
+  for (auto& [glyphKey, glyph] : glyphs) {
     if (classes["haslefttatweel"].contains(glyph.name)) {
       QString destName = QStringLiteral("%1.pluslt_%2").arg(QString::fromStdString(glyph.name)).arg((int)((glyph.charlt + tatweel) * 100));
-      if (glyphs.contains(destName)) {
-        singlesubtable->subst[glyphs[QString::fromStdString(glyph.name)].charcode] = glyphs[destName].charcode;
+      if (glyphs.contains(destName.toStdString())) {
+        singlesubtable->subst[glyphs[glyph.name].charcode] = glyphs[destName.toStdString()].charcode;
       }
     } else if (classes["haslefttatweel"].contains(glyph.originalglyph) && glyph.name.find("pluslt") != std::string::npos) {
       QString destName = QStringLiteral("%1.pluslt_%2").arg(QString::fromStdString(glyph.originalglyph)).arg((int)((glyph.charlt + tatweel) * 100));
-      if (glyphs.contains(destName)) {
-        singlesubtable->subst[glyphs[QString::fromStdString(glyph.name)].charcode] = glyphs[destName].charcode;
+      if (glyphs.contains(destName.toStdString())) {
+        singlesubtable->subst[glyphs[glyph.name].charcode] = glyphs[destName.toStdString()].charcode;
       }
     }
   }
@@ -1996,16 +1996,16 @@ Lookup* OldMadina::forsmalllalef() {
   single->subtables.append(singlesubtable);
   singlesubtable->name = asStdString(single->name);
 
-  for (auto& glyph : glyphs) {
+  for (auto& [glyphKey, glyph] : glyphs) {
     if (classes["haslefttatweel"].contains(glyph.name)) {
       QString destName = QStringLiteral("%1.pluslt_%2").arg(QString::fromStdString(glyph.name)).arg((int)((glyph.charlt + tatweel) * 100));
-      if (glyphs.contains(destName)) {
-        singlesubtable->subst[glyphs[QString::fromStdString(glyph.name)].charcode] = glyphs[destName].charcode;
+      if (glyphs.contains(destName.toStdString())) {
+        singlesubtable->subst[glyphs[glyph.name].charcode] = glyphs[destName.toStdString()].charcode;
       }
     } else if (classes["haslefttatweel"].contains(glyph.originalglyph) && glyph.name.find("pluslt") != std::string::npos) {
       QString destName = QStringLiteral("%1.pluslt_%2").arg(QString::fromStdString(glyph.originalglyph)).arg((int)((glyph.charlt + tatweel) * 100));
-      if (glyphs.contains(destName)) {
-        singlesubtable->subst[glyphs[QString::fromStdString(glyph.name)].charcode] = glyphs[destName].charcode;
+      if (glyphs.contains(destName.toStdString())) {
+        singlesubtable->subst[glyphs[glyph.name].charcode] = glyphs[destName.toStdString()].charcode;
       }
     }
   }
@@ -2095,16 +2095,16 @@ Lookup* OldMadina::forwaw() {
 
   float tatweel = 1;
 
-  for (auto& glyph : glyphs) {
+  for (auto& [glyphKey, glyph] : glyphs) {
     if (classes["haslefttatweel"].contains(glyph.name)) {
       QString destName = QStringLiteral("%1.pluslt_%2").arg(QString::fromStdString(glyph.name)).arg((int)((glyph.charlt + tatweel) * 100));
-      if (glyphs.contains(destName)) {
-        singlesubtable->subst[glyphs[QString::fromStdString(glyph.name)].charcode] = glyphs[destName].charcode;
+      if (glyphs.contains(destName.toStdString())) {
+        singlesubtable->subst[glyphs[glyph.name].charcode] = glyphs[destName.toStdString()].charcode;
       }
     } else if (classes["haslefttatweel"].contains(glyph.originalglyph) && glyph.name.find("pluslt") != std::string::npos) {
       QString destName = QStringLiteral("%1.pluslt_%2").arg(QString::fromStdString(glyph.originalglyph)).arg((int)((glyph.charlt + tatweel) * 100));
-      if (glyphs.contains(destName)) {
-        singlesubtable->subst[glyphs[QString::fromStdString(glyph.name)].charcode] = glyphs[destName].charcode;
+      if (glyphs.contains(destName.toStdString())) {
+        singlesubtable->subst[glyphs[glyph.name].charcode] = glyphs[destName.toStdString()].charcode;
       }
     }
   }
