@@ -133,11 +133,11 @@ void OldMadina::addchars() {
   for (int ayaNumber = 1; ayaNumber <= 286; ayaNumber++) {
     QString setcolored = "";  // QString("coloredglyph:=\"%1.colored%2\"").arg(ayaName).arg(ayaNumber);
     QString data = QString("beginchar(%1%2,-1,-1,2,-1);\n%%beginbody\ngenAyaNumber(%1, %2,3000);%3;endchar;").arg(ayaName).arg(ayaNumber).arg(setcolored);
-    m_layout->font->executeMetaPost(data);
+    m_layout->font->executeMetaPost(data.toLatin1().toStdString());
     addedGlyphs[QString("%1%2").arg(ayaName).arg(ayaNumber).toStdString()] = data.toStdString();
     /*
     data = QString("beginchar(%1.colored%2,-1,-1,5,-1);\n%%beginbody\ngenAyaNumber(%1.colored, %2,3000);endchar;").arg(ayaName).arg(ayaNumber);
-    m_layout->font->executeMetaPost(data);*/
+    m_layout->font->executeMetaPost(data.toLatin1().toStdString());*/
   }
 }
 
@@ -590,8 +590,8 @@ Lookup* OldMadina::rehwawcursivecpp() {
    public:
     CustomCursiveSubtable(Lookup* lookup) : CursiveSubtable(lookup) {}
 
-    virtual QPoint calculateEntry(GlyphVis* originalglyph, GlyphVis* extendedglyph, QPoint defaultEntry) {
-      QPoint entry = entryParameters[originalglyph->charcode];
+    virtual Point calculateEntry(GlyphVis* originalglyph, GlyphVis* extendedglyph, Point defaultEntry) {
+      Point entry = entryParameters[originalglyph->charcode];
 
       entry += QPoint(extendedglyph->width, 0);
 
@@ -929,8 +929,8 @@ Lookup* OldMadina::defaultwaqfmarktobase() {
   lookup->feature = "mark";
   lookup->type = Lookup::mark2base;
 
-  auto basefunction = [this](QString glyphName, QString className, QPoint adjust, GlyphParameters parameters) -> QPoint {
-    GlyphVis& curr = glyphs[glyphName.toStdString()];
+  auto basefunction = [this](std::string glyphName, std::string className, Point adjust, GlyphParameters parameters) -> Point {
+    GlyphVis& curr = glyphs[glyphName];
 
     int height = std::max((int)curr.height + 100, 900);
     int width = 0;  // curr.bbox.llx;
@@ -938,11 +938,11 @@ Lookup* OldMadina::defaultwaqfmarktobase() {
     width += adjust.x();
     height += adjust.y();
 
-    return QPoint(width, height);
+    return Point(width, height);
   };
 
-  auto markfunction = [this](QString glyphName, QString className, QPoint adjust, GlyphParameters parameters) -> QPoint {
-    GlyphVis& curr = glyphs[glyphName.toStdString()];
+  auto markfunction = [this](std::string glyphName, std::string className, Point adjust, GlyphParameters parameters) -> Point {
+    GlyphVis& curr = glyphs[glyphName];
 
     int height = 0;
     int width = 0;
@@ -950,7 +950,7 @@ Lookup* OldMadina::defaultwaqfmarktobase() {
     width += adjust.x();
     height += adjust.y();
 
-    return QPoint(width, height);
+    return Point(width, height);
   };
 
   MarkBaseSubtable* newsubtable = new MarkBaseSubtable(lookup);
@@ -1130,8 +1130,8 @@ Lookup* OldMadina::defaultmarkdotmarks() {
   topsubtable->name = "defaultmarkdotmarkstop";
   topsubtable->base = {"topdotmarks"};
 
-  auto basetopfunction = [this, topsubtable](QString glyphName, QString className, QPoint adjust, GlyphParameters parameters) -> QPoint {
-    GlyphVis& curr = glyphs[glyphName.toStdString()];
+  auto basetopfunction = [this, topsubtable](std::string glyphName, std::string className, Point adjust, GlyphParameters parameters) -> Point {
+    GlyphVis& curr = glyphs[glyphName];
 
     int width = curr.width * 0.5;
     int height = (int)curr.height + 80;
@@ -1139,7 +1139,7 @@ Lookup* OldMadina::defaultmarkdotmarks() {
     width = width + adjust.x();
     height = height + adjust.y();
 
-    return QPoint(width, height);
+    return Point(width, height);
   };
 
   auto topmarksStd = classes["topmarks"];
@@ -1168,8 +1168,8 @@ Lookup* OldMadina::defaultmarkdotmarks() {
   bottomsubtable->name = "defaultmarkdotmarksbottom";
   bottomsubtable->base = {"downdotmarks"};
 
-  auto basedownfunction = [this, bottomsubtable](QString glyphName, QString className, QPoint adjust, GlyphParameters parameters) -> QPoint {
-    GlyphVis& curr = glyphs[glyphName.toStdString()];
+  auto basedownfunction = [this, bottomsubtable](std::string glyphName, std::string className, Point adjust, GlyphParameters parameters) -> Point {
+    GlyphVis& curr = glyphs[glyphName];
 
     int depth = -(int)curr.depth + 50;
     int width = curr.width * 0.5;
@@ -1177,7 +1177,7 @@ Lookup* OldMadina::defaultmarkdotmarks() {
     width = width + adjust.x();
     depth = depth - adjust.y();
 
-    return QPoint(width, -depth);
+    return Point(width, -depth);
   };
 
   bottomsubtable->classes["lowmarks"].mark = {"lowmarks"};
