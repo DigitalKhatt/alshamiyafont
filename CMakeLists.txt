@@ -16,8 +16,7 @@ set(Source_Files
 
 
 find_package(Qt5 COMPONENTS Gui  REQUIRED)
-find_package(Clipper2 CONFIG REQUIRED)
-find_package(visualmetafont REQUIRED)
+find_package(digitalkhatt_otlayout REQUIRED CONFIG HINTS "${CMAKE_CURRENT_SOURCE_DIR}")
 
 
 add_library(${PROJECT_NAME} SHARED ${Source_Files})
@@ -28,6 +27,6 @@ set_target_properties(${PROJECT_NAME} PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POS
 
 target_compile_options(${PROJECT_NAME} PUBLIC $<$<CXX_COMPILER_ID:Clang>:-fdeclspec>)
 
-target_link_libraries(${PROJECT_NAME} Qt5::Gui visualmetafont)
+target_link_libraries(${PROJECT_NAME} Qt5::Gui digitalkhatt_otlayout)
 
 install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_CURRENT_SOURCE_DIR})
