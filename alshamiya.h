@@ -5,13 +5,13 @@
 #include "Subtable.h"
 #include "automedina.h"
 
-class OldMadina : public Automedina {
+class Alshamiya : public Automedina {
  public:
-  OldMadina(OtLayout* layout, MPFont* font, bool extended);
+  Alshamiya(OtLayout* layout, MPFont* font, bool extended);
   Lookup* getLookup(std::string lookupName) override;
   CalcAnchor getanchorCalcFunctions(std::string functionName, Subtable* subtable) override;
   void generateSubstEquivGlyphs() override;
-  ~OldMadina() {}
+  ~Alshamiya() {}
 
  private:
   Lookup* defaultmarkposition();

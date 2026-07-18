@@ -1,4 +1,4 @@
-#include "oldmadina.h"
+#include "alshamiya.h"
 
 #include <algorithm>
 
@@ -13,7 +13,7 @@
 
 using namespace std;
 
-void OldMadina::generateSubstEquivGlyphs() {
+void Alshamiya::generateSubstEquivGlyphs() {
   return;
 
   GlyphParameters parameters;
@@ -47,7 +47,7 @@ void OldMadina::generateSubstEquivGlyphs() {
   }
 }
 
-void OldMadina::generateGlyphs() {
+void Alshamiya::generateGlyphs() {
   auto edgess = font->edges();
 
   glyphs.clear();
@@ -126,7 +126,7 @@ void OldMadina::generateGlyphs() {
   m_layout->glyphs = glyphs;
 }
 
-void OldMadina::addchars() {
+void Alshamiya::addchars() {
   QString ayaName = "endofaya";
 
   for (int ayaNumber = 1; ayaNumber <= 286; ayaNumber++) {
@@ -140,7 +140,7 @@ void OldMadina::addchars() {
   }
 }
 
-OldMadina::OldMadina(OtLayout* layout, MPFont* font, bool extended) : Automedina{layout, font, extended} {
+Alshamiya::Alshamiya(OtLayout* layout, MPFont* font, bool extended) : Automedina{layout, font, extended} {
   isForCoreText = font->boolVariable("isForCoreText");
   // m_metafont = layout->m_font;
   classes["marks"] = {
@@ -461,7 +461,7 @@ OldMadina::OldMadina(OtLayout* layout, MPFont* font, bool extended) : Automedina
   layout->expandableGlyphs["meem.fina.basmala"] = {0, 0, 20, -1};
 }
 
-CalcAnchor OldMadina::getanchorCalcFunctions(std::string functionName,
+CalcAnchor Alshamiya::getanchorCalcFunctions(std::string functionName,
                                              Subtable* subtable) {
   CalcAnchor ret;
   if (functionName == "defaultmarkabovemark") {
@@ -483,7 +483,7 @@ CalcAnchor OldMadina::getanchorCalcFunctions(std::string functionName,
   }
 }
 
-Lookup* OldMadina::getLookup(std::string lookupName) {
+Lookup* Alshamiya::getLookup(std::string lookupName) {
   if (lookupName == "defaultmarkpositioncpp") {
     return defaultmarkposition();
   } else if (lookupName == "defaultwaqfmarktobase") {
@@ -532,7 +532,7 @@ Lookup* OldMadina::getLookup(std::string lookupName) {
 
   return nullptr;
 }
-Lookup* OldMadina::allCursiveJoin(bool rtl) {
+Lookup* Alshamiya::allCursiveJoin(bool rtl) {
   auto lookup = new Lookup(m_layout);
   lookup->name = std::string("allcursivejoin") + (rtl ? "rtl" : "nortl");
   lookup->feature = "";
@@ -576,7 +576,7 @@ Lookup* OldMadina::allCursiveJoin(bool rtl) {
   return lookup;
 }
 
-Lookup* OldMadina::rehwawcursivecpp() {
+Lookup* Alshamiya::rehwawcursivecpp() {
   Lookup* lookup = new Lookup(m_layout);
   lookup->name = "rehwawcursivecpp";
   lookup->feature = isForCoreText ? "" : "curs";
@@ -654,7 +654,7 @@ Lookup* OldMadina::rehwawcursivecpp() {
 
   return lookup;
 }
-Lookup* OldMadina::cursivejoin() {
+Lookup* Alshamiya::cursivejoin() {
   auto lookup = new Lookup(m_layout);
   lookup->name = "cursivejoinrtl";
   lookup->feature = "curs";
@@ -703,7 +703,7 @@ Lookup* OldMadina::cursivejoin() {
 
   return lookup;
 }
-Lookup* OldMadina::defaultmarkposition() {
+Lookup* Alshamiya::defaultmarkposition() {
   Lookup* lookup = new Lookup(m_layout);
   lookup->name = "defaultmarkposition";
   lookup->feature = "mark";
@@ -922,7 +922,7 @@ Lookup* OldMadina::defaultmarkposition() {
 
   return lookup;
 }
-Lookup* OldMadina::defaultwaqfmarktobase() {
+Lookup* Alshamiya::defaultwaqfmarktobase() {
   Lookup* lookup = new Lookup(m_layout);
   lookup->name = "defaultwaqfmarktobase";
   lookup->feature = "mark";
@@ -964,7 +964,7 @@ Lookup* OldMadina::defaultwaqfmarktobase() {
 
   return lookup;
 }
-Lookup* OldMadina::defaultdotmarks() {
+Lookup* Alshamiya::defaultdotmarks() {
   Lookup* lookup = new Lookup(m_layout);
   lookup->name = "defaultdotmarks";
   lookup->feature = "mark";
@@ -1025,7 +1025,7 @@ Lookup* OldMadina::defaultdotmarks() {
 
   return lookup;
 }
-Lookup* OldMadina::defaultmkmk() {
+Lookup* Alshamiya::defaultmkmk() {
   Lookup* lookup = new Lookup(m_layout);
   lookup->name = "defaultmkmk";
   lookup->feature = "mkmk";
@@ -1116,7 +1116,7 @@ Lookup* OldMadina::defaultmkmk() {
 
   return lookup;
 }
-Lookup* OldMadina::defaultmarkdotmarks() {
+Lookup* Alshamiya::defaultmarkdotmarks() {
   Lookup* lookup = new Lookup(m_layout);
   lookup->name = "defaultmarkdotmarkstop";
   lookup->feature = "mkmk";
@@ -1185,7 +1185,7 @@ Lookup* OldMadina::defaultmarkdotmarks() {
 
   return lookup;
 }
-Lookup* OldMadina::defaultwaqfmarkabovemarkprecise() {
+Lookup* Alshamiya::defaultwaqfmarkabovemarkprecise() {
   Lookup* lookup = new Lookup(m_layout);
   lookup->name = "defaultwaqfmarkabovemarkprecise";
   lookup->feature = "mark";
@@ -1233,7 +1233,7 @@ Lookup* OldMadina::defaultwaqfmarkabovemarkprecise() {
 
   return lookup;
 }
-Lookup* OldMadina::tajweedcolorcpp() {
+Lookup* Alshamiya::tajweedcolorcpp() {
   Lookup* single = new Lookup(m_layout);
   single->name = "tajweedcolor.green";
   single->feature = "";
@@ -1340,7 +1340,7 @@ Lookup* OldMadina::tajweedcolorcpp() {
 
   return lookup;
 }
-Lookup* OldMadina::pointmarks() {
+Lookup* Alshamiya::pointmarks() {
   Lookup* lookup = new Lookup(m_layout);
   lookup->name = "pointmarks";
   lookup->feature = "mark";
@@ -1392,7 +1392,7 @@ Lookup* OldMadina::pointmarks() {
   return lookup;
 }
 
-Lookup* OldMadina::ayanumberskern() {
+Lookup* Alshamiya::ayanumberskern() {
   auto& ayaGlyph = glyphs["endofaya"];
   auto digitySet = classtoUnicode("digits");
   qint16 yoffset = 120;
@@ -1506,7 +1506,7 @@ Lookup* OldMadina::ayanumberskern() {
   return lookup;
 }
 
-Lookup* OldMadina::ayanumbers() {
+Lookup* Alshamiya::ayanumbers() {
   QString ayaName = "endofaya";
 
   std::uint16_t endofaya = m_layout->glyphCodePerName[ayaName.toStdString()];
@@ -1628,7 +1628,7 @@ Lookup* OldMadina::ayanumbers() {
 
   return lookup;
 }
-Lookup* OldMadina::forheh() {
+Lookup* Alshamiya::forheh() {
   Lookup* single = new Lookup(m_layout);
   single->name = "forheh.l1";
   single->feature = "";
@@ -1680,7 +1680,7 @@ Lookup* OldMadina::forheh() {
 
   return lookup;
 }
-Lookup* OldMadina::forhamza() {
+Lookup* Alshamiya::forhamza() {
   Lookup* single = new Lookup(m_layout);
   single->name = "forhamza.l1";
   single->feature = "";
@@ -1785,7 +1785,7 @@ Lookup* OldMadina::forhamza() {
 
   return lookup;
 }
-Lookup* OldMadina::shrinkstretchlt() {
+Lookup* Alshamiya::shrinkstretchlt() {
   Lookup* lookup;
   int count = 1;
   for (float i = -0.1; i >= -0.7; i = i - 0.1) {
@@ -1796,7 +1796,7 @@ Lookup* OldMadina::shrinkstretchlt() {
 
   return nullptr;
 }
-Lookup* OldMadina::shrinkstretchlt(float lt, QString featureName) {
+Lookup* Alshamiya::shrinkstretchlt(float lt, QString featureName) {
   // m_layout->addLookup(forwaw(), false);
 
   QString lookupName;
@@ -1881,7 +1881,7 @@ Lookup* OldMadina::shrinkstretchlt(float lt, QString featureName) {
 
   return lookup;
 }
-Lookup* OldMadina::forsmallhighwaw() {
+Lookup* Alshamiya::forsmallhighwaw() {
   Lookup* single = new Lookup(m_layout);
   single->name = "forsmallhighwaw.l1";
   single->feature = "";
@@ -1952,7 +1952,7 @@ Lookup* OldMadina::forsmallhighwaw() {
 
   return lookup;
 }
-Lookup* OldMadina::forsmalllalef() {
+Lookup* Alshamiya::forsmalllalef() {
   Lookup* single = new Lookup(m_layout);
   single->name = "forsmallalef.l1";
   single->feature = "";
@@ -2081,7 +2081,7 @@ Lookup* OldMadina::forsmalllalef() {
   return lookup;
 }
 
-Lookup* OldMadina::forwaw() {
+Lookup* Alshamiya::forwaw() {
   Lookup* single = new Lookup(m_layout);
   single->name = "forwaw.l1";
   single->feature = "";
@@ -2138,7 +2138,7 @@ Lookup* OldMadina::forwaw() {
   return lookup;
 }
 
-Lookup* OldMadina::populatecvxx() {
+Lookup* Alshamiya::populatecvxx() {
   int cvNumber = 1;
 
   for (auto& alternates : cvxxfeatures) {
@@ -2161,7 +2161,7 @@ Lookup* OldMadina::populatecvxx() {
   return nullptr;
 }
 
-Lookup* OldMadina::glyphalternates() {
+Lookup* Alshamiya::glyphalternates() {
   if (isForCoreText) return nullptr;
 
   bool isExtended = m_layout->isExtended();
