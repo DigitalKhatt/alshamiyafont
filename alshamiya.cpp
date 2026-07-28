@@ -492,8 +492,6 @@ Lookup* Alshamiya::getLookup(std::string lookupName) {
     return tajweedcolorcpp();
   } else if (lookupName == "forsmallhighwaw") {
     return forsmallhighwaw();
-  } else if (lookupName == "populatecvxx") {
-    return populatecvxx();
   } else if (lookupName == "glyphalternates") {
     return glyphalternates();
   } else if (lookupName == "allcursivejoinnortl") {
@@ -2108,29 +2106,6 @@ Lookup* Alshamiya::forwaw() {
   newsubtable->compiledRule.lookupRecords.push_back({0, "l1"});
 
   return lookup;
-}
-
-Lookup* Alshamiya::populatecvxx() {
-  int cvNumber = 1;
-
-  for (auto& alternates : cvxxfeatures) {
-    Lookup* alternate = new Lookup(m_layout);
-    alternate->name = QString("cv%1").arg(cvNumber, 2, 10, QLatin1Char('0')).toStdString();
-    alternate->feature = alternate->name;
-    alternate->type = Lookup::alternate;
-
-    m_layout->addLookup(alternate);
-
-    AlternateSubtable* alternateSubtable = new AlternateSubtable(alternate);
-    alternate->subtables.push_back(alternateSubtable);
-    alternate->name = alternate->name;
-
-    alternateSubtable->alternates = alternates;
-
-    cvNumber++;
-  }
-
-  return nullptr;
 }
 
 Lookup* Alshamiya::glyphalternates() {

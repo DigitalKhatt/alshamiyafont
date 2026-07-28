@@ -32,7 +32,6 @@ class Alshamiya : public Automedina {
   Lookup* rehwawcursivecpp();
   Lookup* allCursiveJoin(bool rtl);
   Lookup* tajweedcolorcpp();
-  Lookup* populatecvxx();
   Lookup* glyphalternates();
   // Justification
   Lookup* shrinkstretchlt(float lt, QString featureName);
