@@ -30,7 +30,9 @@ void Alshamiya::generateGlyphs() {
 
       m_layout->glyphNamePerCode[glyph.charcode] = glyph.name;
       m_layout->glyphCodePerName[glyph.name] = glyph.charcode;
-      m_layout->unicodeToGlyphCode[glyph.charcode] = glyph.charcode;
+      if (glyph.unicode != -1) {
+        m_layout->unicodeToGlyphCode[glyph.unicode] = glyph.charcode;
+      }
 
       if (!classes["marks"].contains(glyph.name)) {
         classes["bases"].insert(glyph.name);

@@ -11,7 +11,7 @@ joinvector := ljoinvector := rjoinvector := (16,lineheight);
 nuqta := 1.4penwidth;
 newinternal digitscale;
 digitscale := 0.80;
-boolean isForCoreText; isForCoreText = true;
+boolean isForCoreText; isForCoreText = false;
 if isForCoreText :
   def setCursiveAnchor(suffix pname)(expr pvalue)(expr anchortype) =
     if anchortype = EntryAnchor:
