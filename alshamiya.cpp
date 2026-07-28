@@ -14,37 +14,7 @@
 using namespace std;
 
 void Alshamiya::generateSubstEquivGlyphs() {
-  return;
-
-  GlyphParameters parameters;
-
-  for (auto& glyph : m_layout->expandableGlyphs) {
-    auto glyphCode = m_layout->glyphCodePerName[glyph.first];
-    auto valueLimits = glyph.second;
-
-    if (valueLimits.maxLeft > 0) {
-      for (double leftTatweel = 0.5; leftTatweel <= valueLimits.maxLeft; leftTatweel += 0.5) {
-        parameters.lefttatweel = leftTatweel;
-        parameters.righttatweel = 0.0;
-        GlyphVis* newglyph = m_layout->getAlternate(glyphCode, parameters, true, true);
-      }
-    };
-
-    if (valueLimits.maxRight > 0) {
-      for (double righttatweel = 0.5; righttatweel <= valueLimits.maxRight; righttatweel += 0.5) {
-        parameters.lefttatweel = 0.0;
-        parameters.righttatweel = righttatweel;
-        GlyphVis* newglyph = m_layout->getAlternate(glyphCode, parameters, true, true);
-      }
-    };
-
-    parameters.lefttatweel = valueLimits.minLeft;
-    parameters.righttatweel = valueLimits.minRight;
-
-    if (parameters.lefttatweel != 0 || parameters.righttatweel != 0) {
-      GlyphVis* newglyph = m_layout->getAlternate(glyphCode, parameters, true, true);
-    }
-  }
+  m_layout->generateSubstEquivGlyphsLegacy();
 }
 
 void Alshamiya::generateGlyphs() {
